@@ -1,0 +1,63 @@
+
+<?php $__env->startSection('title'); ?> <?php echo $title; ?> <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_head'); ?>
+    
+    <script type="text/javascript" src="/packages/jquery-1.11.1.min/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css"/>
+    
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+  
+  <div class="row">
+  	<h1 class="page-header"><?php echo $__env->yieldContent('title'); ?></h1>
+    	<?php if(isset($data->id)): ?>
+  			<?php echo Form::open(array('action' => 'Admin_QuotesController@postUpdateQuotes', 'class' => 'form-horizontal')); ?>
+        <?php else: ?>
+        	<?php echo Form::open(array('action' => 'Admin_QuotesController@postAddQuotes', 'class' => 'form-horizontal')); ?> 
+        <?php endif; ?>
+        <div class="form-group <?php echo ($errors->has('quote')) ? 'has-error' : '' ;; ?>">
+        <?php echo Form::label('quote', 'Promo Quote: ', array('class' => 'col-sm-2 control-label')); ?>
+            <div class="col-sm-8">
+                <?php echo ($errors->has('quote')) ? '<p>'. $errors->first('quote'). '</p>' : ''; ?>
+                <?php echo Form::text('quote', (isset($input['qoute'])? Input::old('quote') : (isset($data->quote)? $data->quote : '' )), array('class' => 'form-control')); ?> 
+            </div>
+        </div>
+         <div class="form-group">
+            <?php echo Form::label('active', 'Active: ', array('class' => 'col-sm-2 control-label')); ?>
+            <div class="col-sm-10">
+               <?php echo Form::checkbox('active', 1, (isset($input['active']) ? Input::old('active') : (isset($data->active)? $data->active : '' )), array('class' => '')); ?>
+            </div>
+        </div>
+        <?php echo Form::hidden('id', (isset($input['id'])? Input::old('id') : (isset($data->id)? $data->id : '' ))); ?>
+        <hr/> 
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <?php echo Form::submit('Save', array('class' => 'btn btn-success')); ?>
+            <a href="/admin/user/members/">
+                <?php echo Form::button('Cancel' ,array('class' => 'btn btn-danger')); ?>
+            </a>
+            </div>
+        </div>
+    <?php echo Form::close(); ?>
+    	        	
+  </div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('_tail'); ?>
+
+    <script>
+	
+		$('#tom').bind('click', function(event){
+			event.preventDefault();
+			alert('YOLO');
+		});
+	
+	</script>
+    
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

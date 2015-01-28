@@ -1,0 +1,59 @@
+
+<?php $__env->startSection('title'); ?>yeah boi!<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_head'); ?>
+    
+    <script type="text/javascript" src="/packages/jquery-1.11.1.min/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css"/>
+    
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+  
+  <div class="row">
+  	<h1 class="page-header">Analytics</h1>
+  	<?php echo Form::open(array('url' => 'login')); ?>  
+  	<table class="table">
+    	<tr>
+            <td width="200"><?php echo Form::label('category_name', 'Category Name: ', array('class' => 'admin_form_label')); ?></td>
+            <td><?php echo Form::text('category_name', '', array('class' => 'textbox')); ?></td>
+        </tr>
+        <tr>
+            <td ><?php echo Form::label('category_summary', 'Category Summary: ', array('class' => 'admin_form_label')); ?></td>
+            <td><?php echo Form::textarea('category_summary', null, ['size' => '30x5', 'class' => 'textarea']); ?></td>
+      	</tr>
+        <tr>
+            <td ><?php echo Form::label('category_visible', 'Visible: ', array('class' => 'admin_form_label')); ?></td>
+            <td><?php echo Form::checkbox('category_visible'); ?></td>
+       	</tr>
+     	<tr>
+            <td ><?php echo Form::label('add_recipe', 'Add Recipe: ', array('class' => 'admin_form_label')); ?></td>
+            <td><?php echo Form::text('add_recipe', '', array('class' => 'textbox')); ?></td>
+       	</tr>
+   	</table>    
+        
+        <div>
+        	<?php echo Form::submit('Save', array('class' => 'btn btn-success')); ?>
+		   	<?php echo Form::submit('Cancel', array('class' => 'btn btn-danger')); ?>
+       	</div>
+    <?php echo Form::close(); ?>
+    	        	
+  </div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('_tail'); ?>
+
+    <script>
+	
+		$('#tom').bind('click', function(event){
+			event.preventDefault();
+			alert('YOLO');
+		});
+	
+	</script>
+    
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

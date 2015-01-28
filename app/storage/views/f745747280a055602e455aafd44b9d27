@@ -1,0 +1,21 @@
+
+<?php $__env->startSection('_header'); ?> 
+	<title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+
+<?php $__env->stopSection(); ?>  
+
+<?php $__env->startSection('content'); ?>    
+
+
+
+	<!-- <div class="band content">
+		<div class="container "> <!--Recipe section-->
+			
+	<!-- 	</div>
+	</div>	 -->
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

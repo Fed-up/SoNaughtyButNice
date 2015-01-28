@@ -1,0 +1,16 @@
+
+<?php $__env->startSection('content'); ?>
+	<?php echo Form::open(); ?>
+        <div>
+            <?php echo Form::label('email', 'Email: '); ?>
+            <?php echo Form::email('email'); ?>
+        </div>
+        <div>
+            <?php echo Form::label('password', 'Password: '); ?>
+            <?php echo Form::password('password'); ?>
+        </div>
+        <div><?php echo Form::submit('Login'); ?></div>
+
+    <?php echo Form::close(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

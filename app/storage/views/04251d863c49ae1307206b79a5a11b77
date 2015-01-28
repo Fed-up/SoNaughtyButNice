@@ -1,0 +1,268 @@
+
+
+
+<?php $__env->startSection('content'); ?>
+       
+    <div class="band content">
+    	<div id="header_image_container" class="container">  
+            <div id="headerImage" class="sixteen columns">
+            	<div class="flexslider flex-viewport">
+                	<ul class="slides">
+                    	
+                    	<?php foreach($h_data as $h_image): ?>
+                        	<?php /*'<pre>'; dd($h_image->Images); echo '</pre>';*/ ?>
+                        	<?php foreach($h_image->Images as $image): ?>
+                            	<li> 
+                                	
+                                    <figure>
+                                    	<a href="<?php echo $image->link; ?>">
+                                       		<img src="/uploads/<?php echo $image->name; ?>">
+                                        </a>
+                                    </figure>
+                                   
+                                </li>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>   
+                    	
+                    </ul>
+                </div>
+            </div><!--End sixteen--> 
+      	</div><!--End contatiner-->
+        
+        
+        <div id="ingredient_container" class="container "> <!--Ingredient section-->
+        
+            <div class="hp_ingredient sixteen columns">
+                <div class="hp_ingredients__title nine columns alpha">
+                    <h2 class="section_title ">Healthy Desserts & Snacks are made with the freshest ingredients</h2>
+                </div><!--End nine columns-->
+
+<!-- Place somewhere in the <body> of your page -->
+
+
+
+                  <div id="gallery">
+                        <div class="five columns">
+                            <div id="panel">
+                                <div class="flexslider--thumbs">
+                                  <ul class="slides">
+                                    <?php foreach($iData as $data): ?>
+
+                                        
+
+                                         <?php foreach($data->Images as $image): ?>
+                                            <?php /* '<pre>'; print_r($image->name); echo '</pre>'; */ ?>  
+                                            <li data-thumb="/uploads/<?php echo $image->name; ?>">
+                                              <img src="/uploads/<?php echo $image->name; ?>" />
+                                            </li>
+
+                                            <!-- <img class="ingredient_3_stack ingredient_mobile" src="/uploads/<?php echo $image->name; ?>" alt="<?php echo $image->summary; ?>" />  -->
+                                            
+                                         <?php endforeach; ?>
+                                    <?php endforeach; ?>
+                                    <?php /* '<pre>'; dd(); echo '</pre>'; */ ?>
+                                  </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="3_stack" class="two columns omega">
+                            <div class="mobile_3_stack">
+                                <div id="thumbs" >
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--End nine columns-->
+            </div><!--End sixteen columns-->
+     	</div><!--End container--> 
+
+        
+        <div class="container "> <!--Recipe section-->
+        	<h2 class="recipe_section_title">A taste of healthy treats and sweet recipes</h2>
+            <div class="hp_recipe">
+                	<?php foreach($rData as $recipe): ?>
+                            <div class="four columns recipe_box">
+                            	<a href="/recipe/<?php echo $recipe->id; ?>">
+                                    <?php foreach($recipe->Images as $image): ?>
+                                        <img src="/uploads/<?php echo $image->name; ?>" />
+                                    <?php endforeach; ?>
+                                    <h4 class="recipe_title"><?php echo $recipe->name; ?></h4>
+                                    <p class="recipe_box_summary"><?php echo $recipe->summary; ?></p>
+                                </a>
+                                	<a href="/collection/<?php echo $recipe->MenuCategories->id; ?>" class="category_tag"><?php echo $recipe->MenuCategories->name; ?></a>          		
+                            </div><!--End column-->
+                    <?php endforeach; ?>
+            </div><!--End hp_recipe-->
+        </div><!--End container-->
+        
+        <div class="collection container "> <!--Collection section-->
+            <h2 class="collection_section_title">Discover a new collection of Healthy Desserts</h2>
+        </div>
+        <section class="section container">
+        	<?php foreach($collections as $index=>$collection): ?>
+            
+                <a href="/collection/<?php echo $collection->id; ?>" class="tile four columns" style="background-image:url(/uploads/<?php echo $collection->menuRecipes[0]->Images()->first()->name; ?>)">
+                    <label class="tile__label recipe_title"><?php echo $collection->name; ?></label>
+                </a>               
+               	      
+                <?php if( ($index + 1) % 6 == 0): ?>            
+                    <article class="tile tile--grid four columns">
+                        <div class="tile--grid__inner">
+                            <h6 class="extra_block_title"><span class="mini_extra_block_title">Upcoming</span> Events</h6>
+                            <a href="#">                        
+                                <div class="event_click">
+                                    <div class="hp_event_date_box">
+                                        <p class="hp_event_date">16<span class="hp_date_th">th</span><p>
+                                        <p class="hp_event_month">AUG<p>
+                                    </div>
+                                    <p class="hp_event_name" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Hello Healthy Desserts, im going to eat  you  im eat you  im you  im eat you  im<p>
+                                </div>
+                            </a>
+                            <a href="#">                        
+                                <div id="last_event" class="event_click">
+                                    <div class="hp_event_date_box">
+                                        <p class="hp_event_date">16<span class="hp_date_th">th</span><p>
+                                        <p class="hp_event_month">AUG<p>
+                                    </div>
+                                    <p class="hp_event_name">Hello Healthy Desserts, im going to eat you im eat you  im you  im eat you  im<p>
+                                </div>
+                            </a>
+                        </div>
+                    </article>  
+                <?php elseif( ($index + 1) % 3 == 0): ?>
+                    <article class="tile tile--grid four columns">
+                        <div class="tile--grid__inner">
+                            <h6 class="extra_block_title">Catering <span class="mini_extra_block_title">Packages</span></h6>
+                            <a href="#">
+                                <div class="catering_click">
+                                    <p class="hp_catering_p_name">Event<p>
+                                    <p class="hp_catering_summary">Multiple Days<p>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="catering_click">
+                                    <p class="hp_catering_p_name">Function<p>
+                                    <p class="hp_catering_summary">With Waiters<p>
+                                </div>
+                            </a>
+                            <a href="#">                        
+                                <div class="catering_click">
+                                    <p class="hp_catering_p_name">Party<p>
+                                    <p class="hp_catering_summary">Personal Order<p>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="catering_click">
+                                    <p class="hp_catering_p_name">Corporate<p>
+                                    <p class="hp_catering_summary">Repeat Service<p>
+                                </div>
+                            </a>
+                        </div>
+                    </article> 
+                <?php endif; ?>                
+            <?php endforeach; ?>
+        </section> 
+        
+        <div class="tabs container "> <!--tabs section title-->
+            <h2 class="tabs_section_title">Achieve Healthy Results Faster With Search Filters</h2>
+        </div>    
+        <div class="hp_tabs"><!--Tabs Container-->
+                <ul class='tabs'>
+                    <li><a href='#collections'>Our Collections</a>|</li>
+                    <li><a href='#recipes'>Popular Recipes</a>|</li>
+                    <li><a href='#ingredients'>Main Ingredients</a>|</li>
+                    <li><a href='#events'>Upcoming Events</a>|</li>
+                    <li><a href='#catering'>Catering Packages</a>|</li>
+                    <li><a href='#books'>Recipe Books</a></li>
+                </ul>
+                <hr class="hr_tabs"/>
+                <div class="container">
+                    <div id='collections' class="tab_content">
+                        <ul class="tab_columns four columns">
+                            <?php foreach($collections as $index=>$collection): ?>
+                                <li><a class="tab_link" href="/collection/<?php echo $collection->id; ?>"><?php echo $collection->name; ?></a></li>
+                                <?php if( ($index + 1) % 4 == 0): ?></ul><ul class="tab_columns four columns"><?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <div id='recipes' class="tab_content">
+                        <ul class="tab_columns four columns">
+                            <?php foreach($rData as $index=>$recipe): ?>
+                                <li><a class="tab_link" href="/recipe/<?php echo $recipe->id; ?>"><?php echo $recipe->name; ?></a></li>
+                                <?php if( ($index + 1) % 4 == 0): ?></ul><ul class="tab_columns four columns"><?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <div id='ingredients' class="tab_content">
+                        <ul class="tab_columns four columns">
+                            <?php foreach($iData as $index=>$ingredient): ?>
+                                <li><a class="tab_link" href="/ingredient/<?php echo $ingredient->id; ?>"><?php echo $ingredient->name; ?></a></li>
+                                <?php if( ($index + 1) % 4 == 0): ?></ul><ul class="tab_columns four columns"><?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <div id='events' class="tab_content">
+                        <ul class="tab_columns four columns">
+                            <li>Name</li>
+                            <li>Date</li>
+                            <li>Place</li>
+                            <li>Time</li>
+                        </ul>
+                        <ul class="tab_columns four columns">
+                            <li>Name</li>
+                            <li>Date</li>
+                            <li>Place</li>
+                            <li>Time</li>
+                        </ul>
+                        <ul class="four columns tab_columns ">
+                            <li>Name</li>
+                            <li>Date</li>
+                            <li>Place</li>
+                            <li>Time</li>
+                        </ul>
+                        <ul class="four columns tab_columns ">
+                            <li>Name</li>
+                            <li>Date</li>
+                            <li>Place</li>
+                            <li>Time</li>
+                        </ul>
+                    </div>
+                    <div id='catering' class="tab_content">
+                        <ul class="tab_columns four columns">
+                            <li>Package Name</li>
+                            <li>Included Type</li>
+                            <li>Included Type</li>
+                            <li>Included Type</li>
+                        </ul>
+                    </div>
+                    <div id='books' class="tab_content">
+                        <ul class="tab_columns four columns">
+                            <li>Book Name</li>
+                            <li>Summary</li>
+                        </ul>
+                    </div>
+             	</div>
+        </div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_footer'); ?>
+	<script type="text/javascript" src="/public/js/flexslider.js"></script>
+	<script type="text/javascript" src="/public/js/tabs.js"></script>
+    <script type="text/javascript" src="/js/gallery.js"></script>
+    <script>
+        $(window).load(function() {
+          $('.flexslider--thumbs').flexslider({
+            controlNav: "thumbnails",
+            controlsContainer: "#thumbs",
+            animationSpeed: 300,
+            slideshow: false,
+            directionNav: false,
+            animation: "slide",
+            direction: "vertical"
+          });
+        });
+    </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

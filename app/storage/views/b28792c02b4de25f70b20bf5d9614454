@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+    
+	<title><?php echo $__env->yieldContent('title'); ?></title>
+    <!-- Bootstrap core CSS -->
+	<link rel="stylesheet" type="text/css" href="/packages/bootstrap-3.1.1-dist/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css"/>
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script src="/packages/jquery-1.11.1.min/jquery-1.11.1.min.js"></script>
+    <script src="/packages/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+    <?php echo $__env->yieldContent('_head'); ?>
+  </head>
+
+  <body>
+    <?php if(Auth::user()): ?>
+    <?php echo $__env->make('admin.partial.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <div class="container-fluid">
+        <div class="row">
+            <?php echo $__env->make('admin.partial.navigation', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <?php endif; ?>
+                <?php echo $__env->yieldContent('content'); ?>
+    <?php if(Auth::user()): ?>
+            </div>
+        </div>
+    </div>
+    <?php echo $__env->yieldContent('_tail'); ?>
+    <?php endif; ?>
+  </body>
+</html>

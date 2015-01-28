@@ -1,0 +1,53 @@
+
+
+
+<?php $__env->startSection('content'); ?>
+    <div class="page">
+    <?php foreach($eData as $event): ?>
+        <h1 class="content__title content__title--main"><a class="tab__link" href="/events"><?php echo $event->name; ?></a></h1>
+        <section class="row">
+            <div class="columns small-12 medium-5 large-4">
+                <?php if(isset($hImage->name)): ?>;
+                    <img src="/uploads/<?php echo $hImage->name; ?>"/>
+                <?php else: ?>
+                    <img src="/uploads/o_18uaul8ai1b071b194f1na11a7u8.JPG"/>
+                <?php endif; ?> 
+            </div>
+            
+            <div class="columns small-12 medium-7 large-8">
+                <section class="section__box section-box--margin">
+                    <p class="" > <span class="content-box__title">Date:</span>  <?php echo $event->date; ?></p><br>
+                    <p class="" > <span class="content-box__title">Time:</span>  <?php echo $event->time; ?></p><br>
+                    <p class="" > <span class="content-box__title">Price:</span>  $<?php echo $event->price; ?></p>
+                </section>
+            </div>
+
+            <div class="columns small-12 medium-7 large-8">
+                <section class="section-box section-box--margin">
+                    <?php if (Auth::check()): ?>
+                        <p>Early bird tickets on sale soon!<br/> We can't wait to see you at the event <?php echo Auth::user()->fname; ?></p>
+                    <?php else: ?>
+                        <p>Please <a class="content-link" href="/login">Login</a> to save a seat at the event</p>
+                    <?php endif; ?>
+                </section>
+            </div><!--End Nine columns-->
+        </section>
+        <section class="row">
+            <div class="columns small-12 large-6">
+                <h3 class="content__title">Description</h3>
+                <section class="section__box">
+                    <p class="" ><?php echo $event->why; ?></p><br>
+                </section>
+            </div>
+            <div  class="columns small-12 large-6">
+                <h3 class="content__title">Map</h3>
+                <section class="section__box">
+                    <p class="" ><?php echo $event->place; ?></p><br>
+                </section>
+            </div>
+        </section>
+    <?php endforeach; ?>
+    </div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

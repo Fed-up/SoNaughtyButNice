@@ -1,0 +1,53 @@
+
+<?php $__env->startSection('_head'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+  <h1 class="page-header">All Metrics   <?php echo link_to('/admin/menu/metric/add', '+ Add', array('class' => 'btn btn-primary pull-right')); ?> </h1>
+    <?php if (Session::has('message')): ?>
+       <div class="alert alert-danger"><?php echo Session::get('message'); ?></div>
+    <?php endif; ?>
+  <div class="row">
+       <table class="table table-striped">
+            <thead>
+            	<tr>
+                    <th width="50px">#</td>
+                    <th>Metric Name</th>
+                    <th width="1%">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            <?php foreach($data as $metric): ?>           
+            <tr>
+                <td><?php echo $metric->id; ?></td>
+                <td><?php echo $metric->name; ?></td>
+                <td nowrap="nowrap">
+                	<?php echo link_to('/admin/menu/metric/edit/'.$metric->id, 'Edit', array('class' => 'btn btn-success')); ?>
+                	<?php echo link_to('/admin/menu/metric/delete/'.$metric->id, 'Delete', array('class' => 'btn btn-danger')); ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>   
+            
+            </tbody>
+            <tfoot>
+            	<tr>
+                	<td colspan="20">
+                    	Total: <?php echo $data->count(); ?> 
+                    </td>
+               	</tr>
+            </tfoot>
+       </table> 
+        	
+  </div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('_tail'); ?>
+
+    
+<?php $__env->stopSection(); ?>
+    
+<?php echo $__env->make('tmpl.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

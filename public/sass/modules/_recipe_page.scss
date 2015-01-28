@@ -1,0 +1,62 @@
+/*Recipe Page*/
+/* line 3, C:/webroot/lcsnbn/sass/modules/recipe-page */
+.logo__image {
+  position: absolute;
+  bottom: -0.75rem;
+  right: 10px;
+  width: 4rem;
+  color: #fff;
+  height: 4rem;
+  background: url(/images/site/logo.png) no-repeat 0 0;
+  background-size: contain; }
+  @media only screen and (min-width:768px) {
+    .logo__image {
+      bottom: -0.77rem; } }
+
+/* line 18, C:/webroot/lcsnbn/sass/modules/recipe-page */
+.content__side__icon {
+  color: $text;
+  border: 1px solid $main_light;
+  background-color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: auto;
+  margin-top: 0.5rem;
+  line-height: 3.5rem; }
+  @media only screen and (min-width:481px) {
+    .content__side__icon {
+      width: 3.4rem;
+      height: 3.4rem; } }
+
+@media only screen and (max-width: 480px) {
+  .section-box--margin {
+    margin-top: 0.5rem; } }
+
+/* line 43, C:/webroot/lcsnbn/sass/modules/recipe-page */
+.section__box--fresh-fact {
+  background-color: #fff;
+  border-top: 1px solid $main_color;
+  margin-top: 1rem; }
+  @media only screen and (min-width:481px) {
+    .section__box--fresh-fact {
+      margin-bottom: 0.3rem;
+      border-top: 0;
+      margin-top: 0rem; } }
+
+/* line 54, C:/webroot/lcsnbn/sass/modules/recipe-page */
+.section__box--nutrition-panel {
+  background-color: #fff;
+  border-top: 1px solid $main_color;
+  margin-top: 0rem; }
+  @media only screen and (min-width:481px) {
+    .section__box--nutrition-panel {
+      margin-bottom: 0.3rem;
+      margin-top: 1rem; } }
+
+/* line 64, C:/webroot/lcsnbn/sass/modules/recipe-page */
+.recipe__icon {
+  display: block;
+  margin-bottom: -0.7rem;
+  margin-top: 0.4rem; }

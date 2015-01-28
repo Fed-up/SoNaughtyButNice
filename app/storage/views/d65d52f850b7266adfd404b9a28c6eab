@@ -1,0 +1,81 @@
+
+<?php $__env->startSection('title'); ?>yeah boi!<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_head'); ?>
+    
+    <script type="text/javascript" src="/packages/jquery-1.11.1.min/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css"/>
+    
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+  <h1 class="page-header">All Members <?php echo link_to('admin/user/members/add', '+ Add', array('class' => 'btn btn-primary pull-right')); ?></h1>
+  <div class="row">
+       <table class="table table-striped">
+            <thead>
+            	<tr>
+                    <th>#</td>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>User Type</th>
+                    <th>Active</th>
+                    <th>Edit / Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            <?php foreach($data as $member): ?>           
+            <tr>
+                <td><?php echo $member->id; ?></td>
+                <td><?php echo $member->fname; ?></td>
+                <td><?php echo $member->lname; ?></td>
+                <td><?php echo $member->username; ?></td>
+                <td><?php echo $member->email; ?></td>
+                <td><?php echo $member->user_type; ?></td>
+                <td>
+                	<?php if($member->active == 1): ?>
+                    	<?php echo link_to('/admin/user/members/active/'.$member->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                    <?php else: ?>
+                		<?php echo link_to('/admin/user/members/active/'.$member->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                	<?php endif; ?>
+                
+                </td>
+                <td>
+                	<?php echo link_to('/admin/user/members/edit/'.$member->id, 'Edit', array('class' => 'btn btn-success')); ?>
+                	<?php echo link_to('/admin/user/members/delete/'.$member->id, 'Delete', array('class' => 'btn btn-danger')); ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>   
+            
+            </tbody>
+            <tfoot>
+            	<tr>
+                	<td colspan="20">
+                    	Total: <?php echo $data->count(); ?> 
+                    </td>
+               	</tr>
+            </tfoot>
+       </table> 
+        	
+  </div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('_tail'); ?>
+
+    <script>
+	
+		$('#tom').bind('click', function(event){
+			event.preventDefault();
+			alert('YOLO');
+		});
+	
+	</script>
+    
+<?php $__env->stopSection(); ?>
+    
+<?php echo $__env->make('tmpl.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,21 @@
+
+<?php $__env->startSection('title'); ?>Login <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+	
+	<?php echo Form::open(array('url' => 'login', 'class' => 'form-signin')); ?>
+    	<h2 class="form-signin-heading">Please Login</h2>     
+        <div>
+            <?php echo Form::email('email', '', array('placeholder'=>'Email', 'class'=>'form-control' ) ); ?>
+        </div>
+        <div>
+            <?php echo Form::password('password', array('placeholder'=>'Password', 'class'=>'form-control' ) ); ?>
+        </div>
+        <div>
+        	<?php echo Form::submit('Save', array('class' => 'btn btn-lg btn-primary btn-block')); ?>
+       	</div>
+
+    <?php echo Form::close(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

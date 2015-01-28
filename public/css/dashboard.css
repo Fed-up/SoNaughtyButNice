@@ -1,0 +1,455 @@
+/*
+ * Base structure
+ */
+
+
+
+*{
+	font-family:base_font;
+	margin:0px;
+	padding:0px;
+}
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -20px; /* 20px padding + 1px border */
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding:5px 20px 5px 30px;
+  color:#000;
+}
+.nav-sidebar > li:first-child {
+	margin-top:-5px;
+}
+.nav-sidebar > li > a:hover {
+  background-color: #DBEEC9;
+}
+.nav-sidebar > li.active > a,
+.nav-sidebar > li.active:hover > a {
+  background-color: #DBEEC9;
+}
+.nav-sidebar > .tophead > a {
+  margin-top: -19px;
+  color: #000;
+  border:1px solid #297529;
+  padding-left:10px;
+  margin-bottom: 5px;
+}
+.nav-sidebar > .head > a {
+  color: #000;
+  border:1px solid #297529;
+  padding-left:10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.nav-sidebar > .head > a:hover {
+  color: #000;
+  background-color: #c2dfa4;
+  border:1px solid #297529;
+}
+/*
+.nav-sidebar > .link > a {
+  color: #000;
+  padding-left:30px;
+  margin:-5px;
+}
+.nav-sidebar > .link > a:hover {
+  color: #000;
+  background-color: #DBEEC9;
+  padding-left:30px;
+  margin:-5px;
+}
+*/
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.page-header {
+  margin-top: 0;
+  border-bottom:none;
+  
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  /*border-radius: 50%;*/
+}
+
+/* ------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------- */
+
+
+@font-face {
+    font-family: 'base_font';
+    src: url('/fonts/manksans-medium-webfont.eot');
+    src: url('/fonts/manksans-medium-webfont.eot?#iefix') format('embedded-opentype'),
+url('/fonts/manksans-medium-webfont.woff') format('woff'),
+url('/fonts/manksans-medium-webfont.ttf') format('truetype'),
+url('/fonts/manksans-medium-webfont.svg#manksans-medium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.admin_box{
+	border:1px solid #297529;
+	height:50px;
+	border-radius:5px;
+	margin:5px;
+}
+
+.admin_box_img{
+	float:left;	
+}
+
+.admin_box_header{
+}
+
+.admin_box_text{
+	margin:5px;
+	margin-left:10px;
+	float:left;	
+}
+
+.quick_stat_box{
+	border:1px solid #297529;
+	min-height:300px;
+	border-radius:5px;
+}
+
+.td{
+	vertical-align:top;	
+}
+
+.panel{
+	margin:5px;
+	padding:0px;	
+	vertical-align:top;
+}
+
+hr{
+	width:100%;	
+}
+
+.admin_ed_buttons{
+	float:right;
+}
+
+.admin_button{
+	margin-left:5px;
+	height:48px;	
+}
+
+.textbox{
+	width:200px;
+	padding:5px;
+	margin:5px;	
+}
+
+.textarea{
+	padding:5px;
+	margin:5px;	
+}
+
+.admin_form_label{
+		
+}
+
+/* ----------------------------Sign In ----------------------------------*/
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* ----------------------------Data Input----------------------------------*/
+
+
+.tab-content{
+	margin-top:10px;	
+}
+
+#_ListImages .form-control { /*Space makes the site style all elements within this class with the ID #_ListIngredients */
+ display:inline;
+ width:80%; /*Only uses the width of the element*/ 
+ margin:0 10px 0 0;
+}
+
+#_ListRecipes .form-control { /*Space makes the site style all elements within this class with the ID #_ListIngredients */
+ display:inline;
+ width:80%; /*Only uses the width of the element*/ 
+ margin:0 10px 0 0;
+}
+
+#_PackageRecipes .form-control { /*Space makes the site style all elements within this class with the ID #_ListIngredients */
+ display:inline;
+ width:40%; /*Only uses the width of the element*/ 
+ margin:0 10px 0 0;
+}
+
+#_PackageRecipes .form-control-amount { /*Space makes the site style all elements within this class with the ID #_ListIngredients */
+ display:inline;
+ width:20%; /*Only uses the width of the element*/ 
+ margin:0 10px 0 0;
+}
+
+#_ListFacts .form-control { /*Space makes the site style all elements within this class with the ID #_ListIngredients */
+ display:inline;
+ width:80%; /*Only uses the width of the element*/ 
+ margin:0 10px 0 0;
+}
+
+#_ListIngredients .form-control { /*Space makes the site style all elements within this class with the ID #_ListIngredients */
+ display:inline;
+ width:auto; /*Only uses the width of the element*/ 
+ margin:0 10px 0 0;
+}
+
+#_ListMethods .form-control { /*Space makes the site style all elements within this class with the ID #_ListIngredients */
+ display:inline;
+ width:80%; /*Only uses the width of the element*/ 
+ margin:0 10px 0 0;
+}
+
+#_ListExtras .form-control { /*Space makes the site style all elements within this class with the ID #_ListIngredients */
+ display:inline;
+ width:80%; /*Only uses the width of the element*/ 
+ margin:0 10px 0 0;
+}
+
+#_ListImages .btn{
+	margin-top:-5px;
+}
+
+#_ListFacts .btn{
+	margin-top:-50px;
+}
+
+#_ListIngredients .btn{
+	margin-top:-10px;
+}
+
+#_ListMethods .btn{
+	margin-top:-50px;
+}
+
+#_ListExtras .btn{
+	margin-top:-50px;
+}
+
+#_ListRecipes li{
+	display:block;	
+	margin-bottom:10px;
+	padding-bottom:10px;
+	border-bottom:solid 1px #e4e4e4;
+	width:80%;
+}
+
+#_PackageRecipes li{
+  display:block;  
+  margin-bottom:10px;
+  padding-bottom:10px;
+  border-bottom:solid 1px #e4e4e4;
+  width:80%;
+}
+
+#_ListFacts li{
+	display:block;	
+	margin-bottom:10px;
+	padding-bottom:10px;
+	border-bottom:solid 1px #e4e4e4;
+	width:80%;
+}
+
+#_ListIngredients li{
+	display:block;	
+	margin-bottom:10px;
+	padding-bottom:10px;
+	border-bottom:solid 1px #e4e4e4;
+	width:80%;
+}
+
+#_ListMethods li{
+	display:block;	
+	margin-bottom:10px;
+	padding-bottom:10px;
+	border-bottom:solid 1px #e4e4e4;
+	width:80%;
+}
+
+#_ListExtras li{
+	display:block;	
+	margin-bottom:10px;
+	padding-bottom:10px;
+	border-bottom:solid 1px #e4e4e4;
+	width:80%;
+}
+
+#btnActionAddFact, #btnActionAddIngredient, #btnActionAddMethod, #btnActionAddExtra, #btnActionCalculate {
+	margin-bottom:10px;	
+}
+
+.sortable-placeholder{
+	display:block;	
+	margin-bottom:10px;
+	padding-bottom:10px;
+	border:dotted 1px #999;
+	background-color:#e4e4e4;
+	height:35px;
+	width:80%;	
+}
+
+
+/*Sales Data /////////////////////////////////////////////////////////////////////////////////////////////////////*/
+.sales-data__title{
+  font-weight: 700;
+}
+
+.sales-data__info{
+  margin: 5px 0 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

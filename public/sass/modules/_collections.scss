@@ -1,0 +1,105 @@
+/*END CONTENT*/
+/**----------Collection Section------------**/
+/* line 3, C:/webroot/lcsnbn/sass/modules/collections */
+h2.collection_section_title {
+  margin-top: 30px;
+  text-align: left;
+  margin-left: 10px; }
+
+/* line 8, C:/webroot/lcsnbn/sass/modules/collections */
+.tile {
+  float: left;
+  position: relative;
+  height: 0;
+  width: 46%;
+  padding-top: 22%;
+  margin: 1.5%;
+  background-size: 100%;
+  background-repeat: no-repeat; }
+
+/* line 18, C:/webroot/lcsnbn/sass/modules/collections */
+a.tile.four.columns:hover .tile__label {
+  display: none; }
+
+/* line 21, C:/webroot/lcsnbn/sass/modules/collections */
+.tile__label {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  font-family: headings;
+  color: $text; }
+
+/* line 30, C:/webroot/lcsnbn/sass/modules/collections */
+.tile--grid {
+  position: relative; }
+
+/* line 33, C:/webroot/lcsnbn/sass/modules/collections */
+.tile--grid__inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border: solid 1px #e0e0e0; }
+
+/* line 43, C:/webroot/lcsnbn/sass/modules/collections */
+.hp_collection img {
+  Width: 100%; }
+
+/* line 46, C:/webroot/lcsnbn/sass/modules/collections */
+.hp_collection {
+  margin-bottom: 20px; }
+
+/* line 49, C:/webroot/lcsnbn/sass/modules/collections */
+div.collection.container {
+  margin-top: 10px;
+  position: relative; }
+
+@media only screen and (max-width: 959px) {
+  /* line 55, C:/webroot/lcsnbn/sass/modules/collections */
+  .ingredient_caption {
+    top: -220px; } }
+
+@media only screen and (min-width: 768px) and (max-width: 959px) { }
+
+@media only screen and (max-width: 767px) {
+  /**_______________Collection Section_______________________**/
+  /* line 66, C:/webroot/lcsnbn/sass/modules/collections */
+  a.tile.four.columns {
+    float: left;
+    position: relative;
+    height: 0;
+    width: 46%;
+    padding-top: 42%;
+    margin: 1.5%;
+    background-size: 100%;
+    background-repeat: no-repeat; }
+  /* line 76, C:/webroot/lcsnbn/sass/modules/collections */
+  article.tile.tile--grid.four.columns {
+    width: 46%;
+    padding-top: 42%;
+    margin: 1.5%; }
+  /* line 81, C:/webroot/lcsnbn/sass/modules/collections */
+  .tile__label {
+    font-family: base_font; }
+  /* line 85, C:/webroot/lcsnbn/sass/modules/collections */
+  .tile--grid {
+    position: relative; }
+  /* line 88, C:/webroot/lcsnbn/sass/modules/collections */
+  .tile--grid__inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border: solid 1px #e0e0e0; }
+  /* line 98, C:/webroot/lcsnbn/sass/modules/collections */
+  .hp_collection img {
+    Width: 100%; }
+  /* line 101, C:/webroot/lcsnbn/sass/modules/collections */
+  .hp_collection {
+    margin-bottom: 20px; } }

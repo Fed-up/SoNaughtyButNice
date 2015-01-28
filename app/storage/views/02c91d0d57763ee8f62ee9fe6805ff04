@@ -1,0 +1,128 @@
+
+
+
+<?php $__env->startSection('content'); ?>
+    <div class="page">
+    <?php foreach($eData as $event): ?>
+        <h1 class="content__title content__title--main"><a class="tab__link" href="/events"><?php echo $event->name; ?></a></h1>
+        <section class="row">
+            <div class="columns small-12 medium-5 large-4">
+                    <img src="/uploads/<?php echo $hImage; ?>"/>
+            </div>
+            
+            <div class="columns small-12 medium-7 large-8">
+                <section class="section__box section-box--margin">
+                    <p class="" > <span class="content-box__title">Date:</span>  <?php echo $event->date; ?></p><br>
+                    <p class="" > <span class="content-box__title">Time:</span>  <?php echo $event->time; ?></p><br>
+                    <p class="" > <span class="content-box__title">Price:</span>  $<?php echo $event->price; ?></p><br>
+                    <p class="" > <span class="content-box__title">Seats:</span>  <?php echo $event->ticket_amount; ?></p>
+                    <?php if (Auth::check()): ?>
+                        <?php if ($paid == $confirm_paid): ?>
+                            <?php for($i=0;$i<=$pCount;$i++): ?>
+                            <hr/>
+                            <p class="" > <span class="content-box__title">Tickets Purchased</span> <?php echo $quantity[$i]; ?></p>
+                            <p class="" > <span class="content-box__title">Purchase Date</span> <?php echo $date[$i]; ?></p>
+                            <p class="" > <span class="content-box__title">Total Amount</span> $<?php echo $purchase[$i]; ?></p>
+                            
+                            <?php endfor; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </section>
+            </div>
+
+            <div class="columns small-12 medium-7 large-8">
+                <section class="section-box section-box--margin">
+                    <?php if (Auth::check()): ?>
+                        <?php if ($paid == $confirm_paid): ?>
+                            <p>Looking forward to seeeing you at the event <?php echo Auth::user()->fname; ?></p>
+                            <?php echo Form::open(array('action' => 'CheckoutController@postAddToCart')); ?>
+                                <?php echo Form::hidden('event_id', $event->id); ?> 
+                                <?php echo Form::hidden('name', $event->name); ?>
+                                <?php if(isset($hImage)): ?>
+                                     <?php echo Form::hidden('image', $hImage ); ?>
+                                <?php else: ?>
+                                     <?php echo Form::hidden('image', '/images/site/logo.jpg'); ?>
+                                <?php endif; ?>
+                               
+                                <?php /* Form::text('quantity', 1)*/ ?>
+                                <div class="form-group form__group--event <?php echo ($errors->has('quantity')) ? 'has-error' : '' ;; ?>">
+                                    <?php echo Form::label('quantity', 'Quantity: ', array('class' => ' content-title--sub ')); ?>
+                                    <div class="">
+                                        <?php echo ($errors->has('quantity'))? '<p>'. $errors->first('quantity') .'</p>' : ''; ?>
+                                        <?php echo Form::text('quantity', (isset($input['quantity'])? Input::old('quantity') : 1 ), array('class' => 'input__text--event')); ?>
+                                    </div>
+                                </div>
+
+                                <?php echo Form::hidden('price', $event->price); ?>
+                                <?php echo Form::hidden('section', 'EVENT'); ?>
+                            <?php echo Form::submit('Add to Cart', array('class' => 'form__submit__button form__submit__button--event')); ?>
+                        <?php else: ?>
+                            <?php echo Form::open(array('action' => 'CheckoutController@postAddToCart')); ?>
+                                <?php echo Form::hidden('event_id', $event->id); ?>
+                                <?php echo Form::hidden('name', $event->name); ?>
+                                <?php if(isset($hImage)): ?>
+                                     <?php echo Form::hidden('image', $hImage ); ?>
+                                <?php else: ?>
+                                     <?php echo Form::hidden('image', '/images/site/logo.jpg'); ?>
+                                <?php endif; ?>
+                               
+                                <?php /* Form::text('quantity', 1)*/ ?>
+                                <div class="form-group form__group--event <?php echo ($errors->has('quantity')) ? 'has-error' : '' ;; ?>">
+                                    <?php echo Form::label('quantity', 'Quantity: ', array('class' => ' content-title--sub ')); ?>
+                                    <div class="">
+                                        <?php echo ($errors->has('quantity'))? '<p>'. $errors->first('quantity') .'</p>' : ''; ?>
+                                        <?php echo Form::text('quantity', (isset($input['quantity'])? Input::old('quantity') : 1 ), array('class' => 'input__text--event')); ?>
+                                    </div>
+                                </div>
+                                <?php echo Form::hidden('price', $event->price); ?>
+                                <?php echo Form::hidden('section', 'EVENT'); ?>
+                            <?php echo Form::submit('Add to Cart', array('class' => 'form__submit__button form__submit__button--event')); ?>
+                        <?php endif; ?>    
+                        <!-- <p>Early bird tickets on sale next week!<br/> We can't wait to see you at the event <?php echo Auth::user()->fname; ?></p> -->
+                    <?php else: ?>
+                        <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to save a seat at the event</p>
+                    <?php endif; ?>
+                </section>
+            </div><!--End Nine columns-->
+        </section>
+        <section class="row event__information">
+            <div  class="columns small-12 large-6">
+                <h3 class="content__title">You Are Invited</h3>
+                <section class="section__box section__box--content">
+                    <!-- <p class="" ><?php echo $event->place; ?></p><br> -->
+                    <div class="fluid-wrapper">
+                    <iframe width="560" height="315" src="//<?php echo $event->youtube; ?>" frameborder="0" allowfullscreen></iframe>
+
+                    </div>
+                </section>
+            </div>
+            <div class="columns small-12 large-6">
+                <h3 class="content__title">Description</h3>
+                <section class="section__box">
+                    <?php echo $event->why; ?>
+                </section>
+            </div>
+        </section>
+        <section class="row event__information">
+            <div  class="columns small-12 large-6">
+                <h3 class="content__title">Map</h3>
+                <section class="section__box section__box--content">
+                    <!-- <p class="" ><?php echo $event->place; ?></p><br> -->
+                    <div class="fluid-wrapper">
+                    <iframe src="<?php echo $event->map; ?>" width="640" height="480"></iframe>
+
+                    </div>
+                </section>
+            </div>
+            <div class="columns small-12 large-6">
+                <h3 class="content__title">What to bring</h3>
+                <section class="section__box">
+                    <?php echo $event->bring; ?>
+                </section>
+            </div>
+        </section>
+    <?php endforeach; ?>
+    </div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

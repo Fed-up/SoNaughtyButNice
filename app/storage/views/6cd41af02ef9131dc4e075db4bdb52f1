@@ -1,0 +1,57 @@
+
+<?php $__env->startSection('__header'); ?> 
+<?php $__env->stopSection(); ?>  
+
+<?php $__env->startSection('content'); ?>   
+<div class="band content">
+  <div class="container "> <!--Recipe section-->
+
+  <h2 class="section_title"><?php echo Auth::user()->fname; ?>'s Recipes</h2>
+    <div class="hp_recipe">
+    <?php if(isset($recipe_message)): ?>
+       <h4 class="recipe_title"><?php echo $recipe_message; ?></h4>
+    <?php else: ?>
+      <?php foreach($rData as $recipe): ?>
+        <?php /* '<pre>'; dd($recipe); echo '</pre>'; */ ?>
+        <div class="four columns recipe_box">
+        <a href="/recipe/<?php echo $recipe->id; ?>">
+        <?php foreach($recipe->Images as $image): ?>
+          <img src="/uploads/<?php echo $image->name; ?>" />
+        <?php endforeach; ?>
+        <h4 class="recipe_title"><?php echo $recipe->name; ?></h4>
+        <p class="recipe_box_summary"><?php echo $recipe->summary; ?></p>
+        </a>
+        <a href="/collection/<?php echo $recipe->MenuCategories->id; ?>" class="category_tag"><?php echo $recipe->MenuCategories->name; ?></a>
+
+        </div><!--End column-->     
+      <?php endforeach; ?>
+    <?php endif; ?>
+    </div><!--End hp_recipe-->
+
+    <h2 class="section_title"><?php echo Auth::user()->fname; ?>'s Events</h2>
+    <div class="hp_recipe">
+      <?php if(isset($event_message)): ?>
+         <h4 class="recipe_title"><?php echo $event_message; ?></h4>
+      <?php else: ?>
+        <?php foreach($eData as $event): ?>
+          <?php /* '<pre>'; print_r($event->Images ); echo '</pre>'; */ ?>
+          <div class="four columns recipe_box">
+              <a href="/event/<?php echo $event->id; ?>">
+                  <?php foreach($event->Images as $image): ?>
+                      <img src="/uploads/<?php echo $image->name; ?>" />
+                  <?php endforeach; ?>
+                  <h4 class="recipe_title"><?php echo $event->name; ?></h4>
+                  <p class="recipe_box_summary"><?php echo $event->date; ?></p>
+                  <p class="recipe_box_summary"><?php echo $event->time; ?></p>
+              </a>
+              
+              
+          </div><!--End column-->     
+        <?php endforeach; ?>
+      <?php endif; ?>
+    </div><!--End hp_recipe-->
+  </div>
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

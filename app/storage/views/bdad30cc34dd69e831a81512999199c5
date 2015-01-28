@@ -1,0 +1,69 @@
+
+
+
+<?php $__env->startSection('content'); ?>
+    <div class="page">
+        <section class="row">
+        	<?php foreach($iData as $ingredient): ?>
+                <h2 class="content__title content__title--main"><a class="content__title--link" href="/ingredients"><?php echo $ingredient->name; ?></a></h2>
+                <div class="columns small-12 medium-6 medium-push-3 large-4 large-pull-0">
+                    <img src="/uploads/<?php echo $iImage[$ingredient->id]; ?>" />
+                </div>
+                <div class="columns small-12 medium-12 large-8 end">
+                     
+                    <h4 class="content__title"><?php echo $ingredient->name; ?> Story</h4>
+                    <div class="section__box">   
+                        <p class="recipe_box_summary">We are researching right now to bring you the most relevent information about the nutrition and history, stay tuned =)</p>
+                    </div>
+                </div><!--End column--> 	
+            <?php endforeach; ?>
+        </section>
+    	<?php /* '<pre>'; print_r($rData); echo '</pre>'; */ ?>
+        
+        <?php if(isset($rData)): ?>
+    	<div class="row "> <!--Recipe section-->
+            <?php foreach($iData as $ingredient): ?>
+                <h2 class="content__title">Recipes that contain <?php echo $ingredient->name; ?></h2>
+            <?php endforeach; ?>
+            <?php foreach($rData as $recipe): ?>
+                
+                <div class="columns small-12 medium-6 large-4 xlarge-2 end">
+                    <article class="content-box">
+                        <div class="row collapse">
+                            
+                            <a href="/recipe/<?php echo $recipe->id; ?>" class="columns small-4 medium-12">
+                              <img src="/uploads/<?php echo $recipe->images[0]->name; ?>" />
+                            </a>
+                            
+
+                            <section class="columns small-8 medium-12">
+                                <div class="content-box__copy">
+                                    <a href="/recipe/<?php echo $recipe->id; ?>" class="content-box__copy__inner--recipe">
+                                        <h5 class="content-box__title"><?php echo $recipe->name; ?></h5>
+                                        <!-- <p class="content-box__summary"><?php echo $recipe->summary; ?></p> -->
+                                    </a>
+                                    <a href="/collection/<?php echo $recipe->MenuCategories->id; ?>" class="content-box__tag"><?php echo $recipe->MenuCategories->name; ?></a>
+                                </div>
+                            </section>
+                        </div>
+                    </article>
+                </div> 
+            <?php endforeach; ?>
+        </div><!--End container-->
+		<?php endif; ?>
+        
+        
+        
+  	</div><!--End Band Content-->
+   
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_footer'); ?>
+	<script type="text/javascript" src="/public/js/flexslider.js"></script>
+	<script type="text/javascript" src="/public/js/tabs.js"></script>
+    <script type="text/javascript" src="/js/gallery.js"></script>
+<?php $__env->stopSection(); ?>
+
+
+
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

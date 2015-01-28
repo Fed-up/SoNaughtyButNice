@@ -1,0 +1,96 @@
+/*==== Footer ======= */
+.footer__wrapper {
+  margin-top: 4rem; }
+
+.footer {
+  position: relative;
+  left: 0;
+  right: 0;
+  background: #F3F6F5;
+  width: 100%;
+  line-height: 2rem;
+  padding: 0.8rem;
+  border-bottom: 1px solid $main_dark;
+  text-align: center; }
+
+.addthis_horizontal_follow_toolbox {
+  margin-top: 0.5rem;
+  right: 0.5rem;
+  position: absolute;
+  margin-right: 10%; }
+
+.logo__image--footer {
+  position: absolute;
+  bottom: -0.75rem;
+  left: 5%;
+  width: 4rem;
+  color: #fff;
+  height: 4rem;
+  background: url(/images/site/logo.png) no-repeat 0 0;
+  background-size: contain; }
+  @media only screen and (min-width:768px) {
+    .logo__image--footer {
+      bottom: -0.77rem; } }
+
+.logo__text--footer {
+  font-size: 0.83rem;
+  display: block;
+  color: $text;
+  font-family: headings;
+  padding-right: 0.5rem;
+  font-weight: bold;
+  text-align: right; }
+  @media only screen and (min-width:481px) {
+    .logo__text--footer {
+      margin: 0px;
+      text-align: center;
+      font-size: 1rem; } }
+
+/* line 68, C:/webroot/lcsnbn/sass/modules/footer */
+.footer__links {
+  display: block;
+  width: 80%;
+  border: 0px;
+  text-align: left;
+  color: $text;
+  margin: auto;
+  margin-bottom: 1.5rem;
+  margin-top: 4rem; }
+  @media only screen and (min-width:481px) {
+    .footer__links {
+      width: 80%;
+      margin: auto;
+      margin-bottom: 1.8rem;
+      margin-top: 3.5rem; } }
+
+/* line 90, C:/webroot/lcsnbn/sass/modules/footer */
+.footer__links--heading {
+  padding-bottom: 0.2rem;
+  border-bottom: solid 1px;
+  text-align: center; }
+  @media only screen and (min-width:481px) { }
+
+/* line 100, C:/webroot/lcsnbn/sass/modules/footer */
+.footer__links--text {
+  padding: 0.5rem;
+  font-style: italic; }
+
+/* line 106, C:/webroot/lcsnbn/sass/modules/footer */
+.top__section__footer {
+  background-color: $main_light; }
+  @media only screen and (min-width:481px) { }
+
+/* line 115, C:/webroot/lcsnbn/sass/modules/footer */
+.bottom__section__footer {
+  position: relative;
+  background-color: #343434;
+  color: #fff;
+  font-size: 0.8rem;
+  text-align: center;
+  bottom: 0;
+  padding: 0.3rem; }
+
+/* line 125, C:/webroot/lcsnbn/sass/modules/footer */
+.footer__blurb {
+  margin: 2rem;
+  font-style: italic; }

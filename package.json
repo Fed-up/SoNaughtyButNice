@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "Tom Curphey"
+  },
+  "name": "SoNaughtyButNice",
+  "description": "",
+  "version": "1.0.0",
+  "homepage": "http://sonaughtybutnice.com.au",
+  "repository": {
+    "url": ""
+  },
+  "engines": {
+    "node": "~0.10.22"
+  },
+  "dependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-sass": "^0.14.0"
+  }
+}

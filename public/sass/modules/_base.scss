@@ -1,0 +1,191 @@
+/* GLOBAL STYLES
+ *****************************************/
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+html {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webbkit-box-sizing: border-box;
+  font-size: 1rem;
+  height: auto; } 
+  @media only screen and (min-width:481px) {
+    html {
+      font-size: 0.94rem; } }
+  @media only screen and (min-width:768px) {
+    html {
+      font-size: 0.92rem; } }
+  @media only screen and (min-width:961px) {
+    html {
+      font-size: 0.9rem; } }
+
+body {
+  background-color: #F3F6F5;
+  -webkit-font-smoothing: antialiased;
+  /* Fix for webkit rendering */
+  -webkit-text-size-adjust: 100%;
+  height: auto; }
+
+a {
+  text-decoration: none; 
+}
+
+a:hover, a:focus {
+  color: #fff; 
+  text-decoration: none; 
+}
+
+.columns img {
+  width: 100%; }
+
+ul, li {
+  list-style: none; }
+
+.row {
+  max-width: 84.375rem;
+}
+
+.no-display {
+  display: none; }
+
+.ui-content {
+  padding: 0; }
+
+.content-slot {
+  -webkit-transition-property: -webkit-transform;
+  -moz-transition-property: -moz-transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  background-color: #F3F6F5;
+  // height: 100%;
+  padding-top: 2.5rem;
+  position: relative;
+  z-index: 1; }
+
+.page {
+  color: $text;
+  height: 100%; }
+
+.section__box {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem; }
+
+.section__box--content {
+  padding: 0rem; }
+
+.content-link {
+  color: #000;
+  text-decoration: none;
+  font-weight: bold; }
+
+.content-link:hover {
+  color: $text;
+  border-bottom: 1px solid #ff5531; }
+
+@media only screen {
+  .image-box {
+    margin-bottom: 0.2rem; } }
+@media only screen and (min-width:481px) {
+  .image-box {
+    margin-bottom: 0.2rem; } }
+
+.content__title {
+  text-align: center;
+  font-family: headings;
+  padding: 0.5rem;
+  border-bottom: 1px solid $main_color;
+  margin-top: 0.5rem; }
+
+.content__title--main {
+  text-align: center;
+  margin: 0.5rem 0;
+  font-family: headings; }
+
+.content__title--login {
+  display: inline-block;
+  text-align: center;
+  margin: 0.5rem 0;
+  font-family: headings; }
+
+.content__title--recipe {
+  text-align: center;
+  font-family: headings; }
+
+.content__title--main--signup {
+  text-align: center;
+  margin: 0.5rem 0 2.5rem 0;
+  font-family: headings; }
+
+.content__title--link {
+  text-decoration: none;
+  color: $text; }
+
+.content__title--homepage {
+  text-align: center;
+  margin-top: 0.5rem; }
+  @media only screen and (min-width:768px) {
+    .content__title--homepage {
+      display: none; } }
+
+.content__title--main--tabs {
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 0.5rem; }
+
+.content__title--main--tabs.active {
+  background-color: #E30B5D;
+  color: #fff; }
+
+.content-title--sub {
+  text-align: center;
+  font-family: headings;
+  padding: 0.5rem; }
+
+.subnav {
+  border-bottom: 1px solid $main_color;
+  font-family: headings;
+  padding: 0.3rem;
+  text-align: center; }
+  @media only screen and (min-width:481px) {
+    .subnav {
+      text-align: left; } }
+
+.tab__link {
+  text-decoration: none;
+  color: $menu_dark; }
+
+.active > .tab__link {
+  color: #fff; }
+
+.promo__text {
+  padding: 1rem;
+  font-size: 0.8rem;
+  font-style: italic; }
+
+.form__submit__button {
+  padding: 0.8rem;
+  background-color: green;
+  border: 0;
+  border-radius: 0.2rem;
+  font-size: 1.1rem;
+  color: #fff; }
+
+.form__submit__button--login {
+  padding: 0.8rem;
+  background-color: green;
+  border: 0;
+  border-radius: 0.2rem;
+  font-size: 1.1rem;
+  color: #fff;
+  width: 100%; }

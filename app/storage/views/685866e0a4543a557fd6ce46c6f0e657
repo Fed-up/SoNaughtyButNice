@@ -1,0 +1,10 @@
+<nav>
+    <ul>
+        <li><a href="">Home</a></li>        
+        <?php if(Auth::check()): ?>
+        	<li><a href="">Sign Out</a></li>
+        <?php else: ?>
+        	<li><a href="">Sign In</a></li>
+        <?php endif; ?>
+    </ul>
+</nav>

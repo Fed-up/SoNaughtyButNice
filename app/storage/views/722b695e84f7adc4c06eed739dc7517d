@@ -1,0 +1,58 @@
+
+
+
+<?php $__env->startSection('content'); ?>
+    <div class="band content">
+    <?php foreach($eData as $event): ?>
+    	
+        <div class="container "> <!--header recipe section-->
+        <h3 class="rp_recipe_title"><?php echo $event->name; ?></h3>
+            <div class="five columns alpha">
+                    <?php if(isset($hImage->name)): ?>;
+                        <img src="/uploads/<?php echo $hImage->name; ?>"/>
+                    <?php else: ?>
+                        <img src="/uploads/o_18uaul8ai1b071b194f1na11a7u8.JPG"/>
+                    <?php endif; ?> 	
+            </div><!--End Five columns-->
+            <div class="eight columns rp_fresh_fact">
+            	<p class="rp_recipe_title"><?php echo $event->summary; ?></p>
+            	<ul>                   
+                    <li>Place: <?php echo $event->place; ?></li>
+                    <li>Date: <?php echo $event->date; ?></li>
+                    <li>Time: <?php echo $event->time; ?></li>
+                    <li>Price: <?php echo $event->price; ?></li>
+                </ul>
+            </div><!--End Nine columns-->
+            <div class="three columns omega">
+                <div class="mobile_3_stack">
+                    <?php if (Auth::check()): ?>
+                        <?php if ($paid == $confirm_paid): ?>
+                                <p>Can't wait to see you at the event <?php echo Auth::user()->fname; ?></p>
+                        <?php else: ?>
+                            <?php echo Form::open(array('action' => 'CheckoutController@postAddToCart')); ?>
+                                <?php echo Form::hidden('event_id', $event->id); ?>
+                                <?php echo Form::hidden('name', $event->name); ?>
+                                <?php if(isset($hImage->name)): ?>;
+                                     <?php echo Form::hidden('image', $hImage->name); ?>
+                                <?php else: ?>
+                                     <?php echo Form::hidden('image', 'o_18uaul8ai1b071b194f1na11a7u8.JPG'); ?>
+                                <?php endif; ?>
+                               
+                                <?php echo Form::hidden('quantity', 1); ?>
+                                <?php echo Form::hidden('price', $event->price); ?>
+                                <?php echo Form::hidden('section', 'EVENT'); ?>
+                            <?php echo Form::submit('Add to Cart', array('class' => 'btn btn-success')); ?>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <p>Please Sign In to view event</p>
+                    <?php endif; ?>
+
+
+
+                   
+                </div>
+            </div>
+        </div><!--End container-->
+    <?php endforeach; ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

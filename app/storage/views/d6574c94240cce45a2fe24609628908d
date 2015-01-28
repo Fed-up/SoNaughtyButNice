@@ -1,0 +1,87 @@
+
+
+
+<?php $__env->startSection('content'); ?>
+       
+    <div class="band content">
+    	
+        
+        <div class="collection container "> <!--Collection section-->
+            <h2 class="collection_section_title">Discover a new catering package of Healthy Desserts</h2>
+        </div>
+        <section class="section container">
+        	<?php foreach($cData as $index=>$package): ?>
+            	
+				 <a href="/package/<?php echo $package->id; ?>" class="tile four columns" style="background-image:url(/uploads/<?php echo $package->Images[0]->name; ?>)">
+                    <label class="tile__label recipe_title"><?php echo $package->name; ?></label>
+                </a>              	      
+                <?php if( ($index + 1) % 6 == 0): ?>            
+                    <article class="tile tile--grid four columns">
+                        <div class="tile--grid__inner">
+                            <h6 class="extra_block_title"><span class="mini_extra_block_title">Upcoming</span> Events</h6>
+                            <a href="#">                        
+                                <div class="event_click">
+                                    <div class="hp_event_date_box">
+                                        <p class="hp_event_date">16<span class="hp_date_th">th</span><p>
+                                        <p class="hp_event_month">AUG<p>
+                                    </div>
+                                    <p class="hp_event_name" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Hello Healthy Desserts, im going to eat  you  im eat you  im you  im eat you  im<p>
+                                </div>
+                            </a>
+                            <a href="#">                        
+                                <div id="last_event" class="event_click">
+                                    <div class="hp_event_date_box">
+                                        <p class="hp_event_date">16<span class="hp_date_th">th</span><p>
+                                        <p class="hp_event_month">AUG<p>
+                                    </div>
+                                    <p class="hp_event_name">Hello Healthy Desserts, im going to eat you im eat you  im you  im eat you  im<p>
+                                </div>
+                            </a>
+                        </div>
+                    </article>  
+                <?php elseif( ($index + 1) % 3 == 0): ?>
+                    <article class="tile tile--grid four columns">
+                        <div class="tile--grid__inner">
+                            <h6 class="extra_block_title">Catering <span class="mini_extra_block_title">Packages</span></h6>
+                            <a href="#">
+                                <div class="catering_click">
+                                    <p class="hp_catering_p_name">Event<p>
+                                    <p class="hp_catering_summary">Multiple Days<p>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="catering_click">
+                                    <p class="hp_catering_p_name">Function<p>
+                                    <p class="hp_catering_summary">With Waiters<p>
+                                </div>
+                            </a>
+                            <a href="#">                        
+                                <div class="catering_click">
+                                    <p class="hp_catering_p_name">Party<p>
+                                    <p class="hp_catering_summary">Personal Order<p>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="catering_click">
+                                    <p class="hp_catering_p_name">Corporate<p>
+                                    <p class="hp_catering_summary">Repeat Service<p>
+                                </div>
+                            </a>
+                        </div>
+                    </article> 
+                <?php endif; ?>                
+            <?php endforeach; ?>
+        </section> 
+        
+        
+        
+    	   
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_footer'); ?>
+	<script type="text/javascript" src="/public/js/flexslider.js"></script>
+	<script type="text/javascript" src="/public/js/tabs.js"></script>
+    <script type="text/javascript" src="/js/gallery.js"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

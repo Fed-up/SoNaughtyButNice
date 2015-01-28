@@ -1,0 +1,80 @@
+/* line 3, C:/webroot/lcsnbn/sass/modules/event_page */
+.section-box--margin {
+  margin-top: 0.5rem; }
+
+/* line 7, C:/webroot/lcsnbn/sass/modules/event_page */
+.form__submit__button--event {
+  width: 100%;
+  margin: auto;
+  margin-top: 1rem; }
+  @media only screen and (min-width:481px) {
+    .form__submit__button--event {
+      width: auto;
+      margin: 0.5rem;
+      position: absolute;
+      right: 0; } }
+
+/* line 21, C:/webroot/lcsnbn/sass/modules/event_page */
+.event__information {
+  margin-top: 1rem; }
+  @media only screen and (min-width:481px) {
+    .event__information {
+      margin-top: 3.5rem; } }
+  @media only screen and (min-width:768px) {
+    .event__information {
+      margin-top: 2.5rem; } }
+
+/* line 31, C:/webroot/lcsnbn/sass/modules/event_page */
+.form__group--event {
+  /* float: right; */
+  /* position: relative; */
+  text-align: right;
+  /* width: auto; */
+  margin-top: 1rem; }
+
+/* line 39, C:/webroot/lcsnbn/sass/modules/event_page */
+.input__text--event {
+  display: block;
+  color: $text;
+  padding: 0.7rem;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 0px;
+  border: 1px solid $main_light;
+  text-align: right;
+  width: 30%;
+  margin-left: 70%; }
+  @media only screen and (min-width:481px) {
+    .input__text--event {
+      width: 25%;
+      margin-left: 75%; } }
+  @media only screen and (min-width:768px) {
+    .input__text--event {
+      width: 10%;
+      margin-left: 90%; } }
+
+/* line 62, C:/webroot/lcsnbn/sass/modules/event_page */
+.fluid-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  height: 0; }
+
+/* line 67, C:/webroot/lcsnbn/sass/modules/event_page */
+.fluid-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none; }
+
+/* line 80, C:/webroot/lcsnbn/sass/modules/event_page */
+.section__box li {
+  padding: 0.5rem;
+  list-style-type: disc;
+  margin-left: 2.5rem; }
+
+/* line 86, C:/webroot/lcsnbn/sass/modules/event_page */
+.section__box p {
+  padding: 0.5rem; }

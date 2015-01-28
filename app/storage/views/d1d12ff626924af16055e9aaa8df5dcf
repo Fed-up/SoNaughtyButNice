@@ -1,0 +1,53 @@
+
+<?php $__env->startSection('content'); ?>
+
+	<h1>Create Post</h1>
+    <?php echo Form::open(array('route' => 'posts.store')); ?>
+	<ul>
+    	<li>
+        	<?php echo Form::label('author', 'Author:'); ?><br/>
+            <?php echo Form::text('author'); ?>
+        </li>
+        <li>
+        	<?php echo Form::label('title', 'Title:'); ?><br/>
+            <?php echo Form::text('title'); ?>
+        </li>
+        <li>
+        	<?php echo Form::label('body', 'Body:'); ?><br/>
+            <?php echo Form::textarea('body'); ?>
+        </li>
+        <li>
+        	<?php echo Form::submit('Submit', array('class' => 'btn-info')); ?>
+        </li> 
+    </ul>
+    <?php echo Form::close(); ?>
+    
+   	<?php if($errors->any()): ?>
+    	<ul>
+        	<?php echo implode('', $errors->all('<li class="error">:message</li>')); ?>
+        </ul>
+  	<?php endif; ?>
+<?php $__env->stopSection(); ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php echo $__env->make('tmpl.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

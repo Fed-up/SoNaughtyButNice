@@ -1,0 +1,62 @@
+/*//////////// HEADER SECTION */
+/*Header */
+
+.header {
+  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: $main_color;
+  height: 2.5rem;
+  z-index: 2;
+  width: 100%;
+  line-height: 2.5rem;
+  padding-left: 1rem;
+  border-bottom: 1px solid $main_dark; }
+  @media only screen and (min-width:768px) {
+    .header {
+      text-align: center; } }
+
+.logo__text {
+  font-size: 1rem;
+  color: #fff;
+  font-family: headings;
+  font-weight: bold; }
+  @media only screen and (min-width:768px) {
+    .logo__text {
+      margin: 0px;
+      text-align: center; } }
+
+.logo__image {
+  position: absolute;
+  bottom: -0.75rem;
+  right: 10px;
+  width: 4rem;
+  color: #fff;
+  height: 4rem;
+  background: url(/images/site/logo.png) no-repeat 0 0;
+  background-size: contain; }
+  @media only screen and (min-width:768px) {
+    .logo__image {
+      bottom: -0.77rem; } }
+
+@media only screen and (max-width: 480px) {
+  .menu__image {
+    display: none; } }
+@media only screen and (min-width:481px) {
+  .menu__image {
+    position: absolute;
+    bottom: -1.75rem;
+    right: 5rem;
+    width: 5.5rem;
+    color: #fff;
+    height: 4rem;
+    background: url(/images/site/menu.png) no-repeat 0 0;
+    background-size: contain; } }
+@media only screen and (min-width:768px) {
+  .menu__image {
+    bottom: -1.77rem; } }
+
+/*End Header*/

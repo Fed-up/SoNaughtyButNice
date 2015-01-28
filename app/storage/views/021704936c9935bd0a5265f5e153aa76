@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    	<title><?php echo isset($title) ? $title : "So Naughty But Nice"; ?></title>
+         
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" type="text/css" href="/packages/bootstrap-3.1.1-dist/css/bootstrap.min.css">
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" type="text/css" href="/css/skeleton.css">
+        <link rel="stylesheet" type="text/css" href="/css/layout.css">
+       	<meta name="viewport" content="width=device-width, user-scalable=no"> 
+        <?php echo $__env->yieldContent('_header'); ?>
+    </head>
+    <body>
+    	<?php echo $__env->make('public.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    	<?php echo $__env->yieldContent('_head'); ?> 
+    	<?php echo $__env->yieldContent('content'); ?>
+        <?php echo $__env->make('public.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <!-- JS 
+        ====================================  -->
+        <script src="/packages/jquery-1.11.1.min/jquery-1.11.1.min.js"></script>
+        <script src="/packages/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/site.js"></script>
+        <?php echo $__env->yieldContent('_footer'); ?>
+		
+
+        
+    </body>
+</html>

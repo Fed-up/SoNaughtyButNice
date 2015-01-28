@@ -1,0 +1,58 @@
+
+<?php $__env->startSection('__header'); ?> 
+<?php $__env->stopSection(); ?>  
+
+<?php $__env->startSection('content'); ?> 
+	<div class="band content">
+		<div class="container "> 
+			<?php echo dd(Cart::totalItems());; ?>
+			
+			<!-- <table>
+				<tr>
+					<th>#</th>
+					<th>Product Name</th>
+					<th>Unit Price</th>
+					<th>Quantity</th>
+					<th>Subtotal</th>
+				</tr>
+
+				<?php foreach($products as $product): ?>
+				<tr>
+					<td>$product->id</td>	
+					<td>
+						$product->name
+					</td>	
+					<td>$product->price</td>	
+					<td>$product->quantity</td>	
+					<td>$product->price</td>
+					<td>
+						<a href="/store/removeitem/<?php echo $product->identifier; ?>" >
+					</td>	
+				</tr>
+
+				<tr>
+					<td colspan="5">
+						Subtotal: <?php echo Cart::total(); ?>
+						Total: <?php echo Cart::total(); ?>
+					</td>
+				</tr>
+			</table> -->
+			<!-- <form action="/checkout" method="POST">
+				<script
+					src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+					data-key="<?php echo Config::get('stripe.pk'); ?>"
+					data-image="/images/site/Avocado.jpg"
+					data-name="Demo Site"
+					data-email=""
+					data-description="2 widgets ($20.00)"
+					data-amount="2000"> /*Amount in cents = $20*/
+				</script>
+				<input type="hidden" name="amount" value="2000" />
+				<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
+			</form> -->
+		</div>
+	</div>
+<?php $__env->stopSection(); ?> 
+
+
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

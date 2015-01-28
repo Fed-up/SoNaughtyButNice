@@ -1,0 +1,29 @@
+/* line 1, C:/webroot/lcsnbn/sass/modules/profile */
+.profile__image {
+  margin-top: 1rem;
+  border: 1px solid #e0e0e0; }
+
+/* line 6, C:/webroot/lcsnbn/sass/modules/profile */
+.profile__account__link {
+  background-color: #73cb4d;
+  border: 1px solid #e0e0e0;
+  display: block;
+  margin-top: 0.5rem;
+  padding: 0.3rem;
+  text-align: center;
+  color: #fff; }
+
+/* line 17, C:/webroot/lcsnbn/sass/modules/profile */
+.profile__image__link {
+  position: relative;
+  display: block; }
+
+/* line 22, C:/webroot/lcsnbn/sass/modules/profile */
+.profile__image__link__name {
+  position: absolute;
+  right: 0;
+  top: 2rem;
+  padding: 0.3rem;
+  background-color: #73cb4d;
+  color: #fff;
+  border-radius: 5px 0 0 5px; }

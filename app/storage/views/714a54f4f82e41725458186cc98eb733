@@ -1,0 +1,73 @@
+
+<?php $__env->startSection('_head'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+  <h1 class="page-header">All Categories   <?php echo link_to('/admin/menu/categories/add', '+ Add', array('class' => 'btn btn-primary pull-right')); ?> </h1>
+    <?php if (Session::has('message')): ?>
+       <div class="alert alert-danger"><?php echo Session::get('message'); ?></div>
+    <?php endif; ?>
+  <div class="row">
+       <table class="table table-striped table-hover">
+            <thead>
+            	<tr>
+                    <th>#</td>
+                    <th>Category Name</th>
+                    <th>Summmary</th>
+                    <th>Active</th>
+                    <th>Position</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            <?php foreach($data as $mCat): ?>           
+            <tr>
+                <td><?php echo $mCat->id; ?></td>
+                <td><?php echo $mCat->name; ?></td>
+                <td><?php echo $mCat->summary; ?></td>
+                <td>
+                	<?php if($mCat->active == 1): ?>
+                    	<?php echo link_to('/admin/menu/categories/active/'.$mCat->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                    <?php else: ?>
+                		<?php echo link_to('/admin/menu/categories/active/'.$mCat->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                	<?php endif; ?>
+                
+                </td>
+                <td>
+                	
+                	<a href="<?php echo action('Admin_CategoriesController@getOrderCategories', array($mCat->id,$mCat->ordering,'up')); ?>" class="btn btn-default glyphicon glyphicon-arrow-up <?php echo ($mCat->ordering == 1)? "disabled" : ""; ?> "></a>
+                    <a href="<?php echo action('Admin_CategoriesController@getOrderCategories', array($mCat->id,$mCat->ordering,'down')); ?>" 
+                    class="btn btn-default glyphicon glyphicon-arrow-down <?php echo ($mCat->ordering == $count)? "disabled" : ""; ?> "></a>
+					<a href="#" class="btn btn-default disabled"> <?php echo $mCat->ordering; ?> </a>
+                	
+                </td>
+                <td>
+                	<?php echo link_to('/admin/menu/categories/edit/'.$mCat->id, 'Edit', array('class' => 'btn btn-success')); ?>
+                	<?php echo link_to('/admin/menu/categories/delete/'.$mCat->id, 'Delete', array('class' => 'btn btn-danger')); ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>   
+            
+            </tbody>
+            <tfoot>
+            	<tr>
+                	<td colspan="20">
+                    	Total: <?php echo $data->count(); ?> 
+                    </td>
+               	</tr>
+            </tfoot>
+       </table> 
+        	
+  </div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('_tail'); ?>
+
+    
+<?php $__env->stopSection(); ?>
+    
+<?php echo $__env->make('tmpl.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

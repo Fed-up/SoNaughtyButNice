@@ -1,0 +1,78 @@
+/*///////////// Sign up section*/
+/* line 3, C:/webroot/lcsnbn/sass/modules/signup */
+.section--form {
+  padding: 2rem 1rem; }
+  @media only screen and (min-width:768px) {
+    .section--form {
+      padding: 2rem; } }
+
+/* line 11, C:/webroot/lcsnbn/sass/modules/signup */
+.input__text {
+  display: block;
+  color: $text;
+  padding: 0.7rem;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 0px;
+  width: 100%;
+  border: 1px solid $main_light;
+  margin-right: 20rem;
+  margin-bottom: 1rem; }
+
+/* line 28, C:/webroot/lcsnbn/sass/modules/signup */
+.form__submit__button {
+  padding: 0.8rem;
+  background-color: #ff8e5e;
+  border: 0;
+  border-radius: 0.2rem;
+  font-size: 1.1rem;
+  color: #fff; }
+
+/* line 37, C:/webroot/lcsnbn/sass/modules/signup */
+.form__submit__button:hover {
+  background-color: #ff5531; }
+
+/* line 41, C:/webroot/lcsnbn/sass/modules/signup */
+.form__button--sub {
+  padding: 0.5rem;
+  background-color: #fff;
+  border: 0px;
+  border-radius: 0.5rem;
+  color: $main_color;
+  margin-left: 10%;
+  margin-top: 0.7rem;
+  font-size: 0.8rem; }
+
+/* line 52, C:/webroot/lcsnbn/sass/modules/signup */
+.form__button--sub--signup {
+  margin-left: 0rem; }
+
+/* line 56, C:/webroot/lcsnbn/sass/modules/signup */
+.form__button--sub:hover {
+  padding: 0.5rem;
+  background-color: $main_color;
+  border: 0px;
+  border-radius: 0.2rem;
+  color: #fff;
+  margin-left: 10%; }
+
+/* line 65, C:/webroot/lcsnbn/sass/modules/signup */
+.form__button--sub--signup:hover {
+  margin-left: 0rem; }
+
+/* line 69, C:/webroot/lcsnbn/sass/modules/signup */
+.content__sub__heading {
+  text-align: center;
+  font-style: italic; }
+
+/* line 74, C:/webroot/lcsnbn/sass/modules/signup */
+.promo__list {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  font-style: italic;
+  list-style-type: disc; }
+
+/* line 81, C:/webroot/lcsnbn/sass/modules/signup */
+.promo__list__ul {
+  margin: 2rem;
+  margin-top: 2.5rem; }

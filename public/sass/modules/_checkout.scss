@@ -1,0 +1,27 @@
+/* line 1, C:/webroot/lcsnbn/sass/modules/checkout */
+.checkout__section {
+  position: relative;
+  margin-bottom: 3rem; }
+
+/* line 6, C:/webroot/lcsnbn/sass/modules/checkout */
+.checkout__content {
+  position: absolute;
+  right: 0.5rem; }
+
+/* line 11, C:/webroot/lcsnbn/sass/modules/checkout */
+.cart__total {
+  display: inline-block;
+  padding: 0.5rem; }
+
+/* line 16, C:/webroot/lcsnbn/sass/modules/checkout */
+.content-box__summary--price {
+  color: $text; }
+
+/* line 20, C:/webroot/lcsnbn/sass/modules/checkout */
+.content-box__summary--quantity {
+  color: $text; }
+
+/* line 24, C:/webroot/lcsnbn/sass/modules/checkout */
+.pay_icon {
+  float: right;
+  margin-right: 0.6rem; }

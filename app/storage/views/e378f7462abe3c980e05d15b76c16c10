@@ -1,0 +1,82 @@
+
+<?php $__env->startSection('_header'); ?> 
+	<title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 30rem;
+        width: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvtQhdscDONz8HCTWh1SG02f6NOUOakMQ&libraries=places"></script>
+    <script>
+      // var MelbourneLatLng = new google.maps.LatLng(-37.8136, 144.9631);
+      var MelbourneLatLng = new google.maps.LatLng(-37.8350, 144.9600);//South Melbourne
+      var map;
+      var service;
+
+      function initialize() {
+        var mapOptions = {
+          zoom: 8,
+          center: MelbourneLatLng
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+
+      }
+
+
+      function getGyms(){
+
+        var gymRequest = 
+              {
+                location: MelbourneLatLng,
+                radius: "50000",
+                query: "gym"
+              };
+
+        service = new google.maps.places.PlacesService(map);
+        service.textSearch(gymRequest, placeMarkers);
+      }
+
+      function placeMarkers(results, status){
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            var place = results[i];
+            createMarker(results[i]);
+          }
+        }
+      }
+
+
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location //,
+          //icon: '/image....'
+        });
+      }
+
+
+
+      google.maps.event.addDomListener(window, 'load', function(){
+        initialize();
+        getGyms();
+      });
+
+    </script>
+<?php $__env->stopSection(); ?>  
+
+<?php $__env->startSection('content'); ?>     
+	<div class="band content">
+		<div class="container "> <!--Recipe section-->
+			<div id="map-canvas"></div>
+		</div>
+	</div>	
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

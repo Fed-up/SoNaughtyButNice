@@ -1,0 +1,278 @@
+/**----------Collection Ad Block Section------------**/
+/* line 2, C:/webroot/lcsnbn/sass/modules/promo */
+h6.extra_block_title {
+  text-align: center;
+  margin: 8px; }
+
+/* line 6, C:/webroot/lcsnbn/sass/modules/promo */
+.mini_extra_block_title {
+  font-family: headings; }
+
+/* line 9, C:/webroot/lcsnbn/sass/modules/promo */
+.hp_catering_p_name {
+  text-align: center;
+  margin: 0px;
+  font-size: 12px;
+  font-weight: bold; }
+
+/* line 15, C:/webroot/lcsnbn/sass/modules/promo */
+.hp_catering_summary {
+  text-align: center;
+  margin: 0px;
+  font-size: 12px;
+  line-height: 14px; }
+
+/* line 21, C:/webroot/lcsnbn/sass/modules/promo */
+.catering_click {
+  color: $text;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  vertical-align: central;
+  padding-top: 10%;
+  margin: 1%;
+  margin-left: 1%;
+  width: 48%;
+  height: 40%;
+  float: left;
+  border: 1px solid #8ecba5; }
+
+/* line 35, C:/webroot/lcsnbn/sass/modules/promo */
+.catering_click:hover {
+  background: #8ecba5;
+  color: #fff; }
+
+/* line 39, C:/webroot/lcsnbn/sass/modules/promo */
+.hp_catering_name {
+  margin-top: 10%; }
+
+/*_________Event______________*/
+/* line 45, C:/webroot/lcsnbn/sass/modules/promo */
+#event_extra {
+  overflow: hidden;
+  z-index: 0; }
+
+/* line 49, C:/webroot/lcsnbn/sass/modules/promo */
+.event_click {
+  height: 40%;
+  margin-left: 2%;
+  margin-bottom: 2%;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 2%;
+  overflow: hidden; }
+
+/* line 57, C:/webroot/lcsnbn/sass/modules/promo */
+div.event_click:hover div.hp_event_date_box {
+  background: #fff;
+  color: $text;
+  border: 1px solid #8ecba5; }
+
+/* line 62, C:/webroot/lcsnbn/sass/modules/promo */
+.hp_event_date_box {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0px;
+  font-size: 12px;
+  background: #8ecba5;
+  color: #fff;
+  width: 25%;
+  height: 52%;
+  float: left; }
+
+/* line 75, C:/webroot/lcsnbn/sass/modules/promo */
+.hp_event_date {
+  font-size: 22px;
+  margin-left: 3%; }
+
+/* line 79, C:/webroot/lcsnbn/sass/modules/promo */
+.hp_date_th {
+  font-size: 10px; }
+
+/* line 82, C:/webroot/lcsnbn/sass/modules/promo */
+.hp_event_month {
+  font-size: 12px;
+  line-height: 2px; }
+
+/* line 86, C:/webroot/lcsnbn/sass/modules/promo */
+.hp_event_name {
+  margin-left: 28%;
+  color: $text;
+  font-size: 14px;
+  padding-bottom: 2%; }
+
+/**_________________COMMUNITY SECTION___________________**/
+/* line 94, C:/webroot/lcsnbn/sass/modules/promo */
+.join_section_title {
+  text-align: center; }
+
+/* line 97, C:/webroot/lcsnbn/sass/modules/promo */
+.join.container {
+  position: relative; }
+
+/* line 101, C:/webroot/lcsnbn/sass/modules/promo */
+div.five.columns img {
+  width: 100%; }
+
+/* line 104, C:/webroot/lcsnbn/sass/modules/promo */
+.join_pitch {
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  height: 100%;
+  position: absolute; }
+
+/* line 111, C:/webroot/lcsnbn/sass/modules/promo */
+.join_content {
+  font-size: 32px;
+  margin: 20px;
+  text-align: center; }
+
+/* line 116, C:/webroot/lcsnbn/sass/modules/promo */
+.join_us {
+  padding: 3px;
+  font-size: 14px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #8ecba5;
+  text-decoration: none;
+  color: $text;
+  text-align: center;
+  width: 50%;
+  left: 25%;
+  right: 25%;
+  position: absolute; }
+
+/* line 131, C:/webroot/lcsnbn/sass/modules/promo */
+.join_us:hover {
+  background: #8ecba5;
+  text-decoration: none;
+  color: #fff; }
+
+/* line 136, C:/webroot/lcsnbn/sass/modules/promo */
+.join_row {
+  margin: 10px; }
+
+/* line 139, C:/webroot/lcsnbn/sass/modules/promo */
+.join_span {
+  padding-left: 20px; }
+
+/* line 142, C:/webroot/lcsnbn/sass/modules/promo */
+.join_text {
+  padding: 10px; }
+
+/* line 145, C:/webroot/lcsnbn/sass/modules/promo */
+.social_icon {
+  width: 20%; }
+
+/* line 148, C:/webroot/lcsnbn/sass/modules/promo */
+.social_text {
+  margin: 10px;
+  width: 80%; }
+
+/* line 152, C:/webroot/lcsnbn/sass/modules/promo */
+div.four.columns.social_links {
+  float: right; }
+
+/* line 155, C:/webroot/lcsnbn/sass/modules/promo */
+div.four.columns.social_links {
+  margin-top: 30px; }
+
+@media only screen and (max-width: 959px) {
+  /*_____Event Ad Block_________________________*/
+  /* line 160, C:/webroot/lcsnbn/sass/modules/promo */
+  .catering_click {
+    height: 39%; }
+  /* line 167, C:/webroot/lcsnbn/sass/modules/promo */
+  .hp_event_date_box {
+    width: 25%;
+    height: 65%; }
+  /* line 171, C:/webroot/lcsnbn/sass/modules/promo */
+  .hp_event_date {
+    font-size: 22px;
+    margin-left: 3%; }
+  /* line 175, C:/webroot/lcsnbn/sass/modules/promo */
+  .hp_date_th {
+    font-size: 10px; }
+  /* line 178, C:/webroot/lcsnbn/sass/modules/promo */
+  .hp_event_month {
+    font-size: 12px;
+    line-height: 2px; }
+  /* line 182, C:/webroot/lcsnbn/sass/modules/promo */
+  .hp_event_name {
+    margin-left: 28%;
+    color: $text;
+    font-size: 14px; } }
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  /**___________________Join Section______________________**/
+  /* line 191, C:/webroot/lcsnbn/sass/modules/promo */
+  .social_text {
+    margin-top: 0px;
+    width: 80%; }
+  /* line 195, C:/webroot/lcsnbn/sass/modules/promo */
+  div.social_section.row {
+    margin-bottom: 0px; }
+  /* line 198, C:/webroot/lcsnbn/sass/modules/promo */
+  div.four.columns.social_links {
+    margin-top: 10px; } }
+
+@media only screen and (max-width: 767px) {
+  /**_______________Community Section_______________________**/
+  /* line 205, C:/webroot/lcsnbn/sass/modules/promo */
+  .social_icon {
+    width: 20%; }
+  /* line 208, C:/webroot/lcsnbn/sass/modules/promo */
+  .social_text {
+    margin: 10px; }
+  /* line 211, C:/webroot/lcsnbn/sass/modules/promo */
+  div.five.columns.image_div {
+    width: 40%; }
+  /* line 214, C:/webroot/lcsnbn/sass/modules/promo */
+  div.seven.columns.join_pitch {
+    width: 60%;
+    position: relative;
+    height: 168px; }
+  /* line 219, C:/webroot/lcsnbn/sass/modules/promo */
+  .join_content {
+    font-size: 20px; }
+  /* line 222, C:/webroot/lcsnbn/sass/modules/promo */
+  .join_us {
+    font-size: 14px;
+    width: 50%;
+    left: 25%;
+    right: 25%;
+    position: absolute;
+    top: 70%; }
+  /* line 230, C:/webroot/lcsnbn/sass/modules/promo */
+  figure.one.columns.alpha.social_icon {
+    width: 50%;
+    float: left; } }
+
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  /* line 239, C:/webroot/lcsnbn/sass/modules/promo */
+  #catering_extra {
+    top: -210px;
+    height: 50%; }
+  /* line 243, C:/webroot/lcsnbn/sass/modules/promo */
+  #event_extra {
+    top: 210px;
+    height: 50%; } }
+
+@media only screen and (max-width: 479px) {
+  /**______________Join Section________________**/
+  /* line 252, C:/webroot/lcsnbn/sass/modules/promo */
+  .social_icons {
+    display: inline; }
+  /* line 255, C:/webroot/lcsnbn/sass/modules/promo */
+  div.seven.columns.join_pitch {
+    height: 120px; }
+  /* line 258, C:/webroot/lcsnbn/sass/modules/promo */
+  .join_content {
+    font-size: 18px;
+    margin: 5px; }
+  /* line 262, C:/webroot/lcsnbn/sass/modules/promo */
+  .social_text {
+    display: none; } }

@@ -1,0 +1,149 @@
+/*///////////// Content section*/
+/* line 2, C:/webroot/lcsnbn/sass/modules/tile */
+.content-boxes__wrapper {
+  padding: 0; }
+  @media only screen and (max-width: 480px) {
+    .content-boxes__wrapper > .columns {
+      padding: 0; } }
+
+/* line 16, C:/webroot/lcsnbn/sass/modules/tile */
+.content-box {
+  background: #fff;
+  border: solid 1px #e0e0e0;
+  /*padding-bottom: 30px; */
+  /*margin-bottom: 0.5rem;*/
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-bottom: 0.25rem; }
+  @media only screen and (min-width:1351px) {
+    .content-box {
+      margin-bottom: 1rem; } }
+  @media only screen and (min-width:481px) {
+    .content-box {
+      margin-bottom: 0.8rem; } }
+  /* line 35, C:/webroot/lcsnbn/sass/modules/tile */
+  .content-box .row {
+    position: relative; }
+    @media only screen and (min-width:481px) {
+      .content-box .row {
+        position: static; } }
+
+/* line 75, C:/webroot/lcsnbn/sass/modules/tile */
+.content-box__copy {
+  position: relative;
+  height: 100%; }
+
+/* line 79, C:/webroot/lcsnbn/sass/modules/tile */
+.content-box__copy__inner {
+  display: block;
+  padding: 0.5rem 0.75rem; }
+
+/* line 83, C:/webroot/lcsnbn/sass/modules/tile */
+.content-box__copy__inner--recipe {
+  display: block;
+  padding: 0.5rem 0.75rem 3rem; }
+
+/* line 87, C:/webroot/lcsnbn/sass/modules/tile */
+.content-box__copy__inner--homepage {
+  padding: 0.5rem 0.75rem 0rem;
+  border-bottom: 0; }
+
+/* line 93, C:/webroot/lcsnbn/sass/modules/tile */
+.content-box__title {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: $main_dark;
+  border-top: 0; }
+  @media only screen and (min-width:481px) {
+    .content-box__title {
+      height: 1.8em;
+      line-height: 1.4;
+      padding-bottom: 3.2rem; } }
+  @media only screen and (min-width:768px) {
+    .content-box__title {
+      height: 1.5em;
+      line-height: 1.2; } }
+  @media only screen and (min-width:961px) {
+    .content-box__title {
+      height: 1.7em; } }
+  @media only screen and (min-width:1351px) {
+    .content-box__title {
+      height: 1.5em;
+      font-size: 0.95rem; } }
+
+/* line 118, C:/webroot/lcsnbn/sass/modules/tile */
+.content-box--homepage {
+  display: block;
+  height: 8rem;
+  overflow: hidden; }
+  @media only screen and (min-width:481px) {
+    .content-box--homepage {
+      height: auto; } }
+  /* line 127, C:/webroot/lcsnbn/sass/modules/tile */
+  .content-box--homepage .content-box__image {
+    width: 100%;
+    height: 100%; }
+    @media only screen and (min-width:481px) {
+      .content-box--homepage .content-box__image {
+        height: 0;
+        padding-top: 100%; } }
+
+/* line 137, C:/webroot/lcsnbn/sass/modules/tile */
+.content-box__title--homepage {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #fff;
+  border-radius: 5px 0 0 5px;
+  position: absolute;
+  background-color: #73cb4d;
+  right: 0rem;
+  top: 1rem;
+  padding: 0.3rem; }
+  @media only screen and (min-width:481px) {
+    .content-box__title--homepage {
+      position: static;
+      padding: 0.5rem;
+      line-height: 1.4;
+      font-size: 1.2rem;
+      background: white;
+      color: $main_dark;
+      // color: #fff;
+      height: auto; } }
+  @media only screen and (min-width:768px) {
+    .content-box__title--homepage {
+      line-height: 1.4;
+      font-size: 1rem; } }
+
+/* line 173, C:/webroot/lcsnbn/sass/modules/tile */
+.content-box__summary {
+  color: $text;
+  font-size: 0.8rem; }
+  @media only screen and (min-width:481px) {
+    .content-box__summary {
+      display: none; } }
+
+/* line 181, C:/webroot/lcsnbn/sass/modules/tile */
+.content-box__summary--display {
+  color: $text;
+  font-size: 0.8rem;
+  font-style: italic;
+  padding-left: 0.5rem;
+  padding-bottom: 0.5rem;
+  float: right; }
+
+/* line 190, C:/webroot/lcsnbn/sass/modules/tile */
+.content-box__tag {
+  position: absolute;
+  right: 0.8rem;
+  bottom: 0.6rem;
+  padding: 0.1rem 0.3rem;
+  border: 1px solid #ff8e5e;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: $text; }
+
+/* line 202, C:/webroot/lcsnbn/sass/modules/tile */
+.content-box__tag:hover {
+  color: #fff;
+  background-color: #ff5531; }

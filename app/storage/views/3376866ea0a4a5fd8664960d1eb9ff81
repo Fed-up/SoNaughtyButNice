@@ -1,0 +1,70 @@
+
+<?php $__env->startSection('_head'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+  <h1 class="page-header">All Packages   <?php echo link_to('/admin/products/catering/packages/add', '+ Add', array('class' => 'btn btn-primary pull-right')); ?> </h1>
+    <?php if (Session::has('message')): ?>
+       <div class="alert alert-danger"><?php echo Session::get('message'); ?></div>
+    <?php endif; ?>
+  <div class="row">
+       <table class="table table-striped">
+            <thead>
+            	<tr>
+                    <th>#</td>
+                    <th>Package Name</th>
+                    <th>Summmary</th>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Active</th>
+                    <th>Edit/Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            <?php foreach($data as $package): ?>           
+            <tr>
+                <td><?php echo $package->id; ?></td>
+                <td><?php echo $package->name; ?></td>
+                <td><?php echo $package->summary; ?></td>
+                <td><?php echo $package->package_type; ?></td>
+                <td><?php echo $package->quantity; ?></td>
+                <td>$<?php echo $package->price; ?></td>
+                <td>
+                	<?php if($package->active == 1): ?>
+                    	<?php echo link_to('/admin/products/catering/packages/active/'.$package->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                    <?php else: ?>
+                		<?php echo link_to('/admin/products/catering/packages/active/'.$package->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                	<?php endif; ?>
+                
+                </td>
+                <td>
+                	<?php echo link_to('/admin/products/catering/packages/edit/'.$package->id, 'Edit', array('class' => 'btn btn-success')); ?>
+                	<?php echo link_to('/admin/products/catering/packages/delete/'.$package->id, 'Delete', array('class' => 'btn btn-danger')); ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>   
+            
+            </tbody>
+            <tfoot>
+            	<tr>
+                	<td colspan="20">
+                    	Total: <?php echo $data->count(); ?> 
+                    </td>
+               	</tr>
+            </tfoot>
+       </table> 
+        	
+  </div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('_tail'); ?>
+
+    
+<?php $__env->stopSection(); ?>
+    
+<?php echo $__env->make('tmpl.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

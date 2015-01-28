@@ -1,0 +1,83 @@
+
+<?php $__env->startSection('__header'); ?> 
+<?php $__env->stopSection(); ?>  
+
+<?php $__env->startSection('content'); ?>  
+	<section class="page">
+    	<h2 class="content__title--main"><?php echo Auth::user()->fname; ?>'s' Purchases</h2>
+		
+		<pre><?php /*dd(array_ke$products[0])*/ ?></pre>
+
+
+		<?php if($cart != $confirm_cart): ?>
+				<section class="section-box" colspan="7">
+					<p><?php echo $products; ?></p>
+				</section>
+
+		<?php else: ?>
+			
+			
+			<div class="row content-boxes__wrapper">
+	            <?php foreach($products as $product): ?>
+		            <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
+		                <article class="content-box">
+		                    <div class="row collapse">
+
+		                        
+		                        <a href="/product/<?php echo $product->id; ?>" class="columns small-4 medium-12 end">
+		                          <img src="/uploads/<?php echo $product->image; ?>" />
+		                        </a>
+		                        
+
+		                        <section class="columns small-8 medium-12">
+		                            <div class="content-box__copy">
+		                                <a href="/product/<?php echo $product->id; ?>" class="content-box__copy__inner">
+		                                    <h5 class="content-box__title"><?php echo $product->name; ?></h5>
+		                                    <p class="content-box__summary--quantity">$<?php echo $product->quantity; ?></p>
+		                                    <p class="content-box__summary--price">$<?php echo $product->price; ?>.00</p>
+		                                    <a href="/store/removeitem/<?php echo $product->identifier; ?>" class="content-box__tag">remove</a>
+		                                </a>
+		                            </div>
+		                        </section>
+		                    </div>
+		                </article>
+		            </div>
+	            <?php endforeach; ?>
+        	</div>
+		
+			<section class="row">	
+				<tr>
+					<td class="cart_total" colspan="7">
+						Total: $<?php echo Cart::total(); ?>.00
+					</td>
+				</tr>
+				<tr>
+					<td class="cart_total" colspan="7">
+						<form action="/pay" method="POST"> 
+							<script
+								src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+								data-email="<?php echo Auth::user()->email; ?>"
+								data-key="<?php echo Config::get('stripe.pk'); ?>"
+								data-amount="<?php echo Cart::total(); ?>00"
+								data-name="Demo Site"
+								data-description="Your recipes"
+								data-image="/uploads/">
+							</script>
+							<input type="hidden" name="amount" value="<?php echo Cart::total(); ?>00" />
+							
+						  
+						</form>
+					</td>
+				</tr>
+			</section>	
+		<?php endif; ?>	
+
+
+
+
+
+
+           
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

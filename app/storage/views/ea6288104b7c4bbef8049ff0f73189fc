@@ -1,0 +1,62 @@
+
+<?php $__env->startSection('title'); ?>So Naughty But Nice@stop
+
+<?php $__env->startSection('_head'); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+  <h1 class="page-header">So Naughty But Nice - Welcome Sarah</h1>
+
+  <div class="row placeholders">
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <img src="/images/4cMembers.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
+      <h4>Members</h4>
+      <span class="text-muted">16% Increase</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <img src="/images/4cComments.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
+      <h4>Comments</h4>
+      <span class="text-muted">8% increase</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <img src="/images/4cSales.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
+      <h4>Sales</h4>
+      <span class="text-muted">2% decrease</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <img src="/images/4cMessages.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
+      <h4>Messages</h4>
+      <span class="text-muted">10% decrease</span>
+    </div>
+  </div>
+
+  <h2 class="sub-header">Recent Activity</h2>
+  <div class="row">
+        <div class="panel panel-default col-md-7 col-lg-7 col-sm-12 col-xs-12 recent_activity_box">
+          	<div class="">
+            	<div class="img-responsive recent_activity_box_img">
+                	<img  src="/images/recipe_photos/blueberry.PNG" width="148" height="148"/>
+                </div>
+                <div class="recent_activity_box_text">
+                    <h4 class="recent_activity_box_header"><b>Blueberry Yougurt added to Yolicious</b></h4>
+                    <hr>
+                    <p>This dessert embraces the power of the blueberry</p>
+                </div>
+        	</div>
+        </div>
+        <div class="col-md-1 col-lg-1 hidden-sm hidden-xs"></div>
+        <div class="col-md-4 col-lg-4 hidden-sm hidden-xs quick_stat_box">
+        	Dash Board Quick Stats
+        </div>	
+  </div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('_tail'); ?>
+
+<?php $__env->stopSection(); ?>
+    
+<?php echo $__env->make('tmpl.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

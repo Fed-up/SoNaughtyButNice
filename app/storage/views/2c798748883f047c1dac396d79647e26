@@ -1,0 +1,103 @@
+
+<?php $__env->startSection('title'); ?><?php echo $title; ?> <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_head'); ?>
+	<script type="text/javascript" src="/packages/jquery-1.11.1.min/vendor/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/packages/jquery-1.11.1.min/vendor/jquery-ui-1.10.4.custom/css/no-theme/jquery-ui-1.10.4.custom.min.css"/> 
+	
+	<script>
+        $(function() {
+          
+            $( "._mySortable" ).sortable({ 
+                axis: "y", 
+                opacity: 0.5,
+                placeholder: "sortable-placeholder",
+                // callback function
+                update: function( event, ui ) {
+                    ui.item.css({'background':'#DBEEC9'})
+                },
+            });
+            $( "._mySortable" ).disableSelection();
+        });
+    </script>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+  <div class="row">
+  	<h1 class="page-header"><?php echo $__env->yieldContent('title'); ?></h1>
+    
+    <?php if(isset($data->id)): ?>
+    	<?php echo Form::open(array('action' => 'Admin_CategoriesController@postUpdateCategories', 'class' => 'form-horizontal')); ?> 
+    <?php else: ?>
+    	<?php echo Form::open(array('action' => 'Admin_CategoriesController@postAddCategories', 'class' => 'form-horizontal')); ?> 
+    <?php endif; ?>
+    
+    <ul id="myTab" class="nav nav-tabs">
+      <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
+      <?php if(isset($data->id)): ?>
+      	<li><a href="#ordering" data-toggle="tab">Recipes</a></li>
+      <?php endif; ?>
+
+    </ul>
+    
+    <div id="myTabContent" class="tab-content">
+    
+      <div class="tab-pane fade in active" id="info">
+        <div class="form-group <?php echo ($errors->has('name')) ? ' has-error' : '' ;; ?>">
+              <?php echo Form::label('name', 'Name: ', array('class' => 'col-sm-2 control-label')); ?>
+            <div class="col-sm-10">
+               <?php echo ($errors->has('name')) ? '<p>'. $errors->first('name'). '</p>' : ''; ?>
+               <?php echo Form::text('name', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')); ?>
+               
+            </div>
+        </div>
+        <div class="form-group <?php echo ($errors->has('summary')) ? ' has-error' : '' ;; ?>">
+            <?php echo Form::label('summary', 'Summary: ', array('class' => 'col-sm-2 control-label')); ?>
+            <div class="col-sm-10">
+               <?php echo ($errors->has('summary')) ? '<p>'. $errors->first('summary'). '</p>' : ''; ?>
+               <?php echo Form::textarea('summary', (isset($input['summary'])? Input::old('summary') : (isset($data->summary)? $data->summary : '' )), array('class' => 'form-control', 'rows' => '2')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <?php echo Form::label('active', 'Active: ', array('class' => 'col-sm-2 control-label')); ?>
+            <div class="col-sm-10">
+               <?php echo Form::checkbox('active', 1, (isset($input['active']) ? Input::old('active') : (isset($data->active)? $data->active : '' )), array('class' => '')); ?>
+            </div>
+        </div>
+     </div>    
+      <?php if(isset($data->id)): ?>
+         <div class="tab-pane fade in" id="ordering">
+          	<ul id="_ListRecipes" class="_mySortable">
+                
+            	<?php $x = 0; ?>
+                <?php if(isset($recipes)): ?>
+                	<?php foreach($recipes as $recipe): ?>
+                    	<li>
+                            <input type="text" name="recipe[][<?php echo $recipe->id; ?>]" id="recipe_<?php echo $x; ?>" class="form-control" value="<?php echo $recipe->name; ?>">&nbsp;
+                            <span class="glyphicon glyphicon-sort btn btn-default disabled"></span>
+                        </li>
+                 	<?php $x++; ?>                    
+                   	<?php endforeach; ?>
+                <?php endif; ?>
+         	</ul>
+         </div>  
+     <?php endif; ?>
+   </div> 
+     <hr>   	
+           <?php echo Form::hidden('id', (isset($input['id'])? Input::old('id') : (isset($data->id)? $data->id : '' ))); ?>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <?php echo Form::submit('Save', array('class' => 'btn btn-success')); ?>
+            <a href="/admin/menu/categories/">
+                <?php echo Form::button('Cancel' ,array('class' => 'btn btn-danger')); ?>
+            </a>
+            </div>
+        </div>       	
+  </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_tail'); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

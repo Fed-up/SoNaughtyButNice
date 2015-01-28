@@ -1,0 +1,28 @@
+
+
+
+<?php $__env->startSection('content'); ?>
+    <div class="band content">
+        <div class="container "> <!--Recipe section-->
+        	<h2 class="recipe_section_title">A taste of healthy treats and sweet recipes</h2>
+            <div class="hp_recipe">
+                	<?php foreach($iData as $ingredient): ?>
+                    	<div class="four columns recipe_box">
+                        	<a href="/ingredient/<?php echo $ingredient->id; ?>">
+                                <img src="/uploads/<?php echo $ingredient->images()->first()->name; ?>" />
+                                <h4 class="recipe_title"><?php echo $ingredient->name; ?></h4>
+                                <p class="recipe_box_summary"><?php echo $ingredient->summary; ?></p>
+                            </a>
+                        </div><!--End column-->
+                    <?php endforeach; ?>
+            </div><!--End hp_recipe-->
+        </div><!--End container-->
+  	</div><!--End Band Content-->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_footer'); ?>
+	<script type="text/javascript" src="/public/js/flexslider.js"></script>
+	<script type="text/javascript" src="/public/js/tabs.js"></script>
+    <script type="text/javascript" src="/js/gallery.js"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

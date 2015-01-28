@@ -1,0 +1,84 @@
+<div class="join container "> <!--Join section-->
+            <h2 class="join_section_title">Join The Most Delicious Helthy Dessert Community</h2>
+        </div>
+        <div class="join container "> <!--Collection section-->
+        	<div class="five columns image_div">
+            	<img src="/images/site/join.jpg"/>
+            </div>
+            <div class="seven columns join_pitch">
+            	<div class="flexslider flex-viewport">
+                	<ul class="slides">
+                    	<li><p class="join_content">Indulge and learn how to make the healthiest desserts</p></li>
+                        <li><p class="join_content">Be inspired through our ever growing ingredient index</p></li>
+                        <li><p class="join_content">Join and participate in our exquisite events</p></li>
+                        <li><p class="join_content">Be the first to discover new recipe designs</p></li>
+                    </ul>
+                </div>
+                <a href="#" class="join_us">Join Us Today</a> 
+            </div>
+            <div class="four columns social_links">
+            	<a class="social_icon"><img src="/public/images/site/fcon.jpg"/><span class="social_text">Facebook - 350 likes</span></a>
+                <a class="social_icon"><img src="/public/images/site/icon.jpg"/><span class="social_text">Facebook - 350 likes</span></a>
+                <a class="social_icon"><img src="/public/images/site/pcon.jpg"/><span class="social_text">Facebook - 350 likes</span></a>
+                <a class="social_icon"><img src="/public/images/site/ycon.jpg"/><span class="social_text">Facebook - 350 likes</span></a>
+            </div>
+        </div>    
+
+    </div><!--End Band-->
+    <div class="band footer">
+        <footer class="container footer_right main">
+            <div class="eight columns eight columns">
+                <div class="footer_box_top eight columns">
+                    <h3 class="logo"><a href="#">So Naughty But Nice</a></h3>
+                    <p>So Naughty But Nice was founded in 2012</p>
+                    <p>
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, 
+                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae 
+                    </p>
+                </div>
+                
+                <br>
+                <div class="eight columns">
+                    <div class="footer_box_bottom">
+                        <p>Contact us | About us | <a href="/signup">Sign Up</a> | Privacy | Disclaimer</p> 
+                    </div>
+                </div><!--End eight--> 
+            </div>
+            
+            <div class="four columns">
+            	<header>
+            		<h4 class="logo"><a href="#">Newest Recipes</a></h4>
+                </header>
+                <ul>hp
+                	<li>
+                    	<h5><b>Title of event</b></h5>
+                    	<p>Summary of recipe</p>
+                    </li>
+                    <li>
+                    	<h5><b>Title of event</b></h5>
+                    	<p>Summary of recipe</p>
+                    </li>
+                    <li>
+                    	<h5><b>Title of event</b></h5>
+                    	<p>Summary of recipe</p>
+                    </li>
+                </ul>
+            </div><!--End four-->
+            <div class="four columns">
+            	<header>
+            		<h4 class="logo"><a href="#">Instagram</a></h4>
+                </header>
+                <hr>
+            </div><!--End four-->   
+        </footer><!--End Container-->
+    </div><!--End Band--> 
+    <div class="band bottom">
+        <footer class="container">
+            <div class="eight columns first-credit">
+                <p class="logo">Copyright &copy; 2014<a href="#"> So Naughty But Nice </a></p>
+            </div><!--End eight-->
+            <div class="eight columns last-credit">
+                <p class="logo">Powered by <a href="#"> Xenus </a> - Uniting Health & Fitness Education</p>
+            </div><!--End eight-->
+        </footer><!--End Container-->
+    </div><!--End Band-->  

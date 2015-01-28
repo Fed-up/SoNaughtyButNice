@@ -1,0 +1,57 @@
+
+
+
+<?php $__env->startSection('content'); ?>
+    <div class="band content">
+        <div class="container "> <!--Recipe section-->
+        	<h2 class="recipe_section_title">A taste of healthy treats and sweet recipes</h2>
+            <?php if (Auth::check()): ?>
+                <!-- <p><?php echo $paid; ?></p> -->
+                <!-- <p><?php echo $confirm_paid; ?></p> -->
+                <?php if ($paid == $confirm_paid): ?>
+                    <p>PRINT COLLECTION - You have paid for book</p>
+                <?php else: ?>
+                    <?php foreach($cData as $collection): ?>
+                        <?php echo Form::open(array('action' => 'CheckoutController@postAddToCart')); ?>
+                        <?php echo Form::hidden('collection_id', $collection->id); ?>
+                        <?php echo Form::hidden('name', $collection->name); ?>
+                        <?php echo Form::hidden('image', $collection->menuRecipes[0]->Images()->first()->name); ?>
+                        <?php echo Form::hidden('quantity', 1); ?>
+                        <?php echo Form::hidden('price', 5); ?>
+                        <?php echo Form::hidden('section', 'COLLECTION'); ?>
+                        <?php echo Form::submit('Add to Collection to Cart', array('class' => 'btn btn-success')); ?>
+                    <?php endforeach; ?>
+                
+                <?php endif; ?>
+            <?php else: ?>
+                <p>PRINT COLLECTION - You have paid for book</p>
+            <?php endif; ?>
+
+
+                
+            <div class="hp_recipe">
+            	<?php foreach($cData as $collection): ?>
+                   	<?php foreach($collection->menuRecipes as $recipe): ?>
+                    	<?php /* '<pre>'; print_r($recipe->Images); echo '</pre>'; */ ?>
+                        <div class="four columns recipe_box">
+                        	<a href="/recipe/<?php echo $recipe->id; ?>">
+                                <?php foreach($recipe->Images as $image): ?>
+                                    <img src="/uploads/<?php echo $image->name; ?>" />
+                                <?php endforeach; ?>
+                                <h4 class="recipe_title"><?php echo $recipe->name; ?></h4>
+                                <p class="recipe_box_summary"><?php echo $recipe->summary; ?></p>
+                            </a>
+                        </div><!--End column-->
+                    <?php endforeach; ?>    
+              	<?php endforeach; ?>
+            </div><!--End hp_recipe-->
+        </div><!--End container-->
+  	</div><!--End Band Content-->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_footer'); ?>
+	<script type="text/javascript" src="/public/js/flexslider.js"></script>
+	<script type="text/javascript" src="/public/js/tabs.js"></script>
+    <script type="text/javascript" src="/js/gallery.js"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
