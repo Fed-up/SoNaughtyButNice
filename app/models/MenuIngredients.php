@@ -34,4 +34,8 @@ class MenuIngredients extends Eloquent {
 		return $this->hasmany('Images', 'link_id', 'id');	
 	}
 
+	public function SalesDataIngredient(){
+		return $this->hasOne('SalesDataIngredient', 'id', 'menu_ingredient_id');	
+	}
+
 }

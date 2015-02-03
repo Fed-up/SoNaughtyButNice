@@ -242,6 +242,10 @@ class Admin_RecipesController extends BaseController{
 	
 	public function getEditRecipes($id){
 		$data = MenuRecipes::findOrFail($id);
+			// ->with(array('SalesData' => function($query){
+			// 		$query->orderBy('menu_recipes_facts.ordering','ASC');
+			// 	}))
+		// echo '<pre>'; print_r( $data ); echo '</pre>'; 	exit;
 		
 		//->load('MenuRecipesFacts')
 		
@@ -271,8 +275,8 @@ class Admin_RecipesController extends BaseController{
 		$categories = MenuCategories::orderBy('name','ASC')->where('active', '!=', '9')->get(); // Bring in data that has not been deleted
 		$ingredients = MenuIngredients::orderBy('name','ASC')->where('active', '=', '1')->get();
 		$metrics = Metric::orderBy('name','ASC')->get();
-		
-
+		$sales_data = SalesData::where('menu_recipe_id', '=', $data->id)->get();
+		$sales_data_ingredients = SalesDataIngredients::where('menu_recipe_id', '=', $data->id)->get();
 
 		$recipes_images = $data->Images()->orderBy('ordering','ASC')->where('section', '=', 'RECIPE')->get();
 		$recipes_facts = $data->MenuRecipesFacts()->orderBy('ordering','ASC')->get();
@@ -280,16 +284,31 @@ class Admin_RecipesController extends BaseController{
 		$recipes_methods = $data->MenuRecipesMethods()->orderBy('ordering','ASC')->get();
 		$recipes_extras = $data->MenuRecipesExtras()->orderBy('ordering','ASC')->get();
 		
-		// echo '<pre>'; print_r( $recipes_ingredients ); echo '</pre>'; 	exit;
 		
-		//$data = MenuRecipes::where('active', '!=', 9)->get();
 		
 
+		// $queries = DB::getQueryLog();
+		//   echo '<pre>'; print_r($queries); echo '</pre>';
+	 	// echo '<pre>'; print_r($sales_data->price); echo '</pre>'; 
+		// echo '<pre>'; print_r( $data->id ); echo '</pre>'; 	exit;
+
+		// foreach ($sales_data_ingredients as $sales_data_ingredient) {
+		// 	echo '<pre>'; print_r( $sales_data_ingredient ); echo '</pre>'; 	exit;
+		// }
+		// echo 'No'; exit;
+		//$data = MenuRecipes::where('active', '!=', 9)->get();
+		
+		
+		foreach($ingredients as $ingredient){
+			// echo '<pre>'; print_r( $ingredient->name ); echo '</pre>';
+			// $s_ingredient = $ingredients; 	
+		}
+		// exit;
 		
 		$mCat = array();
 		$mCat[0]	= '- Select Category -';
 		foreach ($categories as $category) {
-			$mCat[$category->id]	= $category->name;
+			$mCat[$category->id] = $category->name;
 		};
 		//
 
@@ -297,12 +316,21 @@ class Admin_RecipesController extends BaseController{
 		$mIng = array();
 		$mIng[0]	= '- Select Ingredients -';	
 		foreach ($ingredients as $ingredient) {
+
+			// echo '<pre>'; print_r( $ingredient ); echo '</pre>'; 
 			$mIng[$ingredient->id]	= $ingredient->name;
-			$json_array[$ingredient->id] = array('grams' => $ingredient->grams, 'price' => $ingredient->price);
+			foreach ($recipes_ingredients as $ri) {
+				if($ri->menu_ingredients_id == $ingredient->id){
+					$json_array[$ingredient->id] = array('grams' => $ingredient->grams, 'price' => $ingredient->price);
+				}
+			}
+		
 		};
+		// echo '<pre>'; print_r( $json_array ); echo '</pre>'; 
+		// exit;
 
 		$out = array_values($json_array);
-		$json_calc = "var myingredientsdata = ". json_encode($json_array);
+		$json_calc = json_encode($json_array);
 		
 		$mMetric = array();
 		$mMetric[0]	= '- Select Metric -';
@@ -310,8 +338,17 @@ class Admin_RecipesController extends BaseController{
 			$mMetric[$metric->id]	= $metric->name;
 		};
 		
+		// $sales_data_ingredients = array();
+		$s_ingredients = $ingredients;
 		
 
+
+		// foreach($sales_data as $i => $in){
+		// 	echo '<pre>'; print_r( $i); echo '</pre>'; 
+		// 	echo '<pre>'; print_r( $in ); echo '</pre>'; 
+		// // 	echo '<br/';
+		// }
+		// exit;
 
 		//$data from the load function above holds all the data for facts to go into the form
 		return View::make('admin.recipes.form')
@@ -325,7 +362,11 @@ class Admin_RecipesController extends BaseController{
 				'r_ingredients' => $recipes_ingredients,
 				'r_methods' => $recipes_methods,
 				'r_extras' => $recipes_extras,
+				'r_sales' => $sales_data,
 				'json_calc' => $json_calc,
+				'json_array' => $json_array,
+				's_ingredients' => $s_ingredients,
+				'sales_data_ingredients' => $sales_data_ingredients,
 				'title'		=> 'Edit Recipe:'.$data->name
 			));	
 		
@@ -334,9 +375,12 @@ class Admin_RecipesController extends BaseController{
 	public function postUpdateRecipes(){
 		$input = Input::all();
 		
-		// echo '<pre> First exit to check for input '; print_r($input); echo '</pre>'; 	exit;
-		
-		
+		// if(isset($input['sc'])){
+		// 	echo '<pre> First exit to check for input '; print_r($input['sc']); echo '</pre>'; 	exit;
+		// 	// echo '<pre> First exit to check for input '; print_r('Hi'); echo '</pre>'; 	exit;
+		// }
+		// echo '<pre> First exit to check for input '; print_r('bye'); echo '</pre>'; 	exit;
+
 		$rules = array(
 			'title' => 'required|Max:30|unique:menu_recipes,name,'.Input::get('id'),
 			'summary' => 'required',
@@ -353,9 +397,10 @@ class Admin_RecipesController extends BaseController{
 				->withInput($input);
 		}else{
 			//die('Hi');
-			//echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+			// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 			
 			$data = MenuRecipes::findOrFail($input['id']);
+			$recipe_id = $input['id'];
 			$data->name 	= $input['title'];
 			$data->summary 	= $input['summary'];
 			$data->menu_categories_id 	= $input['categories'];
@@ -363,7 +408,7 @@ class Admin_RecipesController extends BaseController{
 			$data->length 	= $input['length'];
 			
 			$data->difficulty 	= $input['difficulty'];
-			$data->serve 	= $input['serve'];
+			$data->serve = $serve_amount = $input['serve'];
 			$data->df  = (isset($input['DF'])) ? 1 : 0;
 			$data->ds  = (isset($input['DS'])) ? 1 : 0;
 			$data->ef  = (isset($input['EF'])) ? 1 : 0;
@@ -428,7 +473,7 @@ class Admin_RecipesController extends BaseController{
 									$_fact->description = $f;
 									$_fact->ordering = $fc;
 									$_fact->active = 1;
-									//echo '<pre>'; print_r($_fact); echo '</pre>'; 	exit;
+									// echo '<pre>'; print_r($_fact); echo '</pre>'; 	exit;
 								}else {
 									$_fact = MenuRecipesFacts::find($i);
 									$_fact->description = $f;
@@ -460,6 +505,18 @@ class Admin_RecipesController extends BaseController{
 					$amount = $input['amount'];
 					$metric = $input['metric'];
 					$grams = $input['grams'];
+					$i_grams = $input['i_grams'];
+					$i_price = $input['i_price'];
+
+
+					// foreach($s_ingredient as $id => $data){
+					//   	$array_key = array_keys($data); 	  	
+					// }
+					// echo '<pre>'; print_r($i_grams); echo '</pre>'; exit;	
+
+
+
+
 					
 					// echo '<pre>'; print_r($grams); echo '</pre>'; exit;
 
@@ -485,6 +542,12 @@ class Admin_RecipesController extends BaseController{
 						  $r_i->amount = $amount[$i][$xx[0]];
 						  $r_i->metric_id = $metric[$i][$xx[0]];
 						  $r_i->grams = $grams[$i][$xx[0]];
+
+
+
+
+
+
 						  $r_i->ordering = $i;
 						  $r_i->active = 1;  
 					  }else{
@@ -492,12 +555,42 @@ class Admin_RecipesController extends BaseController{
 						$r_i->menu_ingredients_id = $ingredient[$i][$xx[0]];
 						$r_i->amount = $amount[$i][$xx[0]];
 						$r_i->metric_id = $metric[$i][$xx[0]];
-						$r_i->grams = $grams[$i][$xx[0]]; 
+						$r_i->grams = $r_grams = $grams[$i][$xx[0]];
+
+						if(isset($input['calc']) || isset($input['sales_amount'])){
+							$sales_amount = $input['sales_amount'];
+							$r_i->sales_grams = $sales_grams = $r_grams/$serve_amount * $sales_amount; 
+						}
+						// echo '<pre>'; print_r($sales_grams); echo '</pre>';exit;
+						foreach($i_grams as $id => $i_gram){
+						  	if($ingredient[$i][$xx[0]] == $id){
+						  		// if(isset($input['calc'])){
+
+						  		// echo '<pre>'; print_r($i_grams['$ingredient[$i][$xx[0]]']); echo '</pre>';exit;
+
+							  		$packet_grams_percentage = $sales_grams / $i_gram * 100; 
+							  		$r_i->packet_grams_percentage = $packet_grams_percentage;
+							  		// echo '<pre>'; print_r($packet_grams_percentage); echo '</pre>';
+						  		// }
+						  	}
+						  	
+						}
+
+						foreach($i_price as $id => $ri_price){
+						  	if($ingredient[$i][$xx[0]] == $id){
+						  		// if(isset($input['calc'])){
+							  		$recipe_ingredient_cost = $packet_grams_percentage/100 * $ri_price;
+							  		$r_i->recipe_ingredient_cost = $recipe_ingredient_cost;
+							  		// echo '<pre>'; print_r($recipe_ingredient_cost); echo '</pre>'; 
+						  		// }
+						  	}
+						  	
+						}
 						$r_i->ordering = $i;						
 						
 					  };
 					  $data->MenuRecipesIngredients()->save($r_i);
-				  
+				  		
 					};
 
 
@@ -585,9 +678,62 @@ class Admin_RecipesController extends BaseController{
 						};
 					};						
 				};
+				
+					// echo '<pre>'; print_r($input['sales_time']); echo '</pre>'; 	exit;
+
+				if(isset($input['staff_cost_per_hour']) && isset($input['sales_price']) && isset($input['sales_amount']) && isset($input['sales_time'])){
+
+					// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+
+					
+						// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+
+						$sdata_id = $input['sdata_id'];
+						$staff_cost_per_hour = $input['staff_cost_per_hour'];
+						$sales_price = $input['sales_price'];
+						$sales_amount = $input['sales_amount'];
+						$sales_time = $input['sales_time'];
+
+						$staff_cost_to_make_recipe_batch = $staff_cost_per_hour/60 * $sales_time;
+						$staff_cost_per_piece = $staff_cost_to_make_recipe_batch/ $sales_amount;
+
+						// echo '<pre>'; print_r($staff_cost_per_hour); echo '</pre>'; 	exit;
+
+						$_sales = SalesData::find($sdata_id);
+
+						// $queries = DB::getQueryLog();
+						// echo '<pre>'; print_r($queries); echo '</pre>'; exit;
+						
+
+						$_sales->staff_cost_per_hour = $staff_cost_per_hour;
+						$_sales->sales_price = $sales_price;
+						$_sales->sales_amount = $sales_amount;
+						$_sales->sales_time = $sales_time;
+
+						$_sales->staff_cost_to_make_recipe_batch = $staff_cost_to_make_recipe_batch;
+						$_sales->staff_cost_per_piece = $staff_cost_per_piece;
+						
+						$data->SalesData()->save($_sales);
+
+
+						
+
+
+
+
+
+
+						// echo '<pre>'; print_r($sales); echo '</pre>'; 	exit;
+
+					
+				}
 			};
 			//exit;	
-			return Redirect::action('Admin_RecipesController@getRecipes'); 
+			if(isset($input['sc'])){
+				return Redirect::action('Admin_RecipesController@getRecipes');
+			}else{
+				return Redirect::action('Admin_RecipesController@getEditRecipes', array($recipe_id)); 
+			}
 		}
 	}
 	

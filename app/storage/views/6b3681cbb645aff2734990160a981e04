@@ -372,7 +372,7 @@
 			$('#counterExtras').val( parseInt(currentID, 10) + 1 );
 			
 		});
-		
+
 	  
 	  
 	  	//Start Images
@@ -756,31 +756,47 @@
                 <?php if(isset($r_ingredients)): ?>
                 	<?php foreach($r_ingredients as $r_ingredient): ?>
 
-                	<?php // echo 'THis sarah'; ?>
 
-                	<?php //echo '<pre>'; print_r($r_ingredient); echo '</pre>'; exit; ?>
+	                	<?php // echo 'THis sarah'; ?>
+	                	
+	                	<!-- <?php foreach($json_array as $i => $in): ?>
+                        	<?php if($i == $r_ingredient->id): ?>
+	                        	<?php //echo '<pre>'; print_r($i); echo '</pre>';?>
+	                        	<?php //echo '<pre>'; print_r($in); echo '</pre>';?>
+                        	<?php endif; ?>
+                        <?php endforeach; ?>
+            			<?php //echo '<pre>'; print_r($json_array); echo '</pre>'; exit; ?> -->
 
-                    	<li>
-                    		
-                            <select name="ingredients[][<?php echo $r_ingredient->id; ?>]" id="ingredients_<?php echo $x; ?>" class="form-control input--ingredient"/>
-                                <?php foreach($ingredients as $i=>$v): ?>
-                                	<option value="<?php echo $i; ?>" <?php if ($r_ingredient->menu_ingredients_id == $i): ?> selected="selected" <?php endif; ?> ><?php echo $v; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <input name="amount[][<?php echo $r_ingredient->id; ?>]" id="ingredients_<?php echo $x; ?>" class="form-control input--amount " value="<?php echo $r_ingredient->amount; ?>" />
-                            <select name="metric[][<?php echo $r_ingredient->id; ?>]" id="ingredients_<?php echo $x; ?>" class="form-control input--metric"/>
-                                <?php foreach($metric as $in=>$val): ?>
-                                	<option value="<?php echo $in; ?>" <?php if ($r_ingredient->metric_id == $in): ?> selected="selected" <?php endif; ?> ><?php echo $val; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <input name="grams[][<?php echo $r_ingredient->id; ?>]" id="ingredients_<?php echo $x; ?>" class="form-control input--amount " value="<?php echo $r_ingredient->grams; ?>" />
-                            <button id="<?php echo $r_ingredient->id; ?>" class="deleteIngredient glyphicon glyphicon-remove btn btn-danger"></button>
-                            <span class="glyphicon glyphicon-sort btn btn-default disabled"></span>
-                            
-                   		</li>
-                        
+	                    	<li>
+	                            <select name="ingredients[][<?php echo $r_ingredient->id; ?>]" id="ingredients_<?php echo $x; ?>" class="form-control input--ingredient"/>
+	                                <?php foreach($ingredients as $i=>$v): ?>
+	                                	<option value="<?php echo $i; ?>" <?php if ($r_ingredient->menu_ingredients_id == $i): ?> selected="selected" <?php endif; ?> ><?php echo $v; ?></option>
+	                                <?php endforeach; ?>
+	                            </select>
+	                            <input name="amount[][<?php echo $r_ingredient->id; ?>]" id="ingredients_<?php echo $x; ?>" class="form-control input--amount " value="<?php echo $r_ingredient->amount; ?>" />
+	                            <select name="metric[][<?php echo $r_ingredient->id; ?>]" id="ingredients_<?php echo $x; ?>" class="form-control input--metric"/>
+	                                <?php foreach($metric as $in=>$val): ?>
+	                                	<option value="<?php echo $in; ?>" <?php if ($r_ingredient->metric_id == $in): ?> selected="selected" <?php endif; ?> ><?php echo $val; ?></option>
+	                                <?php endforeach; ?>
+	                            </select>
+	                            <input name="grams[][<?php echo $r_ingredient->id; ?>]" id="ingredients_<?php echo $x; ?>" class="form-control input--amount " value="<?php echo $r_ingredient->grams; ?>" />
 
-                 	<?php $x++; ?>                    
+	                            <?php foreach($json_array as $i => $in): ?>
+	                            	<?php if($i == $r_ingredient->menu_ingredients_id): ?>
+	                            		<input type="hidden" name="i_grams[<?php echo $i; ?>]" value="<?php echo $in['grams']; ?>" />
+	                            		<input type="hidden" name="i_price[<?php echo $i; ?>]" value="<?php echo $in['price']; ?>" />
+			                        	<?php //echo '<pre>'; print_r($i); echo '</pre>';?>
+			                        	<?php //echo '<pre>'; print_r($in); echo '</pre>';?>
+		                        	<?php endif; ?>
+		                        <?php endforeach; ?>
+
+	                            <button id="<?php echo $r_ingredient->id; ?>" class="deleteIngredient glyphicon glyphicon-remove btn btn-danger"></button>
+	                            <span class="glyphicon glyphicon-sort btn btn-default disabled"></span>
+	                            
+	                   		</li>
+	                        
+
+	                 	<?php $x++; ?>                    
                    	<?php endforeach; ?>
                 <?php endif; ?>
          	</ul>
@@ -836,183 +852,184 @@
       </div>
       <div class="tab-pane fade in active" id="sales">
             <div class="col-sm-1">
-            	<?php /* Form::button('+ Calc', array('id' => 'btnActionCalculate','class' => 'btn btn-primary')) */ ?>
-                <a href="#" id="btnActionCalculate" class="btn btn-primary">+ Calc</a>
-<!--                 <?php /* Form::hidden('counterExtras',null,array('id'=>'counterExtras')) */ ?>
-                <div class="col-sm-6" style="background-color:red; width:100%;">
-	                <?php echo ($errors->has('name'))? '<p>'. $errors->first('name') .'</p>' : ''; ?>
-	                <?php echo Form::text('name', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')); ?> 
-	            </div> -->
+            	<?php echo Form::submit('+ Calc', array('id' => 'btnActionCalculate','name' => 'calc','class' => 'btn btn-primary')); ?>
             </div>
             <hr/>
-            <div class="row">
-	            <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
-		              <?php echo Form::label('title', 'Staff cost per hour: ', array('class' => 'col-sm-2 control-label')); ?>
-		            <div class="col-sm-3">
-		               <?php echo ($errors->has('title')) ? '<p>'. $errors->first('name'). '</p>' : ''; ?>
-		               <?php echo Form::text('title', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')); ?>
-		            </div>
+            <?php if(isset($r_sales)): ?>                	
+            	<?php foreach($r_sales as $sdata): ?>
+					<?php echo Form::hidden('sdata_id', $sdata->id); ?>
+		            <div class="row">
+			            <div class="form-group">
+				              <?php echo Form::label('staff_cost_per_hour', 'Staff cost per hour: ', array('class' => 'col-sm-2 control-label')); ?>
+				            <div class="col-sm-3">
+				            <?php echo Form::text('staff_cost_per_hour', (isset($input['staff_cost_per_hour'])? Input::old('staff_cost_per_hour') : (isset($sdata->staff_cost_per_hour)? $sdata->staff_cost_per_hour : '' )), array('class' => 'form-control')); ?>
+				            	<!-- <input name="staff_cost_per_hour[][<?php echo $sdata->id; ?>]" id="staff_cost_per_hour_<?php echo $sdata->id; ?>" class="form-control" value="<?php echo (isset($input['staff_cost_per_hour'])? Input::old('staff_cost_per_hour') : (isset($sdata->staff_cost_per_hour)? $sdata->staff_cost_per_hour : '' )); ?>" />	 -->
+				            </div>
 
-		            <?php echo Form::label('title', 'Price: ', array('class' => 'col-sm-2 control-label')); ?>
-		            <div class="col-sm-3">
-		               <?php echo ($errors->has('title')) ? '<p>'. $errors->first('name'). '</p>' : ''; ?>
-		               <?php echo Form::text('title', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')); ?>
-		               
-		            </div>
+				            <?php echo Form::label('sales_price', 'Price: ', array('class' => 'col-sm-2 control-label')); ?>
+				            <div class="col-sm-3">
+				               <?php echo Form::text('sales_price', (isset($input['sales_price'])? Input::old('sales_price') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')); ?>
+				               
+				            </div>
 
-		        </div>
-		        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
-		        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost to make recipe batch:</h5>
-		              <?php /* Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) */ ?>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
+				        </div>
+				        <div class="form-group">
+				        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost to make recipe batch:</h5>
+				              <?php /* Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) */ ?>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ <?php echo $sdata->staff_cost_to_make_recipe_batch; ?></p>
+				            </div>
 
-		            <?php echo Form::label('title', 'Amount: ', array('class' => 'col-sm-2 control-label')); ?>
-		            <div class="col-sm-3">
-		               <?php echo ($errors->has('title')) ? '<p>'. $errors->first('name'). '</p>' : ''; ?>
-		               <?php echo Form::text('title', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')); ?>
-		            </div>
-		        </div>
-		        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
-		        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost per piece:</h5>
-		              <?php /* Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) */ ?>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
+				            <?php echo Form::label('sales_amount', 'Amount: ', array('class' => 'col-sm-2 control-label')); ?>
+				            <div class="col-sm-3">
+				               <?php echo Form::text('sales_amount', (isset($input['sales_amount'])? Input::old('sales_amount') : (isset($sdata->sales_amount)? $sdata->sales_amount : '' )), array('class' => 'form-control')); ?>
+				            </div>
+				        </div>
+				        <div class="form-group">
+				        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost per piece:</h5>
+				              <?php /* Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) */ ?>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ <?php echo $sdata->staff_cost_per_piece; ?></p>
+				            </div>
 
-		            <?php echo Form::label('title', 'Time: ', array('class' => 'col-sm-2 control-label')); ?>
-		            <div class="col-sm-3">
-		               <?php echo ($errors->has('title')) ? '<p>'. $errors->first('name'). '</p>' : ''; ?>
-		               <?php echo Form::text('title', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')); ?>
-		            </div>
-		        </div>
-		        <hr/>
-		        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Total recipe cost:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
+				            <?php echo Form::label('sales_time', 'Time - minutes: ', array('class' => 'col-sm-2 control-label')); ?>
+				            <div class="col-sm-3">
+				               <?php echo Form::text('sales_time', (isset($input['sales_time'])? Input::old('sales_time') : (isset($sdata->sales_time)? $sdata->sales_time : '' )), array('class' => 'form-control')); ?>
+				            </div>
+				        </div>
+				        <hr/>
+				        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
+			        	    <h5 class="col-sm-2 control-label sales-data__title">Total recipe cost:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ <?php echo $sdata->total_recipe_cost; ?></p>
+				            </div>
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total cost percentage</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
-		        </div>
-		        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Total ingredient cost:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total cost percentage</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ <?php echo $sdata->total_cost_percentage; ?></p>
+				            </div>
+				        </div>
+				        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
+			        	    <h5 class="col-sm-2 control-label sales-data__title">Total ingredient cost:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ <?php echo $sdata->total_ingredient_cost; ?></p>
+				            </div>
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total recipe revenue:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
-		        </div>
-		        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Total ingredient cost per piece:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total recipe revenue:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ <?php echo $sdata->total_recipe_revenue; ?></p>
+				            </div>
+				        </div>
+				        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
+			        	    <h5 class="col-sm-2 control-label sales-data__title">Total ingredient cost per piece:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ <?php echo $sdata->total_ingredient_cost_per_piece; ?></p>
+				            </div>
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total markup per piece:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
-		        </div>
-		        <hr/>
-		        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Total cost per piece:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total markup per piece:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ <?php echo $sdata->total_markup_per_piece; ?></p>
+				            </div>
+				        </div>
+				        <hr/>
+				        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
+			        	    <h5 class="col-sm-2 control-label sales-data__title">Total cost per piece:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ <?php echo $sdata->total_cost_per_piece; ?></p>
+				            </div>
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total profit:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
-		        </div>
-		        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Staff cost percentage:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$ %%</p>
-		            </div>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total profit:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ <?php echo $sdata->total_profit; ?></p>
+				            </div>
+				        </div>
+				        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
+			        	    <h5 class="col-sm-2 control-label sales-data__title">Staff cost percentage:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info"><?php echo $sdata->staff_cost_percentage; ?> %</p>
+				            </div>
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total profit per piece:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
-		        </div>
-		        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Ingredient cost percentage:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$ %%</p>
-		            </div>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total profit per piece:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ <?php echo $sdata->total_profit_per_piece; ?></p>
+				            </div>
+				        </div>
+				        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
+			        	    <h5 class="col-sm-2 control-label sales-data__title">Ingredient cost percentage:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info"><?php echo $sdata->ingredient_cost_percentage; ?> %</p>
+				            </div>
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total markup percentage:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$ %%</p>
-		            </div>
-		        </div>
-		        <hr/>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total markup percentage:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info"><?php echo $sdata->total_markup_percentage; ?> %</p>
+				            </div>
+				        </div>
+				        <hr/>
+		        		<?php //echo '<pre>'; print_r($sdata->price); echo '</pre>'; exit; ?>
+               	<?php endforeach; ?>
+            <?php endif; ?>
+	        <!-- <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
+        	    <h5 class="col-sm-2 control-label sales-data__title">Ingredient cost percentage:</h5>
+	            <div class="col-sm-3">
+	               <p class="sales-data__info">$$$$ %%</p>
+	            </div>
 
-		        <!-- <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Ingredient cost percentage:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$ %%</p>
-		            </div>
+	            <h5 class="col-sm-2 control-label sales-data__title">Total markup percentage:</h5>
+	            <div class="col-sm-3">
+	               <p class="sales-data__info">$$$$ %%</p>
+	            </div>
+	        </div> -->
+	        <div class="row">
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total markup percentage:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$ %%</p>
-		            </div>
-		        </div> -->
-		        <div class="row">
+	        	<div class="col-sm-offset-1 col-sm-10">
+			       	<table class="table table-striped">
+			            <thead>
+			            	<tr>
+			                    <th>Ingredient</td>
+			                    <th>Ingredient Cost</th>
+			                    <th>Packet Grams</th>
+			                    <th>Packet Grams %</th>
+			                    <th>Recipe Ingredient Cost</th>
+			                    <th>Recipe Grams</th>
+			                </tr>
+			            </thead>
+			            <?php if(isset($r_ingredients)): ?>
+            			<?php foreach($r_ingredients as $r_ingredient): ?>
 
-		        	<div class="col-sm-offset-1 col-sm-10">
-				       	<table class="table table-striped">
-				            <thead>
-				            	<tr>
-				                    <th>Ingredient</td>
-				                    <th>Ingredient Cost</th>
-				                    <th>Packet Grams</th>
-				                    <th>Packet Grams %</th>
-				                    <th>Recipe Ingredient Cost</th>
-				                    <th>Recipe Grams</th>
-				                </tr>
-				            </thead>
-				            <?php if(isset($r_ingredients)): ?>
-                			<?php foreach($r_ingredients as $r_ingredient): ?>
-                			<?php foreach($ingredients as $i=>$v): ?>
-                                	
-                                
+            			<?php foreach($s_ingredients as $ingredient): ?>
+            			<?php foreach($sales_data_ingredients as $sd_ingredient): ?>
+
+            				<?php //echo '<pre>'; print_r($ingredient); echo '</pre>'; ?>
+            				<?php //echo '<pre>'; print_r($ingredient->id); echo '</pre>'; exit; ?>
+
+
+                            <?php if ($r_ingredient->menu_ingredients_id == $ingredient->id): ?>    	
 				            <tbody>
 					            <tr>
-					                <td><?php echo $v; ?></td>
-					                <td></td>
-					                <td></td>
-					                <td></td>
-					                <td></td>
-					                <td></td>
+					                <td> <?php echo $ingredient->name; ?> </td>
+					                <td> <?php echo $ingredient->price; ?> </td>
+					                <td> <?php echo $ingredient->grams; ?> </td>
+					                <td> <?php echo $r_ingredient->packet_grams_percentage; ?> </td>
+					                <td> <?php echo $r_ingredient->recipe_ingredient_cost; ?> </td>
+					                <td> <?php echo $r_ingredient->sales_grams; ?> </td>
 					            </tr>
 				            </tbody>
-				            <?php endforeach; ?>
-				            <?php endforeach; ?>
-				            <?php endif; ?>
-				            <tfoot>
-				            	<tr>
-				                	<td colspan="20">
-				                    	
-				                    </td>
-				               	</tr>
-				            </tfoot>
-				       	</table>
-			        </div>	
-			  </div>
-
-
-	            
+				            <?php endif; ?> 
+			            <?php endforeach; ?>
+			            <?php endforeach; ?>
+			            <?php endforeach; ?>
+			            <?php endif; ?>
+			            <tfoot>
+			            	<tr>
+			                	<td colspan="20">
+			                    	
+			                    </td>
+			               	</tr>
+			            </tfoot>
+			       	</table>
+		        </div>	
+			</div>
 	        </div>
       </div>
             
@@ -1024,12 +1041,15 @@
     </div>
         
         	<?php echo Form::hidden('id', (isset($input['id'])? Input::old('id') : (isset($data->id)? $data->id : '' ))); ?>
+        	<?php /* Form::hidden('sc', ( '10' )) */ ?>
             
             <hr/>
             
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <?php echo Form::submit('Save', array('class' => 'btn btn-success')); ?>
+              <?php echo Form::submit('Save', array('class' => 'btn btn-primary')); ?>
+              <?php echo Form::submit('Save & Close', array('name' => 'sc','class' => 'btn btn-success')); ?>
+              <!-- <input type="submit" name="sc" id="1" value="Save & Close" class="btn btn-success"> -->
             <a href="/admin/menu/recipes/">
                 <?php echo Form::button('Cancel' ,array('class' => 'btn btn-danger')); ?>
             </a>

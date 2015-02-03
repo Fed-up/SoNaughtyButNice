@@ -373,7 +373,7 @@
 			$('#counterExtras').val( parseInt(currentID, 10) + 1 );
 			
 		});
-		
+
 	  
 	  
 	  	//Start Images
@@ -757,31 +757,47 @@
                 @if(isset($r_ingredients))
                 	@foreach($r_ingredients as $r_ingredient)
 
-                	<?php // echo 'THis sarah'; ?>
 
-                	<?php //echo '<pre>'; print_r($r_ingredient); echo '</pre>'; exit; ?>
+	                	<?php // echo 'THis sarah'; ?>
+	                	
+	                	<!-- @foreach($json_array as $i => $in)
+                        	@if($i == $r_ingredient->id)
+	                        	<?php //echo '<pre>'; print_r($i); echo '</pre>';?>
+	                        	<?php //echo '<pre>'; print_r($in); echo '</pre>';?>
+                        	@endif
+                        @endforeach
+            			<?php //echo '<pre>'; print_r($json_array); echo '</pre>'; exit; ?> -->
 
-                    	<li>
-                    		
-                            <select name="ingredients[][{{ $r_ingredient->id }}]" id="ingredients_{{ $x }}" class="form-control input--ingredient"/>
-                                @foreach($ingredients as $i=>$v)
-                                	<option value="{{ $i }}" @if ($r_ingredient->menu_ingredients_id == $i) selected="selected" @endif >{{ $v }}</option>
-                                @endforeach
-                            </select>
-                            <input name="amount[][{{ $r_ingredient->id }}]" id="ingredients_{{ $x }}" class="form-control input--amount " value="{{ $r_ingredient->amount }}" />
-                            <select name="metric[][{{ $r_ingredient->id }}]" id="ingredients_{{ $x }}" class="form-control input--metric"/>
-                                @foreach($metric as $in=>$val)
-                                	<option value="{{ $in }}" @if ($r_ingredient->metric_id == $in) selected="selected" @endif >{{ $val }}</option>
-                                @endforeach
-                            </select>
-                            <input name="grams[][{{ $r_ingredient->id }}]" id="ingredients_{{ $x }}" class="form-control input--amount " value="{{ $r_ingredient->grams }}" />
-                            <button id="{{ $r_ingredient->id }}" class="deleteIngredient glyphicon glyphicon-remove btn btn-danger"></button>
-                            <span class="glyphicon glyphicon-sort btn btn-default disabled"></span>
-                            
-                   		</li>
-                        
+	                    	<li>
+	                            <select name="ingredients[][{{ $r_ingredient->id }}]" id="ingredients_{{ $x }}" class="form-control input--ingredient"/>
+	                                @foreach($ingredients as $i=>$v)
+	                                	<option value="{{ $i }}" @if ($r_ingredient->menu_ingredients_id == $i) selected="selected" @endif >{{ $v }}</option>
+	                                @endforeach
+	                            </select>
+	                            <input name="amount[][{{ $r_ingredient->id }}]" id="ingredients_{{ $x }}" class="form-control input--amount " value="{{ $r_ingredient->amount }}" />
+	                            <select name="metric[][{{ $r_ingredient->id }}]" id="ingredients_{{ $x }}" class="form-control input--metric"/>
+	                                @foreach($metric as $in=>$val)
+	                                	<option value="{{ $in }}" @if ($r_ingredient->metric_id == $in) selected="selected" @endif >{{ $val }}</option>
+	                                @endforeach
+	                            </select>
+	                            <input name="grams[][{{ $r_ingredient->id }}]" id="ingredients_{{ $x }}" class="form-control input--amount " value="{{ $r_ingredient->grams }}" />
 
-                 	<?php $x++; ?>                    
+	                            @foreach($json_array as $i => $in)
+	                            	@if($i == $r_ingredient->menu_ingredients_id)
+	                            		<input type="hidden" name="i_grams[{{$i}}]" value="{{ $in['grams'] }}" />
+	                            		<input type="hidden" name="i_price[{{$i}}]" value="{{ $in['price'] }}" />
+			                        	<?php //echo '<pre>'; print_r($i); echo '</pre>';?>
+			                        	<?php //echo '<pre>'; print_r($in); echo '</pre>';?>
+		                        	@endif
+		                        @endforeach
+
+	                            <button id="{{ $r_ingredient->id }}" class="deleteIngredient glyphicon glyphicon-remove btn btn-danger"></button>
+	                            <span class="glyphicon glyphicon-sort btn btn-default disabled"></span>
+	                            
+	                   		</li>
+	                        
+
+	                 	<?php $x++; ?>                    
                    	@endforeach
                 @endif
          	</ul>
@@ -837,183 +853,184 @@
       </div>
       <div class="tab-pane fade in active" id="sales">
             <div class="col-sm-1">
-            	{{-- Form::button('+ Calc', array('id' => 'btnActionCalculate','class' => 'btn btn-primary')) --}}
-                <a href="#" id="btnActionCalculate" class="btn btn-primary">+ Calc</a>
-<!--                 {{-- Form::hidden('counterExtras',null,array('id'=>'counterExtras')) --}}
-                <div class="col-sm-6" style="background-color:red; width:100%;">
-	                {{ ($errors->has('name'))? '<p>'. $errors->first('name') .'</p>' : '' }}
-	                {{ Form::text('name', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')) }} 
-	            </div> -->
+            	{{ Form::submit('+ Calc', array('id' => 'btnActionCalculate','name' => 'calc','class' => 'btn btn-primary')) }}
             </div>
             <hr/>
-            <div class="row">
-	            <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-		              {{ Form::label('title', 'Staff cost per hour: ', array('class' => 'col-sm-2 control-label')) }}
-		            <div class="col-sm-3">
-		               {{($errors->has('title')) ? '<p>'. $errors->first('name'). '</p>' : '' }}
-		               {{ Form::text('title', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')) }}
-		            </div>
+            @if(isset($r_sales))                	
+            	@foreach($r_sales as $sdata)
+					{{ Form::hidden('sdata_id', $sdata->id) }}
+		            <div class="row">
+			            <div class="form-group">
+				              {{ Form::label('staff_cost_per_hour', 'Staff cost per hour: ', array('class' => 'col-sm-2 control-label')) }}
+				            <div class="col-sm-3">
+				            {{ Form::text('staff_cost_per_hour', (isset($input['staff_cost_per_hour'])? Input::old('staff_cost_per_hour') : (isset($sdata->staff_cost_per_hour)? $sdata->staff_cost_per_hour : '' )), array('class' => 'form-control')) }}
+				            	<!-- <input name="staff_cost_per_hour[][{{ $sdata->id }}]" id="staff_cost_per_hour_{{ $sdata->id }}" class="form-control" value="{{ (isset($input['staff_cost_per_hour'])? Input::old('staff_cost_per_hour') : (isset($sdata->staff_cost_per_hour)? $sdata->staff_cost_per_hour : '' )) }}" />	 -->
+				            </div>
 
-		            {{ Form::label('title', 'Price: ', array('class' => 'col-sm-2 control-label')) }}
-		            <div class="col-sm-3">
-		               {{($errors->has('title')) ? '<p>'. $errors->first('name'). '</p>' : '' }}
-		               {{ Form::text('title', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')) }}
-		               
-		            </div>
+				            {{ Form::label('sales_price', 'Price: ', array('class' => 'col-sm-2 control-label')) }}
+				            <div class="col-sm-3">
+				               {{ Form::text('sales_price', (isset($input['sales_price'])? Input::old('sales_price') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) }}
+				               
+				            </div>
 
-		        </div>
-		        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-		        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost to make recipe batch:</h5>
-		              {{-- Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) --}}
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
+				        </div>
+				        <div class="form-group">
+				        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost to make recipe batch:</h5>
+				              {{-- Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) --}}
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{$sdata->staff_cost_to_make_recipe_batch}}</p>
+				            </div>
 
-		            {{ Form::label('title', 'Amount: ', array('class' => 'col-sm-2 control-label')) }}
-		            <div class="col-sm-3">
-		               {{($errors->has('title')) ? '<p>'. $errors->first('name'). '</p>' : '' }}
-		               {{ Form::text('title', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')) }}
-		            </div>
-		        </div>
-		        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-		        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost per piece:</h5>
-		              {{-- Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) --}}
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
+				            {{ Form::label('sales_amount', 'Amount: ', array('class' => 'col-sm-2 control-label')) }}
+				            <div class="col-sm-3">
+				               {{ Form::text('sales_amount', (isset($input['sales_amount'])? Input::old('sales_amount') : (isset($sdata->sales_amount)? $sdata->sales_amount : '' )), array('class' => 'form-control')) }}
+				            </div>
+				        </div>
+				        <div class="form-group">
+				        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost per piece:</h5>
+				              {{-- Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) --}}
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{$sdata->staff_cost_per_piece}}</p>
+				            </div>
 
-		            {{ Form::label('title', 'Time: ', array('class' => 'col-sm-2 control-label')) }}
-		            <div class="col-sm-3">
-		               {{($errors->has('title')) ? '<p>'. $errors->first('name'). '</p>' : '' }}
-		               {{ Form::text('title', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')) }}
-		            </div>
-		        </div>
-		        <hr/>
-		        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Total recipe cost:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
+				            {{ Form::label('sales_time', 'Time - minutes: ', array('class' => 'col-sm-2 control-label')) }}
+				            <div class="col-sm-3">
+				               {{ Form::text('sales_time', (isset($input['sales_time'])? Input::old('sales_time') : (isset($sdata->sales_time)? $sdata->sales_time : '' )), array('class' => 'form-control')) }}
+				            </div>
+				        </div>
+				        <hr/>
+				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
+			        	    <h5 class="col-sm-2 control-label sales-data__title">Total recipe cost:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{$sdata->total_recipe_cost}}</p>
+				            </div>
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total cost percentage</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
-		        </div>
-		        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Total ingredient cost:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total cost percentage</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{$sdata->total_cost_percentage}}</p>
+				            </div>
+				        </div>
+				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
+			        	    <h5 class="col-sm-2 control-label sales-data__title">Total ingredient cost:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{$sdata->total_ingredient_cost}}</p>
+				            </div>
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total recipe revenue:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
-		        </div>
-		        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Total ingredient cost per piece:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total recipe revenue:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{$sdata->total_recipe_revenue}}</p>
+				            </div>
+				        </div>
+				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
+			        	    <h5 class="col-sm-2 control-label sales-data__title">Total ingredient cost per piece:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{$sdata->total_ingredient_cost_per_piece}}</p>
+				            </div>
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total markup per piece:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
-		        </div>
-		        <hr/>
-		        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Total cost per piece:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total markup per piece:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{$sdata->total_markup_per_piece}}</p>
+				            </div>
+				        </div>
+				        <hr/>
+				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
+			        	    <h5 class="col-sm-2 control-label sales-data__title">Total cost per piece:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{$sdata->total_cost_per_piece}}</p>
+				            </div>
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total profit:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
-		        </div>
-		        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Staff cost percentage:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$ %%</p>
-		            </div>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total profit:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{$sdata->total_profit}}</p>
+				            </div>
+				        </div>
+				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
+			        	    <h5 class="col-sm-2 control-label sales-data__title">Staff cost percentage:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">{{$sdata->staff_cost_percentage}} %</p>
+				            </div>
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total profit per piece:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$</p>
-		            </div>
-		        </div>
-		        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Ingredient cost percentage:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$ %%</p>
-		            </div>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total profit per piece:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{$sdata->total_profit_per_piece}}</p>
+				            </div>
+				        </div>
+				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
+			        	    <h5 class="col-sm-2 control-label sales-data__title">Ingredient cost percentage:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">{{$sdata->ingredient_cost_percentage}} %</p>
+				            </div>
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total markup percentage:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$ %%</p>
-		            </div>
-		        </div>
-		        <hr/>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total markup percentage:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">{{$sdata->total_markup_percentage}} %</p>
+				            </div>
+				        </div>
+				        <hr/>
+		        		<?php //echo '<pre>'; print_r($sdata->price); echo '</pre>'; exit; ?>
+               	@endforeach
+            @endif
+	        <!-- <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
+        	    <h5 class="col-sm-2 control-label sales-data__title">Ingredient cost percentage:</h5>
+	            <div class="col-sm-3">
+	               <p class="sales-data__info">$$$$ %%</p>
+	            </div>
 
-		        <!-- <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-	        	    <h5 class="col-sm-2 control-label sales-data__title">Ingredient cost percentage:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$ %%</p>
-		            </div>
+	            <h5 class="col-sm-2 control-label sales-data__title">Total markup percentage:</h5>
+	            <div class="col-sm-3">
+	               <p class="sales-data__info">$$$$ %%</p>
+	            </div>
+	        </div> -->
+	        <div class="row">
 
-		            <h5 class="col-sm-2 control-label sales-data__title">Total markup percentage:</h5>
-		            <div class="col-sm-3">
-		               <p class="sales-data__info">$$$$ %%</p>
-		            </div>
-		        </div> -->
-		        <div class="row">
+	        	<div class="col-sm-offset-1 col-sm-10">
+			       	<table class="table table-striped">
+			            <thead>
+			            	<tr>
+			                    <th>Ingredient</td>
+			                    <th>Ingredient Cost</th>
+			                    <th>Packet Grams</th>
+			                    <th>Packet Grams %</th>
+			                    <th>Recipe Ingredient Cost</th>
+			                    <th>Recipe Grams</th>
+			                </tr>
+			            </thead>
+			            @if(isset($r_ingredients))
+            			@foreach($r_ingredients as $r_ingredient)
 
-		        	<div class="col-sm-offset-1 col-sm-10">
-				       	<table class="table table-striped">
-				            <thead>
-				            	<tr>
-				                    <th>Ingredient</td>
-				                    <th>Ingredient Cost</th>
-				                    <th>Packet Grams</th>
-				                    <th>Packet Grams %</th>
-				                    <th>Recipe Ingredient Cost</th>
-				                    <th>Recipe Grams</th>
-				                </tr>
-				            </thead>
-				            @if(isset($r_ingredients))
-                			@foreach($r_ingredients as $r_ingredient)
-                			@foreach($ingredients as $i=>$v)
-                                	
-                                
+            			@foreach($s_ingredients as $ingredient)
+            			@foreach($sales_data_ingredients as $sd_ingredient)
+
+            				<?php //echo '<pre>'; print_r($ingredient); echo '</pre>'; ?>
+            				<?php //echo '<pre>'; print_r($ingredient->id); echo '</pre>'; exit; ?>
+
+
+                            @if ($r_ingredient->menu_ingredients_id == $ingredient->id)    	
 				            <tbody>
 					            <tr>
-					                <td>{{ $v }}</td>
-					                <td></td>
-					                <td></td>
-					                <td></td>
-					                <td></td>
-					                <td></td>
+					                <td> {{ $ingredient->name }} </td>
+					                <td> {{ $ingredient->price }} </td>
+					                <td> {{ $ingredient->grams }} </td>
+					                <td> {{ $r_ingredient->packet_grams_percentage }} </td>
+					                <td> {{ $r_ingredient->recipe_ingredient_cost }} </td>
+					                <td> {{ $r_ingredient->sales_grams }} </td>
 					            </tr>
 				            </tbody>
-				            @endforeach
-				            @endforeach
-				            @endif
-				            <tfoot>
-				            	<tr>
-				                	<td colspan="20">
-				                    	
-				                    </td>
-				               	</tr>
-				            </tfoot>
-				       	</table>
-			        </div>	
-			  </div>
-
-
-	            
+				            @endif 
+			            @endforeach
+			            @endforeach
+			            @endforeach
+			            @endif
+			            <tfoot>
+			            	<tr>
+			                	<td colspan="20">
+			                    	
+			                    </td>
+			               	</tr>
+			            </tfoot>
+			       	</table>
+		        </div>	
+			</div>
 	        </div>
       </div>
             
@@ -1025,12 +1042,15 @@
     </div>
         
         	{{ Form::hidden('id', (isset($input['id'])? Input::old('id') : (isset($data->id)? $data->id : '' ))) }}
+        	{{-- Form::hidden('sc', ( '10' )) --}}
             
             <hr/>
             
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              {{ Form::submit('Save', array('class' => 'btn btn-success')) }}
+              {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+              {{ Form::submit('Save & Close', array('name' => 'sc','class' => 'btn btn-success')) }}
+              <!-- <input type="submit" name="sc" id="1" value="Save & Close" class="btn btn-success"> -->
             <a href="/admin/menu/recipes/">
                 {{ Form::button('Cancel' ,array('class' => 'btn btn-danger')) }}
             </a>

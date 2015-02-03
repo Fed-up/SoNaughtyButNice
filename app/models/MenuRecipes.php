@@ -38,6 +38,10 @@ class MenuRecipes extends Eloquent {
 	public function MenuIngredients(){
 		return $this->hasOne('MenuIngredients', 'id', 'recipe_id');	
 	}
+
+	public function SalesDataIngredient(){
+		return $this->hasOne('SalesDataIngredient', 'id', 'menu_recipe_id');	
+	}
 	
 	public function Metric(){
 		return $this->hasOne('Metric', 'id', 'recipe_id');	
@@ -69,6 +73,10 @@ class MenuRecipes extends Eloquent {
 
 	public function Catering(){ //One recipe belongs to many catering
 		return $this->belongsToMany('Catering', 'catering_recipes')->withPivot('id','amount','ordering');
+	}
+
+	public function SalesData(){
+		return $this->hasOne('SalesData', 'id', 'menu_recipe_id');	
 	}
 	
 	
