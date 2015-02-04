@@ -522,32 +522,21 @@ class Admin_RecipesController extends BaseController{
 
 					//$recipe_ingredient = array($ingredient, $amount, $metric);
 					//$array_count = count($recipe_ingredient);
+
+					$ti_cost = 0;
+
+
 					$array_count = count($ingredient);
 					for($i=0; $i<$array_count; $i++){
 					  
 					  $xx = array_keys($ingredient[$i]);
-					  /*echo '<pre>$xx[0] ... we need the value of the first index => this will give us the ID <br><br><strong>'; 
-					  print_r($xx[0]); echo '</strong></pre>';
-					  echo '<pre>$ingredient[$i][$xx[0]] ... injecting it into here will produce<br><br>$ingredient[0][10]<br>yielding the VALUE<br><br><strong>'; 
-					  print_r($ingredient[$i][$xx[0]]); echo '</strong></pre><br/>';
-					  echo '<pre>'; print_r($amount[$i][$xx[0]]); echo '</strong></pre><br/>';
-					  echo '<pre>'; print_r($metric[$i][$xx[0]]); echo '</strong></pre><br/>';
-					  
-					  echo '<hr/>';*/
-					  
-					  
+
 					  if($xx[0] == 'x'){
 						  $r_i = new MenuRecipesIngredients();
 						  $r_i->menu_ingredients_id = $ingredient[$i][$xx[0]];
 						  $r_i->amount = $amount[$i][$xx[0]];
 						  $r_i->metric_id = $metric[$i][$xx[0]];
 						  $r_i->grams = $grams[$i][$xx[0]];
-
-
-
-
-
-
 						  $r_i->ordering = $i;
 						  $r_i->active = 1;  
 					  }else{
@@ -575,13 +564,14 @@ class Admin_RecipesController extends BaseController{
 						  	}
 						  	
 						}
+						
 
 						foreach($i_price as $id => $ri_price){
 						  	if($ingredient[$i][$xx[0]] == $id){
 						  		// if(isset($input['calc'])){
 							  		$recipe_ingredient_cost = $packet_grams_percentage/100 * $ri_price;
 							  		$r_i->recipe_ingredient_cost = $recipe_ingredient_cost;
-							  		// echo '<pre>'; print_r($recipe_ingredient_cost); echo '</pre>'; 
+							  		$ti_cost = $ti_cost + $recipe_ingredient_cost;
 						  		// }
 						  	}
 						  	
@@ -592,6 +582,7 @@ class Admin_RecipesController extends BaseController{
 					  $data->MenuRecipesIngredients()->save($r_i);
 				  		
 					};
+
 
 
 					// $queries = DB::getQueryLog();
@@ -612,6 +603,8 @@ class Admin_RecipesController extends BaseController{
 						};
 					};		
 				};
+
+				// echo '<pre>'; print_r($ti_cost); echo '</pre>'; exit;
 				 
 				if(isset($input['method'])){
 					$m_count = count($input['method']);
@@ -697,6 +690,17 @@ class Admin_RecipesController extends BaseController{
 						$staff_cost_to_make_recipe_batch = $staff_cost_per_hour/60 * $sales_time;
 						$staff_cost_per_piece = $staff_cost_to_make_recipe_batch/ $sales_amount;
 
+						$total_recipe_cost = $staff_cost_to_make_recipe_batch + $ti_cost;
+						$total_recipe_revenue = $sales_amount * $sales_price;
+						$total_cost_percentage = $total_recipe_cost/ $total_recipe_revenue * 100;
+						$total_ingredient_cost_per_piece = $ti_cost/  $sales_amount;
+
+						$total_cost_per_piece = $total_recipe_cost / $sales_amount;
+						$total_profit = $total_recipe_revenue - $total_recipe_cost;
+						$total_profit_per_piece = $total_profit/ $sales_amount;
+						$staff_cost_percentage = $staff_cost_to_make_recipe_batch/ $total_recipe_revenue * 100;
+						$ingredient_cost_percentage = $ti_cost/ $total_recipe_revenue * 100;
+						$total_markup_percentage = $total_recipe_revenue/ $total_profit * 100;
 						// echo '<pre>'; print_r($staff_cost_per_hour); echo '</pre>'; 	exit;
 
 						$_sales = SalesData::find($sdata_id);
@@ -709,6 +713,22 @@ class Admin_RecipesController extends BaseController{
 						$_sales->sales_price = $sales_price;
 						$_sales->sales_amount = $sales_amount;
 						$_sales->sales_time = $sales_time;
+
+						$_sales->total_recipe_cost = $total_recipe_cost;
+						$_sales->total_cost_percentage = $total_cost_percentage;
+						$_sales->total_ingredient_cost = $total_ingredient_cost = $ti_cost;
+						$_sales->total_recipe_revenue = $total_recipe_revenue;
+						$_sales->total_ingredient_cost_per_piece = $total_ingredient_cost_per_piece;
+						// $_sales->total_markup_per_piece = $total_markup_per_piece;
+
+						$_sales->total_cost_per_piece = $total_cost_per_piece;
+						$_sales->total_profit = $total_profit;
+						$_sales->staff_cost_percentage = $staff_cost_percentage;
+						$_sales->total_profit_per_piece = $total_profit_per_piece;
+						$_sales->ingredient_cost_percentage = $ingredient_cost_percentage;
+						$_sales->total_markup_percentage = $total_markup_percentage;
+
+
 
 						$_sales->staff_cost_to_make_recipe_batch = $staff_cost_to_make_recipe_batch;
 						$_sales->staff_cost_per_piece = $staff_cost_per_piece;
@@ -751,3 +771,14 @@ class Admin_RecipesController extends BaseController{
 		return Redirect::action('Admin_RecipesController@getRecipes');
 	}
 }
+
+
+					  /*echo '<pre>$xx[0] ... we need the value of the first index => this will give us the ID <br><br><strong>'; 
+					  print_r($xx[0]); echo '</strong></pre>';
+					  echo '<pre>$ingredient[$i][$xx[0]] ... injecting it into here will produce<br><br>$ingredient[0][10]<br>yielding the VALUE<br><br><strong>'; 
+					  print_r($ingredient[$i][$xx[0]]); echo '</strong></pre><br/>';
+					  echo '<pre>'; print_r($amount[$i][$xx[0]]); echo '</strong></pre><br/>';
+					  echo '<pre>'; print_r($metric[$i][$xx[0]]); echo '</strong></pre><br/>';
+					  
+					  echo '<hr/>';*/
+					  

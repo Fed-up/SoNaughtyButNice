@@ -907,7 +907,7 @@
 
 				            <h5 class="col-sm-2 control-label sales-data__title">Total cost percentage</h5>
 				            <div class="col-sm-3">
-				               <p class="sales-data__info">$ {{$sdata->total_cost_percentage}}</p>
+				               <p class="sales-data__info"> {{$sdata->total_cost_percentage}} %</p>
 				            </div>
 				        </div>
 				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
@@ -927,10 +927,10 @@
 				               <p class="sales-data__info">$ {{$sdata->total_ingredient_cost_per_piece}}</p>
 				            </div>
 
-				            <h5 class="col-sm-2 control-label sales-data__title">Total markup per piece:</h5>
+				            <!-- <h5 class="col-sm-2 control-label sales-data__title">Total markup per piece:</h5>
 				            <div class="col-sm-3">
 				               <p class="sales-data__info">$ {{$sdata->total_markup_per_piece}}</p>
-				            </div>
+				            </div> -->
 				        </div>
 				        <hr/>
 				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
@@ -1009,11 +1009,11 @@
 				            <tbody>
 					            <tr>
 					                <td> {{ $ingredient->name }} </td>
-					                <td> {{ $ingredient->price }} </td>
-					                <td> {{ $ingredient->grams }} </td>
-					                <td> {{ $r_ingredient->packet_grams_percentage }} </td>
-					                <td> {{ $r_ingredient->recipe_ingredient_cost }} </td>
-					                <td> {{ $r_ingredient->sales_grams }} </td>
+					                <td>$ {{ $ingredient->price }} </td>
+					                <td> {{ $ingredient->grams }}g </td>
+					                <td> {{ $r_ingredient->packet_grams_percentage }} % </td>
+					                <td>$ {{ $r_ingredient->recipe_ingredient_cost }} </td>
+					                <td> {{ $r_ingredient->sales_grams }}g </td>
 					            </tr>
 				            </tbody>
 				            @endif 
