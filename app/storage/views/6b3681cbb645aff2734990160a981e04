@@ -855,16 +855,14 @@
             	<?php echo Form::submit('+ Calc', array('id' => 'btnActionCalculate','name' => 'calc','class' => 'btn btn-primary')); ?>
             </div>
             <hr/>
-            <?php if(isset($r_sales)): ?>                	
+            <?php if(isset($data->id)): ?>                	
             	<?php foreach($r_sales as $sdata): ?>
 					<?php echo Form::hidden('sdata_id', $sdata->id); ?>
 		            <div class="row">
 			            <div class="form-group">
 				              <?php echo Form::label('staff_cost_per_hour', 'Staff cost per hour: ', array('class' => 'col-sm-2 control-label')); ?>
 				            <div class="col-sm-3">
-				            <?php echo Form::text('staff_cost_per_hour', (isset($input['staff_cost_per_hour'])? Input::old('staff_cost_per_hour') : (isset($sdata->staff_cost_per_hour)? $sdata->staff_cost_per_hour : '' )), array('class' => 'form-control')); ?>
-				            	<!-- <input name="staff_cost_per_hour[][<?php echo $sdata->id; ?>]" id="staff_cost_per_hour_<?php echo $sdata->id; ?>" class="form-control" value="<?php echo (isset($input['staff_cost_per_hour'])? Input::old('staff_cost_per_hour') : (isset($sdata->staff_cost_per_hour)? $sdata->staff_cost_per_hour : '' )); ?>" />	 -->
-				            </div>
+				            <?php echo Form::text('staff_cost_per_hour', (isset($input['staff_cost_per_hour'])? Input::old('staff_cost_per_hour') : (isset($sdata->staff_cost_per_hour)? $sdata->staff_cost_per_hour : '' )), array('class' => 'form-control')); ?>				            </div>
 
 				            <?php echo Form::label('sales_price', 'Price: ', array('class' => 'col-sm-2 control-label')); ?>
 				            <div class="col-sm-3">
@@ -877,7 +875,7 @@
 				        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost to make recipe batch:</h5>
 				              <?php /* Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) */ ?>
 				            <div class="col-sm-3">
-				               <p class="sales-data__info">$ <?php echo $sdata->staff_cost_to_make_recipe_batch; ?></p>
+				               <p class="sales-data__info">$ <?php echo (isset($sdata->staff_cost_to_make_recipe_batch)? $sdata->staff_cost_to_make_recipe_batch : '' ); ?></p>
 				            </div>
 
 				            <?php echo Form::label('sales_amount', 'Amount: ', array('class' => 'col-sm-2 control-label')); ?>
@@ -889,7 +887,7 @@
 				        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost per piece:</h5>
 				              <?php /* Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) */ ?>
 				            <div class="col-sm-3">
-				               <p class="sales-data__info">$ <?php echo $sdata->staff_cost_per_piece; ?></p>
+				               <p class="sales-data__info">$ <?php echo (isset($sdata->staff_cost_per_piece)? $sdata->staff_cost_per_piece : '' ); ?></p>
 				            </div>
 
 				            <?php echo Form::label('sales_time', 'Time - minutes: ', array('class' => 'col-sm-2 control-label')); ?>
@@ -898,6 +896,7 @@
 				            </div>
 				        </div>
 				        <hr/>
+				
 				        <div class="form-group <?php echo ($errors->has('title')) ? ' has-error' : '' ;; ?>">
 			        	    <h5 class="col-sm-2 control-label sales-data__title">Total recipe cost:</h5>
 				            <div class="col-sm-3">
@@ -995,29 +994,31 @@
 			                </tr>
 			            </thead>
 			            <?php if(isset($r_ingredients)): ?>
+
             			<?php foreach($r_ingredients as $r_ingredient): ?>
 
-            			<?php foreach($s_ingredients as $ingredient): ?>
-            			<?php foreach($sales_data_ingredients as $sd_ingredient): ?>
+	            			<?php foreach($s_ingredients as $ingredient): ?>
 
-            				<?php //echo '<pre>'; print_r($ingredient); echo '</pre>'; ?>
-            				<?php //echo '<pre>'; print_r($ingredient->id); echo '</pre>'; exit; ?>
+		            			
+		            				<?php //echo '<pre>'; print_r($sales_data_ingredients); echo '</pre>'; exit;?>
+		            				
+		            				<?php //echo '<pre>'; print_r($ingredient->id); echo '</pre>'; exit; ?>
 
 
-                            <?php if ($r_ingredient->menu_ingredients_id == $ingredient->id): ?>    	
-				            <tbody>
-					            <tr>
-					                <td> <?php echo $ingredient->name; ?> </td>
-					                <td>$ <?php echo $ingredient->price; ?> </td>
-					                <td> <?php echo $ingredient->grams; ?>g </td>
-					                <td> <?php echo $r_ingredient->packet_grams_percentage; ?> % </td>
-					                <td>$ <?php echo $r_ingredient->recipe_ingredient_cost; ?> </td>
-					                <td> <?php echo $r_ingredient->sales_grams; ?>g </td>
-					            </tr>
-				            </tbody>
-				            <?php endif; ?> 
-			            <?php endforeach; ?>
-			            <?php endforeach; ?>
+		                            <?php if ($r_ingredient->menu_ingredients_id == $ingredient->id): ?>    	
+						            <tbody>
+							            <tr>
+							                <td> <?php echo $ingredient->name; ?> </td>
+							                <td>$ <?php echo $ingredient->price; ?> </td>
+							                <td> <?php echo $ingredient->grams; ?>g </td>
+							                <td> <?php echo $r_ingredient->packet_grams_percentage; ?> % </td>
+							                <td>$ <?php echo $r_ingredient->recipe_ingredient_cost; ?> </td>
+							                <td> <?php echo $r_ingredient->sales_grams; ?>g </td>
+							            </tr>
+						            </tbody>
+						            <?php endif; ?> 
+					            
+				            <?php endforeach; ?>
 			            <?php endforeach; ?>
 			            <?php endif; ?>
 			            <tfoot>

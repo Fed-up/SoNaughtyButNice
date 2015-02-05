@@ -326,7 +326,7 @@ class Admin_RecipesController extends BaseController{
 			}
 		
 		};
-		// echo '<pre>'; print_r( $json_array ); echo '</pre>'; 
+		// echo '<pre>'; print_r( $sales_data ); echo '</pre>'; 
 		// exit;
 
 		$out = array_values($json_array);
@@ -342,6 +342,8 @@ class Admin_RecipesController extends BaseController{
 		$s_ingredients = $ingredients;
 		
 
+		// echo '<pre>'; print_r( $sales_data ); echo '</pre>'; 
+		// exit;
 
 		// foreach($sales_data as $i => $in){
 		// 	echo '<pre>'; print_r( $i); echo '</pre>'; 
@@ -496,6 +498,13 @@ class Admin_RecipesController extends BaseController{
 					};
 											 
 				};
+
+				if(!isset($input['sdata_id'])){
+					echo '<pre>'; print_r($input['sdata_id']); echo '</pre>'; 	exit;
+					$_sales = new SalesData();
+					$_sales->menu_recipe_id = $input['id'];
+					$data->SalesData()->save($_sales);
+				}
 				
 				if(isset($input['ingredients']) && isset($input['amount']) && isset($input['metric'])){
 					
@@ -546,35 +555,45 @@ class Admin_RecipesController extends BaseController{
 						$r_i->metric_id = $metric[$i][$xx[0]];
 						$r_i->grams = $r_grams = $grams[$i][$xx[0]];
 
-						if(isset($input['calc']) || isset($input['sales_amount'])){
+						if(isset($input['sales_amount'])){
 							$sales_amount = $input['sales_amount'];
 							$r_i->sales_grams = $sales_grams = $r_grams/$serve_amount * $sales_amount; 
 						}
-						// echo '<pre>'; print_r($sales_grams); echo '</pre>';exit;
-						foreach($i_grams as $id => $i_gram){
-						  	if($ingredient[$i][$xx[0]] == $id){
-						  		// if(isset($input['calc'])){
+						// echo '<pre>'; print_r($input); echo '</pre>';exit;
+						// if(isset($input['sales_grams'])){
 
-						  		// echo '<pre>'; print_r($i_grams['$ingredient[$i][$xx[0]]']); echo '</pre>';exit;
+							
 
-							  		$packet_grams_percentage = $sales_grams / $i_gram * 100; 
-							  		$r_i->packet_grams_percentage = $packet_grams_percentage;
-							  		// echo '<pre>'; print_r($packet_grams_percentage); echo '</pre>';
-						  		// }
-						  	}
-						  	
-						}
+							foreach($i_grams as $id => $i_gram){
+
+								
+
+							  	if($ingredient[$i][$xx[0]] == $id){
+							  		// if(isset($input['calc'])){
+
+							  			if($i_gram > 0){
+								  			$packet_grams_percentage = $sales_grams / $i_gram * 100; 
+											$r_i->packet_grams_percentage = $packet_grams_percentage;
+										}
+								  		// echo '<pre>'; print_r($packet_grams_percentage); echo '</pre>';
+							  		// }
+							  	}
+							}  	
+						// }
 						
 
-						foreach($i_price as $id => $ri_price){
-						  	if($ingredient[$i][$xx[0]] == $id){
-						  		// if(isset($input['calc'])){
-							  		$recipe_ingredient_cost = $packet_grams_percentage/100 * $ri_price;
-							  		$r_i->recipe_ingredient_cost = $recipe_ingredient_cost;
-							  		$ti_cost = $ti_cost + $recipe_ingredient_cost;
-						  		// }
-						  	}
-						  	
+
+
+						if(isset($input['sales_price'])){
+							foreach($i_price as $id => $ri_price){
+							  	if($ingredient[$i][$xx[0]] == $id){
+							  		if(isset($packet_grams_percentage)){
+								  		$recipe_ingredient_cost = $packet_grams_percentage/100 * $ri_price;
+								  		$r_i->recipe_ingredient_cost = $recipe_ingredient_cost;
+								  		$ti_cost = $ti_cost + $recipe_ingredient_cost;
+							  		}
+							  	}
+							}
 						}
 						$r_i->ordering = $i;						
 						
@@ -674,6 +693,8 @@ class Admin_RecipesController extends BaseController{
 				
 					// echo '<pre>'; print_r($input['sales_time']); echo '</pre>'; 	exit;
 
+				
+
 				if(isset($input['staff_cost_per_hour']) && isset($input['sales_price']) && isset($input['sales_amount']) && isset($input['sales_time'])){
 
 					// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
@@ -687,65 +708,65 @@ class Admin_RecipesController extends BaseController{
 						$sales_amount = $input['sales_amount'];
 						$sales_time = $input['sales_time'];
 
+						$total_recipe_revenue = 0;
+						$total_ingredient_cost_per_piece = 0;
+						$total_cost_per_piece = 0;
+						$total_cost_percentage = 0;
+						$total_profit = 0;
+						$staff_cost_percentage = 0;
+						$total_profit_per_piece = 0;
+						$ingredient_cost_percentage = 0;
+						$total_markup_percentage = 0;
+
+						if($sales_amount > 0){
+							$staff_cost_per_piece = $staff_cost_to_make_recipe_batch/ $sales_amount;
+							$total_cost_per_piece = $total_recipe_cost / $sales_amount;
+							$total_ingredient_cost_per_piece = $ti_cost/  $sales_amount;
+							$total_recipe_revenue = $sales_amount * $sales_price;
+							$total_profit_per_piece = $total_profit/ $sales_amount;
+							$total_cost_percentage = $total_recipe_cost/ $total_recipe_revenue * 100;
+							$total_profit = $total_recipe_revenue - $total_recipe_cost;
+							$staff_cost_percentage = $staff_cost_to_make_recipe_batch/ $total_recipe_revenue * 100;
+							$ingredient_cost_percentage = $ti_cost/ $total_recipe_revenue * 100;
+							$total_markup_percentage = $total_recipe_revenue/ $total_profit * 100;
+						}
+
 						$staff_cost_to_make_recipe_batch = $staff_cost_per_hour/60 * $sales_time;
-						$staff_cost_per_piece = $staff_cost_to_make_recipe_batch/ $sales_amount;
-
 						$total_recipe_cost = $staff_cost_to_make_recipe_batch + $ti_cost;
-						$total_recipe_revenue = $sales_amount * $sales_price;
-						$total_cost_percentage = $total_recipe_cost/ $total_recipe_revenue * 100;
-						$total_ingredient_cost_per_piece = $ti_cost/  $sales_amount;
-
-						$total_cost_per_piece = $total_recipe_cost / $sales_amount;
-						$total_profit = $total_recipe_revenue - $total_recipe_cost;
-						$total_profit_per_piece = $total_profit/ $sales_amount;
-						$staff_cost_percentage = $staff_cost_to_make_recipe_batch/ $total_recipe_revenue * 100;
-						$ingredient_cost_percentage = $ti_cost/ $total_recipe_revenue * 100;
-						$total_markup_percentage = $total_recipe_revenue/ $total_profit * 100;
-						// echo '<pre>'; print_r($staff_cost_per_hour); echo '</pre>'; 	exit;
-
-						$_sales = SalesData::find($sdata_id);
-
-						// $queries = DB::getQueryLog();
-						// echo '<pre>'; print_r($queries); echo '</pre>'; exit;
 						
-
-						$_sales->staff_cost_per_hour = $staff_cost_per_hour;
-						$_sales->sales_price = $sales_price;
-						$_sales->sales_amount = $sales_amount;
-						$_sales->sales_time = $sales_time;
-
-						$_sales->total_recipe_cost = $total_recipe_cost;
-						$_sales->total_cost_percentage = $total_cost_percentage;
-						$_sales->total_ingredient_cost = $total_ingredient_cost = $ti_cost;
-						$_sales->total_recipe_revenue = $total_recipe_revenue;
-						$_sales->total_ingredient_cost_per_piece = $total_ingredient_cost_per_piece;
-						// $_sales->total_markup_per_piece = $total_markup_per_piece;
-
-						$_sales->total_cost_per_piece = $total_cost_per_piece;
-						$_sales->total_profit = $total_profit;
-						$_sales->staff_cost_percentage = $staff_cost_percentage;
-						$_sales->total_profit_per_piece = $total_profit_per_piece;
-						$_sales->ingredient_cost_percentage = $ingredient_cost_percentage;
-						$_sales->total_markup_percentage = $total_markup_percentage;
-
-
-
-						$_sales->staff_cost_to_make_recipe_batch = $staff_cost_to_make_recipe_batch;
-						$_sales->staff_cost_per_piece = $staff_cost_per_piece;
 						
-						$data->SalesData()->save($_sales);
+						// echo '<pre>'; print_r($sdata_id); echo '</pre>'; 	exit;
 
+						// $_sales = SalesData::find($sdata_id);	
+						DB::table('sales_data')
+			            ->where('id', $sdata_id)
+			            ->update(array(
+			            		'staff_cost_per_hour' => $staff_cost_per_hour,
+			            		'sales_price' => $sales_price,
+			            		'sales_amount' => $sales_amount,
+			            		'sales_time' => $sales_time,
 
+			            		'staff_cost_to_make_recipe_batch' => $staff_cost_to_make_recipe_batch,
+			            		'total_recipe_cost' => $total_recipe_cost,
+			            		'total_ingredient_cost' => $ti_cost,
+			            		'total_recipe_revenue' => $total_recipe_revenue,
+
+			            		'total_ingredient_cost_per_piece' => $total_ingredient_cost_per_piece,
+			            		'total_cost_percentage' => $total_cost_percentage,
+			            		'total_cost_per_piece' => $total_cost_per_piece,
+			            		'total_profit' => $total_profit,
+
+			            		'staff_cost_percentage' => $staff_cost_percentage,
+			            		'total_profit_per_piece' => $total_profit_per_piece,
+			            		'ingredient_cost_percentage' => $ingredient_cost_percentage,
+			            		'total_markup_percentage' => $total_markup_percentage,
+
+			            	)
+			            );
 						
+						// $data->SalesData()->save($_sales);
 
 
-
-
-
-
-						// echo '<pre>'; print_r($sales); echo '</pre>'; 	exit;
-
-					
 				}
 			};
 			//exit;	

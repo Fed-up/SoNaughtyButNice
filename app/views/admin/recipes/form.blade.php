@@ -856,16 +856,14 @@
             	{{ Form::submit('+ Calc', array('id' => 'btnActionCalculate','name' => 'calc','class' => 'btn btn-primary')) }}
             </div>
             <hr/>
-            @if(isset($r_sales))                	
+            @if(isset($data->id))                	
             	@foreach($r_sales as $sdata)
 					{{ Form::hidden('sdata_id', $sdata->id) }}
 		            <div class="row">
 			            <div class="form-group">
 				              {{ Form::label('staff_cost_per_hour', 'Staff cost per hour: ', array('class' => 'col-sm-2 control-label')) }}
 				            <div class="col-sm-3">
-				            {{ Form::text('staff_cost_per_hour', (isset($input['staff_cost_per_hour'])? Input::old('staff_cost_per_hour') : (isset($sdata->staff_cost_per_hour)? $sdata->staff_cost_per_hour : '' )), array('class' => 'form-control')) }}
-				            	<!-- <input name="staff_cost_per_hour[][{{ $sdata->id }}]" id="staff_cost_per_hour_{{ $sdata->id }}" class="form-control" value="{{ (isset($input['staff_cost_per_hour'])? Input::old('staff_cost_per_hour') : (isset($sdata->staff_cost_per_hour)? $sdata->staff_cost_per_hour : '' )) }}" />	 -->
-				            </div>
+				            {{ Form::text('staff_cost_per_hour', (isset($input['staff_cost_per_hour'])? Input::old('staff_cost_per_hour') : (isset($sdata->staff_cost_per_hour)? $sdata->staff_cost_per_hour : '' )), array('class' => 'form-control')) }}				            </div>
 
 				            {{ Form::label('sales_price', 'Price: ', array('class' => 'col-sm-2 control-label')) }}
 				            <div class="col-sm-3">
@@ -878,7 +876,7 @@
 				        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost to make recipe batch:</h5>
 				              {{-- Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) --}}
 				            <div class="col-sm-3">
-				               <p class="sales-data__info">$ {{$sdata->staff_cost_to_make_recipe_batch}}</p>
+				               <p class="sales-data__info">$ {{(isset($sdata->staff_cost_to_make_recipe_batch)? $sdata->staff_cost_to_make_recipe_batch : '' )}}</p>
 				            </div>
 
 				            {{ Form::label('sales_amount', 'Amount: ', array('class' => 'col-sm-2 control-label')) }}
@@ -890,7 +888,7 @@
 				        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost per piece:</h5>
 				              {{-- Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) --}}
 				            <div class="col-sm-3">
-				               <p class="sales-data__info">$ {{$sdata->staff_cost_per_piece}}</p>
+				               <p class="sales-data__info">$ {{(isset($sdata->staff_cost_per_piece)? $sdata->staff_cost_per_piece : '' )}}</p>
 				            </div>
 
 				            {{ Form::label('sales_time', 'Time - minutes: ', array('class' => 'col-sm-2 control-label')) }}
@@ -899,6 +897,7 @@
 				            </div>
 				        </div>
 				        <hr/>
+				
 				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
 			        	    <h5 class="col-sm-2 control-label sales-data__title">Total recipe cost:</h5>
 				            <div class="col-sm-3">
@@ -996,29 +995,31 @@
 			                </tr>
 			            </thead>
 			            @if(isset($r_ingredients))
+
             			@foreach($r_ingredients as $r_ingredient)
 
-            			@foreach($s_ingredients as $ingredient)
-            			@foreach($sales_data_ingredients as $sd_ingredient)
+	            			@foreach($s_ingredients as $ingredient)
 
-            				<?php //echo '<pre>'; print_r($ingredient); echo '</pre>'; ?>
-            				<?php //echo '<pre>'; print_r($ingredient->id); echo '</pre>'; exit; ?>
+		            			
+		            				<?php //echo '<pre>'; print_r($sales_data_ingredients); echo '</pre>'; exit;?>
+		            				
+		            				<?php //echo '<pre>'; print_r($ingredient->id); echo '</pre>'; exit; ?>
 
 
-                            @if ($r_ingredient->menu_ingredients_id == $ingredient->id)    	
-				            <tbody>
-					            <tr>
-					                <td> {{ $ingredient->name }} </td>
-					                <td>$ {{ $ingredient->price }} </td>
-					                <td> {{ $ingredient->grams }}g </td>
-					                <td> {{ $r_ingredient->packet_grams_percentage }} % </td>
-					                <td>$ {{ $r_ingredient->recipe_ingredient_cost }} </td>
-					                <td> {{ $r_ingredient->sales_grams }}g </td>
-					            </tr>
-				            </tbody>
-				            @endif 
-			            @endforeach
-			            @endforeach
+		                            @if ($r_ingredient->menu_ingredients_id == $ingredient->id)    	
+						            <tbody>
+							            <tr>
+							                <td> {{ $ingredient->name }} </td>
+							                <td>$ {{ $ingredient->price }} </td>
+							                <td> {{ $ingredient->grams }}g </td>
+							                <td> {{ $r_ingredient->packet_grams_percentage }} % </td>
+							                <td>$ {{ $r_ingredient->recipe_ingredient_cost }} </td>
+							                <td> {{ $r_ingredient->sales_grams }}g </td>
+							            </tr>
+						            </tbody>
+						            @endif 
+					            
+				            @endforeach
 			            @endforeach
 			            @endif
 			            <tfoot>
