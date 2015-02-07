@@ -185,7 +185,7 @@ class Admin_RecipesController extends BaseController{
 					  };
 					  
 					  $data->MenuRecipesIngredients()->save($r_i);
-					 	//echo '<pre>'; print_r($r_i); echo '</pre>';exit;
+					 	
 					};			
 				};
 				
@@ -234,49 +234,34 @@ class Admin_RecipesController extends BaseController{
 						};
 					};					
 				};
-				
 			};
 		}
-		return Redirect::action('Admin_RecipesController@getRecipes');
+
+		
+
+		if(empty($input['sdata_id'])){
+			// echo 'YES!!!'; 	exit;
+			$_sales = new SalesData();
+			$_sales->menu_recipe_id = $data->id;
+			$data->SalesData()->save($_sales);
+		}
+		
+
+		if(isset($input['sc'])){
+			return Redirect::action('Admin_RecipesController@getRecipes');
+		}else{
+			return Redirect::action('Admin_RecipesController@getEditRecipes', array($data->id)); 
+		}
 	}
 	
 	public function getEditRecipes($id){
 		$data = MenuRecipes::findOrFail($id);
-			// ->with(array('SalesData' => function($query){
-			// 		$query->orderBy('menu_recipes_facts.ordering','ASC');
-			// 	}))
-		// echo '<pre>'; print_r( $data ); echo '</pre>'; 	exit;
-		
-		//->load('MenuRecipesFacts')
-		
-		// $ingredients = MenuIngredients::orderBy('name','ASC')->get();
-		// $metrics = Metric::orderBy('name','ASC')->get();
-		
-		// $mCat = array();
-		// $mCat[0]	= '- Select Category -';
-		// foreach ($categories as $category) {
-		// 	$mCat[$category->id]	= $category->name;
-		// };
-		
-		// $mIng = array();
-		// $mIng[0]	= '- Select Ingredients -';
-		// foreach ($ingredients as $ingredient) {
-		// 	$mIng[$ingredient->id]	= $ingredient->name;
-		// };
-		
-		// $mMetric = array();
-		// $mMetric[0]	= '- Select Metric -';
-		// foreach ($metrics as $metric) {
-		// 	$mMetric[$metric->id]	= $metric->name;
-		// };
 
-
-			
 		$categories = MenuCategories::orderBy('name','ASC')->where('active', '!=', '9')->get(); // Bring in data that has not been deleted
 		$ingredients = MenuIngredients::orderBy('name','ASC')->where('active', '=', '1')->get();
 		$metrics = Metric::orderBy('name','ASC')->get();
 		$sales_data = SalesData::where('menu_recipe_id', '=', $data->id)->get();
-		$sales_data_ingredients = SalesDataIngredients::where('menu_recipe_id', '=', $data->id)->get();
+		// $sales_data_ingredients = SalesDataIngredients::where('menu_recipe_id', '=', $data->id)->get();
 
 		$recipes_images = $data->Images()->orderBy('ordering','ASC')->where('section', '=', 'RECIPE')->get();
 		$recipes_facts = $data->MenuRecipesFacts()->orderBy('ordering','ASC')->get();
@@ -368,7 +353,7 @@ class Admin_RecipesController extends BaseController{
 				'json_calc' => $json_calc,
 				'json_array' => $json_array,
 				's_ingredients' => $s_ingredients,
-				'sales_data_ingredients' => $sales_data_ingredients,
+				// 'sales_data_ingredients' => $sales_data_ingredients,
 				'title'		=> 'Edit Recipe:'.$data->name
 			));	
 		
@@ -499,13 +484,15 @@ class Admin_RecipesController extends BaseController{
 											 
 				};
 
-				if(!isset($input['sdata_id'])){
-					echo '<pre>'; print_r($input['sdata_id']); echo '</pre>'; 	exit;
+				if(empty($input['sdata_id'])){
+					// echo 'YES!!!'; 	exit;
 					$_sales = new SalesData();
 					$_sales->menu_recipe_id = $input['id'];
 					$data->SalesData()->save($_sales);
 				}
 				
+				// echo 'No!'; 	exit;
+
 				if(isset($input['ingredients']) && isset($input['amount']) && isset($input['metric'])){
 					
 					
@@ -529,8 +516,8 @@ class Admin_RecipesController extends BaseController{
 					
 					// echo '<pre>'; print_r($grams); echo '</pre>'; exit;
 
-					//$recipe_ingredient = array($ingredient, $amount, $metric);
-					//$array_count = count($recipe_ingredient);
+					// $recipe_ingredient = array($ingredient, $amount, $metric);
+					// $array_count = count($recipe_ingredient);
 
 					$ti_cost = 0;
 
@@ -558,12 +545,7 @@ class Admin_RecipesController extends BaseController{
 						if(isset($input['sales_amount'])){
 							$sales_amount = $input['sales_amount'];
 							$r_i->sales_grams = $sales_grams = $r_grams/$serve_amount * $sales_amount; 
-						}
-						// echo '<pre>'; print_r($input); echo '</pre>';exit;
-						// if(isset($input['sales_grams'])){
-
-							
-
+						
 							foreach($i_grams as $id => $i_gram){
 
 								
@@ -578,11 +560,8 @@ class Admin_RecipesController extends BaseController{
 								  		// echo '<pre>'; print_r($packet_grams_percentage); echo '</pre>';
 							  		// }
 							  	}
-							}  	
-						// }
-						
-
-
+							}
+						}
 
 						if(isset($input['sales_price'])){
 							foreach($i_price as $id => $ri_price){
@@ -695,7 +674,7 @@ class Admin_RecipesController extends BaseController{
 
 				
 
-				if(isset($input['staff_cost_per_hour']) && isset($input['sales_price']) && isset($input['sales_amount']) && isset($input['sales_time'])){
+				if(isset($input['staff_cost_per_hour']) && isset($input['sales_price']) && isset($input['sales_amount']) && isset($input['sales_time']) && isset($input['sdata_id'])){
 
 					// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 
@@ -718,11 +697,15 @@ class Admin_RecipesController extends BaseController{
 						$ingredient_cost_percentage = 0;
 						$total_markup_percentage = 0;
 
+						$staff_cost_to_make_recipe_batch = $staff_cost_per_hour/60 * $sales_time;
+						$total_recipe_cost = $staff_cost_to_make_recipe_batch + $ti_cost;
+
 						if($sales_amount > 0){
+							$total_recipe_revenue = $sales_amount * $sales_price;
 							$staff_cost_per_piece = $staff_cost_to_make_recipe_batch/ $sales_amount;
 							$total_cost_per_piece = $total_recipe_cost / $sales_amount;
 							$total_ingredient_cost_per_piece = $ti_cost/  $sales_amount;
-							$total_recipe_revenue = $sales_amount * $sales_price;
+							
 							$total_profit_per_piece = $total_profit/ $sales_amount;
 							$total_cost_percentage = $total_recipe_cost/ $total_recipe_revenue * 100;
 							$total_profit = $total_recipe_revenue - $total_recipe_cost;
@@ -731,8 +714,8 @@ class Admin_RecipesController extends BaseController{
 							$total_markup_percentage = $total_recipe_revenue/ $total_profit * 100;
 						}
 
-						$staff_cost_to_make_recipe_batch = $staff_cost_per_hour/60 * $sales_time;
-						$total_recipe_cost = $staff_cost_to_make_recipe_batch + $ti_cost;
+						
+						
 						
 						
 						// echo '<pre>'; print_r($sdata_id); echo '</pre>'; 	exit;
