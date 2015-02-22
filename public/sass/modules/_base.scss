@@ -93,6 +93,10 @@ ul, li {
   color: $text;
   border-bottom: 1px solid #ff5531; }
 
+.footer__push{
+  height: 30rem;
+}
+
 @media only screen {
   .image-box {
     margin-bottom: 0.2rem; } }
@@ -105,31 +109,39 @@ ul, li {
   font-family: headings;
   padding: 0.5rem;
   border-bottom: 1px solid $main_color;
-  margin-top: 0.5rem; }
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
 
 .content__title--main {
   text-align: center;
   margin: 0.5rem 0;
-  font-family: headings; }
+  font-family: $headings; }
 
 .content__title--login {
   display: inline-block;
   text-align: center;
   margin: 0.5rem 0;
-  font-family: headings; }
+  font-family: $headings; }
 
 .content__title--recipe {
   text-align: center;
-  font-family: headings; }
+  font-family: headings !important; }
 
 .content__title--main--signup {
   text-align: center;
   margin: 0.5rem 0 2.5rem 0;
-  font-family: headings; }
+  font-family: $headings; }
 
 .content__title--link {
   text-decoration: none;
-  color: $text; }
+  color: $text; 
+  font-weight: bold;
+}
+
+.content__title--link:hover{
+  color: $text; 
+}
 
 .content__title--homepage {
   text-align: center;
@@ -141,7 +153,13 @@ ul, li {
 .content__title--main--tabs {
   display: inline-block;
   padding: 0.5rem;
-  border-radius: 0.5rem; }
+  border-radius: 0.5rem; 
+  font-weight: bold;
+}
+
+.content__title--main--tabs:hover{
+  color: $text; 
+}
 
 .content__title--main--tabs.active {
   background-color: #E30B5D;
@@ -163,7 +181,13 @@ ul, li {
 
 .tab__link {
   text-decoration: none;
-  color: $menu_dark; }
+  color: $menu_dark; 
+  white-space: nowrap;
+  font-family: headings;
+}
+.tab__link:hover{
+  color: $menu_dark; 
+}
 
 .active > .tab__link {
   color: #fff; }
@@ -189,3 +213,94 @@ ul, li {
   font-size: 1.1rem;
   color: #fff;
   width: 100%; }
+
+.column, .columns {
+  padding-left:0.625rem;
+  padding-right:0.625rem;
+}
+
+.tabs-content > .content {
+    padding: 0.625rem 0;
+}
+
+.tabs {
+  margin-bottom: 0 !important;
+  margin-left: 0; }
+  .tabs:before, .tabs:after {
+    content: " ";
+    display: table; }
+  .tabs:after {
+    clear: both; }
+  .tabs dd, .tabs .tab-title {
+    position: relative;
+    margin-bottom: 0 !important;
+    list-style: none;
+    float: left; }
+    .tabs dd > a, .tabs .tab-title > a {
+      display: block;
+      background-color: #efefef;
+      color: #222222;
+      padding: 1rem 2rem;
+      font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+      font-size: 1rem; }
+      .tabs dd > a:hover, .tabs .tab-title > a:hover {
+        background-color: #e1e1e1; }
+    .tabs dd.active a, .tabs .tab-title.active a {
+      background-color: white;
+      color: #222222; }
+  .tabs.radius dd:first-child a, .tabs.radius .tab:first-child a {
+    -webkit-border-bottom-left-radius: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px; }
+  .tabs.radius dd:last-child a, .tabs.radius .tab:last-child a {
+    -webkit-border-bottom-right-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px; }
+  .tabs.vertical dd, .tabs.vertical .tab-title {
+    position: inherit;
+    float: none;
+    display: block;
+    top: auto; }
+
+.tabs-content {
+  margin-bottom: 1.5rem;
+  width: 100%; }
+  .tabs-content:before, .tabs-content:after {
+    content: " ";
+    display: table; }
+  .tabs-content:after {
+    clear: both; }
+  .tabs-content > .content {
+    display: none;
+    float: left;
+    padding: 0.625rem 0;
+    width: 100%; }
+    .tabs-content > .content.active {
+      display: block;
+      float: none; }
+    .tabs-content > .content.contained {
+      padding: 0.9375rem; }
+  .tabs-content.vertical {
+    display: block; }
+    .tabs-content.vertical > .content {
+      padding: 0 0.9375rem; }
+
+@media only screen and (min-width: 40.063em) {
+  .tabs.vertical {
+    width: 20%;
+    max-width: 20%;
+    float: left;
+    margin: 0 0 1.25rem; }
+
+  .tabs-content.vertical {
+    width: 80%;
+    max-width: 80%;
+    float: left;
+    margin-left: -1px;
+    padding-left: 1rem; } }
+.no-js .tabs-content > .content {
+  display: block;
+  float: none; }
+

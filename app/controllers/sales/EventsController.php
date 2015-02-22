@@ -24,6 +24,8 @@ class EventsController  extends BaseController {
 
 		$paid = 0;
 		$confirm_paid = 1;
+		$event = 'eData';
+
 		foreach($eData as $event){
 			
 			 // echo '<pre>'; print_r($event); echo '</pre>';exit;
@@ -38,16 +40,7 @@ class EventsController  extends BaseController {
 					$confirm_paid = 1;
 					$paid = 0;
 				}
-				
-				
 			}
-			// $user = Auth::user();
-			// echo '<pre>'; print_r($paid); echo '</pre>';exit;
-			// $rMethod = $recipe->MenuRecipesMethods;
-			// echo '<pre>'; print_r($rMethod); echo '</pre>';
-
-			
-
 
 			$e_count = count($event->Images);
 			// echo '<pre>'; print_r($event->Images[$e_count-1]->name); echo '</pre>';exit;
@@ -58,8 +51,13 @@ class EventsController  extends BaseController {
 				$event_image[$event->id] = 'event.jpg';
 			}	
 		}
+
+		if($event == 'eData'){
+			$event_image = 'event.png';	
+			$e_count = 'empty';
+		}
 		
-		// echo '<pre>'; print_r($c_message); echo '</pre>';exit;
+		// echo '<pre>'; print_r($event_image); echo '</pre>';exit;
 		if(isset($paid_events)){
 			return View::make('sales.events')->with(array(
 				'eData' => $eData,
@@ -67,6 +65,7 @@ class EventsController  extends BaseController {
 				'paid' =>	$paid,
 				'confirm_paid' => $confirm_paid,
 				'pEvents' => $paid_events,
+				'e_count' => $e_count,
 			));	
 
 		}else{
@@ -75,6 +74,7 @@ class EventsController  extends BaseController {
 				'event_image' => $event_image,
 				'paid' =>	$paid,
 				'confirm_paid' => $confirm_paid,
+				'e_count' => $e_count,
 			));	
 		}
 		

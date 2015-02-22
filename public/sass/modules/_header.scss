@@ -22,12 +22,13 @@
 .logo__text {
   font-size: 1rem;
   color: #fff;
-  font-family: headings;
+  font-family: $headings;
   font-weight: bold; }
   @media only screen and (min-width:768px) {
     .logo__text {
       margin: 0px;
-      text-align: center; } }
+      text-align: center; } 
+}
 
 .logo__image {
   position: absolute;

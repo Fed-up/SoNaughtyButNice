@@ -26,14 +26,24 @@
 	        </div>
 	        @endforeach
 
-	        @foreach($eData as $event)
-	        <div class="columns small-6 large-3">
-	            <a href="/events#myevents" class="profile__image__link">
-	                <img class="top-right profile__image" src="/uploads/{{ $eImage[$event->id] }}">
-	                <p class="profile__image__link__name">My Events</p>
-	            </a>
-	        </div>
-	        @endforeach			
+	        @if($e_count != 'empty')
+		        @foreach($eData as $event)
+		        <div class="columns small-6 large-3">
+		            <a href="/events#myevents" class="profile__image__link">
+		                <img class="top-right profile__image" src="/uploads/{{ $eImage[$event->id] }}">
+		                <p class="profile__image__link__name">My Events</p>
+		            </a>
+		        </div>
+		        @endforeach		
+		    @else
+		    	<div class="columns small-6 large-3">
+		            <a href="/events#myevents" class="profile__image__link">
+		                <img class="top-right profile__image" src="/uploads/{{ $eImage }}">
+		                <p class="profile__image__link__name">My Events</p>
+		            </a>
+		        </div>	
+		    @endif
+
 
 			@foreach($pData as $catering)
 	        <div class="columns small-6 large-3">

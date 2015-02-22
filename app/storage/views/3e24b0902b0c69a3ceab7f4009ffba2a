@@ -1,0 +1,69 @@
+
+<?php $__env->startSection('_head'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+  <h1 class="page-header">All Events   <?php echo link_to('/admin/products/events/add', '+ Add', array('class' => 'btn btn-primary pull-right')); ?> </h1>
+    <?php if (Session::has('message')): ?>
+       <div class="alert alert-danger"><?php echo Session::get('message'); ?></div>
+    <?php endif; ?>
+  <div class="row">
+       <table class="table table-striped">
+            <thead>
+            	<tr>
+                    <th>#</td>
+                    <th>Event Name</th>
+                    <th>Seats</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Price</th>
+                    <th>Active</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            <?php foreach($data as $event): ?>           
+            <tr>
+                <td><?php echo $event->id; ?></td>
+                <td><?php echo $event->name; ?></td>
+                <td><?php echo $event->ticket_amount; ?></td>
+                <td><?php echo $event->date; ?></td>
+                <td><?php echo $event->time; ?></td>
+                <td>$<?php echo $event->price; ?></td>
+                <td>
+                	<?php if($event->active == 1): ?>
+                    	<?php echo link_to('/admin/products/events/active/'.$event->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                    <?php else: ?>
+                		<?php echo link_to('/admin/products/events/active/'.$event->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                	<?php endif; ?>
+                
+                </td>
+                <td>
+                	<?php echo link_to('/admin/products/events/edit/'.$event->id, 'Edit', array('class' => 'btn btn-success')); ?>
+                	<?php echo link_to('/admin/products/events/delete/'.$event->id, 'Delete', array('class' => 'btn btn-danger')); ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>   
+            
+            </tbody>
+            <tfoot>
+            	<tr>
+                	<td colspan="20">
+                    	Total: <?php echo $data->count(); ?> 
+                    </td>
+               	</tr>
+            </tfoot>
+       </table> 
+        	
+  </div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('_tail'); ?>
+
+    
+<?php $__env->stopSection(); ?>
+    
+<?php echo $__env->make('tmpl.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

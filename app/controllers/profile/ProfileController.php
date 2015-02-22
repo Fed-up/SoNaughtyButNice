@@ -101,14 +101,14 @@ class ProfileController extends BaseController {
 					$query->where('section', '=', 'EVENT')->where('ordering', '=', 0)->where('active', '=', 1);
 				}))
 		->get();
+		$event = 'eData';
 
 		foreach ($eData as $event) {
-
-			
 			$count = count($event->Images);
 			if($count < 1){
 				// echo '<pre>'; print_r($event); echo '</pre>';exit;
 				$event_image[$event->id] = 'event.png';
+
 			}else{
 
 				foreach($event->Images as $image){
@@ -120,9 +120,14 @@ class ProfileController extends BaseController {
 			        }
 				}
 			}
-			
+			$e_count = $count;
 		}
-		// echo '<pre>'; print_r($eData); echo '</pre>';exit;
+
+		if($event == 'eData'){
+			$event_image = 'event.png';	
+			$e_count = 'empty';
+		}
+		// echo '<pre>'; print_r($e_count); echo '</pre>';exit;
 
 
 
@@ -186,6 +191,8 @@ class ProfileController extends BaseController {
 			'rImage' => $recipe_image,
 			'eImage' => $event_image,
 			'pImage' => $catering_image,
+
+			'e_count' => $e_count,
 			)
 		);
 	}

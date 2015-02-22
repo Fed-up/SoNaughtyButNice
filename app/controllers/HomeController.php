@@ -158,14 +158,25 @@ class HomeController extends BaseController {
 				}))
 		->get();
 
+		// if(empty($eData)){
+		// 	echo '<pre>'; print_r($eData); echo '</pre>'; exit;
+		// }
+		// exit;
+		// // echo '<pre>'; print_r($iData); echo '</pre>'; exit;
+		$event = 'eData';
 		foreach ($eData as $event) {
 
 			// echo '<pre>'; print_r($ingredient->name); echo '</pre>';
 			$e_count = count($event->Images);
 			$event_id = $event->id;
 
+
+
+
+
+
 			if($e_count < 1){
-				// echo '<pre>'; print_r($ingredient->id); echo '</pre>';
+				
 				$event_image[$event->id] = 'event.png';
 			}else{
 
@@ -180,10 +191,13 @@ class HomeController extends BaseController {
 			}
 			
 		}
+		if($event == 'eData'){
+			$event_image = 'event.png';	
+			$e_count = 'empty';
+		}
+		
 
-		// echo '<pre>'; print_r($eData[0]->id); echo '</pre>';exit;
-
-		// echo '<pre>'; print_r($event_image); echo '</pre>';
+		// echo '<pre>'; print_r($event_image); echo '</pre>';exit;
 
 
 		$pData = Catering::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->take(1)

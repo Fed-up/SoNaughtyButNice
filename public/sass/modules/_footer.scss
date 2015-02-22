@@ -44,7 +44,13 @@
     .logo__text--footer {
       margin: 0px;
       text-align: center;
-      font-size: 1rem; } }
+      font-size: 1rem; } 
+}
+
+.logo__text--footer:hover, .logo__text--footer:active{
+  color: $text;
+}
+
 
 /* line 68, C:/webroot/lcsnbn/sass/modules/footer */
 .footer__links {

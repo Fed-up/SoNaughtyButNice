@@ -485,10 +485,12 @@ class Admin_RecipesController extends BaseController{
 				};
 
 				if(empty($input['sdata_id'])){
-					// echo 'YES!!!'; 	exit;
-					$_sales = new SalesData();
-					$_sales->menu_recipe_id = $input['id'];
-					$data->SalesData()->save($_sales);
+					if(!isset($input['sdata_id'])){
+						// echo 'YES!!!'; 	exit;
+						$_sales = new SalesData();
+						$_sales->menu_recipe_id = $input['id'];
+						$data->SalesData()->save($_sales);
+					}
 				}
 				
 				// echo 'No!'; 	exit;

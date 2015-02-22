@@ -52,6 +52,7 @@
 .content-box__title {
   font-size: 1.2rem;
   line-height: 1.4;
+  font-weight: bold;
   color: $main_dark;
   border-top: 0; }
   @media only screen and (min-width:481px) {
@@ -95,6 +96,7 @@
   color: #fff;
   border-radius: 5px 0 0 5px;
   position: absolute;
+  font-weight: bold;
   background-color: #73cb4d;
   right: 0rem;
   top: 1rem;
@@ -112,7 +114,8 @@
   @media only screen and (min-width:768px) {
     .content-box__title--homepage {
       line-height: 1.4;
-      font-size: 1rem; } }
+      font-size: 1rem; } 
+}
 
 /* line 173, C:/webroot/lcsnbn/sass/modules/tile */
 .content-box__summary {

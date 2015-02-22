@@ -55,23 +55,32 @@
         </div>
         @endforeach
 
-        @foreach($eData as $event)
-        <div class="columns small-12 medium-6 large-4 xlarge-2 end">
-             
+        @if($e_count != 'empty')
+            @foreach($eData as $event)
+            <div class="columns small-12 medium-6 large-4 xlarge-2 end">
+                 
                 @if($e_count == 1) 
-
-                   <a href="/event/{{ $event->id }}"  class="content-box content-box--homepage">
-
+                    <a href="/event/{{ $event->id }}"  class="content-box content-box--homepage">
+                    <div class="content-box__image"  style="background: url(/uploads/{{ $eImage[$event->id] }}) center center; background-size:cover;"></div> 
                 @else 
                     <a href="/events" class="content-box content-box--homepage">
-                @endif 
-
-                
-                <div class="content-box__image"  style="background: url(/uploads/{{ $eImage[$event->id] }}) center center; background-size:cover;"></div>
+                    <div class="content-box__image"  style="background: url(/uploads/{{ $eImage[$event->id] }}) center center; background-size:cover;"></div>
+                @endif
                 <h5 class="content-box__title content-box__title--homepage">Upcoming Events</h5>
-            </a>
-        </div>
-        @endforeach
+                </a>
+            </div>
+            @endforeach
+        @else
+            <div class="columns small-12 medium-6 large-4 xlarge-2 end">
+                <a href="/events"  class="content-box content-box--homepage">
+                    <div class="content-box__image"  style="background: url(/uploads/{{ $eImage }}) center center; background-size:cover;"></div>
+                    <h5 class="content-box__title content-box__title--homepage">Upcoming Events</h5>
+                </a>
+            </div>
+            <!-- <a href="/events" class="content-box content-box--homepage">
+            <div class="content-box__image"  style="background: url(/uploads/{{ $eImage }}) center center; background-size:cover;"></div>
+            <h5 class="content-box__title content-box__title--homepage">Upcoming Events</h5> -->
+        @endif
 
         @foreach($pData as $catering)
         <div class="columns small-12 medium-6 large-4 xlarge-2 end">
