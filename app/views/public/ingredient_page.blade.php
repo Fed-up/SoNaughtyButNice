@@ -13,8 +13,14 @@
                 <div class="columns small-12 medium-12 large-8 end">
                      
                     <h4 class="content__title">{{$ingredient->name}} Story</h4>
-                    <div class="section__box">   
-                        <p class="recipe_box_summary">We are researching right now to bring you the most relevent information about the nutrition and history, stay tuned =)</p>
+                    <div class="section__box">
+
+                        @if($ingredient->description != null) 
+                            {{-- '<pre>'; print_r($ingredient); echo '</pre>'; --}}
+                            <p class="recipe_box_summary">{{$ingredient->description}}</p>
+                        @else  
+                            <p class="recipe_box_summary">We are researching right now to bring you the most relevent information about the nutrition and history, stay tuned =)</p>
+                        @endif
                     </div>
                 </div><!--End column--> 	
             @endforeach

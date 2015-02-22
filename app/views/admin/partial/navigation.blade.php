@@ -2,7 +2,7 @@
     
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
-        <li class="tophead">{{ HTML::link('admin/menu/categories', 'Menu') }}</li>
+        <li class="tophead">{{ HTML::link('admin/menu/recipes', 'Menu') }}</li>
       </ul>
       <ul class="nav nav-sidebar">
 		@if(Auth::user()->user_type === 'Manager' || Auth::user()->user_type === 'ADMIN' )

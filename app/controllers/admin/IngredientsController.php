@@ -23,7 +23,7 @@ class Admin_IngredientsController extends BaseController {
 		$rules = array(
 			'name' 		=> 'required|unique:menu_ingredients,name',
 			'summary'	=> 'required',
-			'description'	=> 'required',
+			
 		);
 		
 		$validator = Validator::make($input, $rules);
@@ -106,7 +106,7 @@ class Admin_IngredientsController extends BaseController {
 		$rules = array(
 			'name' 		=> 'required|unique:menu_ingredients,name,'.Input::get('id'),
 			'summary'	=> 'required',
-			'description' => 'required',
+			
 			// 'price'	=> 'required|regex:/^[+-]?\d+\.\d+, ?[+-]?\d+\.\d+$/'
 		);
 		
