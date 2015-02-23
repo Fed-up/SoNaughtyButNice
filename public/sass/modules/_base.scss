@@ -177,7 +177,13 @@ ul, li {
   text-align: center; }
   @media only screen and (min-width:481px) {
     .subnav {
-      text-align: left; } }
+      text-align: left; 
+    } 
+  }
+
+.subnav--centre{
+  text-align: center;
+}
 
 .tab__link {
   text-decoration: none;
