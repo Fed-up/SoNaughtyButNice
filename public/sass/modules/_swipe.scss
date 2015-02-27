@@ -61,7 +61,7 @@ input:-webkit-autofill {
   width: 100%; }
 
 .side__login__button {
-  background-color: $main_color;
+  background-color: $main_dark;
   color: #fff;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -76,7 +76,7 @@ input:-webkit-autofill {
       padding: 0.5rem 1rem; } }
 
 .side__login__button:hover {
-  background-color: #73cb4d; }
+  background-color: $main_color; }
 
 .side__login__button--signup {
   margin-right: 0rem; }
@@ -85,7 +85,7 @@ input:-webkit-autofill {
       padding: 0.5rem 1rem; } }
 
 .side__login__button--swipe {
-  background-color: $main_color;
+  background-color: $contrast_dark;
   color: #fff;
   padding: 0.3rem;
   border-radius: 5px;
@@ -98,10 +98,10 @@ input:-webkit-autofill {
   font-size: 1rem; }
 
 .side__login__button--swipe:hover {
-  background-color: #73cb4d; }
+  background-color: $contrast_light; }
 
 .side__member__button {
-  background-color: #ff8e5e;
+  background-color: $contrast_dark;
   color: #fff;
   padding: 0.3rem;
   border-radius: 5px;
@@ -114,7 +114,7 @@ input:-webkit-autofill {
   margin-right: 0rem; }
 
 .side__member__button:hover {
-  background-color: #ff5531; }
+  background-color: $contrast_light; }
 
 .side--nav {
   color: #fff;

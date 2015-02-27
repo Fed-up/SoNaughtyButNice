@@ -65,7 +65,7 @@ ul, li {
   -webkit-transition-duration: 0.5s;
   -moz-transition-duration: 0.5s;
   transition-duration: 0.5s;
-  background-color: #F3F6F5;
+  background-color: $background; //F3F6F5;
   // height: 100%;
   padding-top: 2.5rem;
   position: relative;
@@ -162,7 +162,7 @@ ul, li {
 }
 
 .content__title--main--tabs.active {
-  background-color: #E30B5D;
+  background-color: $contrast_dark;
   color: #fff; }
 
 .content-title--sub {

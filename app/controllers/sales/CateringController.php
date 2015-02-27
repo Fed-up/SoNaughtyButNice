@@ -4,23 +4,31 @@ class CateringController  extends BaseController {
 
 	public function getCatering(){
 
-		$cData = Catering::orderBy('name','ASC')->where('active', '=', '1')
-			->with(array('Images' => function($query){
-					$query->orderBy('ordering','ASC')->where('section', '=', 'CATERING')->take(1)->get();
-				}))
-		->get();
+		$cData = Catering::with(array('Images' => function($query)
+			{
+				$query->where('section', '=', 'CATERING')->orderBy(DB::raw('RAND()'))->where('active', '=', 1);
+			}))
+		->orderBy('name','ASC')->where('active', '=', 1)->get();
 
-		foreach($cData as $package)
-		$p_count = count($package->Images);
-			// echo '<pre>'; print_r($event->Images[$e_count-1]->name); echo '</pre>';exit;
-			
-			if($p_count > 0){
-				$package_image[$package->id] = $package->Images[$p_count-1]->name;
+
+
+
+		foreach ($cData as $package) {
+			// echo '<pre>'; print_r($npackage); echo '</pre>'; exit;
+
+			$count = count($package->Images);
+			if($count < 1){
+				$package_image[$package->id] = 'ingredient.png';
 			}else{
-				$package_image[$package->id] = 'catering.png';
-			}	
-
-		// echo '<pre>'; print_r($package_image[$package->id]); echo '</pre>';exit;
+				foreach($package->Images as $image){
+			        if(file_exists('uploads/'.$image->name)){
+			            $package_image[$package->id] = $image->name;
+			        }else{
+			           	$package_image[$package->id] = 'ingredient.png';
+			        }
+				}
+			}
+		}
 
 		return View::make('public.catering')->with(array(
 			'cData' => $cData,
