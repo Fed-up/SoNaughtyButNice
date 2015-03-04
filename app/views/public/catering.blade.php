@@ -25,6 +25,7 @@
                             <div class="content-box__copy">
                                 <a href="/package/{{$package->id}}" class="content-box__copy__inner">
                                     <h5 class="content-box__title">{{$package->name}}</h5>
+                                    <p class="content-box__summary--display">{{$package->quantity}} pieces</p>
                                 </a>
                                 
                             </div>

@@ -29,6 +29,7 @@ class CateringController  extends BaseController {
 				}
 			}
 		}
+		// echo '<pre>'; print_r($cData); echo '</pre>'; exit;
 
 		return View::make('public.catering')->with(array(
 			'cData' => $cData,
@@ -40,7 +41,7 @@ class CateringController  extends BaseController {
 
 	public function getPackage($id)
 	{
-		$pData = Catering::where('active', '=', '1')
+		$pData = Catering::where('active', '=', '1')->where('id', '=', $id)
 			->with(array('menuRecipes' => function($query) use ($id){
 				
 				$query->where('catering_recipes.catering_id', '=', $id)->orderBy('pivot_ordering','ASC')
@@ -73,16 +74,42 @@ class CateringController  extends BaseController {
 				
 			}
 		}
-		// echo '<pre>'; print_r($package_image); echo '</pre>';exit;	
+		// echo '<pre>'; print_r($pData); echo '</pre>';exit;	
 			
 			
-
-		// echo '<pre>'; print_r($package_image); echo '</pre>';exit;
+		// foreach($pData as $package){
+		// 	echo '<pre>'; print_r($package->id); echo '</pre>';
+		// }exit;
 
 		return View::make('sales.package')->with(array(
 			'pData' => $pData,
 			'recipe_image' => $recipe_image)
 		);
+	}
+
+
+
+	public function packageEnquiry(){
+
+		echo 'Done';exit;
+
+		$messageData = array(
+	        'name' => $user->fname,
+	        'quantity' => $quantity[$product->id],
+	        'ticket_id' => $ticket_id,
+	        'product_id' => $product->id,
+
+	        'event_id' => $edata->id,
+	        'event_name' => $edata->name,
+	        'event_date' => $edata->date,
+	        'event_time' => $edata->time,
+	        'event_cost' => $edata->price*$quantity[$product->id],
+	        'event_map' => $edata->map,
+	    );
+
+		Mail::send('sales.package_email', $messageData, function($message) use ($user){
+			$message->to( $user->email )->cc('sales@sonaughtybutnice.com')->subject('So Naughty But Nice - Event confirmation');
+		}); //->cc('sales@sonaughtybutnice.com')
 	}
 }
 

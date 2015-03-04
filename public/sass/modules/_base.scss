@@ -310,3 +310,10 @@ ul, li {
   display: block;
   float: none; }
 
+.package__total{
+  text-align: right;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  color: $main_dark;
+}
+

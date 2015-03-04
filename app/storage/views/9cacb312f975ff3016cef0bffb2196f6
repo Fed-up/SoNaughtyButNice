@@ -375,10 +375,6 @@
                 <?php $x = 0; ?>
                   <?php if(isset($catering_recipes)): ?>
                     <?php foreach($catering_recipes as $c_recipe): ?>
-
-                        
-                        
-
                          <li>
                                 <select name="recipes[][<?php echo $c_recipe->pivot->id; ?>]" id="recipes_<?php echo $x; ?>" class="form-control"/>
                                     <?php foreach($recipes as $i=>$v): ?>                                    
@@ -394,8 +390,6 @@
                                 <span class="glyphicon glyphicon-sort btn btn-default disabled"></span>
                                 
                           </li>
-                          
-
                       <?php $x++; ?>  
                      
                     <?php endforeach; ?>

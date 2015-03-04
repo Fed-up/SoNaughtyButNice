@@ -376,10 +376,6 @@
                 <?php $x = 0; ?>
                   @if(isset($catering_recipes))
                     @foreach($catering_recipes as $c_recipe)
-
-                        
-                        
-
                          <li>
                                 <select name="recipes[][{{ $c_recipe->pivot->id }}]" id="recipes_{{ $x }}" class="form-control"/>
                                     @foreach($recipes as $i=>$v)                                    
@@ -395,8 +391,6 @@
                                 <span class="glyphicon glyphicon-sort btn btn-default disabled"></span>
                                 
                           </li>
-                          
-
                       <?php $x++; ?>  
                      
                     @endforeach

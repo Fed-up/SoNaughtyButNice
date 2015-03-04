@@ -169,13 +169,12 @@ class Admin_PackagesController extends BaseController {
 
 		$recipes = MenuRecipes::orderBy('name','ASC')->where('active', '=', '1')
 			->with(array('Catering' => function($query) use ($id){
-					
 					$query->where('catering_recipes.catering_id', '=', $id);
 				}))
 		->get();
 		
 
-		$catering = Catering::where('active', '=', '1')
+		$catering = Catering::where('id', '=', $id)
 			->with(array('menuRecipes' => function($query) use ($id){
 				
 				$query->where('catering_recipes.catering_id', '=', $id)->orderBy('pivot_ordering','ASC');
@@ -185,10 +184,15 @@ class Admin_PackagesController extends BaseController {
 		->get();
 		
 		foreach ($catering as $cat) {
-			
-
 			$catering_recipes = $cat->menuRecipes;
+			// echo '<pre>'; print_r($catering); echo '</pre>'; exit;
 		}; 
+
+		
+		
+		// foreach ($catering_recipes as $rec) {
+			// echo '<pre>'; print_r($catering->MenuRecipes); echo '</pre>'; exit;
+		// }; 
 
 		$mRep = array();
 		$mRep[0]	= '- Select Recipe -';	
@@ -196,8 +200,9 @@ class Admin_PackagesController extends BaseController {
 			$mRep[$recipe->id]	= $recipe->name;
 		};
 
-		// $queries = DB::getQueryLog();
-		// echo '<pre>'; print_r($queries); echo '</pre>';exit;
+		$queries = DB::getQueryLog();
+		// echo '<pre>'; print_r($queries); echo '</pre>'; exit;
+
 		
 		return View::make('admin.packages.form')
 			->with(array(
