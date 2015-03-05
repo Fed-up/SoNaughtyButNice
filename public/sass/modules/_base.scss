@@ -75,6 +75,11 @@ ul, li {
   color: $text;
   height: 100%; }
 
+.error_message{
+  font-size: 80%;
+  color: $contrast_dark;
+}
+
 .section__box {
   background-color: #fff;
   border: 1px solid #e0e0e0;

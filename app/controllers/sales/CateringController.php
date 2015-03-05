@@ -51,6 +51,12 @@ class CateringController  extends BaseController {
 			}))			
 		->get();
 
+		if(Auth::user()){
+			$user = Auth::user();
+		}else{
+			$user = 0;
+		}
+
 		foreach($pData as $package){
 			foreach ($package->MenuRecipes as $recipe) {
 
@@ -74,7 +80,7 @@ class CateringController  extends BaseController {
 				
 			}
 		}
-		// echo '<pre>'; print_r($pData); echo '</pre>';exit;	
+		// echo '<pre>'; print_r($user); echo '</pre>';exit;	
 			
 			
 		// foreach($pData as $package){
@@ -83,7 +89,9 @@ class CateringController  extends BaseController {
 
 		return View::make('sales.package')->with(array(
 			'pData' => $pData,
-			'recipe_image' => $recipe_image)
+			'recipe_image' => $recipe_image,
+			'user' => $user,
+			)
 		);
 	}
 
@@ -91,25 +99,51 @@ class CateringController  extends BaseController {
 
 	public function packageEnquiry(){
 
-		echo 'Done';exit;
+		$input = Input::all();
+		
+		// $messages = array(
+		//     'size'    => 'Your :attribute must be :size numbers long.',
+		// );
+		$rules = array(
+			'fname' => 'required',
+			'email' => 'required|email',
+			'mobile' => 'required|numeric',
+			'message' => 'required',
+		);
+		$validator = Validator::make($input, $rules);
+		
+		if($validator->fails()){
+			return Redirect::back()
+				->withErrors($validator)
+				->withInput($input);
+		}else{
+			echo '<pre>'; print_r($input); echo '</pre>';exit;
+			if(Auth::user()){
+				$user = Auth::user();
+				$user_id = $user->id;
+			}else{
+				$user_id = 0;
+			}
 
-		$messageData = array(
-	        'name' => $user->fname,
-	        'quantity' => $quantity[$product->id],
-	        'ticket_id' => $ticket_id,
-	        'product_id' => $product->id,
 
-	        'event_id' => $edata->id,
-	        'event_name' => $edata->name,
-	        'event_date' => $edata->date,
-	        'event_time' => $edata->time,
-	        'event_cost' => $edata->price*$quantity[$product->id],
-	        'event_map' => $edata->map,
-	    );
+			$messageData = array(
+		        // 'name' => $user->fname,
+		        // 'quantity' => $quantity[$product->id],
+		        // 'ticket_id' => $ticket_id,
+		        // 'product_id' => $product->id,
 
-		Mail::send('sales.package_email', $messageData, function($message) use ($user){
-			$message->to( $user->email )->cc('sales@sonaughtybutnice.com')->subject('So Naughty But Nice - Event confirmation');
-		}); //->cc('sales@sonaughtybutnice.com')
+		        // 'event_id' => $edata->id,
+		        // 'event_name' => $edata->name,
+		        // 'event_date' => $edata->date,
+		        // 'event_time' => $edata->time,
+		        // 'event_cost' => $edata->price*$quantity[$product->id],
+		        // 'event_map' => $edata->map,
+		    );
+
+			Mail::send('sales.package_email', $messageData, function($message) use ($user){
+				$message->to( $user->email )->cc('sales@sonaughtybutnice.com')->subject('So Naughty But Nice - Event confirmation');
+			}); //->cc('sales@sonaughtybutnice.com')
+		}
 	}
 }
 

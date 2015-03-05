@@ -38,39 +38,44 @@
         <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
             <div class="section section--form" >
                 <!-- <h1 class="page-header">@yield('title')</h1> -->
-                {{ Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')) }}
+                @if(isset($user->id))
+                     {{ Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')) }}
+                @else
+                     {{ Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')) }}
+                @endif
+               
                     <p class="package__total">Total: ${{$pData[0]->price}}</p>
-                    <h2 class="content__title--main--signup">To order {{$pData[0]->name}}<br/> Please email us today =)</h2> 
+                    <h2 class="content__title--main--signup">Hi {{ Auth::user()->fname }}, to order<br/>The {{$pData[0]->name}} package<br/> Please email us today =)</h2> 
                     <div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
                         {{ Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')) }}
                         <div class="">
-                            {{ ($errors->has('fname'))? '<p>'. $errors->first('fname') .'</p>' : '' }}
-                            {{ Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($data->fname)? $data->fname : '' )), array('class' => 'input__text')) }} 
+                            {{ ($errors->has('fname'))? '<p class="error_message">'. $errors->first('fname') .'</p>' : '' }}
+                            {{ Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($user->fname)? $user->fname : '' )), array('class' => 'input__text')) }} 
                         </div>
                     </div>
                     <div class="form-group {{ ($errors->has('email')) ? 'has-error' : '' ; }}">
                         {{ Form::label('email', 'Email: ', array('class' => ' content-title--sub ')) }}
                         <div class="">
-                            {{ ($errors->has('email'))? '<p>'. $errors->first('email') .'</p>' : '' }}
-                            {{ Form::text('email', (isset($input['email'])? Input::old('email') : (isset($data->email)? $data->email : '' )), array('class' => 'input__text')) }} 
+                            {{ ($errors->has('email'))? '<p class="error_message">'. $errors->first('email') .'</p>' : '' }}
+                            {{ Form::text('email', (isset($input['email'])? Input::old('email') : (isset($user->email)? $user->email : '' )), array('class' => 'input__text')) }} 
                         </div>
                     </div>
                     <div class="form-group {{ ($errors->has('mobile')) ? 'has-error' : '' ; }}">
                         {{ Form::label('mobile', 'Mobile: ', array('class' => ' content-title--sub ')) }}
                         <div class="">
-                            {{ ($errors->has('mobile'))? '<p>'. $errors->first('mobile') .'</p>' : '' }}
-                            {{ Form::text('mobile', (isset($input['mobile'])? Input::old('mobile') : (isset($data->mobile)? $data->mobile : '' )), array('class' => 'input__text')) }} 
+                            {{ ($errors->has('mobile'))? '<p class="error_message">'. $errors->first('mobile') .'</p>' : '' }}
+                            {{ Form::text('mobile', (isset($input['mobile'])? Input::old('mobile') : (isset($user->mobile)? $user->mobile : '' )), array('class' => 'input__text')) }} 
                         </div>
                     </div>
                     
                     <div class="form-group {{ ($errors->has('message')) ? 'has-error' : '' ; }}">
                         {{ Form::label('message', 'Detailed Message: ', array('class' => ' content-title--sub ')) }}
                         <div class="">
-                            {{ ($errors->has('message'))? '<p>'. $errors->first('message') .'</p>' : '' }}
-                            {{ Form::textarea('message', (isset($input['message'])? Input::old('message') : (isset($data->message)? $data->message : '' )), array('class' => 'input__text')) }} 
+                            {{ ($errors->has('message'))? '<p class="error_message">'. $errors->first('message') .'</p>' : '' }}
+                            {{ Form::textarea('message', (isset($input['message'])? Input::old('message') : ''), array('class' => 'input__text')) }} 
                         </div>
                     </div>
-                
+                    {{ Form::hidden('package_id', $pData[0]->id) }}
                     <div class="form-group">
                         <div class="form__buttons">
                             <a href="/">

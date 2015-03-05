@@ -37,39 +37,44 @@
         <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
             <div class="section section--form" >
                 <!-- <h1 class="page-header"><?php echo $__env->yieldContent('title'); ?></h1> -->
-                <?php echo Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')); ?>
+                <?php if(isset($user->id)): ?>
+                     <?php echo Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')); ?>
+                <?php else: ?>
+                     <?php echo Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')); ?>
+                <?php endif; ?>
+               
                     <p class="package__total">Total: $<?php echo $pData[0]->price; ?></p>
-                    <h2 class="content__title--main--signup">To order <?php echo $pData[0]->name; ?><br/> Please email us today =)</h2> 
+                    <h2 class="content__title--main--signup">Hi <?php echo Auth::user()->fname; ?>, to order<br/>The <?php echo $pData[0]->name; ?> package<br/> Please email us today =)</h2> 
                     <div class="form-group <?php echo ($errors->has('fname')) ? 'has-error' : '' ;; ?>">
                         <?php echo Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')); ?>
                         <div class="">
-                            <?php echo ($errors->has('fname'))? '<p>'. $errors->first('fname') .'</p>' : ''; ?>
-                            <?php echo Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($data->fname)? $data->fname : '' )), array('class' => 'input__text')); ?> 
+                            <?php echo ($errors->has('fname'))? '<p class="error_message">'. $errors->first('fname') .'</p>' : ''; ?>
+                            <?php echo Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($user->fname)? $user->fname : '' )), array('class' => 'input__text')); ?> 
                         </div>
                     </div>
                     <div class="form-group <?php echo ($errors->has('email')) ? 'has-error' : '' ;; ?>">
                         <?php echo Form::label('email', 'Email: ', array('class' => ' content-title--sub ')); ?>
                         <div class="">
-                            <?php echo ($errors->has('email'))? '<p>'. $errors->first('email') .'</p>' : ''; ?>
-                            <?php echo Form::text('email', (isset($input['email'])? Input::old('email') : (isset($data->email)? $data->email : '' )), array('class' => 'input__text')); ?> 
+                            <?php echo ($errors->has('email'))? '<p class="error_message">'. $errors->first('email') .'</p>' : ''; ?>
+                            <?php echo Form::text('email', (isset($input['email'])? Input::old('email') : (isset($user->email)? $user->email : '' )), array('class' => 'input__text')); ?> 
                         </div>
                     </div>
                     <div class="form-group <?php echo ($errors->has('mobile')) ? 'has-error' : '' ;; ?>">
                         <?php echo Form::label('mobile', 'Mobile: ', array('class' => ' content-title--sub ')); ?>
                         <div class="">
-                            <?php echo ($errors->has('mobile'))? '<p>'. $errors->first('mobile') .'</p>' : ''; ?>
-                            <?php echo Form::text('mobile', (isset($input['mobile'])? Input::old('mobile') : (isset($data->mobile)? $data->mobile : '' )), array('class' => 'input__text')); ?> 
+                            <?php echo ($errors->has('mobile'))? '<p class="error_message">'. $errors->first('mobile') .'</p>' : ''; ?>
+                            <?php echo Form::text('mobile', (isset($input['mobile'])? Input::old('mobile') : (isset($user->mobile)? $user->mobile : '' )), array('class' => 'input__text')); ?> 
                         </div>
                     </div>
                     
                     <div class="form-group <?php echo ($errors->has('message')) ? 'has-error' : '' ;; ?>">
                         <?php echo Form::label('message', 'Detailed Message: ', array('class' => ' content-title--sub ')); ?>
                         <div class="">
-                            <?php echo ($errors->has('message'))? '<p>'. $errors->first('message') .'</p>' : ''; ?>
-                            <?php echo Form::textarea('message', (isset($input['message'])? Input::old('message') : (isset($data->message)? $data->message : '' )), array('class' => 'input__text')); ?> 
+                            <?php echo ($errors->has('message'))? '<p class="error_message">'. $errors->first('message') .'</p>' : ''; ?>
+                            <?php echo Form::textarea('message', (isset($input['message'])? Input::old('message') : ''), array('class' => 'input__text')); ?> 
                         </div>
                     </div>
-                
+                    <?php echo Form::hidden('package_id', $pData[0]->id); ?>
                     <div class="form-group">
                         <div class="form__buttons">
                             <a href="/">

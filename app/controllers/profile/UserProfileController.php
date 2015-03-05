@@ -13,7 +13,7 @@ public function getAddUser(){
 	
 	public function postAddUser(){
 		$input = Input::all();
-		//dd($input);
+		// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 		$rules = array(
 			'fname' => 'required',
 			'email' => 'required|email|unique:users,email,'.Input::get('id'),

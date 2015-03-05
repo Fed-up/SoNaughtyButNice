@@ -32,7 +32,7 @@ Route::get('event/{id}', 'EventsPageController@getEvents');
 //Catering
 Route::get('catering', 'CateringController@getCatering');
 Route::get('package/{id}', 'CateringController@getPackage');
-Route::get('package/{id}', 'CateringController@packageEnquiry');
+Route::post('package', 'CateringController@packageEnquiry');
 
 
 //Sales
