@@ -80,6 +80,14 @@ ul, li {
   color: $contrast_dark;
 }
 
+.message__alert{
+  margin: .6rem;
+  color: $contrast_dark;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  padding: 1rem;
+}
+
 .section__box {
   background-color: #fff;
   border: 1px solid #e0e0e0;

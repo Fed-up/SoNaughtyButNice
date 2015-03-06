@@ -41,11 +41,17 @@ class CateringController  extends BaseController {
 
 	public function getPackage($id)
 	{
+		if(isset($m_sent)){
+			echo '<pre>'; print_r($m); echo '</pre>';exit;	
+		}else{
+			
+		}
+
 		$pData = Catering::where('active', '=', '1')->where('id', '=', $id)
 			->with(array('menuRecipes' => function($query) use ($id){
 				
 				$query->where('catering_recipes.catering_id', '=', $id)->orderBy('pivot_ordering','ASC')
-				->with(array('Images' => function($query) use ($id){
+				->with(array('Images' => function($query){
 					$query->where('ordering', '=', 0)->where('section', '=', 'RECIPE');
 				}));
 			}))			
@@ -69,9 +75,6 @@ class CateringController  extends BaseController {
 				// echo '<pre>'; print_r($iData[0]->name); echo '</pre>';exit;	
 				
 				$i_count = count($iData);
-
-				
-
 				if($i_count > 0){
 					$recipe_image[$recipe->id] = $iData[0]->name;
 				}else{
@@ -80,7 +83,7 @@ class CateringController  extends BaseController {
 				
 			}
 		}
-		// echo '<pre>'; print_r($user); echo '</pre>';exit;	
+		// echo '<pre>'; print_r($recipe_image); echo '</pre>';exit;	
 			
 			
 		// foreach($pData as $package){
@@ -100,12 +103,23 @@ class CateringController  extends BaseController {
 	public function packageEnquiry(){
 
 		$input = Input::all();
+
+		$fname = $input['fname'];
+		$date = $input['date'];
+		$time = $input['time'];
+		$email = $input['email'];
+		$d_message = $input['message'];
+
+		// $user = Auth::user();
+		// 	echo '<pre>'; print_r($user); echo '</pre>';exit;
 		
 		// $messages = array(
 		//     'size'    => 'Your :attribute must be :size numbers long.',
 		// );
 		$rules = array(
 			'fname' => 'required',
+			'date' => 'required',
+			'time' => 'required',
 			'email' => 'required|email',
 			'mobile' => 'required|numeric',
 			'message' => 'required',
@@ -117,32 +131,130 @@ class CateringController  extends BaseController {
 				->withErrors($validator)
 				->withInput($input);
 		}else{
-			echo '<pre>'; print_r($input); echo '</pre>';exit;
+
+			
+
+			
 			if(Auth::user()){
 				$user = Auth::user();
-				$user_id = $user->id;
+				// echo '<pre>'; print_r($user); echo '</pre>';exit;
 			}else{
 				$user_id = 0;
 			}
+			$package_id = $input['package_id'];
+			
 
+
+
+			$cData = Catering::with(array('Images' => function($query)
+				{
+					$query->where('section', '=', 'CATERING')->orderBy(DB::raw('RAND()'))->where('active', '=', 1);
+				}))
+			->orderBy('name','ASC')->where('active', '=', 1)->get();
+
+
+
+
+			$pData = Catering::where('active', '=', '1')->where('id', '=', $package_id)
+				->with(array('menuRecipes' => function($query) use ($package_id){
+					
+					$query->where('catering_recipes.catering_id', '=', $package_id)->orderBy('pivot_ordering','ASC')
+					->with(array('Images' => function($query) use ($package_id){
+						$query->where('ordering', '=', 0)->where('section', '=', 'RECIPE');
+					}));
+				}))
+				->with(array('Images' => function($query){
+					$query->where('section', '=', 'CATERING')->orderBy(DB::raw('RAND()'))->where('active', '=', 1);
+				}))		
+			->get();
+
+			foreach ($pData as $package) {
+			// echo '<pre>'; print_r($npackage); echo '</pre>'; exit;
+
+				$count = count($pData[0]->Images);
+				if($count < 1){
+					$package_image[$package->id] = 'ingredient.png';
+				}else{
+					foreach($package->Images as $image){
+				        if(file_exists('uploads/'.$image->name)){
+				            $package_image[$package->id] = $image->name;
+				        }else{
+				           	$package_image[$package->id] = 'ingredient.png';
+				        }
+					}
+				}
+
+				foreach ($package->MenuRecipes as $recipe) {
+
+					$iData = Images::where('active', '=', '1')
+						->where('link_id', '=', $recipe->id)
+						->where('ordering', '=', 0)
+						->where('section', '=', 'RECIPE')
+						->get();
+					
+					// echo '<pre>'; print_r($iData[0]->name); echo '</pre>';exit;	
+					
+					$i_count = count($iData);
+					if($i_count > 0){
+						$recipe_image[$recipe->id] = $iData[0]->name;
+					}else{
+						$recipe_image[$recipe->id] = 'recipe.png';
+					}	
+					
+				}
+			}
+
+			// echo '<pre>'; print_r($package_id); echo '</pre>';exit;
 
 			$messageData = array(
-		        // 'name' => $user->fname,
-		        // 'quantity' => $quantity[$product->id],
-		        // 'ticket_id' => $ticket_id,
-		        // 'product_id' => $product->id,
-
-		        // 'event_id' => $edata->id,
-		        // 'event_name' => $edata->name,
-		        // 'event_date' => $edata->date,
-		        // 'event_time' => $edata->time,
-		        // 'event_cost' => $edata->price*$quantity[$product->id],
-		        // 'event_map' => $edata->map,
+		        'pData' => $pData,
+				'package_image' => $package_image,
+				'fname' => $fname,
+				'date' => $date,
+				'time' => $time,
+				'email' => $email,
+				'd_message' => $d_message,
+				'recipe_image' => $recipe_image,
 		    );
 
-			Mail::send('sales.package_email', $messageData, function($message) use ($user){
-				$message->to( $user->email )->cc('sales@sonaughtybutnice.com')->subject('So Naughty But Nice - Event confirmation');
+		 //    return View::make('sales.catering_email')->with(array(
+			// 		'pData' => $pData,
+			// 		'user' => $user,
+			// 		'package_image' => $package_image,
+			// 		'fname' => $input['fname'],
+			// 		'date' => $input['date'],
+			// 		'time' => $input['time'],
+			// 		'message' => $input['message'],
+			// 		'recipe_image' => $recipe_image,
+			// 	)
+			// );
+
+			Mail::send('sales.catering_email', $messageData, function($message) use ($email, $pData){
+				$message->to( $email )->cc('sales@sonaughtybutnice.com')->subject('Confirmation, We recieved your catering enquiry - '.$pData[0]->name);
 			}); //->cc('sales@sonaughtybutnice.com')
+
+
+		    // Mail::send('sales.catering_email', $messageData, function($message) use ($email, $pData){
+		    // {   
+		    //     $message->from('sales@sonaughtybutnice.com','Tom ');
+		    //     $message->to( $email )->cc('sales@sonaughtybutnice.com')->subject('Catering Enquiry - '.$pData[0]->name);
+		    // });
+
+			// $m_sent = "We have just sent you a confirmation email!<br/>If you do not recieve an email please check the email you typed in =)";
+		 //    return Redirect::action('CateringController@getPackage', array($package_id))->with(array(
+			// 	'm_sent', $m_sent
+			// 	)
+			// );
+
+		    return Redirect::action('CateringController@getPackage', array($package_id))
+			->with('message', 'We have just sent you a confirmation email.<br/>
+					If you do not recieve an email please check the email you typed in =) </br>
+					We will contact you as soon as possible!
+			');
+
+		    
+		    // return Redirect::to('package/'$package_id);
+			
 		}
 	}
 }

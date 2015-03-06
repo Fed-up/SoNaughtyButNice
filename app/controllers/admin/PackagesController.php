@@ -8,6 +8,7 @@ class Admin_PackagesController extends BaseController {
 		return View::make('admin.packages.index')
 			->with(array('data' => $data));
 	}
+	
 	public function getAddPackages(){
 		$recipes = MenuRecipes::orderBy('name','ASC')->where('active', '=', '1')->get();
 

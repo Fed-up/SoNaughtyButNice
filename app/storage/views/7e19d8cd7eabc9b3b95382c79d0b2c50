@@ -3,7 +3,12 @@
     <section class="page">
         <h2 class="content__title content__title--main"><a class="content__title--link" href="/catering"><?php echo $pData[0]->name; ?> Recipes</a></h2>
 
+        
+
         <div class="row content-boxes__wrapper">
+            <?php if (Session::has('message')): ?>
+               <div class="message__alert"><?php echo Session::get('message'); ?></div>
+            <?php endif; ?>
             <?php foreach($pData as $package): ?>
                 <?php foreach($package->menuRecipes as $recipe): ?>
 
@@ -44,7 +49,7 @@
                 <?php endif; ?>
                
                     <p class="package__total">Total: $<?php echo $pData[0]->price; ?></p>
-                    <h2 class="content__title--main--signup">Hi <?php echo Auth::user()->fname; ?>, to order<br/>The <?php echo $pData[0]->name; ?> package<br/> Please email us today =)</h2> 
+                    <h2 class="content__title--main--signup"><?php if (Auth::check()): ?> Hi <?php echo Auth::user()->fname; ?>, <?php endif; ?> To order<br/>The <?php echo $pData[0]->name; ?> package<br/> Please email us today =)</h2> 
                     <div class="form-group <?php echo ($errors->has('fname')) ? 'has-error' : '' ;; ?>">
                         <?php echo Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')); ?>
                         <div class="">
@@ -52,6 +57,22 @@
                             <?php echo Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($user->fname)? $user->fname : '' )), array('class' => 'input__text')); ?> 
                         </div>
                     </div>
+                    
+                    <div class="form-group <?php echo ($errors->has('date')) ? 'has-error' : '' ;; ?>">
+                        <?php echo Form::label('date', 'Date: ', array('class' => ' content-title--sub ')); ?>
+                        <div class="">
+                            <?php echo ($errors->has('date'))? '<p class="error_message">'. $errors->first('date') .'</p>' : ''; ?>
+                            <?php echo Form::text('date', (isset($input['date'])? Input::old('date') : (isset($user->date)? $user->date : '' )), array('class' => 'input__text')); ?> 
+                        </div>
+                    </div>
+                    <div class="form-group <?php echo ($errors->has('time')) ? 'has-error' : '' ;; ?>">
+                        <?php echo Form::label('time', 'Time: ', array('class' => ' content-title--sub ')); ?>
+                        <div class="">
+                            <?php echo ($errors->has('time'))? '<p class="error_message">'. $errors->first('time') .'</p>' : ''; ?>
+                            <?php echo Form::text('time', (isset($input['time'])? Input::old('time') : (isset($user->time)? $user->time : '' )), array('class' => 'input__text')); ?> 
+                        </div>
+                    </div>
+
                     <div class="form-group <?php echo ($errors->has('email')) ? 'has-error' : '' ;; ?>">
                         <?php echo Form::label('email', 'Email: ', array('class' => ' content-title--sub ')); ?>
                         <div class="">

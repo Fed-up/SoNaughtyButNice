@@ -4,7 +4,12 @@
     <section class="page">
         <h2 class="content__title content__title--main"><a class="content__title--link" href="/catering">{{$pData[0]->name}} Recipes</a></h2>
 
+        
+
         <div class="row content-boxes__wrapper">
+            @if (Session::has('message'))
+               <div class="message__alert">{{ Session::get('message') }}</div>
+            @endif
             @foreach($pData as $package)
                 @foreach($package->menuRecipes as $recipe)
 
@@ -45,7 +50,7 @@
                 @endif
                
                     <p class="package__total">Total: ${{$pData[0]->price}}</p>
-                    <h2 class="content__title--main--signup">Hi {{ Auth::user()->fname }}, to order<br/>The {{$pData[0]->name}} package<br/> Please email us today =)</h2> 
+                    <h2 class="content__title--main--signup">@if (Auth::check()) Hi {{ Auth::user()->fname }}, @endif To order<br/>The {{$pData[0]->name}} package<br/> Please email us today =)</h2> 
                     <div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
                         {{ Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')) }}
                         <div class="">
@@ -53,6 +58,22 @@
                             {{ Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($user->fname)? $user->fname : '' )), array('class' => 'input__text')) }} 
                         </div>
                     </div>
+                    
+                    <div class="form-group {{ ($errors->has('date')) ? 'has-error' : '' ; }}">
+                        {{ Form::label('date', 'Date: ', array('class' => ' content-title--sub ')) }}
+                        <div class="">
+                            {{ ($errors->has('date'))? '<p class="error_message">'. $errors->first('date') .'</p>' : '' }}
+                            {{ Form::text('date', (isset($input['date'])? Input::old('date') : (isset($user->date)? $user->date : '' )), array('class' => 'input__text')) }} 
+                        </div>
+                    </div>
+                    <div class="form-group {{ ($errors->has('time')) ? 'has-error' : '' ; }}">
+                        {{ Form::label('time', 'Time: ', array('class' => ' content-title--sub ')) }}
+                        <div class="">
+                            {{ ($errors->has('time'))? '<p class="error_message">'. $errors->first('time') .'</p>' : '' }}
+                            {{ Form::text('time', (isset($input['time'])? Input::old('time') : (isset($user->time)? $user->time : '' )), array('class' => 'input__text')) }} 
+                        </div>
+                    </div>
+
                     <div class="form-group {{ ($errors->has('email')) ? 'has-error' : '' ; }}">
                         {{ Form::label('email', 'Email: ', array('class' => ' content-title--sub ')) }}
                         <div class="">
