@@ -67,7 +67,7 @@ class Admin_RecipesController extends BaseController{
 		// echo '<pre>'; print_r($input); echo '</pre>'; exit;
 
 		$rules = array(
-			'title' => 'required|Max:20|unique:menu_recipes,name',
+			'title' => 'required|Max:25|unique:menu_recipes,name',
 			'summary' => 'required',
 			'length' => 'required',
 			'difficulty' => 'required',
@@ -683,6 +683,12 @@ class Admin_RecipesController extends BaseController{
 					
 						// echo '<pre>'; print_r($ti_cost); echo '</pre>'; 	exit;
 
+						if(isset($ti_cost)){
+							$ti_cost = $ti_cost;
+						}else{
+							$ti_cost = 0;
+						}
+
 						$sdata_id = $input['sdata_id'];
 						$staff_cost_per_hour = $input['staff_cost_per_hour'];
 						$sales_price = $input['sales_price'];
@@ -699,6 +705,8 @@ class Admin_RecipesController extends BaseController{
 						$total_profit_per_piece = 0;
 						$ingredient_cost_percentage = 0;
 						$total_markup_percentage = 0;
+						$total_margin_percentage = 0;
+						$desired_sales_price = 0;
 
 						$staff_cost_to_make_recipe_batch = $staff_cost_per_hour/60 * $sales_time;
 						$total_recipe_cost = $staff_cost_to_make_recipe_batch + $ti_cost;
@@ -728,7 +736,7 @@ class Admin_RecipesController extends BaseController{
 							$desired_total_markup = 150;
 						}
 
-						if($desired_total_markup > 0){
+						if($desired_total_markup > 0 && $sales_amount > 0){
 
 							$time_per_piece = ($sales_time/ $sales_amount) * 60; 
 							$time_to_make = ($time_per_piece * $sales_amount) / 60;
