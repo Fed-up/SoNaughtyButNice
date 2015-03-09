@@ -99,11 +99,15 @@ class Admin_IngredientsController extends BaseController {
 
 			$metric = Metric::where('active', '!=', 9)->orderBy('name','ASC')->get();
 
-			foreach ($imData as $im) {
-				foreach ($im->metric as $pivot_metric) {
-					echo '<pre>'; print_r($pivot_metric); echo '</pre>'; 	exit;
-				}
-			}
+			// if(!isset($imData->Metric)){
+			// 	echo '<pre>'; print_r($imData); echo '</pre>'; 	exit;
+			// }
+
+			// foreach ($imData as $im) {
+			// 	foreach ($im->metric as $pivot_metric) {
+			// 		echo '<pre>'; print_r($pivot_metric); echo '</pre>'; 	exit;
+			// 	}
+			// }
 			
 
 
@@ -126,6 +130,10 @@ class Admin_IngredientsController extends BaseController {
 		// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 
 		$ingredient_id = $input['id'];
+		$grams = $input['grams'];
+		$metric_type = $input['metric_type'];
+
+
 		$rules = array(
 			'name' 		=> 'required|unique:menu_ingredients,name,'.Input::get('id'),
 			'summary'	=> 'required',

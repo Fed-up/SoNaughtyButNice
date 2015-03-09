@@ -299,24 +299,41 @@
             <hr/>
             <?php $x = 0; ?>
             <?php foreach($metrics as $metric): ?>
-            	<?php foreach($imData as $im): ?>
-					<?php foreach ($im->metric as $pivot_metric): ?>	
-						<div class="form-group">
-				            <label for="<?php echo $metric->name; ?>" class="col-sm-2 control-label"><?php echo $metric->name; ?> :</label>
-				            <div class="col-sm-3">
-				            	
-				            	<input type="text" class="form-control" id="<?php echo $metric->name; ?>" name="metric_type[<?php echo $metric->name; ?>][<?php echo $x; ?>]" value=" <?php if($pivot_metric->id == $metric->id): ?> <?php echo $pivot_metric->pivot->metric_amount; ?> <?php endif; ?> " />
-				            </div>
+            	<?php if(isset($imData->Metric)): ?>
+	            	<?php foreach($imData as $im): ?>
+						<?php foreach ($im->metric as $pivot_metric): ?>	
+							<div class="form-group">
+					            <label for="<?php echo $metric->name; ?>" class="col-sm-2 control-label"><?php echo $metric->name; ?> :</label>
+					            <div class="col-sm-3">
+					            	
+					            	<input type="text" class="form-control" id="<?php echo $metric->name; ?>" name="metric_type[<?php echo $metric->name; ?>][<?php echo $x; ?>]" value=" <?php if($pivot_metric->id == $metric->id): ?> <?php echo $pivot_metric->pivot->metric_amount; ?> <?php endif; ?> " />
+					            </div>
 
-				            <label for="grams" class="col-sm-2 control-label">Grams :</label>
-				            <div class="col-sm-3">
-				               <?php /* Form::text('$metric->name', (isset($input['ingredient_metric'])? Input::old('ingredient_metric') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) */ ?>
-				               <input type="text" class="form-control" id="grams" name="grams[<?php echo $x; ?>]" value=" <?php if($pivot_metric->id == $metric->id): ?> <?php echo $pivot_metric->pivot->grams; ?> <?php endif; ?> " />
-				            </div>
-				        </div>
-				        <?php $x++; ?>
+					            <label for="grams" class="col-sm-2 control-label">Grams :</label>
+					            <div class="col-sm-3">
+					               <?php /* Form::text('$metric->name', (isset($input['ingredient_metric'])? Input::old('ingredient_metric') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) */ ?>
+					               <input type="text" class="form-control" id="grams" name="grams[<?php echo $x; ?>]" value=" <?php if($pivot_metric->id == $metric->id): ?> <?php echo $pivot_metric->pivot->grams; ?> <?php endif; ?> " />
+					            </div>
+					        </div>
+					        <?php $x++; ?>
+				        <?php endforeach; ?>
 			        <?php endforeach; ?>
-		        <?php endforeach; ?>
+			    <?php else: ?>
+			    	<div class="form-group">
+			            <label for="<?php echo $metric->name; ?>" class="col-sm-2 control-label"><?php echo $metric->name; ?> :</label>
+			            <div class="col-sm-3">
+			            	
+			            	<input type="text" class="form-control" id="<?php echo $metric->name; ?>" name="metric_type[<?php echo $metric->name; ?>][<?php echo $x; ?>]" value="" />
+			            </div>
+
+			            <label for="grams" class="col-sm-2 control-label">Grams :</label>
+			            <div class="col-sm-3">
+			               <?php /* Form::text('$metric->name', (isset($input['ingredient_metric'])? Input::old('ingredient_metric') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) */ ?>
+			               <input type="text" class="form-control" id="grams" name="grams[<?php echo $x; ?>]" value="" />
+			            </div>
+			        </div>
+			        <?php $x++; ?>
+			    <?php endif; ?>
 		    <?php endforeach; ?>
        	</div>	
 

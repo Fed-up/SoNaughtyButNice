@@ -300,24 +300,41 @@
             <hr/>
             <?php $x = 0; ?>
             @foreach($metrics as $metric)
-            	@foreach($imData as $im)
-					@foreach ($im->metric as $pivot_metric)	
-						<div class="form-group">
-				            <label for="{{$metric->name}}" class="col-sm-2 control-label">{{$metric->name}} :</label>
-				            <div class="col-sm-3">
-				            	
-				            	<input type="text" class="form-control" id="{{$metric->name}}" name="metric_type[{{$metric->name}}][{{$x}}]" value=" @if($pivot_metric->id == $metric->id) {{ $pivot_metric->pivot->metric_amount }} @endif " />
-				            </div>
+            	@if(isset($imData->Metric))
+	            	@foreach($imData as $im)
+						@foreach ($im->metric as $pivot_metric)	
+							<div class="form-group">
+					            <label for="{{$metric->name}}" class="col-sm-2 control-label">{{$metric->name}} :</label>
+					            <div class="col-sm-3">
+					            	
+					            	<input type="text" class="form-control" id="{{$metric->name}}" name="metric_type[{{$metric->name}}][{{$x}}]" value=" @if($pivot_metric->id == $metric->id) {{ $pivot_metric->pivot->metric_amount }} @endif " />
+					            </div>
 
-				            <label for="grams" class="col-sm-2 control-label">Grams :</label>
-				            <div class="col-sm-3">
-				               {{-- Form::text('$metric->name', (isset($input['ingredient_metric'])? Input::old('ingredient_metric') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) --}}
-				               <input type="text" class="form-control" id="grams" name="grams[{{$x}}]" value=" @if($pivot_metric->id == $metric->id) {{ $pivot_metric->pivot->grams }} @endif " />
-				            </div>
-				        </div>
-				        <?php $x++; ?>
+					            <label for="grams" class="col-sm-2 control-label">Grams :</label>
+					            <div class="col-sm-3">
+					               {{-- Form::text('$metric->name', (isset($input['ingredient_metric'])? Input::old('ingredient_metric') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) --}}
+					               <input type="text" class="form-control" id="grams" name="grams[{{$x}}]" value=" @if($pivot_metric->id == $metric->id) {{ $pivot_metric->pivot->grams }} @endif " />
+					            </div>
+					        </div>
+					        <?php $x++; ?>
+				        @endforeach
 			        @endforeach
-		        @endforeach
+			    @else
+			    	<div class="form-group">
+			            <label for="{{$metric->name}}" class="col-sm-2 control-label">{{$metric->name}} :</label>
+			            <div class="col-sm-3">
+			            	
+			            	<input type="text" class="form-control" id="{{$metric->name}}" name="metric_type[{{$metric->name}}][{{$x}}]" value="" />
+			            </div>
+
+			            <label for="grams" class="col-sm-2 control-label">Grams :</label>
+			            <div class="col-sm-3">
+			               {{-- Form::text('$metric->name', (isset($input['ingredient_metric'])? Input::old('ingredient_metric') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) --}}
+			               <input type="text" class="form-control" id="grams" name="grams[{{$x}}]" value="" />
+			            </div>
+			        </div>
+			        <?php $x++; ?>
+			    @endif
 		    @endforeach
        	</div>	
 
