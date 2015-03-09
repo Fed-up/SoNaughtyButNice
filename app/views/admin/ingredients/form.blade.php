@@ -302,8 +302,6 @@
             @foreach($metrics as $metric)
             	@foreach($imData as $im)
 					@foreach ($im->metric as $pivot_metric)	
-						
-
 						<div class="form-group">
 				            <label for="{{$metric->name}}" class="col-sm-2 control-label">{{$metric->name}} :</label>
 				            <div class="col-sm-3">
@@ -323,7 +321,7 @@
 		    @endforeach
        	</div>	
 
-		
+
 
         <div class="tab-pane fade in" id="description">
 	        <div class="form-group {{ ($errors->has('description')) ? ' has-error' : '' ; }}">

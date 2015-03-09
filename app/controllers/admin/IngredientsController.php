@@ -99,7 +99,12 @@ class Admin_IngredientsController extends BaseController {
 
 			$metric = Metric::where('active', '!=', 9)->orderBy('name','ASC')->get();
 
-			// echo '<pre>'; print_r($metric); echo '</pre>'; 	exit;
+			foreach ($imData as $im) {
+				foreach ($im->metric as $pivot_metric) {
+					echo '<pre>'; print_r($pivot_metric); echo '</pre>'; 	exit;
+				}
+			}
+			
 
 
 		return View::make('admin.ingredients.form')

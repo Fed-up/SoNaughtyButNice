@@ -503,9 +503,9 @@ class Admin_RecipesController extends BaseController{
 					$amount = $input['amount'];
 					$metric = $input['metric'];
 					$grams = $input['grams'];
-					$i_grams = $input['i_grams'];
-					$i_price = $input['i_price'];
 
+					if(isset($input['i_grams'])){$i_grams = $input['i_grams'];}else{$i_grams = 0;};
+					if(isset($input['i_price'])){$i_price = $input['i_price'];}else{$i_price = 0;}
 
 					// foreach($s_ingredient as $id => $data){
 					//   	$array_key = array_keys($data); 	  	
@@ -680,7 +680,7 @@ class Admin_RecipesController extends BaseController{
 
 					// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 
-					
+						if(isset($ti_cost)){$ti_cost = $ti_cost;}else{$ti_cost = 0;}
 						// echo '<pre>'; print_r($ti_cost); echo '</pre>'; 	exit;
 
 						$sdata_id = $input['sdata_id'];
@@ -699,6 +699,8 @@ class Admin_RecipesController extends BaseController{
 						$total_profit_per_piece = 0;
 						$ingredient_cost_percentage = 0;
 						$total_markup_percentage = 0;
+						$total_margin_percentage = 0;
+						$desired_sales_price = 0;
 
 						$staff_cost_to_make_recipe_batch = $staff_cost_per_hour/60 * $sales_time;
 						$total_recipe_cost = $staff_cost_to_make_recipe_batch + $ti_cost;
@@ -722,29 +724,28 @@ class Admin_RecipesController extends BaseController{
 							$total_markup_percentage = $decimal_margin/ (1 - $decimal_margin) * 100;
 							$total_profit_per_piece = $total_profit/ $sales_amount;
 
+						
+							if($desired_total_markup == 0){
+								$desired_total_markup = 150;
+							}
+
+							if($desired_total_markup > 0){
+
+								$time_per_piece = ($sales_time/ $sales_amount) * 60; 
+								$time_to_make = ($time_per_piece * $sales_amount) / 60;
+								$projected_staff_cost_to_make = ($staff_cost_per_hour / 60) * $time_to_make;
+
+								$projected_ingredient_cost = $total_ingredient_cost_per_piece * $sales_amount;
+								$projected_recipe_cost = $projected_ingredient_cost + $projected_staff_cost_to_make;
+								$projected_total_markup = $projected_recipe_cost * ($desired_total_markup / 100);
+								$projected_recipe_revenue = $projected_total_markup + $projected_recipe_cost;
+
+								$desired_sales_price = $projected_recipe_revenue / $sales_amount;
+								// echo '<pre>'; print_r($desired_sales_price); echo '</pre>'; 	exit;
+							}
 						}
 
-						if($desired_total_markup == 0){
-							$desired_total_markup = 150;
-						}
-
-						if($desired_total_markup > 0){
-
-							$time_per_piece = ($sales_time/ $sales_amount) * 60; 
-							$time_to_make = ($time_per_piece * $sales_amount) / 60;
-							$projected_staff_cost_to_make = ($staff_cost_per_hour / 60) * $time_to_make;
-
-							$projected_ingredient_cost = $total_ingredient_cost_per_piece * $sales_amount;
-							$projected_recipe_cost = $projected_ingredient_cost + $projected_staff_cost_to_make;
-							$projected_total_markup = $projected_recipe_cost * ($desired_total_markup / 100);
-							$projected_recipe_revenue = $projected_total_markup + $projected_recipe_cost;
-
-							$desired_sales_price = $projected_recipe_revenue / $sales_amount;
-
-
-
-							// echo '<pre>'; print_r($desired_sales_price); echo '</pre>'; 	exit;
-						}
+						
 						
 						
 						
