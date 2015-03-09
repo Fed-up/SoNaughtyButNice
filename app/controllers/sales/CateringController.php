@@ -41,12 +41,6 @@ class CateringController  extends BaseController {
 
 	public function getPackage($id)
 	{
-		if(isset($m_sent)){
-			echo '<pre>'; print_r($m); echo '</pre>';exit;	
-		}else{
-			
-		}
-
 		$pData = Catering::where('active', '=', '1')->where('id', '=', $id)
 			->with(array('menuRecipes' => function($query) use ($id){
 				

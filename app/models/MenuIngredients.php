@@ -38,4 +38,8 @@ class MenuIngredients extends Eloquent {
 		return $this->hasOne('SalesDataIngredient', 'id', 'menu_ingredient_id');	
 	}
 
+	public function Metric(){ //One recipe belongs to many catering
+		return $this->belongsToMany('Metric', 'ingredient_metric')->withPivot('id','grams', 'metric_amount');
+	}
+
 }

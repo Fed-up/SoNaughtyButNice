@@ -190,73 +190,73 @@
     <ul id="myTab" class="nav nav-tabs">
       <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
       <li><a href="#images" data-toggle="tab">Images</a></li>
+      <li><a href="#metric" data-toggle="tab">Metric</a></li>
       <li><a href="#description" data-toggle="tab">Description</a></li>
     </ul>
     
     <div id="myTabContent" class="tab-content">
     
-      <div class="tab-pane fade in active" id="info">
-        <div class="form-group <?php echo ($errors->has('name')) ? ' has-error' : '' ;; ?>">
-            <?php echo Form::label('name', 'Name: ', array('class' => 'col-sm-2 control-label')); ?>
-            <div class="col-sm-10">
-              <?php echo ($errors->has('name')) ? '<p>'. $errors->first('name') : '' .'</p>'; ?>
-              <?php echo Form::text('name', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')); ?>
-        	</div>
+      	<div class="tab-pane fade in active" id="info">
+	        <div class="form-group <?php echo ($errors->has('name')) ? ' has-error' : '' ;; ?>">
+	            <?php echo Form::label('name', 'Name: ', array('class' => 'col-sm-2 control-label')); ?>
+	            <div class="col-sm-10">
+	              <?php echo ($errors->has('name')) ? '<p>'. $errors->first('name') : '' .'</p>'; ?>
+	              <?php echo Form::text('name', (isset($input['name'])? Input::old('name') : (isset($data->name)? $data->name : '' )), array('class' => 'form-control')); ?>
+	        	</div>
+	        </div>
+	        <div class="form-group <?php echo ($errors->has('summary')) ? ' has-error' : '' ;; ?>">
+	            <?php echo Form::label('summary', 'Summary: ', array('class' => 'col-sm-2 control-label')); ?>
+	            <div class="col-sm-10">
+	              <?php echo ($errors->has('summary')) ? '<p>'. $errors->first('summary') : '' .'</p>'; ?>
+	              <?php echo Form::textarea('summary', (isset($input['summary'])? Input::old('summary') : (isset($data->summary)? $data->summary : '' )), array('class' => 'form-control', 'rows' => '2')); ?>
+	            </div>
+	        </div>
+	        <div class="form-group <?php echo ($errors->has('grams')) ? ' has-error' : '' ;; ?>">
+	            <?php echo Form::label('grams', 'Grams: ', array('class' => 'col-sm-2 control-label')); ?>
+	            <div class="col-sm-2">
+	              <?php echo ($errors->has('grams')) ? '<p>'. $errors->first('grams') : '' .'</p>'; ?>
+	              <?php echo Form::text('grams', (isset($input['grams'])? Input::old('grams') : (isset($data->grams)? $data->grams : '' )), array('class' => 'form-control')); ?>
+	        	</div>
+	        </div>
+	        <div class="form-group <?php echo ($errors->has('grams')) ? ' has-error' : '' ;; ?>">
+	            <?php echo Form::label('price', 'Price: ', array('class' => 'col-sm-2 control-label')); ?>
+	            <div class="col-sm-2">
+	              <?php echo ($errors->has('price')) ? '<p>'. $errors->first('price') : '' .'</p>'; ?>
+	              <?php echo Form::text('price', (isset($input['price'])? Input::old('price') : (isset($data->price)? $data->price : '' )), array('class' => 'form-control')); ?>
+	        	</div>
+	        </div>
+	        <div class="form-group">
+	            <?php echo Form::label('active', 'Active: ', array('class' => 'col-sm-2 control-label')); ?>
+	            <div class="col-sm-10">
+	              <?php echo Form::checkbox('active', 1, (isset($input['active']) ? Input::old('active') : (isset($data->active)? $data->active : '' )), array('class' => '')); ?>
+	            </div>
+	        </div>
+	        	<?php echo Form::hidden('id', (isset($input['id'])? Input::old('id') : (isset($data->id)? $data->id : '' ))); ?>
+	       	<div class="form-group">
+	            <table class="table">
+	                <thead>
+	                    <tr>
+	                    	<th><?php echo Form::label('fruit', 'Fruit: ', array('class' => 'control-label')); ?></td>
+	                        <th><?php echo Form::label('lowgi', 'Low Gi: ', array('class' => 'control-label')); ?></td>
+	                        <th><?php echo Form::label('nut_seed', 'Nuts & Seeds: ', array('class' => 'control-label')); ?></td>
+	                        <th><?php echo Form::label('superfood', 'Superfood: ', array('class' => 'control-label')); ?></th>
+	                        <th><?php echo Form::label('sweetner', 'Natural Sweetner: ', array('class' => 'control-label')); ?></th>
+	                        <th><?php echo Form::label('vegetable', 'Vegetable: ', array('class' => 'control-label')); ?></th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <td><?php echo Form::checkbox('fruit', 1, (isset($input['fruit'])? Input::old('fruit') : (isset($data->fruit)? $data->fruit : '' )), array('class' => '')); ?></td>
+	                    <td><?php echo Form::checkbox('lowgi', 1, (isset($input['lowgi'])? Input::old('lowgi') : (isset($data->lowgi)? $data->lowgi : '' )), array('class' => '')); ?></td>
+	                    <td><?php echo Form::checkbox('nut_seed', 1, (isset($input['nut_seed'])? Input::old('nut_seed') : (isset($data->nut_seed)? $data->nut_seed : '' )), array('class' => '')); ?></td>
+	                    <td><?php echo Form::checkbox('superfood', 1, (isset($input['superfood'])? Input::old('superfood') : (isset($data->superfood)? $data->superfood : '' )), array('class' => '')); ?></td>
+	                    <td><?php echo Form::checkbox('sweetner', 1, (isset($input['sweetner'])? Input::old('sweetner') : (isset($data->sweetner)? $data->sweetner : '' )), array('class' => '')); ?></td>
+	                    <td><?php echo Form::checkbox('vegetable', 1, (isset($input['vegetable'])? Input::old('vegetable') : (isset($data->vegetable)? $data->vegetable : '' )), array('class' => '')); ?></td>                    
+	                </tbody>
+	            </table>
+	      	</div>  
         </div>
-        <div class="form-group <?php echo ($errors->has('summary')) ? ' has-error' : '' ;; ?>">
-            <?php echo Form::label('summary', 'Summary: ', array('class' => 'col-sm-2 control-label')); ?>
-            <div class="col-sm-10">
-              <?php echo ($errors->has('summary')) ? '<p>'. $errors->first('summary') : '' .'</p>'; ?>
-              <?php echo Form::textarea('summary', (isset($input['summary'])? Input::old('summary') : (isset($data->summary)? $data->summary : '' )), array('class' => 'form-control', 'rows' => '2')); ?>
-            </div>
-        </div>
-        <div class="form-group <?php echo ($errors->has('grams')) ? ' has-error' : '' ;; ?>">
-            <?php echo Form::label('grams', 'Grams: ', array('class' => 'col-sm-2 control-label')); ?>
-            <div class="col-sm-2">
-              <?php echo ($errors->has('grams')) ? '<p>'. $errors->first('grams') : '' .'</p>'; ?>
-              <?php echo Form::text('grams', (isset($input['grams'])? Input::old('grams') : (isset($data->grams)? $data->grams : '' )), array('class' => 'form-control')); ?>
-        	</div>
-        </div>
-        <div class="form-group <?php echo ($errors->has('grams')) ? ' has-error' : '' ;; ?>">
-            <?php echo Form::label('price', 'Price: ', array('class' => 'col-sm-2 control-label')); ?>
-            <div class="col-sm-2">
-              <?php echo ($errors->has('price')) ? '<p>'. $errors->first('price') : '' .'</p>'; ?>
-              <?php echo Form::text('price', (isset($input['price'])? Input::old('price') : (isset($data->price)? $data->price : '' )), array('class' => 'form-control')); ?>
-        	</div>
-        </div>
-        <div class="form-group">
-            <?php echo Form::label('active', 'Active: ', array('class' => 'col-sm-2 control-label')); ?>
-            <div class="col-sm-10">
-              <?php echo Form::checkbox('active', 1, (isset($input['active']) ? Input::old('active') : (isset($data->active)? $data->active : '' )), array('class' => '')); ?>
-            </div>
-        </div>
-        	<?php echo Form::hidden('id', (isset($input['id'])? Input::old('id') : (isset($data->id)? $data->id : '' ))); ?>
-       	<div class="form-group">
-            <table class="table">
-                <thead>
-                    <tr>
-                    	<th><?php echo Form::label('fruit', 'Fruit: ', array('class' => 'control-label')); ?></td>
-                        <th><?php echo Form::label('lowgi', 'Low Gi: ', array('class' => 'control-label')); ?></td>
-                        <th><?php echo Form::label('nut_seed', 'Nuts & Seeds: ', array('class' => 'control-label')); ?></td>
-                        <th><?php echo Form::label('superfood', 'Superfood: ', array('class' => 'control-label')); ?></th>
-                        <th><?php echo Form::label('sweetner', 'Natural Sweetner: ', array('class' => 'control-label')); ?></th>
-                        <th><?php echo Form::label('vegetable', 'Vegetable: ', array('class' => 'control-label')); ?></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <td><?php echo Form::checkbox('fruit', 1, (isset($input['fruit'])? Input::old('fruit') : (isset($data->fruit)? $data->fruit : '' )), array('class' => '')); ?></td>
-                    <td><?php echo Form::checkbox('lowgi', 1, (isset($input['lowgi'])? Input::old('lowgi') : (isset($data->lowgi)? $data->lowgi : '' )), array('class' => '')); ?></td>
-                    <td><?php echo Form::checkbox('nut_seed', 1, (isset($input['nut_seed'])? Input::old('nut_seed') : (isset($data->nut_seed)? $data->nut_seed : '' )), array('class' => '')); ?></td>
-                    <td><?php echo Form::checkbox('superfood', 1, (isset($input['superfood'])? Input::old('superfood') : (isset($data->superfood)? $data->superfood : '' )), array('class' => '')); ?></td>
-                    <td><?php echo Form::checkbox('sweetner', 1, (isset($input['sweetner'])? Input::old('sweetner') : (isset($data->sweetner)? $data->sweetner : '' )), array('class' => '')); ?></td>
-                    <td><?php echo Form::checkbox('vegetable', 1, (isset($input['vegetable'])? Input::old('vegetable') : (isset($data->vegetable)? $data->vegetable : '' )), array('class' => '')); ?></td>                    
-                </tbody>
-            </table>
-
-      	</div>  
-      </div>
       
-       <div class="tab-pane fade in" id="images">
+        <div class="tab-pane fade in" id="images">
         	<br/>
             <div id="filelist">
             	Your browser doesn't have Flash, Silverlight or HTML5 support.
@@ -289,24 +289,57 @@
             <br />
             <pre id="console"></pre>
 
-      </div>
-      
-      
-       <div class="tab-pane fade in" id="description">
-        <div class="form-group <?php echo ($errors->has('description')) ? ' has-error' : '' ;; ?>">
-            <?php echo Form::label('description', 'Description: ', array('class' => 'col-sm-2 control-label')); ?>
-            <div class="col-sm-10">
-              <?php echo ($errors->has('description')) ? '<p>'. $errors->first('description') : '' .'</p>'; ?>
-              <?php echo Form::textarea('description', (isset($input['description'])? Input::old('description') : (isset($data->description)? $data->description : '' )), array('class' => 'form-control')); ?>
-            </div>
         </div>
-       </div>
+      
+		
+        <div class="tab-pane fade in" id="metric">
+			<div class="col-sm-1">
+            	<?php echo Form::submit('+ Calc', array('id' => 'btnActionCalculate','name' => 'calc','class' => 'btn btn-primary')); ?>
+            </div>
+            <hr/>
+            <?php $x = 0; ?>
+            <?php foreach($metrics as $metric): ?>
+            	<?php foreach($imData as $im): ?>
+					<?php foreach ($im->metric as $pivot_metric): ?>	
+						
+
+						<div class="form-group">
+				            <label for="<?php echo $metric->name; ?>" class="col-sm-2 control-label"><?php echo $metric->name; ?> :</label>
+				            <div class="col-sm-3">
+				            	
+				            	<input type="text" class="form-control" id="<?php echo $metric->name; ?>" name="metric_type[<?php echo $metric->name; ?>][<?php echo $x; ?>]" value=" <?php if($pivot_metric->id == $metric->id): ?> <?php echo $pivot_metric->pivot->metric_amount; ?> <?php endif; ?> " />
+				            </div>
+
+				            <label for="grams" class="col-sm-2 control-label">Grams :</label>
+				            <div class="col-sm-3">
+				               <?php /* Form::text('$metric->name', (isset($input['ingredient_metric'])? Input::old('ingredient_metric') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) */ ?>
+				               <input type="text" class="form-control" id="grams" name="grams[<?php echo $x; ?>]" value=" <?php if($pivot_metric->id == $metric->id): ?> <?php echo $pivot_metric->pivot->grams; ?> <?php endif; ?> " />
+				            </div>
+				        </div>
+				        <?php $x++; ?>
+			        <?php endforeach; ?>
+		        <?php endforeach; ?>
+		    <?php endforeach; ?>
+       	</div>	
+
+		
+
+        <div class="tab-pane fade in" id="description">
+	        <div class="form-group <?php echo ($errors->has('description')) ? ' has-error' : '' ;; ?>">
+	            <?php echo Form::label('description', 'Description: ', array('class' => 'col-sm-2 control-label')); ?>
+	            <div class="col-sm-10">
+	              <?php echo ($errors->has('description')) ? '<p>'. $errors->first('description') : '' .'</p>'; ?>
+	              <?php echo Form::textarea('description', (isset($input['description'])? Input::old('description') : (isset($data->description)? $data->description : '' )), array('class' => 'form-control')); ?>
+	            </div>
+	        </div>
+       	</div>
     </div>
     
     <hr/>        
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <?php echo Form::submit('Save', array('class' => 'btn btn-success')); ?>
+              <?php echo Form::submit('Save', array('class' => 'btn btn-primary')); ?>
+              <?php echo Form::submit('Save & Close', array('name' => 'sc','class' => 'btn btn-success')); ?>
             <a href="/admin/menu/ingredients/">
             	<?php echo Form::button('Cancel' ,array('class' => 'btn btn-danger')); ?>
            	</a>

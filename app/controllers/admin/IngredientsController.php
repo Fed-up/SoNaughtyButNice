@@ -88,13 +88,29 @@ class Admin_IngredientsController extends BaseController {
 		//echo $id; exit;
 			$data = MenuIngredients::findOrFail($id);
 			$ingredient_images = $data->Images()->orderBy('ordering','ASC')->where('section', '=', 'INGREDIENT')->get();
-			//$recipes_images = $data->Images()->orderBy('ordering','ASC')->get();
-			//echo '<pre>'; print_r($ingredient_images); echo '</pre>'; 	exit;	
+			
+
+			$imData = MenuIngredients::where('active', '=', '1')->where('id', '=', $id)
+				->with(array('Metric' => function($query) use ($id){
+					
+					$query->where('ingredient_metric.menu_ingredients_id', '=', $id);
+				}))			
+			->get();
+
+			$metric = Metric::where('active', '!=', 9)->orderBy('name','ASC')->get();
+
+			// echo '<pre>'; print_r($metric); echo '</pre>'; 	exit;
+
+
 		return View::make('admin.ingredients.form')
 			->with(array(
 				'data' => $data,
 				'i_images' => $ingredient_images,
-				'title' => 'Edit Ingredients: '. $data->name));
+				'title' => 'Edit Ingredients: '. $data->name,
+				'imData' => $imData,
+				'metrics' => $metric,
+			)	
+		);
 	}
 
 	
@@ -102,7 +118,9 @@ class Admin_IngredientsController extends BaseController {
 		
 		//Variable is holding the object
 		$input = Input::all();
-		//echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+		echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+
+		$ingredient_id = $input['id'];
 		$rules = array(
 			'name' 		=> 'required|unique:menu_ingredients,name,'.Input::get('id'),
 			'summary'	=> 'required',
@@ -180,7 +198,11 @@ class Admin_IngredientsController extends BaseController {
 			//This code gets the data from the input and attaches it to the object in the variable $data
 			//echo '<pre>'; print_r($data); echo '</pre>'; 	exit;
 		}; 
-		return Redirect::action('Admin_IngredientsController@getIngredients');
+		if(isset($input['sc'])){
+			return Redirect::action('Admin_IngredientsController@getIngredients');
+		}else{
+			return Redirect::action('Admin_IngredientsController@getEditIngredients', array($ingredient_id)); 
+		}
 	}
 	
 	public function getActiveIngredients($id){

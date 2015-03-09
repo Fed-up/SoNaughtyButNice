@@ -724,6 +724,10 @@ class Admin_RecipesController extends BaseController{
 
 						}
 
+						if($desired_total_markup == 0){
+							$desired_total_markup = 150;
+						}
+
 						if($desired_total_markup > 0){
 
 							$time_per_piece = ($sales_time/ $sales_amount) * 60; 
