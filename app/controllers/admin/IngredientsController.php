@@ -118,7 +118,7 @@ class Admin_IngredientsController extends BaseController {
 		
 		//Variable is holding the object
 		$input = Input::all();
-		echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+		// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 
 		$ingredient_id = $input['id'];
 		$rules = array(
