@@ -873,8 +873,7 @@
 
 				        </div>
 				        <div class="form-group">
-				        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost to make recipe batch:</h5>
-				              {{-- Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) --}}
+				        	<h5 class="col-sm-2 control-label sales-data__title">Staff cost to make recipe batch:</h5>
 				            <div class="col-sm-3">
 				               <p class="sales-data__info">$ {{(isset($sdata->staff_cost_to_make_recipe_batch)? $sdata->staff_cost_to_make_recipe_batch : '' )}}</p>
 				            </div>
@@ -885,8 +884,7 @@
 				            </div>
 				        </div>
 				        <div class="form-group">
-				        	  <h5 class="col-sm-2 control-label sales-data__title">Staff cost per piece:</h5>
-				              {{-- Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) --}}
+				        	<h5 class="col-sm-2 control-label sales-data__title">Staff cost per piece:</h5>
 				            <div class="col-sm-3">
 				               <p class="sales-data__info">$ {{(isset($sdata->staff_cost_per_piece)? $sdata->staff_cost_per_piece : '' )}}</p>
 				            </div>
@@ -897,7 +895,18 @@
 				            </div>
 				        </div>
 				        <hr/>
-				
+				        <div class="form-group">
+				        	 <h5 class="col-sm-2 control-label sales-data__title">Desired Sales Price:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{(isset($sdata->desired_sales_price)? $sdata->desired_sales_price : '' )}}</p>
+				            </div>
+
+				            {{ Form::label('desired_total_markup', 'Desired Total Markup - %: ', array('class' => 'col-sm-2 control-label')) }}
+				            <div class="col-sm-2">
+				               {{ Form::text('desired_total_markup', (isset($input['desired_total_markup'])? Input::old('desired_total_markup') : (isset($sdata->desired_total_markup)? $sdata->desired_total_markup : '' )), array('class' => 'form-control', 'placeholder' => '154')) }}
+				            </div>
+				        </div>
+						<hr/>
 				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
 			        	    <h5 class="col-sm-2 control-label sales-data__title">Total recipe cost:</h5>
 				            <div class="col-sm-3">
@@ -915,9 +924,9 @@
 				               <p class="sales-data__info">$ {{$sdata->total_ingredient_cost}}</p>
 				            </div>
 
-				            <h5 class="col-sm-2 control-label sales-data__title">Total recipe revenue:</h5>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total margin percentage:</h5>
 				            <div class="col-sm-3">
-				               <p class="sales-data__info">$ {{$sdata->total_recipe_revenue}}</p>
+				               <p class="sales-data__info">{{$sdata->total_margin_percentage}} %</p>
 				            </div>
 				        </div>
 				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
@@ -926,10 +935,10 @@
 				               <p class="sales-data__info">$ {{$sdata->total_ingredient_cost_per_piece}}</p>
 				            </div>
 
-				            <!-- <h5 class="col-sm-2 control-label sales-data__title">Total markup per piece:</h5>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total recipe revenue:</h5>
 				            <div class="col-sm-3">
-				               <p class="sales-data__info">$ {{$sdata->total_markup_per_piece}}</p>
-				            </div> -->
+				               <p class="sales-data__info">$ {{$sdata->total_recipe_revenue}}</p>
+				            </div>
 				        </div>
 				        <hr/>
 				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">

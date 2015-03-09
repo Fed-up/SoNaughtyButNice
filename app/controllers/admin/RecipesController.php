@@ -681,13 +681,14 @@ class Admin_RecipesController extends BaseController{
 					// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 
 					
-						// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+						// echo '<pre>'; print_r($ti_cost); echo '</pre>'; 	exit;
 
 						$sdata_id = $input['sdata_id'];
 						$staff_cost_per_hour = $input['staff_cost_per_hour'];
 						$sales_price = $input['sales_price'];
 						$sales_amount = $input['sales_amount'];
 						$sales_time = $input['sales_time'];
+						$desired_total_markup = $input['desired_total_markup'];
 
 						$total_recipe_revenue = 0;
 						$total_ingredient_cost_per_piece = 0;
@@ -707,20 +708,42 @@ class Admin_RecipesController extends BaseController{
 							$staff_cost_per_piece = $staff_cost_to_make_recipe_batch/ $sales_amount;
 							$total_cost_per_piece = $total_recipe_cost / $sales_amount;
 							$total_ingredient_cost_per_piece = $ti_cost/  $sales_amount;
-							
-							$total_profit_per_piece = $total_profit/ $sales_amount;
+
 							$total_cost_percentage = $total_recipe_cost/ $total_recipe_revenue * 100;
 							$total_profit = $total_recipe_revenue - $total_recipe_cost;
 							$staff_cost_percentage = $staff_cost_to_make_recipe_batch/ $total_recipe_revenue * 100;
 							$ingredient_cost_percentage = $ti_cost/ $total_recipe_revenue * 100;
-							$total_markup_percentage = $total_recipe_revenue/ $total_profit * 100;
+
+
+							// $total_markup_percentage = $total_recipe_revenue/ $total_profit * 100;
+
+							$total_margin_percentage = $total_profit/ ($sales_amount * $sales_price) * 100;
+							$decimal_margin = $total_margin_percentage/100;
+							$total_markup_percentage = $decimal_margin/ (1 - $decimal_margin) * 100;
+							$total_profit_per_piece = $total_profit/ $sales_amount;
+
 						}
 
+						if($desired_total_markup > 0){
+
+							$time_per_piece = ($sales_time/ $sales_amount) * 60; 
+							$time_to_make = ($time_per_piece * $sales_amount) / 60;
+							$projected_staff_cost_to_make = ($staff_cost_per_hour / 60) * $time_to_make;
+
+							$projected_ingredient_cost = $total_ingredient_cost_per_piece * $sales_amount;
+							$projected_recipe_cost = $projected_ingredient_cost + $projected_staff_cost_to_make;
+							$projected_total_markup = $projected_recipe_cost * ($desired_total_markup / 100);
+							$projected_recipe_revenue = $projected_total_markup + $projected_recipe_cost;
+
+							$desired_sales_price = $projected_recipe_revenue / $sales_amount;
+
+
+
+							// echo '<pre>'; print_r($desired_sales_price); echo '</pre>'; 	exit;
+						}
 						
 						
 						
-						
-						// echo '<pre>'; print_r($sdata_id); echo '</pre>'; 	exit;
 
 						// $_sales = SalesData::find($sdata_id);	
 						DB::table('sales_data')
@@ -745,6 +768,10 @@ class Admin_RecipesController extends BaseController{
 			            		'total_profit_per_piece' => $total_profit_per_piece,
 			            		'ingredient_cost_percentage' => $ingredient_cost_percentage,
 			            		'total_markup_percentage' => $total_markup_percentage,
+			            		'total_margin_percentage' => $total_margin_percentage,
+
+			            		'desired_sales_price' => $desired_sales_price,
+			            		'desired_total_markup' => $desired_total_markup,
 
 			            	)
 			            );

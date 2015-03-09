@@ -144,7 +144,9 @@ ul, li {
 .content__title--main--signup {
   text-align: center;
   margin: 0.5rem 0 2.5rem 0;
-  font-family: $headings; }
+  font-family: $headings; 
+  line-height: 1.6rem;
+}
 
 .content__title--link {
   text-decoration: none;

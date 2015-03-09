@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>{{$pData[0]->name}} - Package Enquiry</title>
+<title>Catering Enquiry</title>
 </head>
 <body style="font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color:#f0f2ea; margin:0; padding:0; color:#333333;">
 
@@ -15,11 +15,11 @@
                     <tbody>
                         <tr>
                             <td>
-                                <a href="https://www.sonaughtybutnice.com/package/{{$pData[0]->id}}" style="display:block; width:407px; height:100px; margin:0 auto 30px;">
+                                <a href="https://www.sonaughtybutnice.com/catering" style="display:block; width:407px; height:100px; margin:0 auto 30px;">
                                     <img src="https://www.sonaughtybutnice.com/images/email/header_logo.png" width="407" height="100" alt="SoNaughtyButNice.com Logo" style="display:block; border:0; margin:0;">
                                 </a>
                                 <p style="margin:0 0 36px; text-align:center; font-size:14px; line-height:20px; text-transform:uppercase; color:#626658;">
-                                    {{$pData[0]->name}} - Package Enquiry
+                                    Catering Enquiry
                                 </p>
                                 <!-- begin wrapper -->
                                 <table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -44,39 +44,14 @@
                                                 <p style="margin:0 30px 33px;; text-align:center; font-size:16px; line-height:30px; color:#484a42;">
                                                     Time: {{$time}}
                                                 </p>
-                                                <!-- begin articles -->
-                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                    <tbody>
 
-                                                        @foreach($pData as $package)
-                                                            @foreach($package->menuRecipes as $recipe)
-                                                                <tr valign="top">
-                                                                    <td width="30"><p style="margin:0; font-size:1px; line-height:1px;">&nbsp;</p></td>
-                                                                    <td width="100px">
-                                                                        <a style="display:block; margin:0 0 14px;" href="https://www.sonaughtybutnice.com/package/{{$pData[0]->id}}">
-                                                                            <img src="https://www.sonaughtybutnice.com/uploads/{{ $recipe_image[$recipe->id] }}" width="100%" height="100%" alt="Recipe Image" style="display:block; margin:0; border:0; background:#eeeeee;">
-                                                                        </a>
-                                                                    </td>
-                                                                    <td width="30"><p style="margin:0; font-size:1px; line-height:1px;">&nbsp;</p></td>
-                                                                    <td>
-                                                                        <p style="font-size:16px; text-align:left; line-height:22px; font-weight:bold; color:#6c7e44; margin:0 0 5px;">{{$recipe->name}}</p>
-                                                                        <p style="font-size:14px; text-align:left; line-height:22px; font-weight:bold; color:#343434; margin:0 0 5px; padding-right:10px; float:left">Amount: </p>
-                                                                        <p style="margin:0 0 35px; font-size:14px; line-height:22px; color:#333333;">{{$recipe->pivot->amount}}</p>
-                                                                    </td>
-                                                                    <td width="30"><p style="margin:0; font-size:1px; line-height:1px;">&nbsp;</p></td>
-                                                                </tr>
-                                                            @endforeach
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                                <!-- /end articles -->
                                                 <p style="margin:0; border-top:1px solid #e5e5e5; font-size:5px; line-height:5px; margin:0 30px 29px;">&nbsp;</p>
                                                 <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                                     <tbody>
                                                         <tr valign="top">
                                                             <td width="30"><p style="margin:0; font-size:1px; line-height:1px;">&nbsp;</p></td>
                                                             <td>
-                                                                <p style="margin:0 0 4px; font-weight:bold; color:#6c7e44; font-size:18px; line-height:22px;">Thank you for your message</p>
+                                                                <p style="margin:0 0 4px; font-weight:bold; color:#6c7e44; font-size:18px; line-height:22px;">Your message</p>
                                                                 <p style="margin-left:10px; color:#333333; font-size:14px; line-height:18px;">{{$d_message}}</p>
                                                             </td>
                                                             <td width="30"><p style="margin:0; font-size:1px; line-height:1px;">&nbsp;</p></td>
@@ -115,7 +90,7 @@
                                                                 </a>
                                                                 <p style="margin:0; font-weight:bold; clear:both; font-size:12px; line-height:22px;">
                                                                     <a href="https://www.sonaughtybutnice.com" style="color:#6d7e44; text-decoration:none;">Visit website</a><br>
-                                                                    <a href="https://www.sonaughtybutnice.com/package/{{$pData[0]->id}}" style="color:#6d7e44; text-decoration:none;">Veiw Package</a>
+                                                                    <a href="https://www.sonaughtybutnice.com/catering" style="color:#6d7e44; text-decoration:none;">Veiw Package</a>
                                                                 </p>
                                                             </td>
                                                             <td width="30"><p style="margin:0; font-size:1px; line-height:1px;">&nbsp;</p></td>

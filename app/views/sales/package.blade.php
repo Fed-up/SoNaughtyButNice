@@ -50,7 +50,7 @@
                 @endif
                
                     <p class="package__total">Total: ${{$pData[0]->price}}</p>
-                    <h2 class="content__title--main--signup">@if (Auth::check()) Hi {{ Auth::user()->fname }}, @endif To order<br/>The {{$pData[0]->name}} package<br/> Please email us today =)</h2> 
+                    <h2 class="content__title--main--signup">@if (Auth::check()) Hi {{ Auth::user()->fname }}, @endif Currently our catering enquiry system is being renovated<br/><br/>To get a price on this catering package please email us today with the changes you require to this package selection =)</h2> 
                     <div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
                         {{ Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')) }}
                         <div class="">
@@ -60,14 +60,14 @@
                     </div>
                     
                     <div class="form-group {{ ($errors->has('date')) ? 'has-error' : '' ; }}">
-                        {{ Form::label('date', 'Date: ', array('class' => ' content-title--sub ')) }}
+                        {{ Form::label('date', 'Delivery Date: ', array('class' => ' content-title--sub ')) }}
                         <div class="">
                             {{ ($errors->has('date'))? '<p class="error_message">'. $errors->first('date') .'</p>' : '' }}
                             {{ Form::text('date', (isset($input['date'])? Input::old('date') : (isset($user->date)? $user->date : '' )), array('class' => 'input__text')) }} 
                         </div>
                     </div>
                     <div class="form-group {{ ($errors->has('time')) ? 'has-error' : '' ; }}">
-                        {{ Form::label('time', 'Time: ', array('class' => ' content-title--sub ')) }}
+                        {{ Form::label('time', 'Delivery Time: ', array('class' => ' content-title--sub ')) }}
                         <div class="">
                             {{ ($errors->has('time'))? '<p class="error_message">'. $errors->first('time') .'</p>' : '' }}
                             {{ Form::text('time', (isset($input['time'])? Input::old('time') : (isset($user->time)? $user->time : '' )), array('class' => 'input__text')) }} 
@@ -93,7 +93,7 @@
                         {{ Form::label('message', 'Detailed Message: ', array('class' => ' content-title--sub ')) }}
                         <div class="">
                             {{ ($errors->has('message'))? '<p class="error_message">'. $errors->first('message') .'</p>' : '' }}
-                            {{ Form::textarea('message', (isset($input['message'])? Input::old('message') : ''), array('class' => 'input__text')) }} 
+                            {{ Form::textarea('message', (isset($input['message'])? Input::old('message') : ''), array('class' => 'input__text', 'placeholder' => 'Example: 12 Chocolate Strawberries, 30 Banana Smoothies and can I please get 12 Rasberry Mousse desserts, for my wedding, except in stead of rasberries I would love it to be made with blueberries =)')) }} 
                         </div>
                     </div>
                     {{ Form::hidden('package_id', $pData[0]->id) }}
