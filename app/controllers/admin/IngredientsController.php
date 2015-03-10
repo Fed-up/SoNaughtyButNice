@@ -210,32 +210,55 @@ class Admin_IngredientsController extends BaseController {
 							$dp->delete();
 						};
 					};
+				}else{
+					$data->active 	= 0;
+					
+					
+				};
 
-					if(isset($input['metric_amount']) && isset($input['metric_grams'])){
+				// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+
+				if(isset($input['metric_amount']) && isset($input['metric_grams'])){
 
 						$metric_amount = $input['metric_amount'];
 						$metric_grams = $input['metric_grams'];
 
-						echo '<pre>HIHI'; print_r($input); echo '</pre>'; 	exit;
+						foreach ($metric_amount as $key => $value) {
+							
+							
+							if($key == 'x'){
+								foreach ($value as $metric_id => $metric_amount) {
+									# code...
+								}
+								// echo '<pre>'; print_r($metric_amount); echo '</pre>'; 	exit;
 
-
-						$attributes = array(
+								DB::table('ingredient_metric')->insert(
+			 				    	array(
+				                    	'metric_id' => $metric_id,
+				                    	'metric_amount' => $metric_amount,
+				                    	'metric_grams' => $metric_grams
+			 				    	)
+								);	
+							}else{
+								$imData_id = $key;
+								$attributes = array(
 				                    'menu_ingredients_id' => $ingredient_id, 
-				                    'metric_id' => $data->id, 
-				                    'metric_amount' => $amount[$i][$catering_recipe_pivot_id], 
-				                    'metric_grams' => $i+1);
-				            
-					    $findrecipes = DB::table('catering_recipes')->where('id', '=', $catering_recipe_pivot_id)->update($attributes) ;
+				                    'metric_id' => $metric_id, 
+				                    'metric_amount' => $metric_amount,
+				                    'metric_grams' => $metric_grams
+				                );
+				    			$imData_update = DB::table('ingredient_metric')->where('id', '=', $imData_id)->update($attributes) ;
+							}
+						}
+
+					
+
+						
+						
+						
 					}
-
-
-
-
-				}else{
-					$data->active 	= 0;
 					$data->save();
-					// echo '<pre>'; print_r($data); echo '</pre>'; 	exit;
-				};
+					exit;
 			};
 			//This code gets the data from the input and attaches it to the object in the variable $data
 			// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;

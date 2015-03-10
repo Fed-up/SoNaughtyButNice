@@ -320,13 +320,13 @@
 				    	<div class="form-group">
 				            <label for="<?php echo $metric->name; ?>" class="col-sm-2 control-label"><?php echo $metric->name; ?> :</label>
 				            <div class="col-sm-3">
-				            	<input type="text" class="form-control" id="<?php echo $metric->name; ?>" name="metric_amount['x'][<?php echo $metric->id; ?>]" value="" />
+				            	<input type="text" class="form-control" id="<?php echo $metric->name; ?>" name="metric_amount[x][<?php echo $metric->id; ?>]" value="" />
 				            </div>
 
 				            <label for="grams" class="col-sm-2 control-label">Grams :</label>
 				            <div class="col-sm-3">
 				               <?php /* Form::text('$metric->name', (isset($input['ingredient_metric'])? Input::old('ingredient_metric') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) */ ?>
-				               <input type="text" class="form-control" id="grams" name="metric_grams['x'][<?php echo $metric->id; ?>]" value="" />
+				               <input type="text" class="form-control" id="grams" name="metric_grams[x][<?php echo $metric->id; ?>]" value="" />
 				            </div>
 				        </div>
 				        <?php $x++; ?>
