@@ -103,11 +103,19 @@ class Admin_IngredientsController extends BaseController {
 			// 	echo '<pre>'; print_r($imData); echo '</pre>'; 	exit;
 			// }
 
-			// foreach ($imData as $im) {
-			// 	foreach ($im->metric as $pivot_metric) {
-			// 		echo '<pre>'; print_r($pivot_metric); echo '</pre>'; 	exit;
+			// foreach($metric as $met){
+			// 	foreach($imData as $im){
+			// 		if($im->Metric()->exists()){		
+			// 			foreach ($im->metric as $pivot_metric){	
+			// 				echo '<pre>'; print_r($pivot_metric->pivot->metric_amount); echo '</pre>'; 
+			// 			}
+			// 		}else{
+			// 			echo '<pre>'; print_r($met->name); echo '</pre>'; 
+			// 		}
 			// 	}
-			// }
+			// 	// $person->getStudent()->exists();
+					
+			// }exit;
 			
 
 
@@ -127,18 +135,18 @@ class Admin_IngredientsController extends BaseController {
 		
 		//Variable is holding the object
 		$input = Input::all();
-		// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+		
+
+		// s
 
 		$ingredient_id = $input['id'];
-		$grams = $input['grams'];
-		$metric_type = $input['metric_type'];
+		//$grams = $input['grams'];
+		// $metric_type = $input['metric_type'];
 
 
 		$rules = array(
 			'name' 		=> 'required|unique:menu_ingredients,name,'.Input::get('id'),
 			'summary'	=> 'required',
-			
-			// 'price'	=> 'required|regex:/^[+-]?\d+\.\d+, ?[+-]?\d+\.\d+$/'
 		);
 		
 		$validator = Validator::make($input, $rules);
@@ -202,6 +210,27 @@ class Admin_IngredientsController extends BaseController {
 							$dp->delete();
 						};
 					};
+
+					if(isset($input['metric_amount']) && isset($input['metric_grams'])){
+
+						$metric_amount = $input['metric_amount'];
+						$metric_grams = $input['metric_grams'];
+
+						echo '<pre>HIHI'; print_r($input); echo '</pre>'; 	exit;
+
+
+						$attributes = array(
+				                    'menu_ingredients_id' => $ingredient_id, 
+				                    'metric_id' => $data->id, 
+				                    'metric_amount' => $amount[$i][$catering_recipe_pivot_id], 
+				                    'metric_grams' => $i+1);
+				            
+					    $findrecipes = DB::table('catering_recipes')->where('id', '=', $catering_recipe_pivot_id)->update($attributes) ;
+					}
+
+
+
+
 				}else{
 					$data->active 	= 0;
 					$data->save();
@@ -209,7 +238,7 @@ class Admin_IngredientsController extends BaseController {
 				};
 			};
 			//This code gets the data from the input and attaches it to the object in the variable $data
-			//echo '<pre>'; print_r($data); echo '</pre>'; 	exit;
+			// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 		}; 
 		if(isset($input['sc'])){
 			return Redirect::action('Admin_IngredientsController@getIngredients');
