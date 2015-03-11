@@ -227,44 +227,65 @@ class Admin_IngredientsController extends BaseController {
 							$imData_ids = $input['imData_id'];
 						}
 						
+						$m_count = count($metric_amounts);
+						$m_count = $m_count;
+						$m = 0;
 
+						foreach($metric_amounts as $ma){
+							if($m <= $m_count){
+								foreach($ma as $metric_id=>$metric_amount){
+									
+									echo '<pre>'; print_r($metric_id); echo '</pre>'; 
 
-						foreach ($metric_amounts as $amount_metric_id => $metric_amount) {
-							foreach ($metric_grams as $gram_metric_id => $metric_gram) {
-
-									// echo '<pre>'; print_r($metric_amounts); echo '</pre>'; 	exit;
-								
-									if(isset($input['imData_id'])){
-
-										// echo '<pre>'; print_r($metric_gram); echo '</pre>'; 	exit;
-										foreach ($imData_ids as $imData_metric_id => $imData_id) {
-											echo '<pre>'; print_r($imData_id); echo '</pre>'; exit;	
-											$metric_id = $metric_id;
+									if($metric_id != 'x'){
+											// echo '<pre>ID</pre>';
 											$attributes = array(
 							                    'menu_ingredients_id' => $ingredient_id, 
 							                    'metric_id' => $metric_id, 
-							                    'metric_amount' => $metric_amount,
-							                    'metric_grams' => $metric_grams
+							                    'metric_amount' => $input['metric_amount'][$m][$metric_id],
+							                    'metric_grams' => $input['metric_grams'][$m][$metric_id]
 							                );
-							    			// $imData_update = DB::table('ingredient_metric')->where('id', '=', $imData_id)->update($attributes) ;
-										}
+							    			$imData_update = DB::table('ingredient_metric')->where('id', '=', $input['imData_id'][$m][$metric_id])->update($attributes) ;
 									}else{
+										$amount_key = array_values($input['metric_amount'][$m]['x']);
+										$amount_value = array_values($input['metric_amount'][$m]['x']);
+										$grams_value = array_values($input['metric_grams'][$m]['x']);
+										// echo '<pre>'; print_r($grams_value[0]); echo '</pre>'; 
 
-										echo '<pre>'.$amount_metric_id.','.$metric_amount.','.$metric_gram.'</pre>';
-									
-										// DB::table('ingredient_metric')->insert(
-					 				//     	array(
-					 				//     		'menu_ingredients_id' => $ingredient_id,
-						    //                 	'metric_id' => $amount_metric_id,
-						    //                 	'metric_amount' => $metric_amount,
-						    //                 	'metric_grams' => $metric_gram
-					 				//     	)
-										// );	
+
+										DB::table('ingredient_metric')->insert(
+					 				    	array(
+					 				    		'menu_ingredients_id' => $ingredient_id,
+						                    	'metric_id' => $amount_key[0],
+						                    	'metric_amount' => $amount_value[0],
+							                    'metric_grams' =>$grams_value[0]
+					 				    	)
+										);	
 
 										
 									}
+
+								}
+								$m++;
+							// foreach ($metric_grams as $gram_metric_id => $metric_gram) {
+								// echo '<pre>'.$amount_metric_id.','.$metric_amount.','.$metric_gram.'</pre>';
+
+								
+
+
+
+
+
 							}
-						}exit;
+						}
+						// $queries = DB::getQueryLog();
+						// echo '<pre>'; print_r($queries); echo '</pre>'; 
+						exit;
+
+
+
+
+						
 
 					
 
