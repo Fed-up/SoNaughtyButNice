@@ -104,21 +104,21 @@ class Admin_IngredientsController extends BaseController {
 			// }
 
 
-			foreach($metric as $met){
-				echo '<pre>'; print_r($met->name); echo '</pre>'; 
+			// foreach($metric as $met){
+			// 	echo '<pre>'; print_r($met->name); echo '</pre>'; 
 
-				foreach($imData as $im){
-					if($im->Metric()->exists()){		
-						foreach ($im->metric as $pivot_metric){	
-							echo '<pre>'; print_r($pivot_metric->pivot->id); echo '</pre>'; 
-						}
-					}else{
-						echo '<pre>'; print_r($met->name); echo '</pre>'; 
-					}
-				}
-				// $person->getStudent()->exists();
+			// 	foreach($imData as $im){
+			// 		if($im->Metric()->exists()){		
+			// 			foreach ($im->metric as $pivot_metric){	
+			// 				echo '<pre>'; print_r($pivot_metric->pivot->id); echo '</pre>'; 
+			// 			}
+			// 		}else{
+			// 			echo '<pre>'; print_r($met->name); echo '</pre>'; 
+			// 		}
+			// 	}
+			// 	// $person->getStudent()->exists();
 					
-			}exit;
+			// }exit;
 			
 
 
