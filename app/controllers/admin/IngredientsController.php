@@ -105,15 +105,22 @@ class Admin_IngredientsController extends BaseController {
 
 
 			// foreach($metric as $met){
-			// 	echo '<pre>'; print_r($met->name); echo '</pre>'; 
+			// 	// echo '<pre>'; print_r($met->name); echo '</pre>'; 
+			// 	echo '<hr/>';
 
 			// 	foreach($imData as $im){
-			// 		if($im->Metric()->exists()){		
-			// 			foreach ($im->metric as $pivot_metric){	
-			// 				echo '<pre>'; print_r($pivot_metric->pivot->id); echo '</pre>'; 
-			// 			}
+			// 		if($im->Metric()->exists()){
+			// 			if($pivot_metric->id == $metric->id){		
+			// 				foreach ($im->metric as $pivot_metric){	
+			// 					echo $pivot_metric->pivot->id.','.$pivot_metric->id.','.$met->id.'<br>'; 
+			// 					// echo '<pre>'; print_r($pivot_metric->id); echo '</pre>'; 
+			// 					// echo '<pre>'; print_r($met->id); echo '</pre>'; 
+			// 					// 
+
+			// 				}
+			// 			}else{$metric->id;}
 			// 		}else{
-			// 			echo '<pre>'; print_r($met->name); echo '</pre>'; 
+			// 			// echo '<pre>'; print_r($met->name); echo '</pre>'; 
 			// 		}
 			// 	}
 			// 	// $person->getStudent()->exists();
@@ -220,7 +227,7 @@ class Admin_IngredientsController extends BaseController {
 					
 				};
 
-				echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+				// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 
 				if(isset($input['metric_amount']) && isset($input['metric_grams'])){
 
@@ -238,10 +245,9 @@ class Admin_IngredientsController extends BaseController {
 							if($m <= $m_count){
 								foreach($ma as $metric_id=>$metric_amount){
 									
-									echo '<pre>'; print_r($metric_id); echo '</pre>'; 
+									// echo '<pre>'; print_r($metric_id); echo '</pre>'; 
 
 									if($metric_id != 'x'){
-											// echo '<pre>ID</pre>';
 											$attributes = array(
 							                    'menu_ingredients_id' => $ingredient_id, 
 							                    'metric_id' => $metric_id, 
@@ -250,10 +256,10 @@ class Admin_IngredientsController extends BaseController {
 							                );
 							    			$imData_update = DB::table('ingredient_metric')->where('id', '=', $input['imData_id'][$m][$metric_id])->update($attributes) ;
 									}else{
-										$amount_key = array_values($input['metric_amount'][$m]['x']);
+										$amount_key = array_keys($input['metric_amount'][$m]['x']);
 										$amount_value = array_values($input['metric_amount'][$m]['x']);
 										$grams_value = array_values($input['metric_grams'][$m]['x']);
-										// echo '<pre>'; print_r($grams_value[0]); echo '</pre>'; 
+										echo '<pre>'; print_r($amount_value[0]); echo '</pre>'; 
 
 
 										DB::table('ingredient_metric')->insert(
@@ -273,11 +279,6 @@ class Admin_IngredientsController extends BaseController {
 							// foreach ($metric_grams as $gram_metric_id => $metric_gram) {
 								// echo '<pre>'.$amount_metric_id.','.$metric_amount.','.$metric_gram.'</pre>';
 
-								
-
-
-
-
 
 							}
 						}
@@ -285,15 +286,6 @@ class Admin_IngredientsController extends BaseController {
 						// echo '<pre>'; print_r($queries); echo '</pre>'; 
 						exit;
 
-
-
-
-						
-
-					
-
-						
-						
 						
 					}
 					$data->save();

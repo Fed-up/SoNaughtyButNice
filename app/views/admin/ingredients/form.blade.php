@@ -303,20 +303,21 @@
 				@foreach($imData as $im)
 					@if($im->Metric()->exists())
 						@foreach ($im->metric as $pivot_metric)	
-							<div class="form-group">
-					            <label for="{{$metric->name}}" class="col-sm-2 control-label">{{$metric->name}} :</label>
-					            <div class="col-sm-3">
-					            	<input type="text" class="form-control" id="{{$metric->name}}" name="@if($pivot_metric->id == $metric->id) metric_amount[][{{$metric->id}}] @else metric_amount[][x][{{$metric->id}}] @endif" value="@if($pivot_metric->id == $metric->id) {{ $pivot_metric->pivot->metric_amount }} @endif" />
-					            </div>
+							@if($pivot_metric->id == $metric->id)
+								<div class="form-group">
+						            <label for="{{$metric->name}}" class="col-sm-2 control-label">{{$metric->name}} :</label>
+						            <div class="col-sm-3">
+						            	<input type="text" class="form-control" id="{{$metric->name}}" name="@if($pivot_metric->id == $metric->id) metric_amount[][{{$metric->id}}] @else metric_amount[][x][{{$metric->id}}] @endif" value=" @if($pivot_metric->id == $metric->id) {{ $pivot_metric->pivot->metric_amount }} @endif " />
+						            </div>
 
-					            <label for="grams" class="col-sm-2 control-label">Grams :</label>
-					            <div class="col-sm-3">
-					               {{-- Form::text('$metric->name', (isset($input['ingredient_metric'])? Input::old('ingredient_metric') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) --}}
-					               <input type="text" class="form-control" id="grams" name="@if($pivot_metric->id == $metric->id) metric_grams[][{{$metric->id}}] @else metric_grams[][x][{{$metric->id}}] @endif" value="@if($pivot_metric->id == $metric->id) {{ $pivot_metric->pivot->metric_grams }} @endif" />
-					            </div>
-					            <input type="hidden" name="@if($pivot_metric->id == $metric->id) imData_id[][{{$metric->id}}] @else imData_id[][x][{{$metric->id}}] @endif" value="@if($pivot_metric->id == $metric->id) {{ $pivot_metric->pivot->id }} @endif"/>
-					        </div>
-					        <?php // $x++; ?>
+						            <label for="grams" class="col-sm-2 control-label">Grams :</label>
+						            <div class="col-sm-3">
+						               {{-- Form::text('$metric->name', (isset($input['ingredient_metric'])? Input::old('ingredient_metric') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) --}}
+						               <input type="text" class="form-control" id="grams" name="@if($pivot_metric->id == $metric->id) metric_grams[][{{$metric->id}}] @else metric_grams[][x][{{$metric->id}}] @endif" value=" @if($pivot_metric->id == $metric->id) {{ $pivot_metric->pivot->metric_grams }} @endif " />
+						            </div>
+						            <input type="hidden" name="@if($pivot_metric->id == $metric->id) imData_id[][{{$metric->id}}] @else imData_id[][x][{{$metric->id}}] @endif" value=" @if($pivot_metric->id == $metric->id) {{ $pivot_metric->pivot->id }} @endif "/>
+						        </div>
+					        @endif
 				        @endforeach
 				    @else
 				    	<div class="form-group">
