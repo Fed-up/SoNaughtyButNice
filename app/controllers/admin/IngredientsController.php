@@ -103,19 +103,22 @@ class Admin_IngredientsController extends BaseController {
 			// 	echo '<pre>'; print_r($imData); echo '</pre>'; 	exit;
 			// }
 
-			// foreach($metric as $met){
-			// 	foreach($imData as $im){
-			// 		if($im->Metric()->exists()){		
-			// 			foreach ($im->metric as $pivot_metric){	
-			// 				echo '<pre>'; print_r($pivot_metric->pivot->id); echo '</pre>'; 
-			// 			}
-			// 		}else{
-			// 			echo '<pre>'; print_r($met->name); echo '</pre>'; 
-			// 		}
-			// 	}
-			// 	// $person->getStudent()->exists();
+
+			foreach($metric as $met){
+				echo '<pre>'; print_r($met->name); echo '</pre>'; 
+
+				foreach($imData as $im){
+					if($im->Metric()->exists()){		
+						foreach ($im->metric as $pivot_metric){	
+							echo '<pre>'; print_r($pivot_metric->pivot->id); echo '</pre>'; 
+						}
+					}else{
+						echo '<pre>'; print_r($met->name); echo '</pre>'; 
+					}
+				}
+				// $person->getStudent()->exists();
 					
-			// }exit;
+			}exit;
 			
 
 
@@ -217,7 +220,7 @@ class Admin_IngredientsController extends BaseController {
 					
 				};
 
-				// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+				echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 
 				if(isset($input['metric_amount']) && isset($input['metric_grams'])){
 
