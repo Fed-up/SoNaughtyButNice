@@ -238,9 +238,10 @@ class Admin_IngredientsController extends BaseController {
 							if($m <= $m_count){
 								foreach($ma as $metric_id=>$metric_amount){
 									
-									// echo '<pre>'; print_r($metric_id); echo '</pre>'; 
+									echo '<pre>'; print_r($metric_id); echo '</pre>'; 
 
 									if($metric_id != 'x'){
+											// echo '<pre>ID</pre>';
 											$attributes = array(
 							                    'menu_ingredients_id' => $ingredient_id, 
 							                    'metric_id' => $metric_id, 
@@ -249,10 +250,10 @@ class Admin_IngredientsController extends BaseController {
 							                );
 							    			$imData_update = DB::table('ingredient_metric')->where('id', '=', $input['imData_id'][$m][$metric_id])->update($attributes) ;
 									}else{
-										$amount_key = array_keys($input['metric_amount'][$m]['x']);
+										$amount_key = array_values($input['metric_amount'][$m]['x']);
 										$amount_value = array_values($input['metric_amount'][$m]['x']);
 										$grams_value = array_values($input['metric_grams'][$m]['x']);
-										echo '<pre>'; print_r($amount_value[0]); echo '</pre>'; 
+										// echo '<pre>'; print_r($grams_value[0]); echo '</pre>'; 
 
 
 										DB::table('ingredient_metric')->insert(
