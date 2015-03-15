@@ -27,12 +27,12 @@
             <div class="columns small-12 medium-12 medium-push-12 large-6 large-pull-2 xlarge-7 xlarge-pull-1">
                 <section class="section__box section__box--nutrition-panel">
                     <?php if (Auth::check()): ?>
-                            
                         <p> Nutritional Panel is coming</p>
                         <br/>
                     <?php else: ?>
                         <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Recipe</p>
                         <!-- <a class=" trigger-menu"><span class="logo__image"></span></a> -->
+
                     <?php endif; ?>
                         
                     
@@ -77,17 +77,27 @@
                 </section>	
             </div>
             <div class="columns small-12 medium-6 ">
-        	    <h3 class="content__title">The Method </h3>
+                <?php if($recipe->exclusive == 1): ?>
+                    <h3 class="content__title">Exclusive Recipe</h3>
+                <?php else: ?>
+                    <h3 class="content__title">The Method</h3>
+                <?php endif; ?>
+        	    
                 <section class="section__box">
-                    <?php if(Auth::check()): ?>
-                        <?php foreach($recipe->MenuRecipesMethods as $rMethods): ?>
-                            <p>
-                                <?php echo $rMethods->description; ?>
-                            </p><br/>
-                        <?php endforeach; ?>
+                    <?php if($recipe->exclusive == 1): ?>
+                       <p>This is a <a class="content-link" href="/">SoNaughtyButNice.com</a> exclusive recipe, we may teach you how to make it at up comming <a class="content-link" href="/events">events</a> or you can include it in your next <a class="content-link" href="/catering">catering package</a></p>
                     <?php else: ?>
-                        <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Method</p>
-                    <?php endif; ?> 
+                        <?php if(Auth::check()): ?>
+                            <?php foreach($recipe->MenuRecipesMethods as $rMethods): ?>
+                                <p>
+                                    <?php echo $rMethods->description; ?>
+                                </p><br/>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Method</p>
+                        <?php endif; ?> 
+                    <?php endif; ?>
+                    
                 </section>  	 
             </div> 
         </section>
@@ -107,25 +117,26 @@
             
         </section>
 
-
-        <section class="row">
-            <div class="columns small-12 "> 
-                <div class=" ">
-                    <h3 class="content__title">Little Extras</h3>
-                    <section class="section__box">
-                        <?php if (Auth::check()): ?>
-                            <?php foreach($recipe->MenuRecipesExtras as $rExtras): ?>
-                                <p>
-                                    <?php echo $rExtras->description; ?>
-                                </p><br/>
-                            <?php endforeach; ?> 
-                        <?php else: ?>
-                            <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Little Extras</p>
-                        <?php endif; ?> 
-                    </section>
-                </div>         
-            </div>            
-        </section>
+        <?php if($recipe->exclusive != 1): ?>
+            <section class="row">
+                <div class="columns small-12 "> 
+                    <div class=" ">
+                        <h3 class="content__title">Little Extras</h3>
+                        <section class="section__box">
+                            <?php if (Auth::check()): ?>
+                                <?php foreach($recipe->MenuRecipesExtras as $rExtras): ?>
+                                    <p>
+                                        <?php echo $rExtras->description; ?>
+                                    </p><br/>
+                                <?php endforeach; ?> 
+                            <?php else: ?>
+                                <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Little Extras</p>
+                            <?php endif; ?> 
+                        </section>
+                    </div>         
+                </div>            
+            </section>
+        <?php endif; ?>
    
         <section class="row content-boxes__wrapper">
             <h5 class="content__title">Recipe cousins</h5>

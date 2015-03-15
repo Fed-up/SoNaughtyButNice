@@ -13,11 +13,15 @@
                         <article class="content-box">
                             <div class="row collapse">
 
-                                @foreach($recipe->Images as $image)
+                                
+
+                                    <!-- <pre>{{print_r($cImage[$recipe->id])}}</pre> -->
+
                                     <a href="/recipe/{{$recipe->id}}" class="columns small-4 medium-12 end">
+
                                       <img src="/uploads/{{ $cImage[$recipe->id] }}" />
                                     </a>
-                                @endforeach
+                                
                                
 
                                 <section class="columns small-8 medium-12">

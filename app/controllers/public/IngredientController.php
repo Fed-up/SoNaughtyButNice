@@ -37,7 +37,7 @@ class IngredientController  extends BaseController {
 			{
 				$query->where('section', '=', 'INGREDIENT')->orderBy(DB::raw('RAND()'))->where('active', '=', 1);
 			}))
-		->orderBy('name','ASC')->where('name', 'LIKE', 'u%')->orWhere('name', 'LIKE', 'v%')->orWhere('name', 'LIKE', 'w%')->orWhere('name', 'LIKE', 'x%')->orWhere('name', 'LIKE', 'y%')->orWhere('name', 'LIKE', 'z%')->where('active', '=', 1)->get();
+		->orderBy('name','ASC')->where('name', 'LIKE', 'u%')->orWhere('name', 'LIKE', 'v%')->orWhere('name', 'LIKE', 'w%')->orWhere('name', 'LIKE', 'x%')->orWhere('name', 'LIKE', 'y%')->where('name', 'LIKE', 'z%')->where('active', '=', 1)->get();
 		
 		// echo '<pre>'; print_r($aeData); echo '</pre>';exit;
 		// 		echo '<hr>';
@@ -57,36 +57,47 @@ class IngredientController  extends BaseController {
 			}
 		}
 
+		
 		// echo '<pre>'; print_r($aeData); echo '</pre>';exit;
 
 		foreach ($aeData as $ae) {
-			$count = count($ae->Images);
-			if($count < 1){
-				$ae_ingredient_image[$ae->id] = 'ingredient.png';
-			}else{
-				foreach($ae->Images as $ae_image){
-			        if(file_exists('uploads/'.$ae_image->name)){
-			            $ae_ingredient_image[$ae->id] = $ae_image->name;
-			        }else{
-			           	$ae_ingredient_image[$ae->id] = 'ingredient.png';
-			        }
+			// if($ae->active == 1){
+			// 	unset($aeData[$ae->id]);
+			// }else{
+				// echo '<pre>'; print_r($ae); echo '</pre>';
+				$count = count($ae->Images);
+				if($count < 1){
+					$ae_ingredient_image[$ae->id] = 'ingredient.png';
+				}else{
+					foreach($ae->Images as $ae_image){
+				        if(file_exists('uploads/'.$ae_image->name)){
+				            $ae_ingredient_image[$ae->id] = $ae_image->name;
+				        }else{
+				           	$ae_ingredient_image[$ae->id] = 'ingredient.png';
+				        }
+					}
 				}
-			}
+			// }
 		}
+		// echo '<pre>'; print_r($aeData); echo '</pre>';exit;
 
 		foreach ($fjData as $fj) {
-			$count = count($fj->Images);
-			if($count < 1){
-				$fj_ingredient_image[$fj->id] = 'ingredient.png';
-			}else{
-				foreach($fj->Images as $fj_image){
-			        if(file_exists('uploads/'.$fj_image->name)){
-			            $fj_ingredient_image[$fj->id] = $fj_image->name;
-			        }else{
-			           	$fj_ingredient_image[$fj->id] = 'ingredient.png';
-			        }
+			// if($fj->active == 1){
+			// 	unset($fjData[$fj->id]);
+			// }else{
+				$count = count($fj->Images);
+				if($count < 1){
+					$fj_ingredient_image[$fj->id] = 'ingredient.png';
+				}else{
+					foreach($fj->Images as $fj_image){
+				        if(file_exists('uploads/'.$fj_image->name)){
+				            $fj_ingredient_image[$fj->id] = $fj_image->name;
+				        }else{
+				           	$fj_ingredient_image[$fj->id] = 'ingredient.png';
+				        }
+					}
 				}
-			}
+			// }
 		}
 
 		foreach ($koData as $ko) {

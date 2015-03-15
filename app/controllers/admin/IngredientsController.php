@@ -284,12 +284,12 @@ class Admin_IngredientsController extends BaseController {
 						}
 						// $queries = DB::getQueryLog();
 						// echo '<pre>'; print_r($queries); echo '</pre>'; 
-						exit;
+						// exit;
 
 						
 					}
 					$data->save();
-					exit;
+					// exit;
 			};
 			//This code gets the data from the input and attaches it to the object in the variable $data
 			// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;

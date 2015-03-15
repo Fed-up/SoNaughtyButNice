@@ -60,7 +60,8 @@ class CollectionPageController  extends BaseController {
 				}			
 			}
 
-
+			// echo '<pre>'; print_r($recipe_image); echo '</pre>';
+			// exit;
 			return View::make('public.collection_page')->with(array(
 				'cData' => $cnData,
 				// 'paid' =>	$paid,

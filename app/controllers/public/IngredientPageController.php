@@ -2,34 +2,18 @@
 class IngredientPageController  extends BaseController {
 
 	public function getIngredient($id){
-		$iData = MenuIngredients::where('id', '=', $id)
+		$iData = MenuIngredients::where('id', '=', $id)->where('active', '=', 1)
 			->with(array('Images' => function($query)
 			{
 				$query->orderBy(DB::raw('RAND()'))->where('section', '=', 'INGREDIENT')->where('active', '=', 1);
 			}))
 		->orderBy(DB::raw('RAND()'))->where('active', '=', 1)->get();
 
-
-
-
-
-
-		foreach ($iData as $ingredient) {
-			
+		foreach ($iData as $ingredient) {			
 			$count = count($ingredient->Images);
 			// echo '<pre>'; print_r($count); echo '</pre>';exit;
-
-
-
-
 			if($count > 0){
-
-				// echo '<pre>'; print_r($ingredient->Images[0]->name); echo '</pre>';exit;
-
-
 				if(file_exists('uploads/'.$ingredient->Images[0]->name)){
-
-
 		            $ingredient_image[$ingredient->id] = $ingredient->Images[0]->name;
 		        }else{
 		           	$ingredient_image[$ingredient->id] = 'ingredient.png';
@@ -37,14 +21,10 @@ class IngredientPageController  extends BaseController {
 		    }else{
 				$ingredient_image[$ingredient->id] = 'ingredient.png';
 		    }
-		    // echo '<pre>'; print_r($ingredient_image); echo '</pre>';   
+		    
 		}
-
-
-
-
-
-
+		
+		// echo '<pre>'; print_r($iData); echo '</pre>';  exit; 
 
 		$rData = MenuRecipes::where('menu_recipes.active', '=', 1)->take(8)
 			->with(array('MenuRecipesIngredients' => function($query) use ($id){
@@ -70,7 +50,7 @@ class IngredientPageController  extends BaseController {
 			}	
 		}
 		// echo '<pre>'; print_r($rnData); echo '</pre>';exit;
-
+		
 		if(isset($rnData)){
 			return View::make('public.ingredient_page')->with(array(
 				'iData' => $iData,

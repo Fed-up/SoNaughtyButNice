@@ -86,6 +86,7 @@ class Admin_RecipesController extends BaseController{
 			$data->summary = Input::get('summary');
 			$data->menu_categories_id = Input::get('categories');
 			$data->active = (isset($input['active'])) ? 1 : 0;
+			$data->exclusive  = (isset($input['exclusive'])) ? 1 : 0;
 			$data->length 	= $input['length'];
 			$data->difficulty 	= $input['difficulty'];
 			$data->serve 	= $input['serve'];
@@ -392,6 +393,7 @@ class Admin_RecipesController extends BaseController{
 			$data->summary 	= $input['summary'];
 			$data->menu_categories_id 	= $input['categories'];
 			$data->active = (isset($input['active'])) ? 1 : 0;
+			$data->exclusive  = (isset($input['exclusive'])) ? 1 : 0;
 			$data->length 	= $input['length'];
 			
 			$data->difficulty 	= $input['difficulty'];

@@ -1,7 +1,5 @@
 @extends('tmpl.public')
 
-
-
 @section('content')
 
     

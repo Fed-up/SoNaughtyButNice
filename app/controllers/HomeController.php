@@ -31,9 +31,7 @@ class HomeController extends BaseController {
 
 
 		};
-
-
-
+		
 		// Categories
 		$cData = MenuCategories::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->take(1)
 			->with(array('menuRecipes' => function($query)

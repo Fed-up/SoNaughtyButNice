@@ -28,12 +28,12 @@
             <div class="columns small-12 medium-12 medium-push-12 large-6 large-pull-2 xlarge-7 xlarge-pull-1">
                 <section class="section__box section__box--nutrition-panel">
                     @if (Auth::check())
-                            
                         <p> Nutritional Panel is coming</p>
                         <br/>
                     @else
                         <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Recipe</p>
                         <!-- <a class=" trigger-menu"><span class="logo__image"></span></a> -->
+
                     @endif
                         
                     
@@ -78,17 +78,27 @@
                 </section>	
             </div>
             <div class="columns small-12 medium-6 ">
-        	    <h3 class="content__title">The Method </h3>
+                @if($recipe->exclusive == 1)
+                    <h3 class="content__title">Exclusive Recipe</h3>
+                @else
+                    <h3 class="content__title">The Method</h3>
+                @endif
+        	    
                 <section class="section__box">
-                    @if(Auth::check())
-                        @foreach($recipe->MenuRecipesMethods as $rMethods)
-                            <p>
-                                {{$rMethods->description}}
-                            </p><br/>
-                        @endforeach
+                    @if($recipe->exclusive == 1)
+                       <p>This is a <a class="content-link" href="/">SoNaughtyButNice.com</a> exclusive recipe, we may teach you how to make it at up comming <a class="content-link" href="/events">events</a> or you can include it in your next <a class="content-link" href="/catering">catering package</a></p>
                     @else
-                        <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Method</p>
-                    @endif 
+                        @if(Auth::check())
+                            @foreach($recipe->MenuRecipesMethods as $rMethods)
+                                <p>
+                                    {{$rMethods->description}}
+                                </p><br/>
+                            @endforeach
+                        @else
+                            <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Method</p>
+                        @endif 
+                    @endif
+                    
                 </section>  	 
             </div> 
         </section>
@@ -108,25 +118,26 @@
             
         </section>
 
-
-        <section class="row">
-            <div class="columns small-12 "> 
-                <div class=" ">
-                    <h3 class="content__title">Little Extras</h3>
-                    <section class="section__box">
-                        @if (Auth::check())
-                            @foreach($recipe->MenuRecipesExtras as $rExtras)
-                                <p>
-                                    {{$rExtras->description}}
-                                </p><br/>
-                            @endforeach 
-                        @else
-                            <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Little Extras</p>
-                        @endif 
-                    </section>
-                </div>         
-            </div>            
-        </section>
+        @if($recipe->exclusive != 1)
+            <section class="row">
+                <div class="columns small-12 "> 
+                    <div class=" ">
+                        <h3 class="content__title">Little Extras</h3>
+                        <section class="section__box">
+                            @if (Auth::check())
+                                @foreach($recipe->MenuRecipesExtras as $rExtras)
+                                    <p>
+                                        {{$rExtras->description}}
+                                    </p><br/>
+                                @endforeach 
+                            @else
+                                <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Little Extras</p>
+                            @endif 
+                        </section>
+                    </div>         
+                </div>            
+            </section>
+        @endif
    
         <section class="row content-boxes__wrapper">
             <h5 class="content__title">Recipe cousins</h5>

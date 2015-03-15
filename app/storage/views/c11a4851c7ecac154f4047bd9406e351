@@ -12,11 +12,15 @@
                         <article class="content-box">
                             <div class="row collapse">
 
-                                <?php foreach($recipe->Images as $image): ?>
+                                
+
+                                    <!-- <pre><?php echo print_r($cImage[$recipe->id]); ?></pre> -->
+
                                     <a href="/recipe/<?php echo $recipe->id; ?>" class="columns small-4 medium-12 end">
+
                                       <img src="/uploads/<?php echo $cImage[$recipe->id]; ?>" />
                                     </a>
-                                <?php endforeach; ?>
+                                
                                
 
                                 <section class="columns small-8 medium-12">

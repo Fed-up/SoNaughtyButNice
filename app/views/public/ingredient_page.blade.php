@@ -8,6 +8,7 @@
         	@foreach($iData as $ingredient)
                 <h2 class="content__title content__title--main"><a class="content__title--link" href="/ingredients">{{$ingredient->name}}</a></h2>
                 <div class="columns small-12 medium-6 medium-push-3 large-4 large-pull-0">
+                    <!-- <pre>{{print_r($iImage[$ingredient->id])}}</pre> -->
                     <img src="/uploads/{{ $iImage[$ingredient->id] }}" />
                 </div>
                 <div class="columns small-12 medium-12 large-8 end">

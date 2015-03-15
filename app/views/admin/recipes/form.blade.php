@@ -636,6 +636,12 @@
             <div class="col-sm-10">
               {{ Form::checkbox('active', 1, (isset($input['active'])? Input::old('active') : (isset($data->active)? $data->active : '' )), array('class' => '')) }}
             </div>
+        </div>  
+        <div class="form-group">
+            {{ Form::label('exclusive', 'Exclusive: ', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+              {{ Form::checkbox('exclusive', 1, (isset($input['exclusive'])? Input::old('exclusive') : (isset($data->exclusive)? $data->exclusive : '' )), array('class' => '')) }}
+            </div>
         </div>        
         <div class="form-group {{ ($errors->has('categories')) ? 'has-error' : '' ; }}">
      	{{ Form::label('categories', 'Categories: ', array('class' => 'col-sm-2 control-label')) }}
