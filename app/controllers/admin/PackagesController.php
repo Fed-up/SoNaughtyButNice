@@ -23,8 +23,10 @@ class Admin_PackagesController extends BaseController {
 			->with(array(
 				'title' => 'Create New Catering Package',
 				'recipes' => $mRep,
-			));	
+			)
+		);	
 	}
+	
 	public function postAddPackages(){
 		
 		$input = Input::all();

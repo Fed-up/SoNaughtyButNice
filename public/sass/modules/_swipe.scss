@@ -53,12 +53,27 @@ input:-webkit-autofill {
 
 .form-control {
   display: block;
-  color: $text;
+  color: #343434;
   padding: 0.7rem;
   border-radius: 5px;
   background-color: #fff;
   border: 0px;
-  width: 100%; }
+  margin-bottom: 1rem;
+}
+
+#_PackageRecipes .form-control {
+  display: inline;
+  // width: 40%;
+  margin-right: 10px;
+  border: #e0e0e0 solid 1px;
+}
+
+#_PackageRecipes .form-control-amount {
+  display: inline;
+  // width: 20%;
+  margin: 0 10px 0 0;
+  border: #e0e0e0 solid 1px;
+}
 
 .side__login__button {
   background-color: $main_dark;

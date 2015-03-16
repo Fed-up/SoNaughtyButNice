@@ -31,13 +31,34 @@ class CateringController  extends BaseController {
 		}
 		// echo '<pre>'; print_r($cData); echo '</pre>'; exit;
 
+
+		
+		$recipes = MenuRecipes::orderBy('name','ASC')->where('active', '=', '1')->get();
+
+		$mRep = array();
+		$mRep[0]	= '- Select Recipe -';	
+		foreach ($recipes as $recipe) {
+			$mRep[$recipe->id]	= $recipe->name;
+		};
+		
+		// echo '<pre>'; print_r($mRep); echo '</pre>'; 	exit;
+
+			
+
+		
+
 		return View::make('public.catering')->with(array(
 			'cData' => $cData,
-			'catering_image' => $package_image)
+			'catering_image' => $package_image,
+			'recipes' => $mRep,
+			)
 		);
 	}
 
-
+	public function getCreatePackage(){
+		$input = Input::all();
+		echo '<pre>'; print_r($input); echo '</pre>';exit;	
+	}
 
 	public function getPackage($id)
 	{

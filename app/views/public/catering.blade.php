@@ -1,107 +1,274 @@
 @extends('tmpl.public')
 
+@section('_header') 
+    <script src="/packages/jquery-1.11.1.min/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/packages/jquery-1.11.1.min/vendor/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script type="text/javascript" src="/packages/plupload-2.1.2/js/plupload.full.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/packages/jquery-1.11.1.min/vendor/jquery-ui-1.10.4.custom/css/no-theme/jquery-ui-1.10.4.custom.min.css"/> 
+    
+    <script>
+    $(function() {
+      
+    // $( "._mySortable" ).sortable({ 
+    //   axis: "y", 
+    //   opacity: 0.3,
+    //   placeholder: "sortable-placeholder",
+    //   // callback function
+    //   update: function( event, ui ) {
+    //     ui.item.css({'background':'#DBEEC9'})
+    //   },
+    // });
+    // $( "._mySortable" ).disableSelection();
+    
+ 
+    
+    
+    
+     //Start all Recipes 
+      
+    //Start Delete Recipe
+    $('#counterRecipes').val( $('#_PackageRecipes li').length );
+
+    $('.deleteRecipe').click(function(e) {
+      e.preventDefault();
+      
+      //var currentID = 0;  
+          
+      var currentID = (this.id);
+      
+      if($("#ddi" + currentID).length == 0) {
+        $('#_PackageRecipes')
+          
+            .append( $('<input>',{
+              'type':'hidden',
+              'name':'ddi[]',
+              'id':'ddi'+currentID, /*ddi = delete data recipe*/
+              'class':'form-control',
+              'value':''+currentID,
+            }) )
+        ;
+        $(this).parent('li').hide().unbind('click');
+        
+      } else {
+      //alert('this record already exists');
+        $("#ddi" + currentID).closest('input').remove().unbind('click');
+      }
+      
+      
+      
+    });
+    
+    //Start Recipes
+    $('#counterRecipes').val( $('#_PackageRecipes li').length );
+    $('#btnActionAddRecipes').click(function(e) {
+      e.preventDefault();
+      
+      var currentID = $('#counterRecipes').val();
+      
+      var recipesArray = [];
+      <?php
+      
+      $ix = 0;
+      foreach ($recipes as $i=>$v) {
+        echo 'recipesArray['.$ix.'] = ["'.$i.'","'.$v.'"]'."\n";
+        $ix++;
+      }; 
+
+      ?>
+      
+      var SelectList  = $('<select>',{
+            'name':'recipes[][x]',
+            'id':'recipes_'+currentID,
+            'class':'form-control columns small-7 medium-8',
+          });
+      
+      $.each(recipesArray, function(key,value) {
+        SelectList
+          .append($('<option></option>')
+          .attr('value',value[0])
+          .text(value[1])); 
+      });
+      
+      
+      
+      var deleteButton  = $('<button>',{
+                    'class':'remove columns small-1 medium-1',
+                    'content':'x '
+                  });
+      deleteButton.bind('click', function(e){
+        e.preventDefault();
+        $(this).parent('li').remove().unbind('click');
+      });
+      
+      $('#_PackageRecipes')
+        .append( $('<li>') 
+        
+          .append( SelectList )
+          // .append( '&nbsp;' )
+          .append( $('<input>',{
+            'name':'amount[][x]',
+            'id':'amount_'+currentID,
+            'class':'form-control-amount form-control columns small-3 medium-2',
+            'placeholder':'amount'
+          }) )
+          // .append( '&nbsp;' )
+          .append( deleteButton )
+          
+        )
+      ;
+      
+      $('#counterRecipes').val( parseInt(currentID, 10) + 1 );
+      
+    }); 
+  });
+
+    </script>
+@stop
+
 @section('content')
 
     
 
     <section class="page">
-        <h2 class="content__title content__title--main">Catering Packages</h2>
+        <nav class="tabs subnav" data-tab data-options="deep_linking:true; scroll_to_content: false">
+            <h2 class="content-title--main content__title--main--tabs active"><a class="tab__link" href="#catering">Packages</a></h2> |
+            <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#custom">Create Package</a></h2> 
+        </nav>
+        <section class="tabs-content">
+        <!-- <h2 class="content__title content__title--main">Catering Packages</h2> -->
 
-        <div class="row content-boxes__wrapper">
-            @foreach($cData as $index=>$package)
-            <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
-                <article class="content-box">
-                    <div class="row collapse">
+            <div id="catering" class="content">
+                <div class="row content-boxes__wrapper">
+                 
+                    @foreach($cData as $index=>$package)
+                    <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
+                        <article class="content-box">
+                            <div class="row collapse">
 
-                        
-                        <a href="/package/{{$package->id}}" class="columns small-4 medium-12 end">
-                          <img src="/uploads/{{$catering_image[$package->id]}}" />
-                        </a>
-                        
-
-                        <section class="columns small-8 medium-12">
-                            <div class="content-box__copy">
-                                <a href="/package/{{$package->id}}" class="content-box__copy__inner">
-                                    <h5 class="content-box__title">{{$package->name}}</h5>
-                                    <p class="content-box__summary--display">{{$package->quantity}} pieces</p>
+                                
+                                <a href="/package/{{$package->id}}" class="columns small-4 medium-12 end">
+                                  <img src="/uploads/{{$catering_image[$package->id]}}" />
                                 </a>
                                 
-                            </div>
-                        </section>
-                    </div>
-                </article>
-            </div>
-            @endforeach
-        </div>
-        <div class=" row">
-        <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
-            <div class="section section--form" >
-                <!-- <h1 class="page-header">@yield('title')</h1> -->
-                @if(isset($user->id))
-                     {{ Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')) }}
-                @else
-                     {{ Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')) }}
-                @endif
-                    <h2 class="content__title--main--signup">@if (Auth::check()) Hi {{ Auth::user()->fname }}, @endif Currently our catering enquiry system is being renovated<br/><br/>To get a price on a catering package please email us today with the product selection you require =)</h2> 
-                    <div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
-                        {{ Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')) }}
-                        <div class="">
-                            {{ ($errors->has('fname'))? '<p class="error_message">'. $errors->first('fname') .'</p>' : '' }}
-                            {{ Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($user->fname)? $user->fname : '' )), array('class' => 'input__text')) }} 
-                        </div>
-                    </div>
-                    
-                    <div class="form-group {{ ($errors->has('date')) ? 'has-error' : '' ; }}">
-                        {{ Form::label('date', 'Delivery Date: ', array('class' => ' content-title--sub ')) }}
-                        <div class="">
-                            {{ ($errors->has('date'))? '<p class="error_message">'. $errors->first('date') .'</p>' : '' }}
-                            {{ Form::text('date', (isset($input['date'])? Input::old('date') : (isset($user->date)? $user->date : '' )), array('class' => 'input__text')) }} 
-                        </div>
-                    </div>
-                    <div class="form-group {{ ($errors->has('time')) ? 'has-error' : '' ; }}">
-                        {{ Form::label('time', 'Delivery Time: ', array('class' => ' content-title--sub ')) }}
-                        <div class="">
-                            {{ ($errors->has('time'))? '<p class="error_message">'. $errors->first('time') .'</p>' : '' }}
-                            {{ Form::text('time', (isset($input['time'])? Input::old('time') : (isset($user->time)? $user->time : '' )), array('class' => 'input__text')) }} 
-                        </div>
-                    </div>
 
-                    <div class="form-group {{ ($errors->has('email')) ? 'has-error' : '' ; }}">
-                        {{ Form::label('email', 'Email: ', array('class' => ' content-title--sub ')) }}
-                        <div class="">
-                            {{ ($errors->has('email'))? '<p class="error_message">'. $errors->first('email') .'</p>' : '' }}
-                            {{ Form::text('email', (isset($input['email'])? Input::old('email') : (isset($user->email)? $user->email : '' )), array('class' => 'input__text')) }} 
-                        </div>
+                                <section class="columns small-8 medium-12">
+                                    <div class="content-box__copy">
+                                        <a href="/package/{{$package->id}}" class="content-box__copy__inner">
+                                            <h5 class="content-box__title">{{$package->name}}</h5>
+                                            <p class="content-box__summary--display">{{$package->quantity}} pieces</p>
+                                        </a>
+                                        
+                                    </div>
+                                </section>
+                            </div>
+                        </article>
                     </div>
-                    <div class="form-group {{ ($errors->has('mobile')) ? 'has-error' : '' ; }}">
-                        {{ Form::label('mobile', 'Mobile: ', array('class' => ' content-title--sub ')) }}
-                        <div class="">
-                            {{ ($errors->has('mobile'))? '<p class="error_message">'. $errors->first('mobile') .'</p>' : '' }}
-                            {{ Form::text('mobile', (isset($input['mobile'])? Input::old('mobile') : (isset($user->mobile)? $user->mobile : '' )), array('class' => 'input__text')) }} 
-                        </div>
+                    @endforeach
+                </div>
+                <div class=" row">
+                <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
+                    <div class="section section--form" >
+                        <!-- <h1 class="page-header">@yield('title')</h1> -->
+                        @if(isset($user->id))
+                             {{ Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')) }}
+                        @else
+                             {{ Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')) }}
+                        @endif
+                            <h2 class="content__title--main--signup">@if (Auth::check()) Hi {{ Auth::user()->fname }}, @endif Currently our catering enquiry system is being renovated<br/><br/>To get a price on a catering package please email us today with the product selection you require =)</h2> 
+                            <div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
+                                {{ Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')) }}
+                                <div class="">
+                                    {{ ($errors->has('fname'))? '<p class="error_message">'. $errors->first('fname') .'</p>' : '' }}
+                                    {{ Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($user->fname)? $user->fname : '' )), array('class' => 'input__text')) }} 
+                                </div>
+                            </div>
+                            
+                            <div class="form-group {{ ($errors->has('date')) ? 'has-error' : '' ; }}">
+                                {{ Form::label('date', 'Delivery Date: ', array('class' => ' content-title--sub ')) }}
+                                <div class="">
+                                    {{ ($errors->has('date'))? '<p class="error_message">'. $errors->first('date') .'</p>' : '' }}
+                                    {{ Form::text('date', (isset($input['date'])? Input::old('date') : (isset($user->date)? $user->date : '' )), array('class' => 'input__text')) }} 
+                                </div>
+                            </div>
+                            <div class="form-group {{ ($errors->has('time')) ? 'has-error' : '' ; }}">
+                                {{ Form::label('time', 'Delivery Time: ', array('class' => ' content-title--sub ')) }}
+                                <div class="">
+                                    {{ ($errors->has('time'))? '<p class="error_message">'. $errors->first('time') .'</p>' : '' }}
+                                    {{ Form::text('time', (isset($input['time'])? Input::old('time') : (isset($user->time)? $user->time : '' )), array('class' => 'input__text')) }} 
+                                </div>
+                            </div>
+
+                            <div class="form-group {{ ($errors->has('email')) ? 'has-error' : '' ; }}">
+                                {{ Form::label('email', 'Email: ', array('class' => ' content-title--sub ')) }}
+                                <div class="">
+                                    {{ ($errors->has('email'))? '<p class="error_message">'. $errors->first('email') .'</p>' : '' }}
+                                    {{ Form::text('email', (isset($input['email'])? Input::old('email') : (isset($user->email)? $user->email : '' )), array('class' => 'input__text')) }} 
+                                </div>
+                            </div>
+                            <div class="form-group {{ ($errors->has('mobile')) ? 'has-error' : '' ; }}">
+                                {{ Form::label('mobile', 'Mobile: ', array('class' => ' content-title--sub ')) }}
+                                <div class="">
+                                    {{ ($errors->has('mobile'))? '<p class="error_message">'. $errors->first('mobile') .'</p>' : '' }}
+                                    {{ Form::text('mobile', (isset($input['mobile'])? Input::old('mobile') : (isset($user->mobile)? $user->mobile : '' )), array('class' => 'input__text')) }} 
+                                </div>
+                            </div>
+                            
+                            <div class="form-group {{ ($errors->has('message')) ? 'has-error' : '' ; }}">
+                                {{ Form::label('message', 'Detailed Message: ', array('class' => ' content-title--sub ')) }}
+                                <div class="">
+                                    {{ ($errors->has('message'))? '<p class="error_message">'. $errors->first('message') .'</p>' : '' }}
+                                    {{ Form::textarea('message', (isset($input['message'])? Input::old('message') : ''), array('class' => 'input__text', 'placeholder' => 'Example: 12 Chocolate Strawberries, 30 Banana Smoothies and can I please get 12 Rasberry Mousse desserts, for my wedding, except in stead of rasberries I would love it to be made with blueberries =)')) }} 
+                                </div>
+                            </div>
+                            {{-- Form::hidden('package_id', $pData[0]->id) --}}
+                            <div class="form-group">
+                                <div class="form__buttons">
+                                    <a href="/">
+                                        {{ Form::button('Cancel' ,array('class' => 'form__button--sub form__button--sub--signup')) }}
+                                    </a>
+                                    {{ Form::submit('Send Enquiry', array('class' => 'side__login__button side__login__button--signup')) }}
+                                
+                                </div>
+                            </div>
+                        {{ Form::close() }}         
                     </div>
-                    
-                    <div class="form-group {{ ($errors->has('message')) ? 'has-error' : '' ; }}">
-                        {{ Form::label('message', 'Detailed Message: ', array('class' => ' content-title--sub ')) }}
-                        <div class="">
-                            {{ ($errors->has('message'))? '<p class="error_message">'. $errors->first('message') .'</p>' : '' }}
-                            {{ Form::textarea('message', (isset($input['message'])? Input::old('message') : ''), array('class' => 'input__text', 'placeholder' => 'Example: 12 Chocolate Strawberries, 30 Banana Smoothies and can I please get 12 Rasberry Mousse desserts, for my wedding, except in stead of rasberries I would love it to be made with blueberries =)')) }} 
-                        </div>
-                    </div>
-                    {{-- Form::hidden('package_id', $pData[0]->id) --}}
-                    <div class="form-group">
-                        <div class="form__buttons">
-                            <a href="/">
-                                {{ Form::button('Cancel' ,array('class' => 'form__button--sub form__button--sub--signup')) }}
-                            </a>
-                            {{ Form::submit('Send Enquiry', array('class' => 'side__login__button side__login__button--signup')) }}
-                        
-                        </div>
-                    </div>
-                {{ Form::close() }}         
+                </section>
+                </div>
             </div>
+
+            <div id="custom" class="row content-boxes__wrapper content active">
+                
+                @if(Auth::check())
+                    <section class="columns small-12 medium-10 medium-push-1 large-8 large-push-2 xlarge-6 xlarge-push-3">
+                        {{ Form::open(array('action' => 'CateringController@getCreatePackage', 'class' => 'form-horizontal')) }} 
+                            <h2 class="content__title--main--signup">@if (Auth::check()) Hi {{ Auth::user()->fname }}, @endif Currently our catering enquiry system is being renovated<br/><br/>To get a price on a catering package please email us today with the product selection you require =)</h2> 
+                            <div class="col-sm-1">
+                                <a id="btnActionAddRecipes" class="add">+ Add</a>{{ Form::submit('Get Price', array('class' => 'public__calc')) }}
+                                {{ Form::hidden('counterRecipes',null,array('id'=>'counterRecipes')) }} 
+
+                            </div>
+                            <hr/>
+                            <div class="form-group {{ ($errors->has('recipes')) ? 'has-error' : '' ; }}">
+                                {{ ($errors->has('recipes'))? '<p>'. $errors->first('recipes') .'</p>' : '' }}
+                                <ul id="_PackageRecipes" class="_mySortable">
+                                    <?php $x = 0; ?>
+                                    
+                                </ul>
+                            </div>
+                        {{ Form::close() }} 
+                    </section>
+                @else
+                  
+                    <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
+                        <div class="section section--form" >
+                            <h1 class="page-header">Create Catering Packages coming soon..</h1>
+                        </div>
+                    </section>
+                @endif
+                
+            </div>
+
         </section>
-        </div>
     </section><!--End Band Content-->    
         
     	   
