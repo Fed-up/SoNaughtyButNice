@@ -25,20 +25,14 @@
     
     
      //Start all Recipes 
-      
-    //Start Delete Recipe
+    
+    //start delete
     $('#counterRecipes').val( $('#_PackageRecipes li').length );
-
     $('.deleteRecipe').click(function(e) {
       e.preventDefault();
-      
-      //var currentID = 0;  
-          
       var currentID = (this.id);
-      
       if($("#ddi" + currentID).length == 0) {
         $('#_PackageRecipes')
-          
             .append( $('<input>',{
               'type':'hidden',
               'name':'ddi[]',
@@ -47,15 +41,11 @@
               'value':''+currentID,
             }) )
         ;
-        $(this).parent('li').hide().unbind('click');
-        
+        $(this).parent('li').hide().unbind('click');       
       } else {
       //alert('this record already exists');
         $("#ddi" + currentID).closest('input').remove().unbind('click');
       }
-      
-      
-      
     });
     
     //Start Recipes
@@ -79,7 +69,7 @@
       var SelectList  = $('<select>',{
             'name':'recipes[][x]',
             'id':'recipes_'+currentID,
-            'class':'form-control columns small-7 medium-8',
+            'class':'form__control--no-width columns small-7 medium-8',
           });
       
       $.each(recipesArray, function(key,value) {
@@ -108,7 +98,7 @@
           .append( $('<input>',{
             'name':'amount[][x]',
             'id':'amount_'+currentID,
-            'class':'form-control-amount form-control columns small-3 medium-2',
+            'class':'form-control-amount form__control--no-width columns small-3 medium-2',
             'placeholder':'amount'
           }) )
           // .append( '&nbsp;' )
@@ -137,7 +127,7 @@
         <section class="tabs-content">
         <!-- <h2 class="content__title content__title--main">Catering Packages</h2> -->
 
-            <div id="catering" class="content">
+            <div id="catering" class="content active">
                 <div class="row content-boxes__wrapper">
                  
                     @foreach($cData as $index=>$package)
@@ -236,7 +226,7 @@
                 </div>
             </div>
 
-            <div id="custom" class="row content-boxes__wrapper content active">
+            <div id="custom" class="row content-boxes__wrapper content">
                 
                 @if(Auth::check())
                     <section class="columns small-12 medium-10 medium-push-1 large-8 large-push-2 xlarge-6 xlarge-push-3">
@@ -248,20 +238,41 @@
 
                             </div>
                             <hr/>
+                            @if(isset($last_price))<h4 class="package__total--create-package">Total Price: ${{$last_price}}</h4>@endif
                             <div class="form-group {{ ($errors->has('recipes')) ? 'has-error' : '' ; }}">
                                 {{ ($errors->has('recipes'))? '<p>'. $errors->first('recipes') .'</p>' : '' }}
                                 <ul id="_PackageRecipes" class="_mySortable">
                                     <?php $x = 0; ?>
-                                    
+                                    @if(isset($package_array))
+                                        @foreach($package_array as $package)
+                                            <li>
+                                                <select name="recipes[][{{ $x }}]" id="recipes_{{ $x }}" class="form__control--no-width columns small-7 medium-8"/>
+                                                    @foreach($recipes as $i=>$v)                                    
+                                                    <option value="{{ $i }}" @if ($package['recipe_id'] == $i) selected="selected" @endif >{{ $v }}</option>
+                                                    @endforeach
+                                                    
+                                                </select>
+                                                
+                                                <input name="amount[][{{ $x }}]" id="recipes_{{ $x }}" class="form-control-amount form__control--no-width columns small-3 medium-2" value="{{ $package['amount'] }}" />
+                                              
+                                                <button id="{{ $x }}" class="remove columns small-1 medium-1" content="x"></button>                                                    
+                                            </li>
+                                            <?php $x++; ?>  
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
-                        {{ Form::close() }} 
+                        {{ Form::close() }}
+
                     </section>
+                    <br/>
+                    
                 @else
                   
                     <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
                         <div class="section section--form" >
-                            <h1 class="page-header">Create Catering Packages coming soon..</h1>
+                            <h1 class="content__title--main--signup">Create Catering Packages</h1>
+                            <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to create a personalised catering package</p>
                         </div>
                     </section>
                 @endif
@@ -270,7 +281,7 @@
 
         </section>
     </section><!--End Band Content-->    
-        
+    <div class="footer__push"></div>   
     	   
 @stop
 

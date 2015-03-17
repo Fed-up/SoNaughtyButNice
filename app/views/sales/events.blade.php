@@ -38,7 +38,7 @@
                 @else
                     <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
                         <div class="section section--form" >
-                            <h2 class="page-header">Currently you are not attending any events..</h1>
+                            <h2 class="page-header">Currently there are no upcoming events..</h1>
                             <h4 class="promo__text">Please <a class="content-link" href="/signup">join us</a> to be notified of our next event =)</h4>
                             <p class="promo__text">Would you like to see our latest <a class="content-link" href="/recipes">recipes?</a></p>
                         </div>
@@ -50,6 +50,7 @@
                 @if (Auth::check())
                     @if($e_count != 'empty')
                         @if ($paid == $confirm_paid)
+
                             @foreach($pEvents as $event)
                             <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
                                 <article class="content-box">
@@ -79,7 +80,7 @@
                                 <div class="section section--form" >
                                     <h2 class="page-header">Currently you are not attending any events..</h1>
                                     <h4 class="promo__text">There is an event on the horizon.. Shhh!! Don't tell anyone ;)</h4>
-                                    <p class="promo__text">5 desserts being showcased.. <a class="content-link" href="/event/{{$eData[0]->id}}">Let's celebrate!</a></p>
+                                    <p class="promo__text">5 desserts being showcased.. <a class="content-link" href="/event/{{$eData[0]->id}}">{{$eData[0]->name}}</a></p>
                                 </div>
                                 <div class="footer__push"></div>
                             </section>
@@ -87,7 +88,7 @@
                     @else
                         <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
                             <div class="section section--form" >
-                                <h2 class="page-header">Currently you are not attending any events..</h1>
+                                <h2 class="page-header">Currently there are no upcoming events..</h1>
                                 <h4 class="promo__text">Please <a class="content-link" href="/signup">join us</a> to be notified of our next event =)</h4>
                                 <p class="promo__text">Would you like to see our latest <a class="content-link" href="/recipes">recipes?</a></p>
                             </div>
@@ -95,14 +96,25 @@
                         </section>
                     @endif
                 @else
-                    <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
-                        <div class="section section--form" >
-                            <h1 class="page-header">There is an event on the horizon.. Shhh!! Don't tell anyone ;)</h1>
-                            <p class="promo__text">5 desserts being showcased.. <a class="content-link" href="/event/{{$eData[0]->id}}">Let's celebrate!</a></p>
-                            <p class="promo__text">Please <a class="content-link" href="/login">Login</a> to save a seat at the event</p>
-                        </div>
-                        <div class="footer__push"></div>
-                    </section>
+                    @if($e_count != 'empty')
+                        <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
+                            <div class="section section--form" >
+                                <h1 class="page-header">There is an event on the horizon.. Shhh!! Don't tell anyone ;)</h1>
+                                <p class="promo__text">5 desserts being showcased.. <a class="content-link" href="/event/{{$eData[0]->id}}">{{$eData[0]->name}}</a></p>
+                                <p class="promo__text">Please <a class="content-link" href="/login">Login</a> to save a seat at the event</p>
+                            </div>
+                            <div class="footer__push"></div>
+                        </section>
+                    @else
+                        <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
+                            <div class="section section--form" >
+                                <h2 class="page-header">Currently there are no upcoming events..</h1>
+                                <h4 class="promo__text">Please <a class="content-link" href="/signup">join us</a> to be notified of our next event =)</h4>
+                                <p class="promo__text">Would you like to see our latest <a class="content-link" href="/recipes">recipes?</a></p>
+                            </div>
+                            <div class="footer__push"></div>
+                        </section>
+                    @endif
                 @endif
 
 

@@ -56,59 +56,34 @@ class Admin_PackagesController extends BaseController {
 			$data->price 	= Input::get('price');
 			$data->active  = (Input::get('active')) ? 1 : 0;
 			if($data->save()){
-
-				if(isset($input['recipes']) && isset($input['amount'])){
-					
-					
-					
+				if(isset($input['recipes']) && isset($input['amount'])){			
 					$catering_recipes = Input::get('recipes');
 					$amount = Input::get('amount');
 					
 					for($i=0; $i<count($catering_recipes); $i++){
-
 					  $catering_recipe_pivot_id = array_keys($catering_recipes[$i]);
-
 					  $catering_recipe_pivot_id = $catering_recipe_pivot_id[0];
-
 					  $catering_recipe_id = $catering_recipes[$i][$catering_recipe_pivot_id];
 
-					  // echo '<pre>'; print_r($catering_recipes); echo '</pre>'; exit;
-
-
-					  // echo '<pre>'; print_r($catering_recipes[$i][$catering_recipe_pivot_id]); echo '</pre>'; exit;
-					 
-					 // $data->MenuRecipes()->attach($recipe[$i]['x'], array( 'catering_id' => $data->id, 'amount' => $amount[$i]['x'], 'ordering' => $i ));
-					 // echo '<pre>'; print_r($recipe[1]['x']); echo '</pre>'; exit;
-
 					    if(isset($input['ddi'])){
-							$ddi = $input['ddi'];
-		
-							
+							$ddi = $input['ddi'];							
 							foreach($ddi as $_delete){
-
-								// echo '<pre>'; print_r($_delete); echo '</pre>'; 	exit;
-
+								// print_r($_delete); echo '</pre>'; 	exit;
 								DB::table('catering_recipes')->where('id', '=', $_delete)->delete();
-
 							};
 						};	
 
 					    if (isset($catering_recipes[$i]['x']) && $catering_recipes[$i]['x'] > 0) {
-					    // if($xx[$i] == 'x'){
-
-					  		
 					  		$data->MenuRecipes()->attach($catering_recipes[$i]['x'], array( 'catering_id' => $data->id, 'amount' => $amount[$i]['x'], 'ordering' => $i+1 ));
-					  		// sync(array(1 => array('custom_pivot_field' => 'abc')));
-
 					    }else{
 
-					  	$attributes = array(
-				                    'menu_recipes_id' => $catering_recipe_id, 
-				                    'catering_id' => $data->id, 
-				                    'amount' => $amount[$i][$catering_recipe_pivot_id], 
-				                    'ordering' => $i+1);
-				            
-					    $findrecipes = DB::table('catering_recipes')->where('id', '=', $catering_recipe_pivot_id)->update($attributes) ;
+						  	$attributes = array(
+			                    'menu_recipes_id' => $catering_recipe_id, 
+			                    'catering_id' => $data->id, 
+			                    'amount' => $amount[$i][$catering_recipe_pivot_id], 
+			                    'ordering' => $i+1);
+					            
+						    $findrecipes = DB::table('catering_recipes')->where('id', '=', $catering_recipe_pivot_id)->update($attributes) ;
 
 					    };						
 					  
@@ -204,7 +179,9 @@ class Admin_PackagesController extends BaseController {
 		};
 
 		$queries = DB::getQueryLog();
-		// echo '<pre>'; print_r($queries); echo '</pre>'; exit;
+
+		
+		// echo '<pre>'; print_r($catering_recipes); echo '</pre>'; exit;
 
 		
 		return View::make('admin.packages.form')

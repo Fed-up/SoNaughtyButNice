@@ -116,6 +116,7 @@ class HomeController extends BaseController {
 
 			}else{
 				$category[$recipe->id] = '';
+				$recipe_image[$recipe->id] = 'recipe.png';
 			}
 		}
 		// exit;

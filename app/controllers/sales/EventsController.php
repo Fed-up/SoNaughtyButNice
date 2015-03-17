@@ -4,6 +4,8 @@ class EventsController  extends BaseController {
 
 	public function getEvents(){
 
+		// echo '<pre>'; print_r($eData); echo '</pre>';exit;
+
 		if(Auth::user()){
 			$user = Auth::user();
 			$user_id = $user->id;
@@ -22,13 +24,15 @@ class EventsController  extends BaseController {
 		->get();
 		// echo '<pre>'; print_r($eData); echo '</pre>';
 
+
+
 		$paid = 0;
 		$confirm_paid = 1;
 		$event = 'eData';
 
 		foreach($eData as $event){
 			
-			 // echo '<pre>'; print_r($event); echo '</pre>';exit;
+			 echo '<pre>'; print_r($event); echo '</pre>';exit;
 
 			foreach($event->User as $pivot){
 				$paid = $pivot->pivot->paid;
@@ -57,7 +61,9 @@ class EventsController  extends BaseController {
 			$e_count = 'empty';
 		}
 		
-		// echo '<pre>'; print_r($event_image); echo '</pre>';exit;
+		// echo '<pre>'; print_r($event); echo '</pre>';exit;
+
+
 		if(isset($paid_events)){
 			return View::make('sales.events')->with(array(
 				'eData' => $eData,

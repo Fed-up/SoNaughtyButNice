@@ -31,6 +31,7 @@ Route::get('event/{id}', 'EventsPageController@getEvents');
 
 //Catering
 Route::get('catering', 'CateringController@getCatering');
+Route::get('catering/{package_array}', 'CateringController@getCustomCatering');
 Route::post('catering', 'CateringController@getCreatePackage');
 Route::get('package/{id}', 'CateringController@getPackage');
 Route::post('package', 'CateringController@packageEnquiry');

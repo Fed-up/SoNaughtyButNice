@@ -126,6 +126,11 @@ ul, li {
   font-weight: bold;
 }
 
+.page-header{
+  font-size: 1.1rem;
+  padding-bottom: 1rem;
+}
+
 .content__title--main {
   text-align: center;
   margin: 0.5rem 0;
@@ -214,60 +219,9 @@ ul, li {
   color: #fff; }
 
 .promo__text {
-  padding: 1rem;
-  font-size: 0.8rem;
-  font-style: italic; }
-
-.form__submit__button {
-  padding: 0.8rem;
-  background-color: green;
-  border: 0;
-  border-radius: 0.2rem;
-  font-size: 1.1rem;
-  color: #fff; }
-
-.form__submit__button--login {
-  padding: 0.8rem;
-  background-color: green;
-  border: 0;
-  border-radius: 0.2rem;
-  font-size: 1.1rem;
-  color: #fff;
-  width: 100%; }
-
-.remove{
-  background-color: #ff5a5a;
-  color: #fff;
-  border-radius: 1rem;
-  /* height: 20px; */
-  text-align: center;
-  max-width: 2rem;
-}
-
-.add{
-  display: inline-block;
-  padding: 0.4rem;
-  border-radius: 0.5rem;
-  font-weight: bold;
-  background-color: $main_color;
-  color: #fff;
-  // padding-left: .7rem;
-  // padding-right: .7rem;
-}
-
-.public__calc{
-  display: inline-block;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  font-weight: bold;
-  background-color: $contrast_dark;
-  color: #fff;
-  float: right;
-}
-
-
-.remove:after{
-  content:'x';
+  padding-top: .3rem;
+  font-size: 0.9rem;
+  font-style: italic;
 }
 
 .column, .columns {
@@ -363,6 +317,12 @@ ul, li {
 .package__total{
   text-align: right;
   margin-top: -1rem;
+  margin-bottom: 1rem;
+  color: $main_dark;
+}
+
+.package__total--create-package{
+  text-align: right;
   margin-bottom: 1rem;
   color: $main_dark;
 }

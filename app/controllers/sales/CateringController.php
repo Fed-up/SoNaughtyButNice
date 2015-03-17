@@ -4,6 +4,10 @@ class CateringController  extends BaseController {
 
 	public function getCatering(){
 
+		$input = Input::all();
+		// echo '<pre>'; print_r($package_array); echo '</pre>'; exit;
+
+
 		$cData = Catering::with(array('Images' => function($query)
 			{
 				$query->where('section', '=', 'CATERING')->orderBy(DB::raw('RAND()'))->where('active', '=', 1);
@@ -41,11 +45,6 @@ class CateringController  extends BaseController {
 			$mRep[$recipe->id]	= $recipe->name;
 		};
 		
-		// echo '<pre>'; print_r($mRep); echo '</pre>'; 	exit;
-
-			
-
-		
 
 		return View::make('public.catering')->with(array(
 			'cData' => $cData,
@@ -57,7 +56,104 @@ class CateringController  extends BaseController {
 
 	public function getCreatePackage(){
 		$input = Input::all();
-		echo '<pre>'; print_r($input); echo '</pre>';exit;	
+		// echo '<pre>'; print_r($input); echo '</pre>';exit;	
+
+		//dd($input);
+		$rules = array(
+			'amount' 		=> 'required'
+		);
+		
+		$validator = Validator::make($input, $rules);
+		
+		if($validator->fails()){
+			return Redirect::back()
+				->withErrors($validator);
+		}
+			//$mCatUp = MenuCategories::findOrFail('id');
+		else{
+			
+			if(isset($input['recipes']) && isset($input['amount'])){			
+				$catering_recipes = Input::get('recipes');
+				$input_amount = Input::get('amount');
+				$last_price = 0;
+				
+				for($i=0; $i<count($catering_recipes); $i++){
+					$catering_recipe_pivot_id = array_keys($catering_recipes[$i]);
+				    $catering_recipe_pivot_id = $catering_recipe_pivot_id[0];
+				    $catering_recipe_id = $catering_recipes[$i][$catering_recipe_pivot_id];
+
+				    $amount_array = array_keys($input_amount[$i]);
+				    $index_amount = $amount_array[0];
+				    $amount = $input_amount[$i][$index_amount];
+				    
+				   
+				    $rData = SalesData::where('menu_recipe_id', '=', $catering_recipe_id)->get();
+				    // $rData = SalesData::where('menu_recipes_id','=', $catering_recipe_id);
+
+				    $total_price = $rData[0]->sales_price * $amount;
+				    // echo '<pre>'; print_r($total_price); echo '</pre>';exit;
+
+					$package_array[] = $arrayName = array(
+						'recipe_id' => $catering_recipe_id, 
+						'amount' => $amount, 
+						'price' => $rData[0]->sales_price, 
+						'total_price' => $total_price, 
+					);
+
+					$last_price = $last_price + $total_price;	
+
+					
+				};
+			};
+		}; 
+
+		// foreach ($package_array as $key => $value) {
+		// 	echo '<pre>'; print_r($value['amount']); echo '</pre>';
+		// }							
+		// exit;
+
+		$cData = Catering::with(array('Images' => function($query)
+			{
+				$query->where('section', '=', 'CATERING')->orderBy(DB::raw('RAND()'))->where('active', '=', 1);
+			}))
+		->orderBy('name','ASC')->where('active', '=', 1)->get();
+		foreach ($cData as $package) {
+			$count = count($package->Images);
+			if($count < 1){
+				$package_image[$package->id] = 'ingredient.png';
+			}else{
+				foreach($package->Images as $image){
+			        if(file_exists('uploads/'.$image->name)){
+			            $package_image[$package->id] = $image->name;
+			        }else{
+			           	$package_image[$package->id] = 'ingredient.png';
+			        }
+				}
+			}
+		}
+		$recipes = MenuRecipes::orderBy('name','ASC')->where('active', '=', '1')->get();
+		$mRep = array();
+		$mRep[0]	= '- Select Recipe -';	
+		foreach ($recipes as $recipe) {
+			$mRep[$recipe->id]	= $recipe->name;
+		};
+		return View::make('public.catering')->with(array(
+			'cData' => $cData,
+			'catering_image' => $package_image,
+			'recipes' => $mRep,
+			'package_array' => $package_array,
+			'last_price' => $last_price
+			)
+		);
+	}
+
+	public function getCustomCatering($package_array){
+
+		
+		echo '<pre>'; print_r($package_array); echo '</pre>'; exit;
+
+
+		
 	}
 
 	public function getPackage($id)

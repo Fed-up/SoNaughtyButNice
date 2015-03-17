@@ -32,14 +32,9 @@
 
     $('.deleteRecipe').click(function(e) {
       e.preventDefault();
-      
-      //var currentID = 0;  
-          
       var currentID = (this.id);
-      
       if($("#ddi" + currentID).length == 0) {
         $('#_PackageRecipes')
-          
             .append( $('<input>',{
               'type':'hidden',
               'name':'ddi[]',
@@ -48,15 +43,11 @@
               'value':''+currentID,
             }) )
         ;
-        $(this).parent('li').hide().unbind('click');
-        
+        $(this).parent('li').hide().unbind('click');       
       } else {
       //alert('this record already exists');
         $("#ddi" + currentID).closest('input').remove().unbind('click');
       }
-      
-      
-      
     });
     
     //Start Recipes
