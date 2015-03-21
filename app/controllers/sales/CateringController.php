@@ -56,7 +56,8 @@ class CateringController  extends BaseController {
 
 	public function getCreatePackage(){
 		$input = Input::all();
-		// echo '<pre>'; print_r($input); echo '</pre>';exit;	
+		// echo '<pre>'; print_r($input); echo '</pre>';exit;
+
 
 		//dd($input);
 		$rules = array(
@@ -105,6 +106,25 @@ class CateringController  extends BaseController {
 					
 				};
 			};
+
+
+
+			if(isset($input['ddi'])){
+				$ddi = $input['ddi'];
+
+				for($i=0; $i<count($ddi); $i++){
+					foreach ($package_array as $key => $value) {
+						if($ddi[$i] == $key){
+							$last_price = $last_price - $package_array[$key]['total_price'];
+							unset($package_array[$ddi[$i]]);
+							
+						}
+					}
+
+				}
+				
+				
+			};
 		}; 
 
 		// foreach ($package_array as $key => $value) {
@@ -137,12 +157,33 @@ class CateringController  extends BaseController {
 		foreach ($recipes as $recipe) {
 			$mRep[$recipe->id]	= $recipe->name;
 		};
+
+		if(Auth::user()){
+			$user = Auth::user();
+		}else{
+			$user = 0;
+		}
+
+			// echo '<pre>'; print_r($user->email); echo '</pre>'; exit;
+
+		if(isset($input['cancel'])){
+			return View::make('public.catering')->with(array(
+				'cData' => $cData,
+				'catering_image' => $package_image,
+				'recipes' => $mRep,
+				'active' => 'active'
+				)
+			);
+		}
+
 		return View::make('public.catering')->with(array(
 			'cData' => $cData,
 			'catering_image' => $package_image,
 			'recipes' => $mRep,
 			'package_array' => $package_array,
-			'last_price' => $last_price
+			'last_price' => $last_price,
+			'active' => 'active',
+			'user' => 'user'
 			)
 		);
 	}

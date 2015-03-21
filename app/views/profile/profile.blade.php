@@ -47,7 +47,7 @@
 
 			@foreach($pData as $catering)
 	        <div class="columns small-6 large-3">
-	            <a href="/catering#mypackages" class="profile__image__link">
+	            <a href="/catering#fndtn-custom" class="profile__image__link">
 	                <img class="bottom-left profile__image" src="/uploads/{{ $pImage[$catering->id] }}">
 					<p class="profile__image__link__name">My Catering</p>
 	            </a>

@@ -4615,7 +4615,7 @@ div.four.columns.social_links {
   font-size: 1.1rem;
   color: #fff; }
 
-/* line 14, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 16, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .form__submit__button--login {
   padding: 0.8rem;
   background-color: green;
@@ -4625,16 +4625,17 @@ div.four.columns.social_links {
   color: #fff;
   width: 100%; }
 
-/* line 23, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 26, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .remove {
   background-color: #ff5a5a;
   color: #fff;
   border-radius: 1rem;
   /* height: 20px; */
   text-align: center;
-  max-width: 2rem; }
+  max-width: 2rem;
+  border: none; }
 
-/* line 32, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 36, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .add {
   display: inline-block;
   padding: 0.4rem;
@@ -4643,67 +4644,85 @@ div.four.columns.social_links {
   background-color: #91dd50;
   color: #fff; }
 
-/* line 43, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 47, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .public__calc {
   display: inline-block;
-  padding: 0.5rem;
+  padding: 0.7rem;
   border-radius: 0.5rem;
   font-weight: bold;
-  background-color: #ff5a5a;
+  background-color: #91dd50;
   color: #fff;
-  float: right; }
+  float: right;
+  border: none; }
 
-/* line 54, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 58, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+.public__calc--cancel {
+  display: inline-block;
+  padding: 0.7rem;
+  color: #bababa;
+  float: right;
+  border: none;
+  margin-right: 0.4rem;
+  font-size: 12px;
+  background-color: #fafaf1; }
+
+/* line 69, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+.public__calc--cancel:hover {
+  background-color: #ff7474;
+  border-radius: 0.4rem;
+  color: #fff; }
+
+/* line 75, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .remove:after {
   content: 'x'; }
 
-/* line 58, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 79, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__login__header {
   color: #fff;
   margin: 0.5rem; }
 
-/* line 62, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 83, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__login__header--dark {
   color: #343434;
   margin: 0.5rem;
   text-align: center; }
 
-/* line 67, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 88, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .input__name--white {
   color: #fff;
   font-size: 0.8rem; }
 
-/* line 71, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 92, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .input__name--dark {
   color: #343434;
   font-size: 0.8rem; }
 
-/* line 75, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 96, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset; }
 
-/* line 78, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 99, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .form-signin {
   width: 100%;
   margin: auto; }
 
-/* line 82, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 103, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .form-signin--swipe {
   margin-bottom: 3.2rem;
   margin-top: 1rem; }
 
-/* line 86, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 107, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .form__input--side--login {
   /* margin: auto; */
   /* margin-top: 2rem; */
   margin-left: 1rem;
   margin-right: 1rem; }
 
-/* line 94, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 115, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .form__input--side--login--swipe {
   margin-top: 0rem; }
 
-/* line 97, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 118, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .form-control {
   display: block;
   color: #343434;
@@ -4714,7 +4733,7 @@ input:-webkit-autofill {
   margin-bottom: 1rem;
   width: 100%; }
 
-/* line 108, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 129, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .form__control--no-width {
   display: block;
   color: #343434;
@@ -4724,20 +4743,20 @@ input:-webkit-autofill {
   border: 0px;
   margin-bottom: 1rem; }
 
-/* line 118, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 139, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 #_PackageRecipes .form__control--no-width {
   display: inline;
   margin-right: 10px;
   border: #e0e0e0 solid 1px;
   white-space: nowrap; }
 
-/* line 126, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 147, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 #_PackageRecipes .form-control-amount {
   display: inline;
   margin: 0 10px 0 0;
   border: #e0e0e0 solid 1px; }
 
-/* line 133, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 154, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__login__button {
   background-color: #479327;
   color: #fff;
@@ -4751,24 +4770,24 @@ input:-webkit-autofill {
   border: 0px; }
 
 @media only screen and (min-width: 481px) {
-  /* line 145, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+  /* line 166, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
   .side__login__button {
     padding: 0.5rem 1rem; } }
 
-/* line 148, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 169, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__login__button:hover {
   background-color: #91dd50; }
 
-/* line 151, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 172, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__login__button--signup {
   margin-right: 0rem; }
 
 @media only screen and (min-width: 481px) {
-  /* line 154, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+  /* line 175, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
   .side__login__button--signup {
     padding: 0.5rem 1rem; } }
 
-/* line 157, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 178, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__login__button--swipe {
   background-color: #ff5a5a;
   color: #fff;
@@ -4781,11 +4800,11 @@ input:-webkit-autofill {
   width: 30%;
   font-size: 1rem; }
 
-/* line 171, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 192, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__login__button--swipe:hover {
-  background-color: #f41469; }
+  background-color: #ff7474; }
 
-/* line 174, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 195, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__member__button {
   background-color: #ff5a5a;
   color: #fff;
@@ -4796,15 +4815,15 @@ input:-webkit-autofill {
   margin-bottom: 1rem;
   float: right; }
 
-/* line 184, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 205, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__member__button--login {
   margin-right: 0rem; }
 
-/* line 187, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 208, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__member__button:hover {
-  background-color: #f41469; }
+  background-color: #ff7474; }
 
-/* line 190, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 211, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side--nav {
   color: #fff;
   display: block;
@@ -4817,16 +4836,20 @@ input:-webkit-autofill {
   text-align: left;
   font-size: 1.125rem; }
 
-/* line 202, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 223, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side--nav:hover {
   background-color: #36393b; }
 
-/* line 205, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 226, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .total__price {
   width: 100%;
   margin-bottom: 1rem;
   margin-right: 1rem;
   text-align: right; }
+
+/* line 233, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+.form__box {
+  margin: 0 1rem; }
 
 /* line 4, C:/webroot/lcsnbn/sass/modules/ingredient-page */
 /* line 2, C:/GitHub/SoNaughtyButNice/public/sass/modules/ingredient_page */
