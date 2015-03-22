@@ -91,4 +91,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->belongsToMany('Events', 'paid', 'user_id', 'link_id')->withPivot('paid','type')->withTimestamps();
 	}
 
+	public function Catering(){ // Should be the 
+		return $this->hasMany('Catering', 'id', 'user_id');	
+	}
+
 }

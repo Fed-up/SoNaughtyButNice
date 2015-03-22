@@ -15,6 +15,7 @@
 
 
   <body>
+    
     <!-- <header class="header"> -->
       @include('public.header')
     <!-- </header> -->

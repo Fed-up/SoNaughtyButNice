@@ -159,6 +159,7 @@
                 <section class="columns small-12 medium-10 medium-push-1 large-8 large-push-2 xlarge-6 xlarge-push-3">
                     <div class="section section--form" >
                         <!-- <h1 class="page-header">@yield('title')</h1> -->
+                        
                         @if(isset($user->id))
                              {{ Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')) }}
                         @else
@@ -210,7 +211,7 @@
                                     {{ Form::textarea('message', (isset($input['message'])? Input::old('message') : ''), array('class' => 'input__text', 'placeholder' => 'Example: 12 Chocolate Strawberries, 30 Banana Smoothies and can I please get 12 Rasberry Mousse desserts, for my wedding, except in stead of rasberries I would love it to be made with blueberries =)')) }} 
                                 </div>
                             </div>
-                            {{-- Form::hidden('package_id', $pData[0]->id) --}}
+
                             <div class="form-group">
                                 <div class="form__buttons">
                                     <a href="/">
@@ -227,14 +228,16 @@
             </div>
 
             <div id="custom" class="row content-boxes__wrapper content {{(isset($active)? 'active' : '')}}">
-                
+                @if(isset($confirmation_message))
+                               <div class="message__alert">{{ $confirmation_message }}</div>
+                            @endif
                 @if(Auth::check())
                     <section class="columns small-12 medium-10 medium-push-1 large-8 large-push-2 xlarge-6 xlarge-push-3">
                         {{ Form::open(array('action' => 'CateringController@getCreatePackage', 'class' => 'form-horizontal')) }} 
-                            <h2 class="content__title--main--signup">@if (Auth::check()) Hi {{ Auth::user()->fname }}, @endif Currently our catering enquiry system is being renovated<br/><br/>To get a price on a catering package please email us today with the product selection you require =)</h2> 
+                            <h2 class="content__title--main--signup">@if (Auth::check()) Hi {{ Auth::user()->fname }}, @endif To create a catering package please select the treats you would like, followed by the amount.<br/><br/>Clicking 'Get Price' will estimate the price of the package for you, this does not include delivery costs and the final prie price may change depending on seasonal avaliability =)</h2> 
                             <div class="col-sm-1">
                                 <a id="btnActionAddRecipes" class="add">+ Add</a>
-                                <a>{{ Form::submit('Get Price', array('class' => 'public__calc')) }}</a>
+                                <a>{{ Form::submit('Get Price', array('name' => 'public__calc','class' => 'public__calc')) }}</a>
                                 <a>{{ Form::submit('Cancel' ,array('name' => 'cancel','class' => 'public__calc--cancel')) }}</a><!-- <p class="public__calc--cancel">Cancel</p> -->
                                 {{ Form::hidden('counterRecipes',null,array('id'=>'counterRecipes')) }} 
 
@@ -264,7 +267,7 @@
                                     @endif
                                 </ul>
                             </div>
-                        {{ Form::close() }}
+                        
 
                     </section>
                     
@@ -275,17 +278,21 @@
                     <section class="columns small-12 medium-10 medium-push-1 large-8 large-push-2 xlarge-6 xlarge-push-3">
                         <div class="section section--form form__box" ><!--class = form__box for when the margin needs to be applied instead of padding-->
                             <!-- <h1 class="page-header">@yield('title')</h1> -->
-                            @if(isset($user->id))
-                                 {{ Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')) }}
-                            @else
-                                 {{ Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')) }}
-                            @endif
                                 <h2 class="content__title--main--signup">@if (Auth::check()) Hi {{ Auth::user()->fname }}, @endif Thank you for creating a catering package!<br/><br/>To confirm your catering package please complete the form below to email us today with the selection you require =)</h2> 
+                                <div class="form-group {{ ($errors->has('pname')) ? 'has-error' : '' ; }}">
+                                    {{ Form::label('pname', 'Package Name: ', array('class' => ' content-title--sub ')) }}
+                                    <div class="">
+                                        {{ ($errors->has('pname'))? '<p class="error_message">'. $errors->first('pname') .'</p>' : '' }}
+                                        @if(isset($pname_error))<p class="error_message">{{$pname_error}}</p>@endif
+                                        {{ Form::text('pname', (isset($input['pname'])? Input::old('pname') : (isset($pname)? $pname : '' )), array('class' => 'input__text', 'placeholder' => 'Short name for the package =)')) }} 
+                                    </div>
+                                </div>
+
                                 <div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
-                                    {{ Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')) }}
+                                    {{ Form::label('fname', 'Your Name: ', array('class' => ' content-title--sub ')) }}
                                     <div class="">
                                         {{ ($errors->has('fname'))? '<p class="error_message">'. $errors->first('fname') .'</p>' : '' }}
-                                        {{ Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($user->fname)? $user->fname : '' )), array('class' => 'input__text')) }} 
+                                        {{ Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset(Auth::user()->fname)? Auth::user()->fname : '' )), array('class' => 'input__text')) }} 
                                     </div>
                                 </div>
                                 
@@ -293,14 +300,16 @@
                                     {{ Form::label('date', 'Delivery Date: ', array('class' => ' content-title--sub ')) }}
                                     <div class="">
                                         {{ ($errors->has('date'))? '<p class="error_message">'. $errors->first('date') .'</p>' : '' }}
-                                        {{ Form::text('date', (isset($input['date'])? Input::old('date') : (isset($user->date)? $user->date : '' )), array('class' => 'input__text')) }} 
+                                        @if(isset($date_error))<p class="error_message">{{$date_error}}</p>@endif
+                                        {{ Form::text('date', (isset($input['date'])? Input::old('date') : (isset($date)? $date : '' )), array('class' => 'input__text', 'placeholder' => 'DD / MM / YYYY')) }} 
                                     </div>
                                 </div>
                                 <div class="form-group {{ ($errors->has('time')) ? 'has-error' : '' ; }}">
                                     {{ Form::label('time', 'Delivery Time: ', array('class' => ' content-title--sub ')) }}
                                     <div class="">
                                         {{ ($errors->has('time'))? '<p class="error_message">'. $errors->first('time') .'</p>' : '' }}
-                                        {{ Form::text('time', (isset($input['time'])? Input::old('time') : (isset($user->time)? $user->time : '' )), array('class' => 'input__text')) }} 
+                                        @if(isset($time_error))<p class="error_message">{{$time_error}}</p>@endif
+                                        {{ Form::text('time', (isset($input['time'])? Input::old('time') : (isset($time)? $time : '' )), array('class' => 'input__text')) }} 
                                     </div>
                                 </div>
 
@@ -308,14 +317,14 @@
                                     {{ Form::label('email', 'Email: ', array('class' => ' content-title--sub ')) }}
                                     <div class="">
                                         {{ ($errors->has('email'))? '<p class="error_message">'. $errors->first('email') .'</p>' : '' }}
-                                        {{ Form::text('email', (isset($input['email'])? Input::old('email') : (isset($user->email)? $user->email : '' )), array('class' => 'input__text')) }} 
+                                        {{ Form::text('email', (isset($input['email'])? Input::old('email') : (isset(Auth::user()->email)? Auth::user()->email : '' )), array('class' => 'input__text')) }} 
                                     </div>
                                 </div>
                                 <div class="form-group {{ ($errors->has('mobile')) ? 'has-error' : '' ; }}">
                                     {{ Form::label('mobile', 'Mobile: ', array('class' => ' content-title--sub ')) }}
                                     <div class="">
                                         {{ ($errors->has('mobile'))? '<p class="error_message">'. $errors->first('mobile') .'</p>' : '' }}
-                                        {{ Form::text('mobile', (isset($input['mobile'])? Input::old('mobile') : (isset($user->mobile)? $user->mobile : '' )), array('class' => 'input__text')) }} 
+                                        {{ Form::text('mobile', (isset($input['mobile'])? Input::old('mobile') : (isset($mobile)? $mobile : '' )), array('class' => 'input__text')) }} 
                                     </div>
                                 </div>
                                 
@@ -323,16 +332,18 @@
                                     {{ Form::label('message', 'Detailed Message: ', array('class' => ' content-title--sub ')) }}
                                     <div class="">
                                         {{ ($errors->has('message'))? '<p class="error_message">'. $errors->first('message') .'</p>' : '' }}
-                                        {{ Form::textarea('message', (isset($input['message'])? Input::old('message') : ''), array('class' => 'input__text', 'placeholder' => 'Example: 12 Chocolate Strawberries, 30 Banana Smoothies and can I please get 12 Rasberry Mousse desserts, for my wedding, except in stead of rasberries I would love it to be made with blueberries =)')) }} 
+                                        @if(isset($d_message_error))<p class="error_message">{{$d_message_error}}</p>@endif
+                                        {{ Form::textarea('message', (isset($input['message'])? Input::old('message') : (isset($d_message)? $d_message : '' )), array('class' => 'input__text', 'placeholder' => 'Can I please get 12 Rasberry Mousse desserts, for my wedding, except in stead of rasberries I would love it to be made with blueberries =)')) }} 
                                     </div>
                                 </div>
-                                {{-- Form::hidden('package_id', $pData[0]->id) --}}
+                                {{-- Form::hidden('custom_enquiry', 'custom_enquiry') --}}
+                                {{ Form::hidden('user_id', Auth::user()->id) }}
                                 <div class="form-group">
                                     <div class="form__buttons">
                                         <a href="/">
                                             {{ Form::button('Cancel' ,array('class' => 'form__button--sub form__button--sub--signup')) }}
                                         </a>
-                                        {{ Form::submit('Send Enquiry', array('class' => 'side__login__button side__login__button--signup')) }}
+                                        {{ Form::submit('Send Enquiry', array('name' => 'custom_enquiry','class' => 'side__login__button side__login__button--signup')) }}
                                     
                                     </div>
                                 </div>

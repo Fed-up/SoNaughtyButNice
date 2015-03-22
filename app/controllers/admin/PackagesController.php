@@ -73,6 +73,8 @@ class Admin_PackagesController extends BaseController {
 							};
 						};	
 
+						print_r($catering_recipes[$i]['x']); echo '</pre>'; 	
+
 					    if (isset($catering_recipes[$i]['x']) && $catering_recipes[$i]['x'] > 0) {
 					  		$data->MenuRecipes()->attach($catering_recipes[$i]['x'], array( 'catering_id' => $data->id, 'amount' => $amount[$i]['x'], 'ordering' => $i+1 ));
 					    }else{
@@ -85,10 +87,11 @@ class Admin_PackagesController extends BaseController {
 					            
 						    $findrecipes = DB::table('catering_recipes')->where('id', '=', $catering_recipe_pivot_id)->update($attributes) ;
 
-					    };						
+					    };
+					    						
 					  
 					};
-
+					exit;
 					// echo '<pre>'; print_r($input['ddi']); echo '</pre>';
 						
 				};

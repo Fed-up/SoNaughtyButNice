@@ -15,6 +15,7 @@
 
 
   <body>
+    
     <!-- <header class="header"> -->
       <?php echo $__env->make('public.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     <!-- </header> -->

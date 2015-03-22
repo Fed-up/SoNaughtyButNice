@@ -1,10 +1,17 @@
 /*///////////// Sign up section*/
 /* line 3, C:/webroot/lcsnbn/sass/modules/signup */
 .section--form {
-  padding: 2rem 1rem; }
-  @media only screen and (min-width:768px) {
+  padding: 2rem 1rem;
+  // text-align: center; 
+}
+@media only screen and (min-width:768px) {
     .section--form {
-      padding: 2rem; } }
+      padding: 2rem; 
+    } 
+}
+.form__box_p{
+  text-align: center;
+}
 
 /* line 11, C:/webroot/lcsnbn/sass/modules/signup */
 .input__text {
@@ -39,7 +46,7 @@
   border: 0px;
   border-radius: 0.5rem;
   color: $main_color;
-  margin-left: 10%;
+  // margin-left: 10%;
   margin-top: 0.7rem;
   font-size: 0.8rem; }
 

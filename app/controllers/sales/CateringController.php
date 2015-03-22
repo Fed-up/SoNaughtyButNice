@@ -44,7 +44,7 @@ class CateringController  extends BaseController {
 		foreach ($recipes as $recipe) {
 			$mRep[$recipe->id]	= $recipe->name;
 		};
-		
+
 
 		return View::make('public.catering')->with(array(
 			'cData' => $cData,
@@ -56,7 +56,7 @@ class CateringController  extends BaseController {
 
 	public function getCreatePackage(){
 		$input = Input::all();
-		// echo '<pre>'; print_r($input); echo '</pre>';exit;
+		
 
 
 		//dd($input);
@@ -77,6 +77,7 @@ class CateringController  extends BaseController {
 				$catering_recipes = Input::get('recipes');
 				$input_amount = Input::get('amount');
 				$last_price = 0;
+				$last_amount = 0;
 				
 				for($i=0; $i<count($catering_recipes); $i++){
 					$catering_recipe_pivot_id = array_keys($catering_recipes[$i]);
@@ -102,12 +103,10 @@ class CateringController  extends BaseController {
 					);
 
 					$last_price = $last_price + $total_price;	
-
+					$last_amount = $last_amount + $amount;
 					
 				};
 			};
-
-
 
 			if(isset($input['ddi'])){
 				$ddi = $input['ddi'];
@@ -117,13 +116,9 @@ class CateringController  extends BaseController {
 						if($ddi[$i] == $key){
 							$last_price = $last_price - $package_array[$key]['total_price'];
 							unset($package_array[$ddi[$i]]);
-							
 						}
 					}
-
 				}
-				
-				
 			};
 		}; 
 
@@ -164,7 +159,231 @@ class CateringController  extends BaseController {
 			$user = 0;
 		}
 
+		
+
+		if(isset($input['custom_enquiry'])){
+
 			// echo '<pre>'; print_r($user->email); echo '</pre>'; exit;
+			$pname = $input['pname'];
+			$fname = $input['fname'];
+			$date = $input['date'];
+			$time = $input['time'];
+			$email = $input['email'];
+			$mobile = $input['mobile'];
+			$d_message = $input['message'];
+			// echo '<pre>'; print_r($pname); echo '</pre>'; exit;
+			if(empty($pname)){
+				
+				$pname_error = "Please tell us the name you would like call this package";
+				return View::make('public.catering')->with(array(
+					'cData' => $cData,
+					'catering_image' => $package_image,
+					'recipes' => $mRep,
+					'package_array' => $package_array,
+					'last_price' => $last_price,
+					'active' => 'active',
+					'user' => 'user',
+					'pname_error' => $pname_error,
+					'time' => (!empty($time))? $time : '',
+					'date' => (!empty($date))? $date : '',
+					'mobile' => (!empty($mobile))? $mobile : '',
+					'd_message' => (!empty($d_message))? $d_message : '',
+					)
+				);
+			}
+
+			if(empty($date)){
+				// echo '<pre>'; print_r($input); echo '</pre>'; exit;
+				$date_error = "Please tell us the date you would like this package delivered";
+				return View::make('public.catering')->with(array(
+					'cData' => $cData,
+					'catering_image' => $package_image,
+					'recipes' => $mRep,
+					'package_array' => $package_array,
+					'last_price' => $last_price,
+					'active' => 'active',
+					'user' => 'user',
+					'date_error' => $date_error,
+					'pname' => (!empty($pname))? $pname : '',
+					'time' => (!empty($time))? $time : '',
+					'mobile' => (!empty($mobile))? $mobile : '',
+					'd_message' => (!empty($d_message))? $d_message : '',
+					)
+				);
+			}
+
+			if(empty($time)){
+				// echo '<pre>'; print_r($input); echo '</pre>'; exit;
+				$time_error = "Please tell us the time you would like this package delivered";
+				return View::make('public.catering')->with(array(
+					'cData' => $cData,
+					'catering_image' => $package_image,
+					'recipes' => $mRep,
+					'package_array' => $package_array,
+					'last_price' => $last_price,
+					'active' => 'active',
+					'user' => 'user',
+					'time_error' => $time_error,
+					'pname' => (!empty($pname))? $pname : '',
+					'date' => (!empty($date))? $date : '',
+					'mobile' => (!empty($mobile))? $mobile : '',
+					'd_message' => (!empty($d_message))? $d_message : '',
+					)
+				);
+			}
+
+			if(empty($d_message)){
+				// echo '<pre>'; print_r($input); echo '</pre>'; exit;
+				$d_message_error = "Could you please give us any further information about the requirements of the package you have created?";
+				return View::make('public.catering')->with(array(
+					'cData' => $cData,
+					'catering_image' => $package_image,
+					'recipes' => $mRep,
+					'package_array' => $package_array,
+					'last_price' => $last_price,
+					'active' => 'active',
+					'user' => 'user',
+					'd_message_error' => $d_message_error,
+					'pname' => (!empty($pname))? $pname : '',
+					'date' => (!empty($date))? $date : '',
+					'mobile' => (!empty($mobile))? $mobile : '',
+					'time' => (!empty($time))? $time : '',
+					)
+				);
+			}
+			
+			// echo '<pre>'; print_r($input); echo '</pre>';exit;
+			// echo '<pre>'; print_r($catering_recipes); echo '</pre>';exit;
+
+			$data	= new Catering();
+			$data->user_id  = $user->id;
+			$data->name 	= Input::get('pname');
+			$data->summary 	= 'Made by user '.$user->email;
+			$data->package_type 	= "FUNCTION";
+			$data->quantity 	= $last_amount;
+			$data->price 	= $last_price;
+			$data->active  = 0;
+			if($data->save()){
+				if(isset($input['recipes']) && isset($input['amount'])){			
+					$catering_recipes = Input::get('recipes');
+					$input_amount = Input::get('amount');
+					$last_price = 0;
+					$last_amount = 0;
+					
+					for($i=0; $i<count($catering_recipes); $i++){
+						$catering_recipe_pivot_id = array_keys($catering_recipes[$i]);
+					    $catering_recipe_pivot_id = $catering_recipe_pivot_id[0];
+					    $catering_recipe_id = $catering_recipes[$i][$catering_recipe_pivot_id];
+
+					    $amount_array = array_keys($input_amount[$i]);
+					    $index_amount = $amount_array[0];
+					    $amount = $input_amount[$i][$index_amount];
+					    $total_price = $rData[0]->sales_price * $amount;
+
+
+						$last_price = $last_price + $total_price;	
+						$last_amount = $last_amount + $amount;
+
+						// echo '<pre>'; print_r($amount); echo '</pre>';
+					  	$data->MenuRecipes()->attach($catering_recipes[$i][$i], array( 'catering_id' => $data->id, 'amount' => $amount, 'ordering' => $i+1 ));
+					   
+						
+					};
+				};
+			};
+			
+
+				
+			$package_id = $data->id;
+
+			$pData = Catering::where('id', '=', $package_id)
+				->with(array('menuRecipes' => function($query) use ($package_id){
+					
+					$query->where('catering_recipes.catering_id', '=', $package_id)->orderBy('pivot_ordering','ASC')
+					->with(array('Images' => function($query) use ($package_id){
+						$query->where('ordering', '=', 0)->where('section', '=', 'RECIPE');
+					}));
+				}))
+				->with(array('Images' => function($query){
+					$query->where('section', '=', 'CATERING')->orderBy(DB::raw('RAND()'))->where('active', '=', 1);
+				}))		
+			->get();
+
+			foreach ($pData as $package) {
+				
+				// echo '<pre>'; print_r($package); echo '</pre>';exit;
+
+				$count = count($pData[0]->Images);
+				if($count < 1){
+					$package_image[$package->id] = 'ingredient.png';
+				}else{
+					foreach($package->Images as $image){
+				        if(file_exists('uploads/'.$image->name)){
+				            $package_image[$package->id] = $image->name;
+				        }else{
+				           	$package_image[$package->id] = 'ingredient.png';
+				        }
+					}
+				}
+				
+
+
+				foreach ($package->MenuRecipes as $recipe) {
+					
+					// echo '<pre>'; print_r($recipe); echo '</pre>';exit;
+
+					$iData = Images::where('active', '=', '1')
+						->where('link_id', '=', $recipe->id)
+						->where('ordering', '=', 0)
+						->where('section', '=', 'RECIPE')
+						->get();
+					
+					
+					
+					$i_count = count($iData);
+					if($i_count > 0){
+						$recipe_image[$recipe->id] = $iData[0]->name;
+					}else{
+						$recipe_image[$recipe->id] = 'recipe.png';
+					}	
+					
+				}
+			}
+			// echo '<pre>'; print_r($recipe_image[$recipe->id]); echo '</pre>';exit;	
+			$messageData = array(
+		        'pData' => $pData,
+				'package_image' => $package_image,
+				'fname' => $fname,
+				'date' => $date,
+				'time' => $time,
+				'email' => $email,
+				'd_message' => $d_message,
+				'recipe_image' => $recipe_image,
+		    );
+
+			Mail::send('sales.package_email', $messageData, function($message) use ($email, $pData){
+				$message->to( $email )->cc('sales@sonaughtybutnice.com')->subject('Confirmation, We recieved your catering enquiry - '.$pData[0]->name);
+			}); //->cc('sales@sonaughtybutnice.com')
+
+			
+			$confirmation_message = "An email has been sent to So Naughty but Nice, we will be in contact with you as soon as possible! =)";
+			return View::make('public.catering')->with(array(
+				'cData' => $cData,
+				'catering_image' => $package_image,
+				'recipes' => $mRep,
+				'package_array' => $package_array,
+				'last_price' => $last_price,
+				'active' => 'active',
+				'user' => 'user',
+				'confirmation_message' => $confirmation_message,
+				'pname' => (!empty($pname))? $pname : '',
+				'date' => (!empty($date))? $date : '',
+				'mobile' => (!empty($mobile))? $mobile : '',
+				'time' => (!empty($time))? $time : '',
+				'd_message' => (!empty($d_message))? $d_message : '',
+				)
+			);
+		}
 
 		if(isset($input['cancel'])){
 			return View::make('public.catering')->with(array(
@@ -186,75 +405,23 @@ class CateringController  extends BaseController {
 			'user' => 'user'
 			)
 		);
+
+
 	}
 
 	public function getCustomCatering($package_array){
 
 		
-		echo '<pre>'; print_r($package_array); echo '</pre>'; exit;
+		// echo '<pre>'; print_r($package_array); echo '</pre>'; exit;
 
 
 		
 	}
 
-	public function getPackage($id)
-	{
-		$pData = Catering::where('active', '=', '1')->where('id', '=', $id)
-			->with(array('menuRecipes' => function($query) use ($id){
-				
-				$query->where('catering_recipes.catering_id', '=', $id)->orderBy('pivot_ordering','ASC')
-				->with(array('Images' => function($query){
-					$query->where('ordering', '=', 0)->where('section', '=', 'RECIPE');
-				}));
-			}))			
-		->get();
-
-		if(Auth::user()){
-			$user = Auth::user();
-		}else{
-			$user = 0;
-		}
-
-		foreach($pData as $package){
-			foreach ($package->MenuRecipes as $recipe) {
-
-				$iData = Images::where('active', '=', '1')
-					->where('link_id', '=', $recipe->id)
-					->where('ordering', '=', 0)
-					->where('section', '=', 'RECIPE')
-					->get();
-				
-				// echo '<pre>'; print_r($iData[0]->name); echo '</pre>';exit;	
-				
-				$i_count = count($iData);
-				if($i_count > 0){
-					$recipe_image[$recipe->id] = $iData[0]->name;
-				}else{
-					$recipe_image[$recipe->id] = 'recipe.png';
-				}	
-				
-			}
-		}
-		// echo '<pre>'; print_r($recipe_image); echo '</pre>';exit;	
-			
-			
-		// foreach($pData as $package){
-		// 	echo '<pre>'; print_r($package->id); echo '</pre>';
-		// }exit;
-
-		return View::make('sales.package')->with(array(
-			'pData' => $pData,
-			'recipe_image' => $recipe_image,
-			'user' => $user,
-			)
-		);
-	}
-
-
-
 	public function packageEnquiry(){
 
 		$input = Input::all();
+		// echo '<pre>'; print_r($input); echo '</pre>';exit;
 
 		$fname = $input['fname'];
 		$date = $input['date'];
@@ -390,6 +557,59 @@ class CateringController  extends BaseController {
 		    // return Redirect::to('package/'$package_id);
 			
 		}
+	}
+
+	public function getPackage($id)
+	{
+		$pData = Catering::where('active', '=', '1')->where('id', '=', $id)
+			->with(array('menuRecipes' => function($query) use ($id){
+				
+				$query->where('catering_recipes.catering_id', '=', $id)->orderBy('pivot_ordering','ASC')
+				->with(array('Images' => function($query){
+					$query->where('ordering', '=', 0)->where('section', '=', 'RECIPE');
+				}));
+			}))			
+		->get();
+
+		if(Auth::user()){
+			$user = Auth::user();
+		}else{
+			$user = 0;
+		}
+
+		foreach($pData as $package){
+			foreach ($package->MenuRecipes as $recipe) {
+
+				$iData = Images::where('active', '=', '1')
+					->where('link_id', '=', $recipe->id)
+					->where('ordering', '=', 0)
+					->where('section', '=', 'RECIPE')
+					->get();
+				
+				// echo '<pre>'; print_r($iData[0]->name); echo '</pre>';exit;	
+				
+				$i_count = count($iData);
+				if($i_count > 0){
+					$recipe_image[$recipe->id] = $iData[0]->name;
+				}else{
+					$recipe_image[$recipe->id] = 'recipe.png';
+				}	
+				
+			}
+		}
+		// echo '<pre>'; print_r($recipe_image); echo '</pre>';exit;	
+			
+			
+		// foreach($pData as $package){
+		// 	echo '<pre>'; print_r($package->id); echo '</pre>';
+		// }exit;
+
+		return View::make('sales.package')->with(array(
+			'pData' => $pData,
+			'recipe_image' => $recipe_image,
+			'user' => $user,
+			)
+		);
 	}
 }
 

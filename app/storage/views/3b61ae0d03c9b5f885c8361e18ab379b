@@ -158,6 +158,7 @@
                 <section class="columns small-12 medium-10 medium-push-1 large-8 large-push-2 xlarge-6 xlarge-push-3">
                     <div class="section section--form" >
                         <!-- <h1 class="page-header"><?php echo $__env->yieldContent('title'); ?></h1> -->
+                        
                         <?php if(isset($user->id)): ?>
                              <?php echo Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')); ?>
                         <?php else: ?>
@@ -209,7 +210,7 @@
                                     <?php echo Form::textarea('message', (isset($input['message'])? Input::old('message') : ''), array('class' => 'input__text', 'placeholder' => 'Example: 12 Chocolate Strawberries, 30 Banana Smoothies and can I please get 12 Rasberry Mousse desserts, for my wedding, except in stead of rasberries I would love it to be made with blueberries =)')); ?> 
                                 </div>
                             </div>
-                            <?php /* Form::hidden('package_id', $pData[0]->id) */ ?>
+
                             <div class="form-group">
                                 <div class="form__buttons">
                                     <a href="/">
@@ -226,14 +227,16 @@
             </div>
 
             <div id="custom" class="row content-boxes__wrapper content <?php echo (isset($active)? 'active' : ''); ?>">
-                
+                <?php if(isset($confirmation_message)): ?>
+                               <div class="message__alert"><?php echo $confirmation_message; ?></div>
+                            <?php endif; ?>
                 <?php if(Auth::check()): ?>
                     <section class="columns small-12 medium-10 medium-push-1 large-8 large-push-2 xlarge-6 xlarge-push-3">
                         <?php echo Form::open(array('action' => 'CateringController@getCreatePackage', 'class' => 'form-horizontal')); ?> 
-                            <h2 class="content__title--main--signup"><?php if (Auth::check()): ?> Hi <?php echo Auth::user()->fname; ?>, <?php endif; ?> Currently our catering enquiry system is being renovated<br/><br/>To get a price on a catering package please email us today with the product selection you require =)</h2> 
+                            <h2 class="content__title--main--signup"><?php if (Auth::check()): ?> Hi <?php echo Auth::user()->fname; ?>, <?php endif; ?> To create a catering package please select the treats you would like, followed by the amount.<br/><br/>Clicking 'Get Price' will estimate the price of the package for you, this does not include delivery costs and the final prie price may change depending on seasonal avaliability =)</h2> 
                             <div class="col-sm-1">
                                 <a id="btnActionAddRecipes" class="add">+ Add</a>
-                                <a><?php echo Form::submit('Get Price', array('class' => 'public__calc')); ?></a>
+                                <a><?php echo Form::submit('Get Price', array('name' => 'public__calc','class' => 'public__calc')); ?></a>
                                 <a><?php echo Form::submit('Cancel' ,array('name' => 'cancel','class' => 'public__calc--cancel')); ?></a><!-- <p class="public__calc--cancel">Cancel</p> -->
                                 <?php echo Form::hidden('counterRecipes',null,array('id'=>'counterRecipes')); ?> 
 
@@ -263,7 +266,7 @@
                                     <?php endif; ?>
                                 </ul>
                             </div>
-                        <?php echo Form::close(); ?>
+                        
 
                     </section>
                     
@@ -274,17 +277,21 @@
                     <section class="columns small-12 medium-10 medium-push-1 large-8 large-push-2 xlarge-6 xlarge-push-3">
                         <div class="section section--form form__box" ><!--class = form__box for when the margin needs to be applied instead of padding-->
                             <!-- <h1 class="page-header"><?php echo $__env->yieldContent('title'); ?></h1> -->
-                            <?php if(isset($user->id)): ?>
-                                 <?php echo Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')); ?>
-                            <?php else: ?>
-                                 <?php echo Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')); ?>
-                            <?php endif; ?>
                                 <h2 class="content__title--main--signup"><?php if (Auth::check()): ?> Hi <?php echo Auth::user()->fname; ?>, <?php endif; ?> Thank you for creating a catering package!<br/><br/>To confirm your catering package please complete the form below to email us today with the selection you require =)</h2> 
+                                <div class="form-group <?php echo ($errors->has('pname')) ? 'has-error' : '' ;; ?>">
+                                    <?php echo Form::label('pname', 'Package Name: ', array('class' => ' content-title--sub ')); ?>
+                                    <div class="">
+                                        <?php echo ($errors->has('pname'))? '<p class="error_message">'. $errors->first('pname') .'</p>' : ''; ?>
+                                        <?php if(isset($pname_error)): ?><p class="error_message"><?php echo $pname_error; ?></p><?php endif; ?>
+                                        <?php echo Form::text('pname', (isset($input['pname'])? Input::old('pname') : (isset($pname)? $pname : '' )), array('class' => 'input__text', 'placeholder' => 'Short name for the package =)')); ?> 
+                                    </div>
+                                </div>
+
                                 <div class="form-group <?php echo ($errors->has('fname')) ? 'has-error' : '' ;; ?>">
-                                    <?php echo Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')); ?>
+                                    <?php echo Form::label('fname', 'Your Name: ', array('class' => ' content-title--sub ')); ?>
                                     <div class="">
                                         <?php echo ($errors->has('fname'))? '<p class="error_message">'. $errors->first('fname') .'</p>' : ''; ?>
-                                        <?php echo Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($user->fname)? $user->fname : '' )), array('class' => 'input__text')); ?> 
+                                        <?php echo Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset(Auth::user()->fname)? Auth::user()->fname : '' )), array('class' => 'input__text')); ?> 
                                     </div>
                                 </div>
                                 
@@ -292,14 +299,16 @@
                                     <?php echo Form::label('date', 'Delivery Date: ', array('class' => ' content-title--sub ')); ?>
                                     <div class="">
                                         <?php echo ($errors->has('date'))? '<p class="error_message">'. $errors->first('date') .'</p>' : ''; ?>
-                                        <?php echo Form::text('date', (isset($input['date'])? Input::old('date') : (isset($user->date)? $user->date : '' )), array('class' => 'input__text')); ?> 
+                                        <?php if(isset($date_error)): ?><p class="error_message"><?php echo $date_error; ?></p><?php endif; ?>
+                                        <?php echo Form::text('date', (isset($input['date'])? Input::old('date') : (isset($date)? $date : '' )), array('class' => 'input__text', 'placeholder' => 'DD / MM / YYYY')); ?> 
                                     </div>
                                 </div>
                                 <div class="form-group <?php echo ($errors->has('time')) ? 'has-error' : '' ;; ?>">
                                     <?php echo Form::label('time', 'Delivery Time: ', array('class' => ' content-title--sub ')); ?>
                                     <div class="">
                                         <?php echo ($errors->has('time'))? '<p class="error_message">'. $errors->first('time') .'</p>' : ''; ?>
-                                        <?php echo Form::text('time', (isset($input['time'])? Input::old('time') : (isset($user->time)? $user->time : '' )), array('class' => 'input__text')); ?> 
+                                        <?php if(isset($time_error)): ?><p class="error_message"><?php echo $time_error; ?></p><?php endif; ?>
+                                        <?php echo Form::text('time', (isset($input['time'])? Input::old('time') : (isset($time)? $time : '' )), array('class' => 'input__text')); ?> 
                                     </div>
                                 </div>
 
@@ -307,14 +316,14 @@
                                     <?php echo Form::label('email', 'Email: ', array('class' => ' content-title--sub ')); ?>
                                     <div class="">
                                         <?php echo ($errors->has('email'))? '<p class="error_message">'. $errors->first('email') .'</p>' : ''; ?>
-                                        <?php echo Form::text('email', (isset($input['email'])? Input::old('email') : (isset($user->email)? $user->email : '' )), array('class' => 'input__text')); ?> 
+                                        <?php echo Form::text('email', (isset($input['email'])? Input::old('email') : (isset(Auth::user()->email)? Auth::user()->email : '' )), array('class' => 'input__text')); ?> 
                                     </div>
                                 </div>
                                 <div class="form-group <?php echo ($errors->has('mobile')) ? 'has-error' : '' ;; ?>">
                                     <?php echo Form::label('mobile', 'Mobile: ', array('class' => ' content-title--sub ')); ?>
                                     <div class="">
                                         <?php echo ($errors->has('mobile'))? '<p class="error_message">'. $errors->first('mobile') .'</p>' : ''; ?>
-                                        <?php echo Form::text('mobile', (isset($input['mobile'])? Input::old('mobile') : (isset($user->mobile)? $user->mobile : '' )), array('class' => 'input__text')); ?> 
+                                        <?php echo Form::text('mobile', (isset($input['mobile'])? Input::old('mobile') : (isset($mobile)? $mobile : '' )), array('class' => 'input__text')); ?> 
                                     </div>
                                 </div>
                                 
@@ -322,16 +331,18 @@
                                     <?php echo Form::label('message', 'Detailed Message: ', array('class' => ' content-title--sub ')); ?>
                                     <div class="">
                                         <?php echo ($errors->has('message'))? '<p class="error_message">'. $errors->first('message') .'</p>' : ''; ?>
-                                        <?php echo Form::textarea('message', (isset($input['message'])? Input::old('message') : ''), array('class' => 'input__text', 'placeholder' => 'Example: 12 Chocolate Strawberries, 30 Banana Smoothies and can I please get 12 Rasberry Mousse desserts, for my wedding, except in stead of rasberries I would love it to be made with blueberries =)')); ?> 
+                                        <?php if(isset($d_message_error)): ?><p class="error_message"><?php echo $d_message_error; ?></p><?php endif; ?>
+                                        <?php echo Form::textarea('message', (isset($input['message'])? Input::old('message') : (isset($d_message)? $d_message : '' )), array('class' => 'input__text', 'placeholder' => 'Can I please get 12 Rasberry Mousse desserts, for my wedding, except in stead of rasberries I would love it to be made with blueberries =)')); ?> 
                                     </div>
                                 </div>
-                                <?php /* Form::hidden('package_id', $pData[0]->id) */ ?>
+                                <?php /* Form::hidden('custom_enquiry', 'custom_enquiry') */ ?>
+                                <?php echo Form::hidden('user_id', Auth::user()->id); ?>
                                 <div class="form-group">
                                     <div class="form__buttons">
                                         <a href="/">
                                             <?php echo Form::button('Cancel' ,array('class' => 'form__button--sub form__button--sub--signup')); ?>
                                         </a>
-                                        <?php echo Form::submit('Send Enquiry', array('class' => 'side__login__button side__login__button--signup')); ?>
+                                        <?php echo Form::submit('Send Enquiry', array('name' => 'custom_enquiry','class' => 'side__login__button side__login__button--signup')); ?>
                                     
                                     </div>
                                 </div>
