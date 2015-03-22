@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="page">
-        <h2 class="content__title content__title--main"><a class="content__title--link" href="/catering">{{$pData[0]->name}} Recipes</a></h2>
+        <h2 class="content__title content__title--main"><a class="content__title--link" href="/catering">{{$pData[0]->name}} Package</a></h2>
 
         
 
@@ -40,7 +40,7 @@
         </div>
 
         <div class=" row">
-        <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
+        <section class="columns small-12 medium-10 medium-push-1 large-8 large-push-2 xlarge-6 xlarge-push-3">
             <div class="section section--form" >
                 <!-- <h1 class="page-header">@yield('title')</h1> -->
                 @if(isset($user->id))
@@ -49,8 +49,8 @@
                      {{ Form::open(array('action' => 'CateringController@packageEnquiry', 'class' => 'form-horizontal')) }}
                 @endif
                
-                    <p class="package__total">Total: ${{$pData[0]->price}}</p>
-                    <h2 class="content__title--main--signup">@if (Auth::check()) Hi {{ Auth::user()->fname }}, @endif Currently our catering enquiry system is being renovated<br/><br/>To get a price on this catering package please email us today with the changes you require to this package selection =)</h2> 
+                    <p class="package__total">Estimated Price: ${{$pData[0]->price}}</p>
+                    <h2 class="content__title--main--signup">@if (Auth::check()) Hi {{ Auth::user()->fname }}, @endif To order the {{$pData[0]->name}} catering package<br/><br/>Please email us today and include any changes you would like =)</h2> 
                     <div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
                         {{ Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')) }}
                         <div class="">
@@ -63,7 +63,7 @@
                         {{ Form::label('date', 'Delivery Date: ', array('class' => ' content-title--sub ')) }}
                         <div class="">
                             {{ ($errors->has('date'))? '<p class="error_message">'. $errors->first('date') .'</p>' : '' }}
-                            {{ Form::text('date', (isset($input['date'])? Input::old('date') : (isset($user->date)? $user->date : '' )), array('class' => 'input__text')) }} 
+                            {{ Form::text('date', (isset($input['date'])? Input::old('date') : (isset($user->date)? $user->date : '' )), array('class' => 'input__text', 'placeholder' => 'DD / MM / YYYY')) }} 
                         </div>
                     </div>
                     <div class="form-group {{ ($errors->has('time')) ? 'has-error' : '' ; }}">
