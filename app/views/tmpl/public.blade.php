@@ -9,7 +9,8 @@
     	<title>{{ $title or "So Naughty But Nice" }}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" >
       @yield('_header')
-      <link rel="stylesheet" type="text/css" href="../sass/compiled_css/dev_snbn.css">
+      <link rel="stylesheet" type="text/css" href="../sass/compiled_css/dev_snbn.css">  <!-- Dev site css -->
+      <!-- <link rel="stylesheet" type="text/css" href="../deploy_css/snbn.min.css"> //Live site css -->
       <link rel="stylesheet" type="text/css" href="/packages/jquery-1.11.1.min/vendor/jquery-ui-1.10.4.custom/css/no-theme/jquery-ui-1.10.4.custom.min.css"/>
   </head>
 
