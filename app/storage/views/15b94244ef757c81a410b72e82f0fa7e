@@ -8,7 +8,7 @@
 	<div class="top__section__footer">
 		<section class="row collapse">
 			<div class="columns hide-for-small-only medium-6 ">
-				<p class="footer__blurb">We invite you to indulge, satisfy your sweet tooth and to discover the benefits of the ingredients we use, to make our healthy desserts unique and amazing =)</p>
+				<p class="footer__blurb">SoNaughtyButNice.com is based in Melbourne! We invite you to indulge, satisfy your sweet tooth and to discover the benefits of the ingredients we use, to make our healthy desserts unique and amazing =)</p>
 			</div>
 			<div class="columns small-12 medium-6">
 				<!-- Go to www.addthis.com/dashboard to customize your tools -->

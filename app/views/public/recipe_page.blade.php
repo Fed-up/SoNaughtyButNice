@@ -50,8 +50,12 @@
                     <ul>
                     @foreach($rIngredients as $index=>$ingredient)
                         @if(auth::check())
-                            @if(empty($rIngredients[0]))
-                                
+                            @if($recipe->exclusive == 1)
+                                <li>
+                                    <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
+                                        {{$ingredient->MenuIngredients->name}}
+                                    </a>
+                                </li>
                             @else
                                 <li>
                                     {{$ingredient->amount}} 

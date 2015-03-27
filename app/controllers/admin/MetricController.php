@@ -4,7 +4,7 @@ class Admin_MetricController extends BaseController {
 
 	public function getMetric(){
 		//Finds every record that does not equal 9
-		$metric = Metric::where('active', '!=', 9)->get();
+		$metric = Metric::where('active', '!=', 9)->orderBy('name','ASC')->get(); 
 		return View::make('admin.metric.index')
 			->with(array('data' => $metric));
 	}

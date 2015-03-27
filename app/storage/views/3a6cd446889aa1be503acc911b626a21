@@ -49,8 +49,12 @@
                     <ul>
                     <?php foreach($rIngredients as $index=>$ingredient): ?>
                         <?php if(auth::check()): ?>
-                            <?php if(empty($rIngredients[0])): ?>
-                                
+                            <?php if($recipe->exclusive == 1): ?>
+                                <li>
+                                    <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
+                                        <?php echo $ingredient->MenuIngredients->name; ?>
+                                    </a>
+                                </li>
                             <?php else: ?>
                                 <li>
                                     <?php echo $ingredient->amount; ?> 

@@ -3,7 +3,7 @@ class MenuIngredients extends Eloquent {
 
     protected $table = 'menu_ingredients';
 	
-	/*
+	/* 
 		CREATE TABLE IF NOT EXISTS `menu_ingredients` (
 		  `id` int(11) NOT NULL AUTO_INCREMENT,
 		  `name` varchar(255) NOT NULL,

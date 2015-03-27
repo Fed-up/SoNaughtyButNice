@@ -1,6 +1,6 @@
 <?php
 class Metric extends Eloquent {
-
+ 
     protected $table = 'metric';
 	
 	/*
