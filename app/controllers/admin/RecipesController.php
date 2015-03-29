@@ -257,7 +257,6 @@ class Admin_RecipesController extends BaseController{
 	
 	public function getEditRecipes($id){
 		$data = MenuRecipes::findOrFail($id);
-
 		$categories = MenuCategories::orderBy('name','ASC')->where('active', '!=', '9')->get(); // Bring in data that has not been deleted
 		$ingredients = MenuIngredients::orderBy('name','ASC')->where('active', '=', '1')->get();
 		$metrics = Metric::orderBy('name','ASC')->get();
@@ -328,7 +327,7 @@ class Admin_RecipesController extends BaseController{
 		$s_ingredients = $ingredients;
 		
 
-		// echo '<pre>'; print_r( $sales_data ); echo '</pre>'; 
+		// echo '<pre>'; print_r( $recipes_ingredients ); echo '</pre>'; 
 		// exit;
 
 		// foreach($sales_data as $i => $in){
@@ -509,19 +508,18 @@ class Admin_RecipesController extends BaseController{
 					if(isset($input['i_grams'])){$i_grams = $input['i_grams'];}else{$i_grams = 0;};
 					if(isset($input['i_price'])){$i_price = $input['i_price'];}else{$i_price = 0;}
 
-					// foreach($s_ingredient as $id => $data){
-					//   	$array_key = array_keys($data); 	  	
-					// }
-					// echo '<pre>'; print_r($i_grams); echo '</pre>'; exit;	
-
-
-
-
 					
-					// echo '<pre>'; print_r($grams); echo '</pre>'; exit;
 
-					// $recipe_ingredient = array($ingredient, $amount, $metric);
-					// $array_count = count($recipe_ingredient);
+					// echo '<pre>'; print_r($input); echo '</pre>';exit;
+
+
+
+					// Pull info from database on ingredients metric
+					// Then serch the metric database to find which Id corrsponds with the action
+					// Then calculate value based on database values 
+
+					// ammount * metric value
+
 
 					$ti_cost = 0;
 
@@ -529,63 +527,95 @@ class Admin_RecipesController extends BaseController{
 					$array_count = count($ingredient);
 					for($i=0; $i<$array_count; $i++){
 					  
-					  $xx = array_keys($ingredient[$i]);
+						$xx = array_keys($ingredient[$i]);
+						$input_ingredient_id = $ingredient[$i][$xx[0]];
+						$input_metric_id = $metric[$i][$xx[0]];
+						$input_amount = $amount[$i][$xx[0]];
+						$riGrams = $grams[$i][$xx[0]];
 
-					  if($xx[0] == 'x'){
-						  $r_i = new MenuRecipesIngredients();
-						  $r_i->menu_ingredients_id = $ingredient[$i][$xx[0]];
-						  $r_i->amount = $amount[$i][$xx[0]];
-						  $r_i->metric_id = $metric[$i][$xx[0]];
-						  $r_i->grams = $grams[$i][$xx[0]];
-						  $r_i->ordering = $i;
-						  $r_i->active = 1;  
-					  }else{
-						$r_i = MenuRecipesIngredients::find($xx[0]);
-						$r_i->menu_ingredients_id = $ingredient[$i][$xx[0]];
-						$r_i->amount = $amount[$i][$xx[0]];
-						$r_i->metric_id = $metric[$i][$xx[0]];
-						$r_i->grams = $r_grams = $grams[$i][$xx[0]];
+						$imData = MenuIngredients::where('id', '=', $input_ingredient_id)
+							->with(array('Metric' => function($query) use ($input_ingredient_id){
+								$query->where('ingredient_metric.menu_ingredients_id', '=', $input_ingredient_id);
+							}))	
+						->first();
 
-						if(isset($input['sales_amount'])){
-							$sales_amount = $input['sales_amount'];
-							$r_i->sales_grams = $sales_grams = $r_grams/$serve_amount * $sales_amount; 
+						// $imData = MenuIngredients::with('Metric')->get();
+
+						// echo '<pre>'; print_r($imData); echo '</pre>';exit;
 						
-							foreach($i_grams as $id => $i_gram){
-
-								
-
-							  	if($ingredient[$i][$xx[0]] == $id){
-							  		// if(isset($input['calc'])){
-
-							  			if($i_gram > 0){
-								  			$packet_grams_percentage = $sales_grams / $i_gram * 100; 
-											$r_i->packet_grams_percentage = $packet_grams_percentage;
-										}
-								  		// echo '<pre>'; print_r($packet_grams_percentage); echo '</pre>';
-							  		// }
-							  	}
+						if(!empty($grams[$i][$xx[0]])){
+							$riGrams = $grams[$i][$xx[0]];
+						}else{
+							
+							if(!empty($imData->Metric)){
+								// echo '<pre>'; print_r($imData); echo '</pre>';exit;
+								foreach ($imData->Metric as $pivot_data) { //Ingredient Metric Data
+									// echo '<pre>'; print_r($data); echo '</pre>';exit;
+									if($pivot_data->id == $input_metric_id){
+										$riGrams = $pivot_data->pivot->metric_grams * $input_amount;                            //Recipe Ingredient Grams
+										
+									}
+								}
 							}
+							
 						}
+						// echo '<pre>'; print_r($riGrams); echo '</pre>';exit;
+						// $ingredient_metric = MenuCategories::orderBy('name','ASC')->where('active', '!=', '9')->get();
 
-						if(isset($input['sales_price'])){
-							foreach($i_price as $id => $ri_price){
-							  	if($ingredient[$i][$xx[0]] == $id){
-							  		if(isset($packet_grams_percentage)){
-								  		$recipe_ingredient_cost = $packet_grams_percentage/100 * $ri_price;
-								  		$r_i->recipe_ingredient_cost = $recipe_ingredient_cost;
-								  		$ti_cost = $ti_cost + $recipe_ingredient_cost;
-							  		}
-							  	}
-							}
-						}
-						$r_i->ordering = $i;						
 						
-					  };
+
+						if($xx[0] == 'x'){
+							$r_i = new MenuRecipesIngredients();
+							$r_i->menu_ingredients_id = $input_ingredient_id;
+							$r_i->amount = $amount[$i][$xx[0]];
+							$r_i->metric_id = $input_metric_id;
+							$r_i->grams = $riGrams;
+							$r_i->ordering = $i;
+							$r_i->active = 1;  
+						}else{
+							$r_i = MenuRecipesIngredients::find($xx[0]);
+							$r_i->menu_ingredients_id = $input_ingredient_id;
+							$r_i->amount = $amount[$i][$xx[0]];
+							$r_i->metric_id = $input_metric_id;
+							$r_i->grams = $riGrams;
+
+							if(isset($input['sales_amount'])){
+								$sales_amount = $input['sales_amount'];
+								$r_i->sales_grams = $sales_grams = $riGrams/$serve_amount * $sales_amount; 
+							
+								foreach($i_grams as $id => $i_gram){
+								  	if($ingredient[$i][$xx[0]] == $id){
+								  		// if(isset($input['calc'])){
+
+								  			if($i_gram > 0){
+									  			$packet_grams_percentage = $sales_grams / $i_gram * 100; 
+												$r_i->packet_grams_percentage = $packet_grams_percentage;
+											}
+									  		// echo '<pre>'; print_r($packet_grams_percentage); echo '</pre>';
+								  		// }
+								  	}
+								}
+							}
+
+							if(isset($input['sales_price'])){
+								foreach($i_price as $id => $ri_price){
+								  	if($ingredient[$i][$xx[0]] == $id){
+								  		if(isset($packet_grams_percentage)){
+									  		$recipe_ingredient_cost = $packet_grams_percentage/100 * $ri_price;
+									  		$r_i->recipe_ingredient_cost = $recipe_ingredient_cost;
+									  		$ti_cost = $ti_cost + $recipe_ingredient_cost;
+								  		}
+								  	}
+								}
+							}
+							$r_i->ordering = $i;						
+					    };
+					   // echo '<pre>'; print_r($data); echo '</pre>';exit;
 					  $data->MenuRecipesIngredients()->save($r_i);
 				  		
 					};
 
-
+					// echo '<pre>'; print_r($riGrams); echo '</pre>';exit;
 
 					// $queries = DB::getQueryLog();
 					//   echo '<pre>'; print_r($queries); echo '</pre>';
@@ -683,7 +713,7 @@ class Admin_RecipesController extends BaseController{
 					// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 
 						if(isset($ti_cost)){$ti_cost = $ti_cost;}else{$ti_cost = 0;}
-						// echo '<pre>'; print_r($ti_cost); echo '</pre>'; 	exit;
+						
 
 						$sdata_id = $input['sdata_id'];
 						$staff_cost_per_hour = $input['staff_cost_per_hour'];
@@ -703,6 +733,8 @@ class Admin_RecipesController extends BaseController{
 						$total_markup_percentage = 0;
 						$total_margin_percentage = 0;
 						$desired_sales_price = 0;
+
+						// echo '<pre>'; print_r($sales_time); echo '</pre>'; 	exit;
 
 						$staff_cost_to_make_recipe_batch = $staff_cost_per_hour/60 * $sales_time;
 						$total_recipe_cost = $staff_cost_to_make_recipe_batch + $ti_cost;
@@ -757,6 +789,7 @@ class Admin_RecipesController extends BaseController{
 			            ->where('id', $sdata_id)
 			            ->update(array(
 			            		'staff_cost_per_hour' => $staff_cost_per_hour,
+			            		'staff_cost_per_piece' => $staff_cost_per_piece,
 			            		'sales_price' => $sales_price,
 			            		'sales_amount' => $sales_amount,
 			            		'sales_time' => $sales_time,

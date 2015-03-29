@@ -307,7 +307,7 @@
 									<div class="form-group">
 							            <label for="<?php echo $metric->name; ?>" class="col-sm-2 control-label"><?php echo $metric->name; ?> :</label>
 							            <div class="col-sm-3">
-							            	<input type="text" class="form-control" id="<?php echo $metric->name; ?>" name="<?php if($pivot_metric->id == $metric->id): ?> metric_amount[][<?php echo $metric->id; ?>] <?php else: ?> metric_amount[][x][<?php echo $metric->id; ?>] <?php endif; ?>" value=" <?php if($pivot_metric->id == $metric->id): ?> <?php echo $pivot_metric->pivot->metric_amount; ?> <?php endif; ?> " />
+							            	<input type="text" class="form-control" id="<?php echo $metric->name; ?>" name="<?php if($pivot_metric->id == $metric->id): ?> metric_amount[][<?php echo $metric->id; ?>] <?php else: ?> metric_amount[][x][<?php echo $metric->id; ?>] <?php endif; ?>" value="1" /> <!-- <?php if($pivot_metric->id == $metric->id): ?> <?php echo $pivot_metric->pivot->metric_amount; ?> <?php endif; ?> -->
 							            </div>
 
 							            <label for="grams" class="col-sm-2 control-label">Grams :</label>

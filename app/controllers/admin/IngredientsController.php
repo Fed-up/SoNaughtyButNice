@@ -307,6 +307,8 @@ class Admin_IngredientsController extends BaseController {
 					$m_count = count($metric_amounts);
 					$m_count = $m_count;
 					$m = 0;
+					$Cup = 0;
+					$gCup = 0;
 
 					foreach($metric_amounts as $ma){
 						if($m <= $m_count){
@@ -314,7 +316,10 @@ class Admin_IngredientsController extends BaseController {
 
 								if($metric_id != 'x'){
 									$input_metric = Metric::where('id','=', $metric_id)->get();
-								
+									
+									if($input_metric[0]->name == 'Cup'){
+										$gCup = $input['metric_grams'][$m][$metric_id];
+									}
 									
 									switch ($input_metric[0]->name) {
 										    case "-":
@@ -328,8 +333,8 @@ class Admin_IngredientsController extends BaseController {
 										        break;
 
 										    case "Cups":
-										        $mAmount = $Cup = $input['metric_amount'][$m][$metric_id];
-										    	$mGrams = $gCup = $input['metric_grams'][$m][$metric_id];
+										        $mAmount = $Cup;
+										    	$mGrams = $gCup; 
 										        break;
 
 										    case "grams":
@@ -338,8 +343,43 @@ class Admin_IngredientsController extends BaseController {
 										        break;
 
 										    case "Handful":
-										        $mAmount = $Cup/3;
+										        $mAmount = $input['metric_amount'][$m][$metric_id];
 										    	$mGrams = $gCup/3;
+										        break;
+
+										    // case "mL":
+										    //     $mAmount = $input['metric_amount'][$m][$metric_id];
+										    // 	$mGrams = $input['metric_grams'][$m][$metric_id];
+										    //     break;
+
+										    // case "Sheets":
+										    //     $mAmount = $input['metric_amount'][$m][$metric_id];
+										    // 	$mGrams = $input['metric_grams'][$m][$metric_id];
+										    //     break;
+
+										    // case "slice":
+										    //     $mAmount = $input['metric_amount'][$m][$metric_id];
+										    // 	$mGrams = $input['metric_grams'][$m][$metric_id];
+										    //     break;
+
+										   	case "Tablespoon":
+										        $mAmount = $input['metric_amount'][$m][$metric_id];
+										    	$mGrams = $gCup/16.67;
+										        break;
+
+										    case "Tablespoons":
+										        $mAmount = $input['metric_amount'][$m][$metric_id];
+										    	$mGrams = $gCup/16.67;
+										        break;
+
+										    case "teaspoon":
+										        $mAmount = $input['metric_amount'][$m][$metric_id];
+										    	$mGrams = $gCup/66.68;
+										        break;
+
+										    case "teaspoons":
+										        $mAmount = $input['metric_amount'][$m][$metric_id];
+										    	$mGrams = $gCup/66.68;
 										        break;
 
 										    default:
@@ -349,7 +389,7 @@ class Admin_IngredientsController extends BaseController {
 									
 									
 
-									// echo '<pre>'; print_r($metric[0]->name); echo '</pre>'; exit;
+									// echo '<pre>'; print_r($input_metric[0]->name); echo '</pre>'; exit;
 
 
 

@@ -308,7 +308,7 @@
 									<div class="form-group">
 							            <label for="{{$metric->name}}" class="col-sm-2 control-label">{{$metric->name}} :</label>
 							            <div class="col-sm-3">
-							            	<input type="text" class="form-control" id="{{$metric->name}}" name="@if($pivot_metric->id == $metric->id) metric_amount[][{{$metric->id}}] @else metric_amount[][x][{{$metric->id}}] @endif" value=" @if($pivot_metric->id == $metric->id) {{ $pivot_metric->pivot->metric_amount }} @endif " />
+							            	<input type="text" class="form-control" id="{{$metric->name}}" name="@if($pivot_metric->id == $metric->id) metric_amount[][{{$metric->id}}] @else metric_amount[][x][{{$metric->id}}] @endif" value="1" /> <!-- @if($pivot_metric->id == $metric->id) {{ $pivot_metric->pivot->metric_amount }} @endif -->
 							            </div>
 
 							            <label for="grams" class="col-sm-2 control-label">Grams :</label>
