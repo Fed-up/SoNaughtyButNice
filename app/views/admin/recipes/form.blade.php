@@ -572,18 +572,17 @@
     @endif
     
     <ul id="myTab" class="nav nav-tabs">
-      <li><a href="#info" data-toggle="tab">Info</a></li>
+      <li class="@if($calculated != 1)active@endif"><a href="#info" data-toggle="tab">Info</a></li>
       <li><a href="#images" data-toggle="tab">Images</a></li>
       <li><a href="#facts" data-toggle="tab">Fresh Facts</a></li>
       <li><a href="#ingredients" data-toggle="tab">Ingredients</a></li>
       <li><a href="#method" data-toggle="tab">Method</a></li>
       <li><a href="#extras" data-toggle="tab">Little Extra</a></li>
-      <li class="active"><a href="#sales" data-toggle="tab">Sales Data</a></li>
+      <li class="@if($calculated == 1)active@endif"><a href="#sales" data-toggle="tab">Sales Data</a></li>
     </ul>
     
-    <div id="myTabContent" class="tab-content">
-    
-      <div class="tab-pane fade in " id="info">
+    <div id="myTabContent" class="tab-content ">
+      <div class="tab-pane fade in @if($calculated != 1)active@endif" id="info">
   		<div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
               {{ Form::label('title', 'Name: ', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-10">
@@ -786,7 +785,8 @@
 	                                	<option value="{{ $in }}" @if ($r_ingredient->metric_id == $in) selected="selected" @endif >{{ $val }}</option>
 	                                @endforeach
 	                            </select>
-	                            <input name="grams[][{{ $r_ingredient->id }}]" id="ingredients_{{ $x }}" class="form-control input--amount " value="{{ $r_ingredient->grams }}" />
+	                            <input name="ri_sales_amount[][{{ $r_ingredient->id }}]" id="ingredients_{{ $x }}" class="form-control input--amount " value="{{ $r_ingredient->ri_sales_amount }}" />
+	                            <input name="grams[][{{ $r_ingredient->id }}]" id="ingredients_{{ $x }}" class="form-control input--grams " value="{{ $r_ingredient->grams }}" />
 
 	                            @foreach($json_array as $i => $in)
 	                            	@if($i == $r_ingredient->menu_ingredients_id)
@@ -857,7 +857,7 @@
             </ul>
           </div>
       </div>
-      <div class="tab-pane fade in active" id="sales">
+      <div class="tab-pane fade in @if($calculated == 1)active@endif" id="sales">
             <div class="col-sm-1">
             	{{ Form::submit('+ Calc', array('id' => 'btnActionCalculate','name' => 'calc','class' => 'btn btn-primary')) }}
             </div>
@@ -909,7 +909,7 @@
 
 				            {{ Form::label('desired_total_markup', 'Desired Total Markup - %: ', array('class' => 'col-sm-2 control-label')) }}
 				            <div class="col-sm-2">
-				               {{ Form::text('desired_total_markup', (isset($input['desired_total_markup'])? Input::old('desired_total_markup') : (isset($sdata->desired_total_markup)? $sdata->desired_total_markup : '' )), array('class' => 'form-control', 'placeholder' => '150')) }}
+				               {{ Form::text('desired_total_markup', (isset($input['desired_total_markup'])? Input::old('desired_total_markup') : (isset($sdata->desired_total_markup)? $sdata->desired_total_markup : '' )), array('class' => 'form-control', 'placeholder' => '400')) }}
 				            </div>
 				        </div>
 						<hr/>

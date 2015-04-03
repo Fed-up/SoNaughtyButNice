@@ -133,11 +133,10 @@ class RecipePageController  extends BaseController {
 				}
 			}
 
-			// foreach($rData as $recipe){
-
-			// 	echo '<pre>'; print_r($recipe->exclusive); echo '</pre>'; exit;
+			// foreach($rnIngredient as $Ingredient){
+			// 	echo '<pre>'; print_r($Ingredient->amount); echo '</pre>'; 
 			// }
-			
+			// exit;
 
 
 			return View::make('public.recipe_page')->with(array(

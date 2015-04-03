@@ -37,7 +37,7 @@ class IngredientController  extends BaseController {
 			{
 				$query->where('section', '=', 'INGREDIENT')->orderBy(DB::raw('RAND()'))->where('active', '=', 1);
 			}))
-		->orderBy('name','ASC')->where('name', 'LIKE', 'u%')->orWhere('name', 'LIKE', 'v%')->orWhere('name', 'LIKE', 'w%')->orWhere('name', 'LIKE', 'x%')->orWhere('name', 'LIKE', 'y%')->where('name', 'LIKE', 'z%')->where('active', '=', 1)->get();
+		->orderBy('name','ASC')->where('name', 'LIKE', 'u%')->orWhere('name', 'LIKE', 'v%')->orWhere('name', 'LIKE', 'w%')->orWhere('name', 'LIKE', 'x%')->orWhere('name', 'LIKE', 'y%')->orwhere('name', 'LIKE', 'z%')->where('active', '=', 1)->get();
 		
 		// echo '<pre>'; print_r($aeData); echo '</pre>';exit;
 		// 		echo '<hr>';

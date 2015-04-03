@@ -45,6 +45,7 @@ class Admin_EventsController extends BaseController {
 			$data->price 	= Input::get('price');
 			$data->ticket_amount 	= Input::get('ticket_amount');
 			$data->active  = (Input::get('active')) ? 1 : 0;
+			$data->past  = (Input::get('past')) ? 1 : 0;
 			if($data->save()){
 				if(isset($input['images'])){
 					$p_count = count($input['images']);
@@ -144,6 +145,7 @@ class Admin_EventsController extends BaseController {
 			$data->price 	= Input::get('price');
 			$data->ticket_amount 	= Input::get('ticket_amount');
 			$data->active  = (Input::get('active')) ? 1 : 0;
+			$data->past  = (Input::get('past')) ? 1 : 0;
 			if($data->save()){
 				if(isset($input['images'])){
 					$p_count = count($input['images']);

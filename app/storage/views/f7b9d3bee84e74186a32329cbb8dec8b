@@ -1,0 +1,125 @@
+
+<?php $__env->startSection('title'); ?> <?php echo $title; ?> <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_head'); ?>
+    
+    <script type="text/javascript" src="/packages/jquery-1.11.1.min/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css"/>
+    
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+  
+  <div class="row">
+  	<h1 class="page-header"><?php echo $__env->yieldContent('title'); ?></h1>
+    	<?php if(isset($data->id)): ?>
+  			<?php echo Form::open(array('action' => 'Admin_UserController@postUpdateMembers', 'class' => 'form-horizontal')); ?>
+        <?php else: ?>
+        	<?php echo Form::open(array('action' => 'Admin_UserController@postAddMembers', 'class' => 'form-horizontal')); ?> 
+        <?php endif; ?>
+        
+         <ul id="myTab" class="nav nav-tabs">
+          <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
+          <li><a href="#address" data-toggle="tab">Address</a></li>
+          <li><a href="#password" data-toggle="tab">Password</a></li>
+        </ul>
+        
+        <div id="myTabContent" class="tab-content">
+        
+          <div class="tab-pane fade in active" id="info">
+            <div class="form-group <?php echo ($errors->has('fname')) ? 'has-error' : '' ;; ?>">
+            <?php echo Form::label('fname', 'First Name: ', array('class' => 'col-sm-2 control-label')); ?>
+                <div class="col-sm-10">
+                    <?php echo ($errors->has('fname'))? '<p>'. $errors->first('fname') .'</p>' : ''; ?>
+                    <?php echo Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($data->fname)? $data->fname : '' )), array('class' => 'form-control')); ?> 
+                </div>
+            </div>
+            <div class="form-group <?php echo ($errors->has('lname')) ? 'has-error' : '' ;; ?>">
+            <?php echo Form::label('lname', 'Last Name: ', array('class' => 'col-sm-2 control-label')); ?>
+                <div class="col-sm-10">
+                    <?php echo ($errors->has('lname'))? '<p>'. $errors->first('lname') .'</p>' : ''; ?>
+                    <?php echo Form::text('lname', (isset($input['lname'])? Input::old('lname') : (isset($data->lname)? $data->lname : '' )), array('class' => 'form-control')); ?> 
+                </div>
+            </div>
+            <div class="form-group <?php echo ($errors->has('username')) ? 'has-error' : '' ;; ?>">
+            <?php echo Form::label('username', 'Username: ', array('class' => 'col-sm-2 control-label')); ?>
+                <div class="col-sm-10">
+                    <?php echo ($errors->has('username'))? '<p>'. $errors->first('username') .'</p>' : ''; ?>
+                    <?php echo Form::text('username', (isset($input['username'])? Input::old('username') : (isset($data->username)? $data->username : '' )), array('class' => 'form-control')); ?> 
+                </div>
+            </div>
+            <div class="form-group }}">
+            <?php echo Form::label('user_type', 'User Type: ', array('class' => 'col-sm-2 control-label')); ?>
+                <div class="col-sm-3">
+                    <?php echo Form::select('user_type', 
+                        array('GUEST' => 'Guest',
+                            'REGISTERED' => 'Registered',
+                            'MANAGER' => 'Manager', 
+                            'ADMIN' => 'Admin'), (isset($input['user_type'])? Input::old('user_type') : (isset($data->user_type)? $data->user_type : null )), array('class'=>'form-control')); ?> 
+                </div>
+            </div>
+            <div class="form-group">
+                <?php echo Form::label('active', 'Active: ', array('class' => 'col-sm-2 control-label')); ?>
+                <div class="col-sm-10">
+                  <?php echo Form::checkbox('active', 1, (isset($input['active'])? Input::old('active') : (isset($data->active)? $data->active : '' )), array('class' => '')); ?>
+                </div>
+            </div>
+                <?php echo Form::hidden('id', (isset($input['id'])? Input::old('id') : (isset($data->id)? $data->id : '' ))); ?>
+           </div>
+           <div class="tab-pane fade in " id="address">
+            <div class="form-group <?php echo ($errors->has('email')) ? 'has-error' : '' ;; ?>">
+            <?php echo Form::label('email', 'Email: ', array('class' => 'col-sm-2 control-label')); ?>
+                <div class="col-sm-10">
+                    <?php echo ($errors->has('email'))? '<p>'. $errors->first('email') .'</p>' : ''; ?>
+                    <?php echo Form::text('email', (isset($input['email'])? Input::old('email') : (isset($data->email)? $data->email : '' )), array('class' => 'form-control')); ?> 
+                </div>
+            </div>
+           </div>
+           <div class="tab-pane fade in " id="password">
+            <div class="form-group <?php echo ($errors->has('password')) ? 'has-error' : '' ;; ?>">
+            <?php echo Form::label('password', 'Password: ', array('class' => 'col-sm-2 control-label')); ?>
+                <div class="col-sm-5">
+                    <?php echo ($errors->has('password'))? '<p>'. $errors->first('password') .'</p>' : ''; ?>
+                    <?php echo Form::password('password', array('class'=>'form-control' ) ); ?>
+                </div>
+            </div>
+            
+            <div class="form-group <?php echo ($errors->has('password_match')) ? 'has-error' : '' ;; ?>">
+            <?php echo Form::label('password_match', 'Password Match: ', array('class' => 'col-sm-2 control-label')); ?>
+                <div class="col-sm-5">
+                    <?php echo ($errors->has('password_match'))? '<p>'. $errors->first('password_match') .'</p>' : ''; ?>
+                    <?php echo Form::password('password_match', array('class'=>'form-control' ) ); ?>
+                </div>
+            </div>
+           </div>
+          </div>
+          <hr/> 
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <?php echo Form::submit('Save', array('class' => 'btn btn-success')); ?>
+                <a href="/admin/user/members/">
+                    <?php echo Form::button('Cancel' ,array('class' => 'btn btn-danger')); ?>
+                </a>
+                </div>
+            </div>
+    <?php echo Form::close(); ?>
+    	        	
+  </div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('_tail'); ?>
+
+    <script>
+	
+		$('#tom').bind('click', function(event){
+			event.preventDefault();
+			alert('YOLO');
+		});
+	
+	</script>
+    
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

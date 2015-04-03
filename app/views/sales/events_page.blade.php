@@ -5,7 +5,7 @@
 @section('content')
     <div class="page">
     @foreach($eData as $event)
-        <h1 class="content__title content__title--main"><a class="tab__link" href="/events">{{$event->name}}</a></h1>
+        <h1 class="content__title content__title--main"><a class="tab__link" href="/events">{{$event->name}}@if($confirm_past == 1) - Past Event@endif</a></h1>
         <section class="row">
             <div class="columns small-12 medium-5 large-4">
                     <img src="/uploads/{{$hImage}}"/>
@@ -15,8 +15,10 @@
                 <section class="section__box section-box--margin">
                     <p class="" > <span class="content-box__title">Date:</span>  {{$event->date}}</p><br>
                     <p class="" > <span class="content-box__title">Time:</span>  {{$event->time}}</p><br>
+                    @if($confirm_past != 1)
                     <p class="" > <span class="content-box__title">Price:</span>  ${{$event->price}}</p><br>
                     <p class="" > <span class="content-box__title">Seats:</span>  {{$event->ticket_amount}}</p>
+                    @endif
                     @if (Auth::check())
                         @if ($paid == $confirm_paid)
                             @for($i=0;$i<=$pCount;$i++)
@@ -34,50 +36,55 @@
             <div class="columns small-12 medium-7 large-8">
                 <section class="section-box section-box--margin">
                     @if (Auth::check())
-                        @if ($paid == $confirm_paid)
+                        @if($paid == $confirm_paid)
                             <p>Looking forward to seeeing you at the event {{ Auth::user()->fname }}</p>
-                            {{ Form::open(array('action' => 'CheckoutController@postAddToCart')) }}
-                                {{ Form::hidden('event_id', $event->id)}} 
-                                {{ Form::hidden('name', $event->name)}}
-                                @if(isset($hImage))
-                                     {{ Form::hidden('image', $hImage ) }}
-                                @else
-                                     {{ Form::hidden('image', '/images/site/logo.jpg')}}
-                                @endif
-                               
-                                {{-- Form::text('quantity', 1)--}}
-                                <div class="form-group form__group--event {{ ($errors->has('quantity')) ? 'has-error' : '' ; }}">
-                                    {{ Form::label('quantity', 'Quantity: ', array('class' => ' content-title--sub ')) }}
-                                    <div class="">
-                                        {{ ($errors->has('quantity'))? '<p>'. $errors->first('quantity') .'</p>' : '' }}
-                                        {{ Form::text('quantity', (isset($input['quantity'])? Input::old('quantity') : 1 ), array('class' => 'input__text--event')) }}
+                            @if($confirm_past != 1)
+                                {{ Form::open(array('action' => 'CheckoutController@postAddToCart')) }}
+                                    {{ Form::hidden('event_id', $event->id)}} 
+                                    {{ Form::hidden('name', $event->name)}}
+                                    @if(isset($hImage))
+                                         {{ Form::hidden('image', $hImage ) }}
+                                    @else
+                                         {{ Form::hidden('image', '/images/site/logo.jpg')}}
+                                    @endif
+                                   
+                                    {{-- Form::text('quantity', 1)--}}
+                                    
+                                    <div class="form-group form__group--event {{ ($errors->has('quantity')) ? 'has-error' : '' ; }}">
+                                        {{ Form::label('quantity', 'Quantity: ', array('class' => ' content-title--sub ')) }}
+                                        <div class="">
+                                            {{ ($errors->has('quantity'))? '<p>'. $errors->first('quantity') .'</p>' : '' }}
+                                            {{ Form::text('quantity', (isset($input['quantity'])? Input::old('quantity') : 1 ), array('class' => 'input__text--event')) }}
+                                        </div>
                                     </div>
-                                </div>
 
-                                {{ Form::hidden('price', $event->price)}}
-                                {{ Form::hidden('section', 'EVENT')}}
-                            {{ Form::submit('Add to Cart', array('class' => 'form__submit__button form__submit__button--event')) }}
+                                    {{ Form::hidden('price', $event->price)}}
+                                    {{ Form::hidden('section', 'EVENT')}}
+                                {{ Form::submit('Add to Cart', array('class' => 'form__submit__button form__submit__button--event')) }}
+                            @endif
                         @else
-                            {{ Form::open(array('action' => 'CheckoutController@postAddToCart')) }}
-                                {{ Form::hidden('event_id', $event->id)}}
-                                {{ Form::hidden('name', $event->name)}}
-                                @if(isset($hImage))
-                                     {{ Form::hidden('image', $hImage ) }}
-                                @else
-                                     {{ Form::hidden('image', '/images/site/logo.jpg')}}
-                                @endif
-                               
-                                {{-- Form::text('quantity', 1)--}}
-                                <div class="form-group form__group--event {{ ($errors->has('quantity')) ? 'has-error' : '' ; }}">
-                                    {{ Form::label('quantity', 'Quantity: ', array('class' => ' content-title--sub ')) }}
-                                    <div class="">
-                                        {{ ($errors->has('quantity'))? '<p>'. $errors->first('quantity') .'</p>' : '' }}
-                                        {{ Form::text('quantity', (isset($input['quantity'])? Input::old('quantity') : 1 ), array('class' => 'input__text--event')) }}
+                            @if($confirm_past != 1)
+                                {{ Form::open(array('action' => 'CheckoutController@postAddToCart')) }}
+                                    {{ Form::hidden('event_id', $event->id)}}
+                                    {{ Form::hidden('name', $event->name)}}
+                                    @if(isset($hImage))
+                                         {{ Form::hidden('image', $hImage ) }}
+                                    @else
+                                         {{ Form::hidden('image', '/images/site/logo.jpg')}}
+                                    @endif
+                                   
+                                    {{-- Form::text('quantity', 1)--}}
+                                    <div class="form-group form__group--event {{ ($errors->has('quantity')) ? 'has-error' : '' ; }}">
+                                        {{ Form::label('quantity', 'Quantity: ', array('class' => ' content-title--sub ')) }}
+                                        <div class="">
+                                            {{ ($errors->has('quantity'))? '<p>'. $errors->first('quantity') .'</p>' : '' }}
+                                            {{ Form::text('quantity', (isset($input['quantity'])? Input::old('quantity') : 1 ), array('class' => 'input__text--event')) }}
+                                        </div>
                                     </div>
-                                </div>
-                                {{ Form::hidden('price', $event->price)}}
-                                {{ Form::hidden('section', 'EVENT')}}
-                            {{ Form::submit('Add to Cart', array('class' => 'form__submit__button form__submit__button--event')) }}
+                                    {{ Form::hidden('price', $event->price)}}
+                                    {{ Form::hidden('section', 'EVENT')}}
+                                {{ Form::submit('Add to Cart', array('class' => 'form__submit__button form__submit__button--event')) }}
+                            @endif
                         @endif    
                         <!-- <p>Early bird tickets on sale next week!<br/> We can't wait to see you at the event {{ Auth::user()->fname }}</p> -->
                     @else
@@ -86,6 +93,7 @@
                 </section>
             </div><!--End Nine columns-->
         </section>
+
         <section class="row event__information">
             <div  class="columns small-12 large-6">
                 <h3 class="content__title">You Are Invited</h3>
@@ -104,6 +112,17 @@
                 </section>
             </div>
         </section>
+        <section class="row"> 
+            @foreach($event->Images as $image)
+                
+                    <a href="#" class="columns small-4 large-2 end">
+                        <div class="image-box">
+                            <img class="image-box" src="/uploads/{{ $image->name }}" />
+                        </div>
+                    </a>
+            @endforeach
+        </section>
+
         <section class="row event__information">
             <div  class="columns small-12 large-6">
                 <h3 class="content__title">Map</h3>

@@ -189,15 +189,15 @@
     	{{ Form::open(array('action' => 'Admin_IngredientsController@postAddIngredients', 'class' => 'form-horizontal')) }} 
     @endif
     <ul id="myTab" class="nav nav-tabs">
-      <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
+      <li class="@if($calculated != 1)active@endif"><a href="#info" data-toggle="tab">Info</a></li>
       <li><a href="#images" data-toggle="tab">Images</a></li>
-      <li><a href="#metric" data-toggle="tab">Metric</a></li>
+      <li class="@if($calculated == 1)active@endif"><a href="#metric" data-toggle="tab">Metric</a></li>
       <li><a href="#description" data-toggle="tab">Description</a></li>
     </ul>
     
     <div id="myTabContent" class="tab-content">
     
-      	<div class="tab-pane fade in active" id="info">
+      	<div class="tab-pane fade in @if($calculated != 1)active@endif" id="info">
 	        <div class="form-group {{ ($errors->has('name')) ? ' has-error' : '' ; }}">
 	            {{ Form::label('name', 'Name: ', array('class' => 'col-sm-2 control-label')) }}
 	            <div class="col-sm-10">
@@ -288,12 +288,11 @@
                 </ul>
             </div>
             <br />
-            <pre id="console"></pre>
 
         </div>
       
 		
-	    <div class="tab-pane fade in" id="metric">
+	    <div class="tab-pane fade in @if($calculated == 1)active@endif" id="metric">
 			<div class="col-sm-1">
 				{{ Form::submit('+ Calc', array('id' => 'btnActionCalculate','name' => 'calc','class' => 'btn btn-primary')) }}
 			</div>

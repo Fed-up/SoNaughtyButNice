@@ -23,6 +23,7 @@
 
     <div class="content-slot">
       @yield('content')
+      <div class="footer__push"></div>
       @include('public.footer') 
     </div>
 

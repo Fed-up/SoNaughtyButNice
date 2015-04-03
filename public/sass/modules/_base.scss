@@ -107,15 +107,22 @@ ul, li {
   border-bottom: 1px solid #ff5531; }
 
 .footer__push{
-  height: 30rem;
+  height: 33rem;
 }
 
 @media only screen {
   .image-box {
-    margin-bottom: 0.2rem; } }
+    margin-bottom: 0.2rem; 
+    margin-top: 1rem;
+  } 
+}
+
 @media only screen and (min-width:481px) {
   .image-box {
-    margin-bottom: 0.2rem; } }
+    margin-bottom: 0.2rem; 
+    margin-top: 1rem;
+  } 
+}
 
 .content__title {
   text-align: center;
@@ -192,8 +199,9 @@ ul, li {
 
 .subnav {
   border-bottom: 1px solid $main_color;
-  font-family: headings;
-  padding: 0.3rem;
+  // font-family: headings;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
   text-align: center; }
   @media only screen and (min-width:481px) {
     .subnav {

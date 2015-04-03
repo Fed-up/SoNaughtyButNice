@@ -55,7 +55,8 @@ class Admin_RecipesController extends BaseController{
 				'categories'	=> $mCat,
 				'ingredients'	=> $mIng,
 				'metric'	=> $mMetric,
-				'title'		=> 'Create New Recipe'
+				'title'		=> 'Create New Recipe',
+				'calculated' => 0,
 			));	
 	}
 	
@@ -338,6 +339,8 @@ class Admin_RecipesController extends BaseController{
 		// exit;
 
 		//$data from the load function above holds all the data for facts to go into the form
+		// $calculated = 0;
+
 		return View::make('admin.recipes.form')
 			->with(array(
 				'data' => $data,// This 
@@ -354,7 +357,8 @@ class Admin_RecipesController extends BaseController{
 				'json_array' => $json_array,
 				's_ingredients' => $s_ingredients,
 				// 'sales_data_ingredients' => $sales_data_ingredients,
-				'title'		=> 'Edit Recipe:'.$data->name
+				'title'		=> 'Edit Recipe:'.$data->name,
+				'calculated' => 0,
 			));	
 		
 	}
@@ -502,24 +506,12 @@ class Admin_RecipesController extends BaseController{
 					
 					$ingredient = $input['ingredients'];
 					$amount = $input['amount'];
+					$ri_sales_amount = $input['ri_sales_amount'];
 					$metric = $input['metric'];
 					$grams = $input['grams'];
 
 					if(isset($input['i_grams'])){$i_grams = $input['i_grams'];}else{$i_grams = 0;};
 					if(isset($input['i_price'])){$i_price = $input['i_price'];}else{$i_price = 0;}
-
-					
-
-					// echo '<pre>'; print_r($input); echo '</pre>';exit;
-
-
-
-					// Pull info from database on ingredients metric
-					// Then serch the metric database to find which Id corrsponds with the action
-					// Then calculate value based on database values 
-
-					// ammount * metric value
-
 
 					$ti_cost = 0;
 
@@ -530,8 +522,10 @@ class Admin_RecipesController extends BaseController{
 						$xx = array_keys($ingredient[$i]);
 						$input_ingredient_id = $ingredient[$i][$xx[0]];
 						$input_metric_id = $metric[$i][$xx[0]];
-						$input_amount = $amount[$i][$xx[0]];
+						$input_ri_sales_amount = $ri_sales_amount[$i][$xx[0]];
 						$riGrams = $grams[$i][$xx[0]];
+
+
 
 						$imData = MenuIngredients::where('id', '=', $input_ingredient_id)
 							->with(array('Metric' => function($query) use ($input_ingredient_id){
@@ -552,22 +546,19 @@ class Admin_RecipesController extends BaseController{
 								foreach ($imData->Metric as $pivot_data) { //Ingredient Metric Data
 									// echo '<pre>'; print_r($data); echo '</pre>';exit;
 									if($pivot_data->id == $input_metric_id){
-										$riGrams = $pivot_data->pivot->metric_grams * $input_amount;                            //Recipe Ingredient Grams
-										
+										$riGrams = $pivot_data->pivot->metric_grams * $input_ri_sales_amount;                            //Recipe Ingredient Grams
+										// echo '<pre>'; print_r($riGrams); echo '</pre>';exit;
 									}
 								}
 							}
 							
 						}
-						// echo '<pre>'; print_r($riGrams); echo '</pre>';exit;
-						// $ingredient_metric = MenuCategories::orderBy('name','ASC')->where('active', '!=', '9')->get();
-
-						
 
 						if($xx[0] == 'x'){
 							$r_i = new MenuRecipesIngredients();
 							$r_i->menu_ingredients_id = $input_ingredient_id;
 							$r_i->amount = $amount[$i][$xx[0]];
+							$r_i->ri_sales_amount = $ri_sales_amount[$i][$xx[0]];
 							$r_i->metric_id = $input_metric_id;
 							$r_i->grams = $riGrams;
 							$r_i->ordering = $i;
@@ -576,6 +567,7 @@ class Admin_RecipesController extends BaseController{
 							$r_i = MenuRecipesIngredients::find($xx[0]);
 							$r_i->menu_ingredients_id = $input_ingredient_id;
 							$r_i->amount = $amount[$i][$xx[0]];
+							$r_i->ri_sales_amount = $ri_sales_amount[$i][$xx[0]];
 							$r_i->metric_id = $input_metric_id;
 							$r_i->grams = $riGrams;
 
@@ -615,13 +607,6 @@ class Admin_RecipesController extends BaseController{
 				  		
 					};
 
-					// echo '<pre>'; print_r($riGrams); echo '</pre>';exit;
-
-					// $queries = DB::getQueryLog();
-					//   echo '<pre>'; print_r($queries); echo '</pre>';
-					  // echo '<pre>'; print_r($input['ddi']); echo '</pre>'; 	exit;
-
-
 					if(isset($input['ddi'])){
 						$ddi = $input['ddi'];
 	
@@ -635,8 +620,6 @@ class Admin_RecipesController extends BaseController{
 						};
 					};		
 				};
-
-				// echo '<pre>'; print_r($ti_cost); echo '</pre>'; exit;
 				 
 				if(isset($input['method'])){
 					$m_count = count($input['method']);
@@ -733,6 +716,8 @@ class Admin_RecipesController extends BaseController{
 						$total_markup_percentage = 0;
 						$total_margin_percentage = 0;
 						$desired_sales_price = 0;
+						$staff_cost_per_piece = 0;
+						$staff_cost_to_make_recipe_batch = 0;
 
 						// echo '<pre>'; print_r($sales_time); echo '</pre>'; 	exit;
 
@@ -760,7 +745,7 @@ class Admin_RecipesController extends BaseController{
 
 						
 							if($desired_total_markup == 0){
-								$desired_total_markup = 150;
+								$desired_total_markup = 400;
 							}
 
 							if($desired_total_markup > 0){
@@ -778,7 +763,6 @@ class Admin_RecipesController extends BaseController{
 								// echo '<pre>'; print_r($desired_sales_price); echo '</pre>'; 	exit;
 							}
 						}
-
 						
 						
 						
@@ -825,7 +809,66 @@ class Admin_RecipesController extends BaseController{
 			if(isset($input['sc'])){
 				return Redirect::action('Admin_RecipesController@getRecipes');
 			}else{
-				return Redirect::action('Admin_RecipesController@getEditRecipes', array($recipe_id)); 
+
+				$data = MenuRecipes::findOrFail($input['id']);
+				$categories = MenuCategories::orderBy('name','ASC')->where('active', '!=', '9')->get(); // Bring in data that has not been deleted
+				$ingredients = MenuIngredients::orderBy('name','ASC')->where('active', '=', '1')->get();
+				$metrics = Metric::orderBy('name','ASC')->get();
+				$sales_data = SalesData::where('menu_recipe_id', '=', $data->id)->get();
+				$recipes_images = $data->Images()->orderBy('ordering','ASC')->where('section', '=', 'RECIPE')->get();
+				$recipes_facts = $data->MenuRecipesFacts()->orderBy('ordering','ASC')->get();
+				$recipes_ingredients = $data->MenuRecipesIngredients()->orderBy('ordering','ASC')->get();
+				$recipes_methods = $data->MenuRecipesMethods()->orderBy('ordering','ASC')->get();
+				$recipes_extras = $data->MenuRecipesExtras()->orderBy('ordering','ASC')->get();
+				
+				$mCat = array();
+				$mCat[0]	= '- Select Category -';
+				foreach ($categories as $category) {
+					$mCat[$category->id] = $category->name;
+				};
+
+				$json_array = array();
+				$mIng = array();
+				$mIng[0]	= '- Select Ingredients -';	
+				foreach ($ingredients as $ingredient) {
+					$mIng[$ingredient->id]	= $ingredient->name;
+					foreach ($recipes_ingredients as $ri) {
+						if($ri->menu_ingredients_id == $ingredient->id){
+							$json_array[$ingredient->id] = array('grams' => $ingredient->grams, 'price' => $ingredient->price);
+						}
+					}
+				};
+				$out = array_values($json_array);
+				$json_calc = json_encode($json_array);
+				
+				$mMetric = array();
+				$mMetric[0]	= '- Select Metric -';
+				foreach ($metrics as $metric) {
+					$mMetric[$metric->id]	= $metric->name;
+				};
+				$s_ingredients = $ingredients;
+				return View::make('admin.recipes.form')
+					->with(array(
+						'data' => $data,// This 
+						'categories' => $mCat,
+						'ingredients' => $mIng,
+						'metric' => $mMetric,
+						'r_images' => $recipes_images,
+						'r_facts' => $recipes_facts,
+						'r_ingredients' => $recipes_ingredients,
+						'r_methods' => $recipes_methods,
+						'r_extras' => $recipes_extras,
+						'r_sales' => $sales_data,
+						'json_calc' => $json_calc,
+						'json_array' => $json_array,
+						's_ingredients' => $s_ingredients,
+						// 'sales_data_ingredients' => $sales_data_ingredients,
+						'title'		=> 'Edit Recipe:'.$data->name,
+						'calculated' => 1,
+					));
+
+
+				// return Redirect::action('Admin_RecipesController@getEditRecipes', array($recipe_id)); 
 			}
 		}
 	}

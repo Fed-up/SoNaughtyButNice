@@ -203,6 +203,7 @@ class Admin_IngredientsController extends BaseController {
 				'title' => 'Edit Ingredients: '. $data->name,
 				'imData' => $imData,
 				'metrics' => $metric,
+				'calculated' => 0,
 			)	
 		);
 	}
@@ -382,6 +383,11 @@ class Admin_IngredientsController extends BaseController {
 										    	$mGrams = $gCup/66.68;
 										        break;
 
+										    case "mL":
+										        $mAmount = $input['metric_amount'][$m][$metric_id];
+										    	$mGrams = $gCup;
+										        break;
+
 										    default:
 										        $mAmount = $input['metric_amount'][$m][$metric_id];
 										    	$mGrams = $input['metric_grams'][$m][$metric_id];
@@ -404,7 +410,7 @@ class Admin_IngredientsController extends BaseController {
 									$amount_key = array_keys($input['metric_amount'][$m]['x']);
 									$amount_value = array_values($input['metric_amount'][$m]['x']);
 									$grams_value = array_values($input['metric_grams'][$m]['x']);
-									echo '<pre>'; print_r($amount_value[0]); echo '</pre>'; 
+									// echo '<pre>'; print_r($amount_value[0]); echo '</pre>'; exit;
 
 
 									DB::table('ingredient_metric')->insert(
@@ -423,9 +429,6 @@ class Admin_IngredientsController extends BaseController {
 							$m++;
 						}
 					}
-					// $queries = DB::getQueryLog();
-					// echo '<pre>'; print_r($queries); echo '</pre>'; 
-					// exit;
 				}
 				$data->save();
 				// exit;
@@ -436,7 +439,26 @@ class Admin_IngredientsController extends BaseController {
 		if(isset($input['sc'])){
 			return Redirect::action('Admin_IngredientsController@getIngredients');
 		}else{
-			return Redirect::action('Admin_IngredientsController@getEditIngredients', array($ingredient_id)); 
+			$input_ingredient_id = $input['id'];
+			$data = MenuIngredients::findOrFail($input_ingredient_id);
+			$ingredient_images = $data->Images()->orderBy('ordering','ASC')->where('section', '=', 'INGREDIENT')->get();
+			$imData = MenuIngredients::where('id', '=', $input_ingredient_id)
+				->with(array('Metric' => function($query) use ($input_ingredient_id){
+					
+					$query->where('ingredient_metric.menu_ingredients_id', '=', $input_ingredient_id);
+				}))			
+			->get();
+			$metric = Metric::where('active', '!=', 9)->orderBy('name','ASC')->get();
+			return View::make('admin.ingredients.form')
+				->with(array(
+					'data' => $data,
+					'i_images' => $ingredient_images,
+					'title' => 'Edit Ingredients: '. $data->name,
+					'imData' => $imData,
+					'metrics' => $metric,
+					'calculated' => 1,
+				)	
+			);
 		}
 	}
 	

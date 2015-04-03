@@ -302,6 +302,14 @@ hr{
  margin:0 10px 0 0;
 }
 
+#_ListIngredients .input--amount{
+    width: 6rem;
+}
+
+#_ListIngredients .input--grams{
+    width: 9rem;
+}
+
 #_ListMethods .form-control { /*Space makes the site style all elements within this class with the ID #_ListIngredients */
  display:inline;
  width:80%; /*Only uses the width of the element*/ 

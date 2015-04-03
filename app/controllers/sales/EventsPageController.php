@@ -50,20 +50,12 @@ class EventsPageController  extends BaseController {
 		}
 
 		$pCount = $pCount-1;
-		 // $queries = DB::getQueryLog();
-
-		// echo '<pre>'; print_r($pCount-1); echo '</pre>';exit;
-		// echo '<pre>'; print_r($quantity); echo '</pre>'; 
-		// echo '<pre>'; print_r($convertDate); echo '</pre>';
-
-
 
 		$paid = 0;
 		$confirm_paid = 1;
+		$past = 0;
+		$confirm_past = 0;
 		foreach($eData as $event){
-			
-			 
-
 			foreach($event->User as $pivot){
 				$paid = $pivot->pivot->paid;
 				//
@@ -72,11 +64,8 @@ class EventsPageController  extends BaseController {
 				}else{
 					$confirm_paid = 0;
 					$paid = 1;
-				}
-				
-				
+				}				
 			}
-
 			$images = $event->Images;
 			$e_count = count($images);
 			// echo '<pre>'; print_r($event->Images[$e_count-1]->name); echo '</pre>';exit;
@@ -86,6 +75,10 @@ class EventsPageController  extends BaseController {
 			}else{
 				$header_image = 'event.png';
 			}	
+			$past = $event->past;
+			if($past == 1){
+				$confirm_past = 1;
+			}
 		}
 
 		// echo '<pre>'; print_r($pCount); echo '</pre>';exit;
@@ -101,6 +94,7 @@ class EventsPageController  extends BaseController {
 				'quantity' =>	$quantity,
 				'date' => $date,
 				'pCount' => $pCount,
+				'confirm_past' => $confirm_past,
 				)
 			);
 		}else{
@@ -109,6 +103,7 @@ class EventsPageController  extends BaseController {
 				'eData' => $eData,
 				'paid' =>	$paid,
 				'confirm_paid' => $confirm_paid,
+				'confirm_past' => $confirm_past,
 				)
 			);
 		}

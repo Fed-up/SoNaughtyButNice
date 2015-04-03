@@ -56,6 +56,7 @@ Route::post('signup', 'UserProfileController@postAddUser');
 
 Route::group(array('before' => 'profile'), function() {
 	Route::get('profile', 'ProfileController@getProfile');
+	Route::get('profile/events', 'ProfileEventsController@getProfileEvents');
 });
 
 

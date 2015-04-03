@@ -1,8 +1,8 @@
 <?php
 
-class EventsController  extends BaseController {
+class ProfileEventsController  extends BaseController {
 
-	public function getEvents(){
+	public function getProfileEvents(){
 
 		// echo '<pre>'; print_r($eData); echo '</pre>';exit;
 
@@ -13,7 +13,7 @@ class EventsController  extends BaseController {
 			$user_id = 0;
 		}
 
-		$eData = Events::orderBy('date','ASC')->where('active', '=', 1)
+		$eData = Events::orderBy('date','ASC')->where('active', '!=', 9)
 			->with(array('Images' => function($query){
 					$query->where('images.ordering', '=', 0)->where('section', '=', 'EVENT');
 				}))
@@ -29,8 +29,8 @@ class EventsController  extends BaseController {
 		$paid = 0;
 		$confirm_paid = 1;
 		$event = 'eData';
-		$past = 0;
-		$confirm_past = 0;
+		$active = 0;
+		$confirm_active = 0;
 
 		foreach($eData as $event){
 			foreach($event->User as $pivot){
@@ -52,9 +52,9 @@ class EventsController  extends BaseController {
 			}else{
 				$event_image[$event->id] = 'event.jpg';
 			}
-			$past = $event->past;
-			if($past == 1){
-				$confirm_past = 1;
+			$active = $event->active;
+			if($active == 1){
+				$confirm_active == 1;
 			}	
 		}
 
@@ -67,24 +67,24 @@ class EventsController  extends BaseController {
 
 
 		if(isset($paid_events)){
-			return View::make('sales.events')->with(array(
+			return View::make('profile.profile_events')->with(array(
 				'eData' => $eData,
 				'event_image' => $event_image,
 				'paid' =>	$paid,
 				'confirm_paid' => $confirm_paid,
 				'pEvents' => $paid_events,
 				'e_count' => $e_count,
-				'confirm_past' => $confirm_past,
+				'confirm_active' => $confirm_active,
 			));	
 
 		}else{
-			return View::make('sales.events')->with(array(
+			return View::make('profile.profile_events')->with(array(
 				'eData' => $eData,
 				'event_image' => $event_image,
 				'paid' =>	$paid,
 				'confirm_paid' => $confirm_paid,
 				'e_count' => $e_count,
-				'confirm_past' => $confirm_past,
+				'confirm_active' => $confirm_active,
 			));	
 		}
 		
