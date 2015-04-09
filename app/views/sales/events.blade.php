@@ -37,7 +37,7 @@
                         </div>
                     @endif
                     @endforeach
-                    @if($confirm_past == 0)
+                    @if($current_event == 0)
                     <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
                         <div class="section section--form" >
                             <h2 class="page-header">Currently there are no upcoming events..</h1>
@@ -87,7 +87,7 @@
                         @if($confirm_past == 0)
                         <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
                             <div class="section section--form" >
-                                <h2 class="page-header">Currently there are no upcoming events..</h1>
+                                <h2 class="page-header">Currently there are no past events..</h1>
                                 <h4 class="promo__text">Please <a class="content-link" href="/signup">join us</a> to be notified of our next event =)</h4>
                                 <p class="promo__text">Would you like to see our latest <a class="content-link" href="/recipes">recipes?</a></p>
                             </div>
@@ -97,7 +97,7 @@
                     @else
                         <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
                             <div class="section section--form" >
-                                <h2 class="page-header">Currently there are no upcoming events..</h1>
+                                <h2 class="page-header">Currently there are no past events..</h1>
                                 <h4 class="promo__text">Please <a class="content-link" href="/signup">join us</a> to be notified of our next event =)</h4>
                                 <p class="promo__text">Would you like to see our latest <a class="content-link" href="/recipes">recipes?</a></p>
                             </div>
@@ -116,21 +116,14 @@
                     @else
                         <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
                             <div class="section section--form" >
-                                <h2 class="page-header">Currently there are no upcoming events..</h1>
+                                <h2 class="page-header">Currently there are no past events..</h1>
                                 <h4 class="promo__text">Please <a class="content-link" href="/signup">join us</a> to be notified of our next event =)</h4>
                                 <p class="promo__text">Would you like to see our latest <a class="content-link" href="/recipes">recipes?</a></p>
                             </div>
                             <div class="footer__push"></div>
                         </section>
                     @endif
-                @endif
-
-
-
-
-
-
-                
+                @endif  
             </div>
 
         </section>

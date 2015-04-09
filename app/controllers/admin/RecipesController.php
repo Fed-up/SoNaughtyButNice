@@ -20,7 +20,7 @@
 class Admin_RecipesController extends BaseController{
 
 	public function getRecipes(){
-		$data = MenuRecipes::where('active', '!=', 9)->get();
+		$data = MenuRecipes::where('active', '!=', 9)->orderBy('name','ASC')->get();
 		return View::make('admin.recipes.index')
 			->with(array(
 				'data' => $data,
@@ -29,7 +29,7 @@ class Admin_RecipesController extends BaseController{
 	
 	public function getAddRecipes(){
 		$categories = MenuCategories::orderBy('name','ASC')->where('active', '!=', '9')->get(); // Bring in data that has not been deleted
-		$ingredients = MenuIngredients::orderBy('name','ASC')->get();
+		$ingredients = MenuIngredients::orderBy('name','ASC')->where('active', '!=', '9')->get();
 		$metrics = Metric::orderBy('name','ASC')->get();
 		
 		$mCat = array();
@@ -259,7 +259,7 @@ class Admin_RecipesController extends BaseController{
 	public function getEditRecipes($id){
 		$data = MenuRecipes::findOrFail($id);
 		$categories = MenuCategories::orderBy('name','ASC')->where('active', '!=', '9')->get(); // Bring in data that has not been deleted
-		$ingredients = MenuIngredients::orderBy('name','ASC')->where('active', '=', '1')->get();
+		$ingredients = MenuIngredients::orderBy('name','ASC')->where('active', '!=', '9')->get();
 		$metrics = Metric::orderBy('name','ASC')->get();
 		$sales_data = SalesData::where('menu_recipe_id', '=', $data->id)->get();
 		// $sales_data_ingredients = SalesDataIngredients::where('menu_recipe_id', '=', $data->id)->get();
@@ -537,9 +537,9 @@ class Admin_RecipesController extends BaseController{
 
 						// echo '<pre>'; print_r($imData); echo '</pre>';exit;
 						
-						if(!empty($grams[$i][$xx[0]])){
-							$riGrams = $grams[$i][$xx[0]];
-						}else{
+						// if(!empty($grams[$i][$xx[0]])){
+						// 	$riGrams = $grams[$i][$xx[0]];
+						// }else{
 							
 							if(!empty($imData->Metric)){
 								// echo '<pre>'; print_r($imData); echo '</pre>';exit;
@@ -552,7 +552,7 @@ class Admin_RecipesController extends BaseController{
 								}
 							}
 							
-						}
+						// }
 
 						if($xx[0] == 'x'){
 							$r_i = new MenuRecipesIngredients();
@@ -696,6 +696,7 @@ class Admin_RecipesController extends BaseController{
 					// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 
 						if(isset($ti_cost)){$ti_cost = $ti_cost;}else{$ti_cost = 0;}
+						if(isset($input['B2B_sales_price'])){$B2B_sales_price = $input['B2B_sales_price'];}else{$B2B_sales_price = 0;}
 						
 
 						$sdata_id = $input['sdata_id'];
@@ -719,7 +720,7 @@ class Admin_RecipesController extends BaseController{
 						$staff_cost_per_piece = 0;
 						$staff_cost_to_make_recipe_batch = 0;
 
-						// echo '<pre>'; print_r($sales_time); echo '</pre>'; 	exit;
+						
 
 						$staff_cost_to_make_recipe_batch = $staff_cost_per_hour/60 * $sales_time;
 						$total_recipe_cost = $staff_cost_to_make_recipe_batch + $ti_cost;
@@ -743,23 +744,36 @@ class Admin_RecipesController extends BaseController{
 							$total_markup_percentage = $decimal_margin/ (1 - $decimal_margin) * 100;
 							$total_profit_per_piece = $total_profit/ $sales_amount;
 
-						
+							
+							$B2B_total_recipe_revenue = $total_recipe_cost / 0.3;
+							$B2B_desired_sales_price = $B2B_total_recipe_revenue/ $sales_amount;
+							if($B2B_sales_price == 0){
+								$B2B_sales_price = $B2B_desired_sales_price;
+							}
+							if($B2B_sales_price >= 0){
+								$B2B_total_recipe_revenue = $B2B_sales_price * $sales_amount;
+							}
+							$B2B_pofit = $B2B_total_recipe_revenue - $total_recipe_cost;
+							$B2B_desired_total_markup = $B2B_pofit/$total_recipe_cost *100;
+							// echo '<pre>'; print_r($B2B_total_recipe_revenue); echo '</pre>'; 	exit;
+
+
+
 							if($desired_total_markup == 0){
 								$desired_total_markup = 400;
 							}
 
 							if($desired_total_markup > 0){
 
-								$time_per_piece = ($sales_time/ $sales_amount) * 60; 
-								$time_to_make = ($time_per_piece * $sales_amount) / 60;
-								$projected_staff_cost_to_make = ($staff_cost_per_hour / 60) * $time_to_make;
+								$projected_total_markup_per_piece = $total_cost_per_piece * ($desired_total_markup / 100);
+								// $projected_total_markup_per_piece = $projected_total_markup / $sales_amount;
 
-								$projected_ingredient_cost = $total_ingredient_cost_per_piece * $sales_amount;
-								$projected_recipe_cost = $projected_ingredient_cost + $projected_staff_cost_to_make;
-								$projected_total_markup = $projected_recipe_cost * ($desired_total_markup / 100);
-								$projected_recipe_revenue = $projected_total_markup + $projected_recipe_cost;
+								// echo '<pre>'; print_r($total_cost_per_piece); echo '</pre>';
+								// echo '<pre>'; print_r($projected_total_markup); echo '</pre>'; 	exit;
+								
+								$projected_recipe_revenue = $projected_total_markup_per_piece + $total_cost_per_piece;
 
-								$desired_sales_price = $projected_recipe_revenue / $sales_amount;
+								$desired_sales_price = $projected_recipe_revenue;
 								// echo '<pre>'; print_r($desired_sales_price); echo '</pre>'; 	exit;
 							}
 						}
@@ -797,6 +811,11 @@ class Admin_RecipesController extends BaseController{
 			            		'desired_sales_price' => $desired_sales_price,
 			            		'desired_total_markup' => $desired_total_markup,
 
+			            		'B2B_total_recipe_revenue' => $B2B_total_recipe_revenue,
+			            		'B2B_desired_sales_price' => $B2B_desired_sales_price,
+			            		'B2B_sales_price' => $B2B_sales_price,
+			            		'B2B_desired_total_markup' => $B2B_desired_total_markup,
+
 			            	)
 			            );
 						
@@ -812,7 +831,7 @@ class Admin_RecipesController extends BaseController{
 
 				$data = MenuRecipes::findOrFail($input['id']);
 				$categories = MenuCategories::orderBy('name','ASC')->where('active', '!=', '9')->get(); // Bring in data that has not been deleted
-				$ingredients = MenuIngredients::orderBy('name','ASC')->where('active', '=', '1')->get();
+				$ingredients = MenuIngredients::orderBy('name','ASC')->where('active', '!=', '9')->get();
 				$metrics = Metric::orderBy('name','ASC')->get();
 				$sales_data = SalesData::where('menu_recipe_id', '=', $data->id)->get();
 				$recipes_images = $data->Images()->orderBy('ordering','ASC')->where('section', '=', 'RECIPE')->get();

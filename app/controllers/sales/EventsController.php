@@ -31,6 +31,7 @@ class EventsController  extends BaseController {
 		$event = 'eData';
 		$past = 0;
 		$confirm_past = 0;
+		$current_event = 0;
 
 		foreach($eData as $event){
 			foreach($event->User as $pivot){
@@ -55,7 +56,10 @@ class EventsController  extends BaseController {
 			$past = $event->past;
 			if($past == 1){
 				$confirm_past = 1;
+			}else{
+				$current_event = 1;
 			}	
+
 		}
 
 		if($event == 'eData'){
@@ -75,6 +79,7 @@ class EventsController  extends BaseController {
 				'pEvents' => $paid_events,
 				'e_count' => $e_count,
 				'confirm_past' => $confirm_past,
+				'current_event' => $current_event,
 			));	
 
 		}else{
@@ -85,6 +90,7 @@ class EventsController  extends BaseController {
 				'confirm_paid' => $confirm_paid,
 				'e_count' => $e_count,
 				'confirm_past' => $confirm_past,
+				'current_event' => $current_event,
 			));	
 		}
 		

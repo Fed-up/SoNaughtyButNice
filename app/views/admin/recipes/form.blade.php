@@ -211,9 +211,16 @@
 					.append( SelectListM )
 					.append( '&nbsp;' )
 					.append( $('<input>',{
+						'name':'ri_sales_amount[][x]',
+						'id':'ri_sales_amount_'+currentID,
+						'class':'form-control input--amount',
+						'placeholder':'0.00',
+					}) )
+					.append( '&nbsp;' )
+					.append( $('<input>',{
 						'name':'grams[][x]',
 						'id':'grams_'+currentID,
-						'class':'form-control input--amount',
+						'class':'form-control input--grams',
 						'placeholder':'grams',
 					}) )
 					.append( '&nbsp;' )
@@ -873,8 +880,7 @@
 
 				            {{ Form::label('sales_price', 'Price: ', array('class' => 'col-sm-2 control-label')) }}
 				            <div class="col-sm-3">
-				               {{ Form::text('sales_price', (isset($input['sales_price'])? Input::old('sales_price') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) }}
-				               
+				               {{ Form::text('sales_price', (isset($input['sales_price'])? Input::old('sales_price') : (isset($sdata->sales_price)? $sdata->sales_price : '' )), array('class' => 'form-control')) }} 
 				            </div>
 
 				        </div>
@@ -884,15 +890,26 @@
 				               <p class="sales-data__info">$ {{(isset($sdata->staff_cost_to_make_recipe_batch)? $sdata->staff_cost_to_make_recipe_batch : '' )}}</p>
 				            </div>
 
-				            {{ Form::label('sales_amount', 'Amount: ', array('class' => 'col-sm-2 control-label')) }}
+				            {{ Form::label('B2B_sales_price', 'B2B - Price: ', array('class' => 'col-sm-2 control-label')) }}
 				            <div class="col-sm-3">
-				               {{ Form::text('sales_amount', (isset($input['sales_amount'])? Input::old('sales_amount') : (isset($sdata->sales_amount)? $sdata->sales_amount : '' )), array('class' => 'form-control')) }}
+				               {{ Form::text('B2B_sales_price', (isset($input['B2B_sales_price'])? Input::old('B2B_sales_price') : (isset($sdata->B2B_sales_price)? $sdata->B2B_sales_price : '' )), array('class' => 'form-control')) }} 
 				            </div>
 				        </div>
 				        <div class="form-group">
 				        	<h5 class="col-sm-2 control-label sales-data__title">Staff cost per piece:</h5>
 				            <div class="col-sm-3">
 				               <p class="sales-data__info">$ {{(isset($sdata->staff_cost_per_piece)? $sdata->staff_cost_per_piece : '' )}}</p>
+				            </div>
+
+				            {{ Form::label('sales_amount', 'Amount: ', array('class' => 'col-sm-2 control-label')) }}
+				            <div class="col-sm-3">
+				               {{ Form::text('sales_amount', (isset($input['sales_amount'])? Input::old('sales_amount') : (isset($sdata->sales_amount)? $sdata->sales_amount : '' )), array('class' => 'form-control')) }}
+				            </div>
+				        </div>
+				        <div class="form-group">
+				        	<h5 class="col-sm-2 control-label sales-data__title">   </h5>
+				            <div class="col-sm-3">
+				               
 				            </div>
 
 				            {{ Form::label('sales_time', 'Time - minutes: ', array('class' => 'col-sm-2 control-label')) }}
@@ -902,7 +919,7 @@
 				        </div>
 				        <hr/>
 				        <div class="form-group">
-				        	 <h5 class="col-sm-2 control-label sales-data__title">Desired Sales Price:</h5>
+				        	 <h5 class="col-sm-2 control-label sales-data__title">B2C - Desired Sales Price:</h5>
 				            <div class="col-sm-3">
 				               <p class="sales-data__info">$ {{(isset($sdata->desired_sales_price)? $sdata->desired_sales_price : '' )}}</p>
 				            </div>
@@ -911,6 +928,18 @@
 				            <div class="col-sm-2">
 				               {{ Form::text('desired_total_markup', (isset($input['desired_total_markup'])? Input::old('desired_total_markup') : (isset($sdata->desired_total_markup)? $sdata->desired_total_markup : '' )), array('class' => 'form-control', 'placeholder' => '400')) }}
 				            </div>
+				            <!-- <div class="col-sm-1"></div> -->
+				             
+				        </div>
+				        <div class="form-group">
+				        	<h5 class="col-sm-2 control-label sales-data__title">B2B - Desired Sales Price:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">$ {{$sdata->B2B_desired_sales_price}}</p>
+				            </div>
+				            <h5 class="col-sm-2 control-label sales-data__title">B2B Total markup - %:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">{{$sdata->B2B_desired_total_markup}} %</p>
+				            </div>  
 				        </div>
 						<hr/>
 				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
@@ -918,22 +947,20 @@
 				            <div class="col-sm-3">
 				               <p class="sales-data__info">$ {{$sdata->total_recipe_cost}}</p>
 				            </div>
-
-				            <h5 class="col-sm-2 control-label sales-data__title">Total cost percentage</h5>
+				            <h5 class="col-sm-2 control-label sales-data__title">B2C Total markup - %:</h5>
 				            <div class="col-sm-3">
-				               <p class="sales-data__info"> {{$sdata->total_cost_percentage}} %</p>
-				            </div>
-				        </div>
+				               <p class="sales-data__info">{{$sdata->total_markup_percentage}} %</p>
+				            </div>           
+						 </div>
 				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
 			        	    <h5 class="col-sm-2 control-label sales-data__title">Total ingredient cost:</h5>
 				            <div class="col-sm-3">
 				               <p class="sales-data__info">$ {{$sdata->total_ingredient_cost}}</p>
 				            </div>
-
-				            <h5 class="col-sm-2 control-label sales-data__title">Total margin percentage:</h5>
+				            <h5 class="col-sm-2 control-label sales-data__title">B2B Total Recipe Revenue:</h5>
 				            <div class="col-sm-3">
-				               <p class="sales-data__info">{{$sdata->total_margin_percentage}} %</p>
-				            </div>
+				               <p class="sales-data__info">$ {{$sdata->B2B_total_recipe_revenue}}</p>
+				            </div>  
 				        </div>
 				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
 			        	    <h5 class="col-sm-2 control-label sales-data__title">Total ingredient cost per piece:</h5>
@@ -948,10 +975,12 @@
 				        </div>
 				        <hr/>
 				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-			        	    <h5 class="col-sm-2 control-label sales-data__title">Total cost per piece:</h5>
+			        	    
+				        	<h5 class="col-sm-2 control-label sales-data__title">Total cost percentage</h5>
 				            <div class="col-sm-3">
-				               <p class="sales-data__info">$ {{$sdata->total_cost_per_piece}}</p>
+				               <p class="sales-data__info"> {{$sdata->total_cost_percentage}} %</p>
 				            </div>
+
 
 				            <h5 class="col-sm-2 control-label sales-data__title">Total profit:</h5>
 				            <div class="col-sm-3">
@@ -975,10 +1004,19 @@
 				               <p class="sales-data__info">{{$sdata->ingredient_cost_percentage}} %</p>
 				            </div>
 
-				            <h5 class="col-sm-2 control-label sales-data__title">Total markup percentage:</h5>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total cost per piece:</h5>
 				            <div class="col-sm-3">
-				               <p class="sales-data__info">{{$sdata->total_markup_percentage}} %</p>
+				               <p class="sales-data__info">$ {{$sdata->total_cost_per_piece}}</p>
 				            </div>
+				        </div>
+				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
+				        	<h5 class="col-sm-2 control-label sales-data__title">Total margin percentage:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">{{$sdata->total_margin_percentage}} %</p>
+				            </div>
+				        </div>
+				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
+				        	
 				        </div>
 				        <hr/>
 		        		<?php //echo '<pre>'; print_r($sdata->price); echo '</pre>'; exit; ?>

@@ -59,13 +59,13 @@
             <div class="columns small-12 medium-6 large-4 xlarge-2 end">
                  
                 <?php if($e_count == 1): ?> 
-                    <a href="/event/<?php echo $event->id; ?>"  class="content-box content-box--homepage">
+                    <a href="/events"  class="content-box content-box--homepage">
                     <div class="content-box__image"  style="background: url(/uploads/<?php echo $eImage[$event->id]; ?>) center center; background-size:cover;"></div> 
                 <?php else: ?> 
                     <a href="/events" class="content-box content-box--homepage">
                     <div class="content-box__image"  style="background: url(/uploads/<?php echo $eImage[$event->id]; ?>) center center; background-size:cover;"></div>
                 <?php endif; ?>
-                <h5 class="content-box__title content-box__title--homepage">Upcoming Events</h5>
+                <h5 class="content-box__title content-box__title--homepage">Events</h5>
                 </a>
             </div>
             <?php endforeach; ?>
@@ -73,7 +73,7 @@
             <div class="columns small-12 medium-6 large-4 xlarge-2 end">
                 <a href="/events"  class="content-box content-box--homepage">
                     <div class="content-box__image"  style="background: url(/uploads/<?php echo $eImage; ?>) center center; background-size:cover;"></div>
-                    <h5 class="content-box__title content-box__title--homepage">Upcoming Events</h5>
+                    <h5 class="content-box__title content-box__title--homepage">Events</h5>
                 </a>
             </div>
             <!-- <a href="/events" class="content-box content-box--homepage">

@@ -22,6 +22,7 @@ class Admin_IngredientsController extends BaseController {
 			->with(array(
 				'title' => 'Create New Ingredients',
 				'metrics' => $metric,
+				'calculated' => 0,
 			));
 	}
 	
