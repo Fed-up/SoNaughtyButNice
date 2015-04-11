@@ -1014,9 +1014,21 @@
 				            <div class="col-sm-3">
 				               <p class="sales-data__info">{{$sdata->total_margin_percentage}} %</p>
 				            </div>
+
+				            
 				        </div>
+				        <hr>
 				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-				        	
+				        	<h5 class="col-sm-2 control-label sales-data__title">Total recipe grams:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">{{$sdata->total_recipe_grams}} g</p>
+				            </div>
+
+				            <h5 class="col-sm-2 control-label sales-data__title">Total grams per piece:</h5>
+				            <div class="col-sm-3">
+				               <p class="sales-data__info">{{$sdata->total_grams_per_piece}} g</p>
+				            </div>
+
 				        </div>
 				        <hr/>
 		        		<?php //echo '<pre>'; print_r($sdata->price); echo '</pre>'; exit; ?>

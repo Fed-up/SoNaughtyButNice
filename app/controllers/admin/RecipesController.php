@@ -514,6 +514,7 @@ class Admin_RecipesController extends BaseController{
 					if(isset($input['i_price'])){$i_price = $input['i_price'];}else{$i_price = 0;}
 
 					$ti_cost = 0;
+					$ti_grams = 0;
 
 
 					$array_count = count($ingredient);
@@ -547,7 +548,7 @@ class Admin_RecipesController extends BaseController{
 									// echo '<pre>'; print_r($data); echo '</pre>';exit;
 									if($pivot_data->id == $input_metric_id){
 										$riGrams = $pivot_data->pivot->metric_grams * $input_ri_sales_amount;                            //Recipe Ingredient Grams
-										// echo '<pre>'; print_r($riGrams); echo '</pre>';exit;
+										// echo '<pre>'; print_r($riGrams); echo '</pre>';
 									}
 								}
 							}
@@ -574,7 +575,9 @@ class Admin_RecipesController extends BaseController{
 							if(isset($input['sales_amount'])){
 								$sales_amount = $input['sales_amount'];
 								$r_i->sales_grams = $sales_grams = $riGrams/$serve_amount * $sales_amount; 
-							
+								
+								// echo '<pre>'; print_r($sales_grams); echo '</pre>';
+
 								foreach($i_grams as $id => $i_gram){
 								  	if($ingredient[$i][$xx[0]] == $id){
 								  		// if(isset($input['calc'])){
@@ -583,11 +586,15 @@ class Admin_RecipesController extends BaseController{
 									  			$packet_grams_percentage = $sales_grams / $i_gram * 100; 
 												$r_i->packet_grams_percentage = $packet_grams_percentage;
 											}
-									  		// echo '<pre>'; print_r($packet_grams_percentage); echo '</pre>';
+
+											$ti_grams = $ti_grams + $sales_grams;
+									  		
 								  		// }
 								  	}
 								}
 							}
+
+
 
 							if(isset($input['sales_price'])){
 								foreach($i_price as $id => $ri_price){
@@ -603,9 +610,14 @@ class Admin_RecipesController extends BaseController{
 							$r_i->ordering = $i;						
 					    };
 					   // echo '<pre>'; print_r($data); echo '</pre>';exit;
-					  $data->MenuRecipesIngredients()->save($r_i);
+
+					   	
+
+					  	$data->MenuRecipesIngredients()->save($r_i);
 				  		
 					};
+
+					// echo '<pre>'; print_r($ti_grams); echo '</pre>';exit;
 
 					if(isset($input['ddi'])){
 						$ddi = $input['ddi'];
@@ -620,7 +632,9 @@ class Admin_RecipesController extends BaseController{
 						};
 					};		
 				};
-				 
+				
+
+
 				if(isset($input['method'])){
 					$m_count = count($input['method']);
 					$mc = 1;
@@ -719,6 +733,11 @@ class Admin_RecipesController extends BaseController{
 						$desired_sales_price = 0;
 						$staff_cost_per_piece = 0;
 						$staff_cost_to_make_recipe_batch = 0;
+						$total_grams_per_piece = 0;
+						$B2B_total_recipe_revenue = 0;
+						$B2B_desired_sales_price = 0;
+						$B2B_desired_total_markup = 0;
+						// $B2B_desired_total_markup
 
 						
 
@@ -730,6 +749,7 @@ class Admin_RecipesController extends BaseController{
 							$staff_cost_per_piece = $staff_cost_to_make_recipe_batch/ $sales_amount;
 							$total_cost_per_piece = $total_recipe_cost / $sales_amount;
 							$total_ingredient_cost_per_piece = $ti_cost/  $sales_amount;
+							$total_grams_per_piece = $ti_grams / $sales_amount;
 
 							$total_cost_percentage = $total_recipe_cost/ $total_recipe_revenue * 100;
 							$total_profit = $total_recipe_revenue - $total_recipe_cost;
@@ -791,6 +811,9 @@ class Admin_RecipesController extends BaseController{
 			            		'sales_price' => $sales_price,
 			            		'sales_amount' => $sales_amount,
 			            		'sales_time' => $sales_time,
+
+			            		'total_recipe_grams' => $ti_grams,
+			            		'total_grams_per_piece' => $total_grams_per_piece,
 
 			            		'staff_cost_to_make_recipe_batch' => $staff_cost_to_make_recipe_batch,
 			            		'total_recipe_cost' => $total_recipe_cost,

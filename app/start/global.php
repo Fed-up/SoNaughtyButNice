@@ -37,7 +37,7 @@ ClassLoader::addDirectories(array(
 |
 */
 
-Log::useFiles(storage_path().'/logs/laravel.log');
+Log::useFiles(storage_path().'/logs/laravel.log'); 
 
 /*
 |--------------------------------------------------------------------------
@@ -54,8 +54,11 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
-	// return Response::view('public.error');
+	$error = Log::error($exception);
+
+	// echo '<pre>'; print_r($code); echo '</pre>'; 
+	// echo '<pre>'; print_r($exception); echo '</pre>'; 	exit;
+	return Response::view('public.error');
 });
 
 /*
