@@ -50,6 +50,9 @@ class AuthController extends BaseController {
 					case 'MANAGER':
 						return Redirect::to('admin');
 						break;
+					case 'B2B':
+						return Redirect::to('profile');
+						break;
 					case 'REGISTERED':
 						return Redirect::to('profile');
 						break;

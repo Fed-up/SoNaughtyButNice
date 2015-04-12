@@ -50,6 +50,7 @@
                     <ul>
                     @foreach($rIngredients as $index=>$ingredient)
                         @if(auth::check())
+                            
                             @if($recipe->exclusive == 1)
                                 <li>
                                     <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
@@ -64,8 +65,8 @@
                                         {{$ingredient->MenuIngredients->name}}
                                     </a>
                                 </li>
-
                             @endif
+                       
                         @else
                             <li>
                                 <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
@@ -82,25 +83,65 @@
                 </section>	
             </div>
             <div class="columns small-12 medium-6 ">
-                @if($recipe->exclusive == 1)
-                    <h3 class="content__title">Exclusive Recipe</h3>
-                @else
-                    <h3 class="content__title">The Method</h3>
-                @endif
-        	    
-                <section class="section__box">
-                    @if($recipe->exclusive == 1)
-                       <p>This is a <a class="content-link" href="/">SoNaughtyButNice.com</a> exclusive recipe, we may teach you how to make it at up comming <a class="content-link" href="/events">events</a> or you can include it in your next <a class="content-link" href="/catering">catering package</a></p>
-                    @else
-                        @if(Auth::check())
-                            @foreach($recipe->MenuRecipesMethods as $rMethods)
-                                <p>
-                                    {{$rMethods->description}}
-                                </p><br/>
-                            @endforeach
+                @if(auth::check())
+                    @if(Auth::user()->user_type != 'B2B')
+                        @if($recipe->exclusive == 1)
+                            <h3 class="content__title">Exclusive Recipe</h3>
                         @else
-                            <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Method</p>
-                        @endif 
+                            <h3 class="content__title">The Method</h3>
+                        @endif
+                    @else
+                        <h3 class="content__title">Purchase Information</h3>
+                    @endif
+                @else
+                    @if($recipe->exclusive == 1)
+                        <h3 class="content__title">Exclusive Recipe</h3>
+                    @else
+                        <h3 class="content__title">The Method</h3>
+                    @endif    
+        	    @endif
+
+                <section class="section__box">
+                    @if(auth::check())
+                        @if(Auth::user()->user_type != 'B2B')
+                            @if($recipe->exclusive == 1)
+                               <p>This is a <a class="content-link" href="/">SoNaughtyButNice.com</a> exclusive recipe, we may teach you how to make it at up comming <a class="content-link" href="/events">events</a> or you can include it in your next <a class="content-link" href="/catering">catering package</a></p>
+                            @else
+                                @if(Auth::check())
+                                    @foreach($recipe->MenuRecipesMethods as $rMethods)
+                                        <p>
+                                            {{$rMethods->description}}
+                                        </p><br/>
+                                    @endforeach
+                                @else
+                                    <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Method</p>
+                                @endif 
+                            @endif
+                        @else
+                            <p><span class="content-link">Ideal amount:</span>&nbsp; &nbsp; {{$sales_data[0]->sales_amount}}</p>
+                            <p><span class="content-link">Ideal grams:</span>&nbsp; &nbsp; {{$sales_data[0]->total_recipe_grams}}g</p>
+                            <p><span class="content-link">Ideal cost:</span>&nbsp; &nbsp; $ {{$sales_data[0]->B2B_total_recipe_revenue}}</p><br/>
+
+                            <p><span class="content-link">Total grams per piece:</span>&nbsp; &nbsp; {{$sales_data[0]->total_grams_per_piece}}g</p>
+                            <p><span class="content-link">Total cost per piece:</span>&nbsp; &nbsp; ${{$sales_data[0]->B2B_sales_price}}</p>
+                            <hr>
+                            <p>All products are handmade to perfection, we are able to tailor this product to your specific requirements at no additional cost. 
+                            <br/>Our prices are formulated, so the cost to produce is 30%, ensuring you recieve the same value every time you purchase these delicious creations</p>
+                        @endif
+                    @else
+                        @if($recipe->exclusive == 1)
+                           <p>This is a <a class="content-link" href="/">SoNaughtyButNice.com</a> exclusive recipe, we may teach you how to make it at up comming <a class="content-link" href="/events">events</a> or you can include it in your next <a class="content-link" href="/catering">catering package</a></p>
+                        @else
+                            @if(Auth::check())
+                                @foreach($recipe->MenuRecipesMethods as $rMethods)
+                                    <p>
+                                        {{$rMethods->description}}
+                                    </p><br/>
+                                @endforeach
+                            @else
+                                <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Method</p>
+                            @endif 
+                        @endif   
                     @endif
                     
                 </section>  	 

@@ -576,7 +576,7 @@ class Admin_RecipesController extends BaseController{
 								$sales_amount = $input['sales_amount'];
 								$r_i->sales_grams = $sales_grams = $riGrams/$serve_amount * $sales_amount; 
 								
-								// echo '<pre>'; print_r($sales_grams); echo '</pre>';
+								// 
 
 								foreach($i_grams as $id => $i_gram){
 								  	if($ingredient[$i][$xx[0]] == $id){
@@ -593,8 +593,6 @@ class Admin_RecipesController extends BaseController{
 								  	}
 								}
 							}
-
-
 
 							if(isset($input['sales_price'])){
 								foreach($i_price as $id => $ri_price){
@@ -710,6 +708,7 @@ class Admin_RecipesController extends BaseController{
 					// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 
 						if(isset($ti_cost)){$ti_cost = $ti_cost;}else{$ti_cost = 0;}
+						if(isset($ti_grams)){$ti_grams = $ti_grams;}else{$ti_grams = 0;}
 						if(isset($input['B2B_sales_price'])){$B2B_sales_price = $input['B2B_sales_price'];}else{$B2B_sales_price = 0;}
 						
 
@@ -799,7 +798,7 @@ class Admin_RecipesController extends BaseController{
 						}
 						
 						
-						
+						// 
 						
 
 						// $_sales = SalesData::find($sdata_id);	

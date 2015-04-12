@@ -49,6 +49,7 @@
                     <ul>
                     <?php foreach($rIngredients as $index=>$ingredient): ?>
                         <?php if(auth::check()): ?>
+                            
                             <?php if($recipe->exclusive == 1): ?>
                                 <li>
                                     <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
@@ -63,8 +64,8 @@
                                         <?php echo $ingredient->MenuIngredients->name; ?>
                                     </a>
                                 </li>
-
                             <?php endif; ?>
+                       
                         <?php else: ?>
                             <li>
                                 <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
@@ -81,25 +82,65 @@
                 </section>	
             </div>
             <div class="columns small-12 medium-6 ">
-                <?php if($recipe->exclusive == 1): ?>
-                    <h3 class="content__title">Exclusive Recipe</h3>
-                <?php else: ?>
-                    <h3 class="content__title">The Method</h3>
-                <?php endif; ?>
-        	    
-                <section class="section__box">
-                    <?php if($recipe->exclusive == 1): ?>
-                       <p>This is a <a class="content-link" href="/">SoNaughtyButNice.com</a> exclusive recipe, we may teach you how to make it at up comming <a class="content-link" href="/events">events</a> or you can include it in your next <a class="content-link" href="/catering">catering package</a></p>
-                    <?php else: ?>
-                        <?php if(Auth::check()): ?>
-                            <?php foreach($recipe->MenuRecipesMethods as $rMethods): ?>
-                                <p>
-                                    <?php echo $rMethods->description; ?>
-                                </p><br/>
-                            <?php endforeach; ?>
+                <?php if(auth::check()): ?>
+                    <?php if(Auth::user()->user_type != 'B2B'): ?>
+                        <?php if($recipe->exclusive == 1): ?>
+                            <h3 class="content__title">Exclusive Recipe</h3>
                         <?php else: ?>
-                            <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Method</p>
-                        <?php endif; ?> 
+                            <h3 class="content__title">The Method</h3>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <h3 class="content__title">Purchase Information</h3>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <?php if($recipe->exclusive == 1): ?>
+                        <h3 class="content__title">Exclusive Recipe</h3>
+                    <?php else: ?>
+                        <h3 class="content__title">The Method</h3>
+                    <?php endif; ?>    
+        	    <?php endif; ?>
+
+                <section class="section__box">
+                    <?php if(auth::check()): ?>
+                        <?php if(Auth::user()->user_type != 'B2B'): ?>
+                            <?php if($recipe->exclusive == 1): ?>
+                               <p>This is a <a class="content-link" href="/">SoNaughtyButNice.com</a> exclusive recipe, we may teach you how to make it at up comming <a class="content-link" href="/events">events</a> or you can include it in your next <a class="content-link" href="/catering">catering package</a></p>
+                            <?php else: ?>
+                                <?php if(Auth::check()): ?>
+                                    <?php foreach($recipe->MenuRecipesMethods as $rMethods): ?>
+                                        <p>
+                                            <?php echo $rMethods->description; ?>
+                                        </p><br/>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Method</p>
+                                <?php endif; ?> 
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <p><span class="content-link">Ideal amount:</span>&nbsp; &nbsp; <?php echo $sales_data[0]->sales_amount; ?></p>
+                            <p><span class="content-link">Ideal grams:</span>&nbsp; &nbsp; <?php echo $sales_data[0]->total_recipe_grams; ?>g</p>
+                            <p><span class="content-link">Ideal cost:</span>&nbsp; &nbsp; $ <?php echo $sales_data[0]->B2B_total_recipe_revenue; ?></p><br/>
+
+                            <p><span class="content-link">Total grams per piece:</span>&nbsp; &nbsp; <?php echo $sales_data[0]->total_grams_per_piece; ?>g</p>
+                            <p><span class="content-link">Total cost per piece:</span>&nbsp; &nbsp; $<?php echo $sales_data[0]->B2B_sales_price; ?></p>
+                            <hr>
+                            <p>All products are handmade to perfection, we are able to tailor this product to your specific requirements at no additional cost. 
+                            <br/>Our prices are formulated, so the cost to produce is 30%, ensuring you recieve the same value every time you purchase these delicious creations</p>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <?php if($recipe->exclusive == 1): ?>
+                           <p>This is a <a class="content-link" href="/">SoNaughtyButNice.com</a> exclusive recipe, we may teach you how to make it at up comming <a class="content-link" href="/events">events</a> or you can include it in your next <a class="content-link" href="/catering">catering package</a></p>
+                        <?php else: ?>
+                            <?php if(Auth::check()): ?>
+                                <?php foreach($recipe->MenuRecipesMethods as $rMethods): ?>
+                                    <p>
+                                        <?php echo $rMethods->description; ?>
+                                    </p><br/>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Method</p>
+                            <?php endif; ?> 
+                        <?php endif; ?>   
                     <?php endif; ?>
                     
                 </section>  	 

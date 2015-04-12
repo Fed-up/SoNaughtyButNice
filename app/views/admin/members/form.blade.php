@@ -56,6 +56,7 @@
                     {{ Form::select('user_type', 
                         array('GUEST' => 'Guest',
                             'REGISTERED' => 'Registered',
+                            'B2B' => 'B2B',
                             'MANAGER' => 'Manager', 
                             'ADMIN' => 'Admin'), (isset($input['user_type'])? Input::old('user_type') : (isset($data->user_type)? $data->user_type : null )), array('class'=>'form-control')) }} 
                 </div>
