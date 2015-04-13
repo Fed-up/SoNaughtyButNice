@@ -5,8 +5,14 @@
 @section('content')
     <section class="page">  
         <nav class="tabs subnav subnav--centre" data-tab data-options="deep_linking:true; scroll_to_content: false">
-            <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#recipes">Recipes</a></h2> |
-            <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#myrecipes">Exclusive Recipes</a></h2> 
+            <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#recipes">@if(Auth::check())@if(Auth::user()->user_type != 'B2B')Recipes @else Nutritents @endif @else Recipes @endif</a></h2>
+            @if(Auth::check())
+                @if(Auth::user()->user_type != 'B2B')
+                | <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#myrecipes">Exclusive Recipes</a></h2>
+                @endif
+            @else
+                | <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#myrecipes">Exclusive Recipes</a></h2>
+            @endif 
             <h2 class="subnav"></h2>
 
 

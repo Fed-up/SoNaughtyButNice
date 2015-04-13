@@ -1,7 +1,7 @@
 <footer class=" footer__wrapper">
 	<div class="footer">
 		<section class="row">
-		    <a class="logo__text--footer" href="/recipes">Healthy Dessert Recipes</a>
+		    <a class="logo__text--footer" href="/recipes">We Love Healthy Education</a>
 		    <a class=" trigger-menu"><span class="logo__image--footer"></span></a>
 		</section>
 	</div>

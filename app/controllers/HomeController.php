@@ -3,6 +3,16 @@
 class HomeController extends BaseController {
 
 	public function getIndex(){
+		if(Auth::user()){
+			$user = Auth::user();
+			if($user->user_type == 'B2B'){
+				$B2B = 1;
+			}else{
+				$B2B = 0;
+			}
+		}else{
+			$B2B = 0;
+		}
 		
 		// Header Image
 		$hData = Header::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->take(3)
@@ -250,7 +260,7 @@ class HomeController extends BaseController {
 			'pImage' => $catering_image,
 
 			'e_count' => $e_count,
-			// 'event_id' =>
+			'B2B' => $B2B,
 			)
 		);
 	}

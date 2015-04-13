@@ -7,21 +7,26 @@ class RecipePageController  extends BaseController {
 				$user_id = $user->id;
 				if($user->user_type == 'B2B'){
 					$sales_data = SalesData::where('menu_recipe_id', '=', $id)->get();
-					foreach($sales_data as $sd){
-						$sd->sales_amount = number_format($sd->sales_amount,2);
-						$sd->total_recipe_grams = number_format($sd->total_recipe_grams,2);
-						$sd->B2B_total_recipe_revenue = number_format($sd->B2B_total_recipe_revenue,2);
-						$sd->total_grams_per_piece = number_format($sd->total_grams_per_piece,2);
-						$sd->B2B_sales_price = number_format($sd->B2B_sales_price,2);
+					$sales_count = count($sales_data);
+					if($sales_count == 0){
+						$sales_count = 0;
+					}else{
+						$sales_count = 1;
+						foreach($sales_data as $sd){
+							$sd->sales_amount = number_format($sd->sales_amount,2);
+							$sd->total_recipe_grams = number_format($sd->total_recipe_grams,2);
+							$sd->B2B_total_recipe_revenue = number_format($sd->B2B_total_recipe_revenue,2);
+							$sd->total_grams_per_piece = number_format($sd->total_grams_per_piece,2);
+							$sd->B2B_sales_price = number_format($sd->B2B_sales_price,2);
+						}
 					}
+					
 				}else{$sales_data = 0;}
 			}else{
 				$user_id = 0;
+				$sales_count = 0;
 				$sales_data = 0;
 			}
-
-			// echo '<pre>'; print_r($user); echo '</pre>';exit;
-			// echo '<pre>'; print_r($sales_data); echo '</pre>';exit;
 
 
 			$rData = MenuRecipes::where('id', '=', $id)
@@ -148,6 +153,10 @@ class RecipePageController  extends BaseController {
 				}
 			}
 
+
+			// echo '<pre>'; print_r($sales_data); echo '</pre>';exit;
+
+			
 			return View::make('public.recipe_page')->with(array(
 				'rData' => $rData,
 				'hImage' => $header_image,
@@ -156,6 +165,7 @@ class RecipePageController  extends BaseController {
 				'crImage' => $cRecipe_image,
 				'rIngredients' => $rnIngredient,
 				'sales_data' => $sales_data,
+				'sales_count' => $sales_count,
 				)
 			);
 		}

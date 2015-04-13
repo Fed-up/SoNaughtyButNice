@@ -39,7 +39,7 @@
                         <div class="row collapse">
                             
                             <a href="/recipe/<?php echo $recipe->id; ?>" class="columns small-4 medium-12">
-                              <img src="/uploads/<?php echo $recipe->images[0]->name; ?>" />
+                              <img src="/uploads/<?php echo $recipe->Images[0]->name;; ?>" />
                             </a>
                             
 

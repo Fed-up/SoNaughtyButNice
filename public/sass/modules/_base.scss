@@ -218,9 +218,15 @@ ul, li {
   color: $menu_dark; 
   white-space: nowrap;
   font-family: headings;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
 }
 .tab__link:hover{
   color: $menu_dark; 
+  border: 0;
+  outline: 0;
+  box-shadow: none;
 }
 
 .active > .tab__link {

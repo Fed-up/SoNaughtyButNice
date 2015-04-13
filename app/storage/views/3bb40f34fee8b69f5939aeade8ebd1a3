@@ -4,8 +4,14 @@
 <?php $__env->startSection('content'); ?>
     <section class="page">  
         <nav class="tabs subnav subnav--centre" data-tab data-options="deep_linking:true; scroll_to_content: false">
-            <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#recipes">Recipes</a></h2> |
-            <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#myrecipes">Exclusive Recipes</a></h2> 
+            <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#recipes"><?php if(Auth::check()): ?><?php if(Auth::user()->user_type != 'B2B'): ?>Recipes <?php else: ?> Nutritents <?php endif; ?> <?php else: ?> Recipes <?php endif; ?></a></h2>
+            <?php if(Auth::check()): ?>
+                <?php if(Auth::user()->user_type != 'B2B'): ?>
+                | <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#myrecipes">Exclusive Recipes</a></h2>
+                <?php endif; ?>
+            <?php else: ?>
+                | <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#myrecipes">Exclusive Recipes</a></h2>
+            <?php endif; ?> 
             <h2 class="subnav"></h2>
 
 

@@ -41,7 +41,7 @@
         <div class="columns small-12 medium-6 large-4 xlarge-2 end">
             <a href="/recipes" class="content-box content-box--homepage">
                 <div class="content-box__image"  style="background: url(/uploads/{{ $rImage[$recipe->id] }}) center center; background-size:cover;"></div>
-                <h5 class="content-box__title content-box__title--homepage">Recipes</h5>
+                <h5 class="content-box__title content-box__title--homepage">@if(Auth::check())@if(Auth::user()->user_type != 'B2B')Recipes @else Nutritents @endif @else Recipes @endif</h5>
             </a>
         </div>
         @endforeach

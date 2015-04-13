@@ -49,17 +49,24 @@
                     <ul>
                     <?php foreach($rIngredients as $index=>$ingredient): ?>
                         <?php if(auth::check()): ?>
-                            
-                            <?php if($recipe->exclusive == 1): ?>
-                                <li>
-                                    <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
-                                        <?php echo $ingredient->MenuIngredients->name; ?>
-                                    </a>
-                                </li>
+                            <?php if(Auth::user()->user_type != 'B2B'): ?>
+                                <?php if($recipe->exclusive == 1): ?>
+                                    <li>
+                                        <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
+                                            <?php echo $ingredient->MenuIngredients->name; ?>
+                                        </a>
+                                    </li>
+                                <?php else: ?>
+                                    <li>
+                                        <?php echo $ingredient->amount; ?> 
+                                        <?php echo $ingredient->Metric->name; ?>
+                                        <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
+                                            <?php echo $ingredient->MenuIngredients->name; ?>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
                             <?php else: ?>
                                 <li>
-                                    <?php echo $ingredient->amount; ?> 
-                                    <?php echo $ingredient->Metric->name; ?>
                                     <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
                                         <?php echo $ingredient->MenuIngredients->name; ?>
                                     </a>
@@ -117,15 +124,19 @@
                                 <?php endif; ?> 
                             <?php endif; ?>
                         <?php else: ?>
-                            <p><span class="content-link">Ideal amount:</span>&nbsp; &nbsp; <?php echo $sales_data[0]->sales_amount; ?></p>
-                            <p><span class="content-link">Ideal grams:</span>&nbsp; &nbsp; <?php echo $sales_data[0]->total_recipe_grams; ?>g</p>
-                            <p><span class="content-link">Ideal cost:</span>&nbsp; &nbsp; $ <?php echo $sales_data[0]->B2B_total_recipe_revenue; ?></p><br/>
+                            <?php if($sales_count == 0): ?>
+                                <p>This product is still being perfected, please email us directly if you are interested in it, as we want to accomodate to your needs promptly.<br/>Regards,<br/> So Naughty But Nice</p>
+                            <?php else: ?>
+                                <p><span class="content-link">Ideal amount:</span>&nbsp; &nbsp; <?php echo $sales_data[0]->sales_amount; ?></p>
+                                <p><span class="content-link">Ideal grams:</span>&nbsp; &nbsp; <?php echo $sales_data[0]->total_recipe_grams; ?>g</p>
+                                <p><span class="content-link">Ideal cost:</span>&nbsp; &nbsp; $ <?php echo $sales_data[0]->B2B_total_recipe_revenue; ?></p><br/>
 
-                            <p><span class="content-link">Total grams per piece:</span>&nbsp; &nbsp; <?php echo $sales_data[0]->total_grams_per_piece; ?>g</p>
-                            <p><span class="content-link">Total cost per piece:</span>&nbsp; &nbsp; $<?php echo $sales_data[0]->B2B_sales_price; ?></p>
-                            <hr>
-                            <p>All products are handmade to perfection, we are able to tailor this product to your specific requirements at no additional cost. 
-                            <br/>Our prices are formulated, so the cost to produce is 30%, ensuring you recieve the same value every time you purchase these delicious creations</p>
+                                <p><span class="content-link">Total grams per piece:</span>&nbsp; &nbsp; <?php echo $sales_data[0]->total_grams_per_piece; ?>g</p>
+                                <p><span class="content-link">Total cost per piece:</span>&nbsp; &nbsp; $<?php echo $sales_data[0]->B2B_sales_price; ?></p>
+                                <hr>
+                                <p>All products are handmade to perfection, we are able to tailor this product to your specific requirements at no additional cost. 
+                                <br/>Our prices are formulated, so the cost to produce is 30%, ensuring you recieve the same value every time you purchase these delicious creations</p>
+                            <?php endif; ?>
                         <?php endif; ?>
                     <?php else: ?>
                         <?php if($recipe->exclusive == 1): ?>
@@ -161,30 +172,36 @@
             <?php endforeach; ?>
             
         </section>
-
-        <?php if($recipe->exclusive != 1): ?>
-            <section class="row">
-                <div class="columns small-12 "> 
-                    <div class=" ">
-                        <h3 class="content__title">Little Extras</h3>
-                        <section class="section__box">
-                            <?php if (Auth::check()): ?>
-                                <?php foreach($recipe->MenuRecipesExtras as $rExtras): ?>
-                                    <p>
-                                        <?php echo $rExtras->description; ?>
-                                    </p><br/>
-                                <?php endforeach; ?> 
-                            <?php else: ?>
-                                <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Little Extras</p>
-                            <?php endif; ?> 
-                        </section>
-                    </div>         
-                </div>            
-            </section>
+        
+        <?php if(Auth::check()): ?>
+            <?php if(Auth::user()->user_type != 'B2B'): ?>
+                <?php if($recipe->exclusive != 1): ?>
+                    <section class="row">
+                        <div class="columns small-12 "> 
+                            <div class=" ">
+                                <h3 class="content__title">Little Extras</h3>
+                                <section class="section__box">
+                                    <?php if (Auth::check()): ?>
+                                        <?php foreach($recipe->MenuRecipesExtras as $rExtras): ?>
+                                            <p>
+                                                <?php echo $rExtras->description; ?>
+                                            </p><br/>
+                                        <?php endforeach; ?> 
+                                    <?php else: ?>
+                                        <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Little Extras</p>
+                                    <?php endif; ?> 
+                                </section>
+                            </div>         
+                        </div>            
+                    </section>
+                <?php endif; ?>
+            <?php endif; ?>
+        <?php else: ?>
+            <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Little Extras</p>
         <?php endif; ?>
    
         <section class="row content-boxes__wrapper">
-            <h5 class="content__title">Recipe cousins</h5>
+            <h5 class="content__title"><?php echo $recipe->name; ?>'s cousins</h5>
             <?php foreach($category->menuRecipes as $recipe): ?>
                 
                  <?php /*'<pre>'; print_r($recipe ); echo '</pre>';*/ ?>

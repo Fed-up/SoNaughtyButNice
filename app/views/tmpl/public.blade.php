@@ -65,7 +65,7 @@
                 <!-- <a class="side--nav" href="/">{{ ((Auth::guest())? '' : ((Auth::user()->admin == 1)? HTML::link('admin', 'Profile') : HTML::link('profile', 'Profile'))) }}</a> -->
                 {{ ((Auth::guest())? '' : ((Auth::user()->admin == 1)? HTML::link('admin', 'Profile', array('class' => 'side--nav')) : HTML::link('profile', 'Profile', array('class' => 'side--nav')))) }}
                 <a class="{{((Request::segment(1) === 'collections')? 'side--nav navTab_active' : 'side--nav')}}" href="/collections">Collections</a>
-                <a class="{{((Request::segment(1) === 'recipes')? 'side--nav navTab_active' : 'side--nav')}}" href="/recipes">Recipes</a>
+                <a class="{{((Request::segment(1) === 'recipes')? 'side--nav navTab_active' : 'side--nav')}}" href="/recipes">@if(Auth::check())@if(Auth::user()->user_type != 'B2B')Recipes @else Nutritents @endif @else Recipes @endif</a>
                 <a class="{{((Request::segment(1) === 'ingredients')? 'side--nav navTab_active' : 'side--nav')}}" href="/ingredients">Ingredients</a>
                 <a class="{{((Request::segment(1) === 'events')? 'side--nav navTab_active' : 'side--nav')}}" href="/events">Events</a>
                 <a class="{{((Request::segment(1) === 'catering')? 'side--nav navTab_active' : 'side--nav')}}" href="/catering">Catering</a>

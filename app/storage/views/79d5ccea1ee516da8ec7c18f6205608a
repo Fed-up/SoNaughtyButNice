@@ -65,7 +65,7 @@
                 <!-- <a class="side--nav" href="/"><?php echo ((Auth::guest())? '' : ((Auth::user()->admin == 1)? HTML::link('admin', 'Profile') : HTML::link('profile', 'Profile'))); ?></a> -->
                 <?php echo ((Auth::guest())? '' : ((Auth::user()->admin == 1)? HTML::link('admin', 'Profile', array('class' => 'side--nav')) : HTML::link('profile', 'Profile', array('class' => 'side--nav')))); ?>
                 <a class="<?php echo ((Request::segment(1) === 'collections')? 'side--nav navTab_active' : 'side--nav'); ?>" href="/collections">Collections</a>
-                <a class="<?php echo ((Request::segment(1) === 'recipes')? 'side--nav navTab_active' : 'side--nav'); ?>" href="/recipes">Recipes</a>
+                <a class="<?php echo ((Request::segment(1) === 'recipes')? 'side--nav navTab_active' : 'side--nav'); ?>" href="/recipes"><?php if(Auth::check()): ?><?php if(Auth::user()->user_type != 'B2B'): ?>Recipes <?php else: ?> Nutritents <?php endif; ?> <?php else: ?> Recipes <?php endif; ?></a>
                 <a class="<?php echo ((Request::segment(1) === 'ingredients')? 'side--nav navTab_active' : 'side--nav'); ?>" href="/ingredients">Ingredients</a>
                 <a class="<?php echo ((Request::segment(1) === 'events')? 'side--nav navTab_active' : 'side--nav'); ?>" href="/events">Events</a>
                 <a class="<?php echo ((Request::segment(1) === 'catering')? 'side--nav navTab_active' : 'side--nav'); ?>" href="/catering">Catering</a>

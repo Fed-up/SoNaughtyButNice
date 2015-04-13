@@ -50,17 +50,24 @@
                     <ul>
                     @foreach($rIngredients as $index=>$ingredient)
                         @if(auth::check())
-                            
-                            @if($recipe->exclusive == 1)
-                                <li>
-                                    <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
-                                        {{$ingredient->MenuIngredients->name}}
-                                    </a>
-                                </li>
+                            @if(Auth::user()->user_type != 'B2B')
+                                @if($recipe->exclusive == 1)
+                                    <li>
+                                        <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
+                                            {{$ingredient->MenuIngredients->name}}
+                                        </a>
+                                    </li>
+                                @else
+                                    <li>
+                                        {{$ingredient->amount}} 
+                                        {{$ingredient->Metric->name}}
+                                        <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
+                                            {{$ingredient->MenuIngredients->name}}
+                                        </a>
+                                    </li>
+                                @endif
                             @else
                                 <li>
-                                    {{$ingredient->amount}} 
-                                    {{$ingredient->Metric->name}}
                                     <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
                                         {{$ingredient->MenuIngredients->name}}
                                     </a>
@@ -118,15 +125,19 @@
                                 @endif 
                             @endif
                         @else
-                            <p><span class="content-link">Ideal amount:</span>&nbsp; &nbsp; {{$sales_data[0]->sales_amount}}</p>
-                            <p><span class="content-link">Ideal grams:</span>&nbsp; &nbsp; {{$sales_data[0]->total_recipe_grams}}g</p>
-                            <p><span class="content-link">Ideal cost:</span>&nbsp; &nbsp; $ {{$sales_data[0]->B2B_total_recipe_revenue}}</p><br/>
+                            @if($sales_count == 0)
+                                <p>This product is still being perfected, please email us directly if you are interested in it, as we want to accomodate to your needs promptly.<br/>Regards,<br/> So Naughty But Nice</p>
+                            @else
+                                <p><span class="content-link">Ideal amount:</span>&nbsp; &nbsp; {{$sales_data[0]->sales_amount}}</p>
+                                <p><span class="content-link">Ideal grams:</span>&nbsp; &nbsp; {{$sales_data[0]->total_recipe_grams}}g</p>
+                                <p><span class="content-link">Ideal cost:</span>&nbsp; &nbsp; $ {{$sales_data[0]->B2B_total_recipe_revenue}}</p><br/>
 
-                            <p><span class="content-link">Total grams per piece:</span>&nbsp; &nbsp; {{$sales_data[0]->total_grams_per_piece}}g</p>
-                            <p><span class="content-link">Total cost per piece:</span>&nbsp; &nbsp; ${{$sales_data[0]->B2B_sales_price}}</p>
-                            <hr>
-                            <p>All products are handmade to perfection, we are able to tailor this product to your specific requirements at no additional cost. 
-                            <br/>Our prices are formulated, so the cost to produce is 30%, ensuring you recieve the same value every time you purchase these delicious creations</p>
+                                <p><span class="content-link">Total grams per piece:</span>&nbsp; &nbsp; {{$sales_data[0]->total_grams_per_piece}}g</p>
+                                <p><span class="content-link">Total cost per piece:</span>&nbsp; &nbsp; ${{$sales_data[0]->B2B_sales_price}}</p>
+                                <hr>
+                                <p>All products are handmade to perfection, we are able to tailor this product to your specific requirements at no additional cost. 
+                                <br/>Our prices are formulated, so the cost to produce is 30%, ensuring you recieve the same value every time you purchase these delicious creations</p>
+                            @endif
                         @endif
                     @else
                         @if($recipe->exclusive == 1)
@@ -162,30 +173,36 @@
             @endforeach
             
         </section>
-
-        @if($recipe->exclusive != 1)
-            <section class="row">
-                <div class="columns small-12 "> 
-                    <div class=" ">
-                        <h3 class="content__title">Little Extras</h3>
-                        <section class="section__box">
-                            @if (Auth::check())
-                                @foreach($recipe->MenuRecipesExtras as $rExtras)
-                                    <p>
-                                        {{$rExtras->description}}
-                                    </p><br/>
-                                @endforeach 
-                            @else
-                                <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Little Extras</p>
-                            @endif 
-                        </section>
-                    </div>         
-                </div>            
-            </section>
+        
+        @if(Auth::check())
+            @if(Auth::user()->user_type != 'B2B')
+                @if($recipe->exclusive != 1)
+                    <section class="row">
+                        <div class="columns small-12 "> 
+                            <div class=" ">
+                                <h3 class="content__title">Little Extras</h3>
+                                <section class="section__box">
+                                    @if (Auth::check())
+                                        @foreach($recipe->MenuRecipesExtras as $rExtras)
+                                            <p>
+                                                {{$rExtras->description}}
+                                            </p><br/>
+                                        @endforeach 
+                                    @else
+                                        <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Little Extras</p>
+                                    @endif 
+                                </section>
+                            </div>         
+                        </div>            
+                    </section>
+                @endif
+            @endif
+        @else
+            <p>Please <a class="content-link" href="/login">Login</a> or <a class="content-link" href="/signup">create an account</a> to view Little Extras</p>
         @endif
    
         <section class="row content-boxes__wrapper">
-            <h5 class="content__title">Recipe cousins</h5>
+            <h5 class="content__title">{{$recipe->name}}'s cousins</h5>
             @foreach($category->menuRecipes as $recipe)
                 
                  {{--'<pre>'; print_r($recipe ); echo '</pre>';--}}

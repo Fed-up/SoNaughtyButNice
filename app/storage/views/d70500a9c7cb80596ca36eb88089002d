@@ -40,7 +40,7 @@
         <div class="columns small-12 medium-6 large-4 xlarge-2 end">
             <a href="/recipes" class="content-box content-box--homepage">
                 <div class="content-box__image"  style="background: url(/uploads/<?php echo $rImage[$recipe->id]; ?>) center center; background-size:cover;"></div>
-                <h5 class="content-box__title content-box__title--homepage">Recipes</h5>
+                <h5 class="content-box__title content-box__title--homepage"><?php if(Auth::check()): ?><?php if(Auth::user()->user_type != 'B2B'): ?>Recipes <?php else: ?> Nutritents <?php endif; ?> <?php else: ?> Recipes <?php endif; ?></h5>
             </a>
         </div>
         <?php endforeach; ?>

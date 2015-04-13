@@ -26,36 +26,56 @@ class IngredientPageController  extends BaseController {
 		
 		// echo '<pre>'; print_r($iData); echo '</pre>';  exit; 
 
-		$rData = MenuRecipes::where('menu_recipes.active', '=', 1)->take(8)
+		$rData = MenuRecipes::where('menu_recipes.active', '=', 1)
 			->with(array('MenuRecipesIngredients' => function($query) use ($id){
-				$query->where('menu_recipes_ingredients.active', '=', 1)
-					->with(array('MenuIngredients' => function($query) use ($id){
-						$query->where('menu_ingredients.id', '=', $id);
-					}));
+				$query->where('menu_ingredients_id', '=', $id);
 			}))
 			->with(array('Images' => function($query)
 			{
-				$query->where('images.ordering', '=', 0)->where('section', '=', 'RECIPE');
+				$query->where('ordering', '=', 0)->where('section', '=', 'RECIPE');
 			}))
+
 		->orderBy('menu_recipes.name', '=', 'ASC')->where('active', '=', 1)->get();
+
+
+
+
+
+
 		
 		// $queries = DB::getQueryLog();
   // 		echo '<pre>'; print_r($queries); echo '</pre>';exit;
 		
 		foreach($rData  as $recipe){
-			foreach($recipe->MenuRecipesIngredients as $ingredients){
-				if(isset($ingredients->MenuIngredients)){
-					$rnData[] = $recipe;
-				}
-			}	
+			// echo '<pre>'; print_r($recipe->MenuRecipesIngredients); echo '</pre>';
+			$ri_count = count($recipe->MenuRecipesIngredients);
+			if($ri_count > 0){
+				// foreach($recipe->MenuRecipesIngredients as $ingredients){
+				// // if($ingredients->MenuIngredients->id)
+				// // echo '<pre>'; print_r($ingredients); echo '</pre>';
+
+				// 	if(isset($ingredients->MenuIngredients)){
+				// 			$rnData[] = $recipe;
+				// 	}
+					// $recipe_image = $recipe->images[0]->name;
+					// echo '<pre>'; print_r($recipe->images); echo '</pre>';
+					
+				// }
+				$rnData[] = $recipe;
+				// echo '<pre>'; print_r($recipe->name); echo '</pre>';
+			}
+				
 		}
+		// exit;
 		// echo '<pre>'; print_r($rnData); echo '</pre>';exit;
 		
 		if(isset($rnData)){
 			return View::make('public.ingredient_page')->with(array(
 				'iData' => $iData,
 				'rData' => $rnData,
-				'iImage' => $ingredient_image)
+				'iImage' => $ingredient_image,
+				// 'recipe_image' => $recipe_image,
+				)
 			);
 		}else{
 			return View::make('public.ingredient_page')->with(array(

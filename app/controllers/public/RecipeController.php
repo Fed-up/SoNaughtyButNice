@@ -3,17 +3,34 @@
 class RecipeController  extends BaseController {
 
 	public function getRecipes(){
-		$rData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->where('exclusive', '!=', 1)->take(18)
-			->with(array('MenuCategories' => function($query)
-			{
-				$query->where('menu_categories.active', '=', 1);
-			}))
+		if(Auth::user()){
+			$user = Auth::user();
+			if($user->user_type == 'B2B'){
+				$rData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->take(18)
+					->with(array('MenuCategories' => function($query)
+					{
+						$query->where('menu_categories.active', '=', 1);
+					}))
+					
+					->with(array('Images' => function($query){
+						$query->where('images.ordering', '=', 0)->where('section', '=', 'RECIPE')->where('active', '=', 1);
+					}))
+				
+				->get();
+			}
+		}else{
+			$rData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->where('exclusive', '!=', 1)->take(18)
+				->with(array('MenuCategories' => function($query)
+				{
+					$query->where('menu_categories.active', '=', 1);
+				}))
+				
+				->with(array('Images' => function($query){
+					$query->where('images.ordering', '=', 0)->where('section', '=', 'RECIPE')->where('active', '=', 1);
+				}))
 			
-			->with(array('Images' => function($query){
-				$query->where('images.ordering', '=', 0)->where('section', '=', 'RECIPE')->where('active', '=', 1);
-			}))
-		
-		->get();
+			->get();
+		}
 
 		$aeData = MenuRecipes::where('exclusive', '!=', 1)->where('active', '=', 1)
 			->with(array('MenuCategories' => function($query){$query->where('menu_categories.active', '=', 1);}))
@@ -182,47 +199,42 @@ class RecipeController  extends BaseController {
 
 
 
-
-		$exrData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->where('exclusive', '=', 1)->take(12)
-			->with(array('MenuCategories' => function($query)
-			{
-				$query->where('menu_categories.active', '=', 1);
-			}))
+		// if($user->user_type != 'B2B'){
+			$exrData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->where('exclusive', '=', 1)->take(12)
+				->with(array('MenuCategories' => function($query)
+				{
+					$query->where('menu_categories.active', '=', 1);
+				}))
+				
+				->with(array('Images' => function($query){
+					$query->where('images.ordering', '=', 0)->where('section', '=', 'RECIPE')->where('active', '=', 1);
+				}))
 			
-			->with(array('Images' => function($query){
-				$query->where('images.ordering', '=', 0)->where('section', '=', 'RECIPE')->where('active', '=', 1);
-			}))
-		
-		->get();
+			->get();
 
+			foreach ($exrData as $exRecipe) {
+				$count = count($exRecipe->MenuCategories);
+				if($count > 0){
+					$category[$exRecipe->id] = $exRecipe->MenuCategories;
 
-		
-
-
-
-		foreach ($exrData as $exRecipe) {
-			$count = count($exRecipe->MenuCategories);
-			if($count > 0){
-				$category[$exRecipe->id] = $exRecipe->MenuCategories;
-
-				$count = count($exRecipe->Images);
-				if($count < 1){
-					$exRecipe_image[$exRecipe->id] = 'recipe.png';
-				}else{
-					foreach($exRecipe->Images as $image){
-				        if(file_exists('uploads/'.$image->name)){
-				            $exRecipe_image[$exRecipe->id] = $image->name;
-				        }else{
-				           	$exRecipe_image[$exRecipe->id] = 'recipe.png';
-				        }
+					$count = count($exRecipe->Images);
+					if($count < 1){
+						$exRecipe_image[$exRecipe->id] = 'recipe.png';
+					}else{
+						foreach($exRecipe->Images as $image){
+					        if(file_exists('uploads/'.$image->name)){
+					            $exRecipe_image[$exRecipe->id] = $image->name;
+					        }else{
+					           	$exRecipe_image[$exRecipe->id] = 'recipe.png';
+					        }
+						}
 					}
+				}else{
+					$category[$exRecipe->id] = '';
+					$exRecipe_image[$exRecipe->id] = 'recipe.png';
 				}
-			}else{
-				$category[$exRecipe->id] = '';
-				$exRecipe_image[$exRecipe->id] = 'recipe.png';
 			}
-		}
-		
+		// }
 		
 		if(isset($exrData) && isset($exRecipe_image))
 			return View::make('public.recipes')->with(array(

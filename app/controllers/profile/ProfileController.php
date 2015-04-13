@@ -69,7 +69,7 @@ class ProfileController extends BaseController {
 
 		foreach ($rData as $recipe) {
 
-			// echo '<pre>'; print_r($ingredient->name); echo '</pre>';
+			// echo '<pre>'; print_r($recipe->MenuCategories); echo '</pre>';
 
 			$count = count($recipe->MenuCategories);
 			if($count > 0){
@@ -89,10 +89,13 @@ class ProfileController extends BaseController {
 				           	$recipe_image[$recipe->id] = 'recipe.png';
 				        }
 					}
+					
 				}
 
 			}else{
 				$category[$recipe->id] = '';
+				$recipe_image[$recipe->id] = 'recipe.png';
+
 			}
 		}
 
