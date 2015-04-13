@@ -10,7 +10,9 @@
             <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#settings">Settings</a></h2> |
             <h2 class="content-title--main content__title--main--tabs active"><a class="tab__link" href="#profile">{{ Auth::user()->fname }}'s Profile</a></h2>
         </nav>
-		<!-- <h2 class="content__title content__title--main"><a class="content__title--link" href="/profile"></a></h2> -->
+		@if (Session::has('message'))
+           <div class="message__alert">{{ Session::get('message') }}</div>
+        @endif
 		<section class="tabs-content"> 
             <div id="profile" class="row content-boxes__wrapper content active">
 				<section class="row">
@@ -78,31 +80,28 @@
 			<div id="settings" class="row content-boxes__wrapper content ">
 				<section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
                     <div class="section section--form" >
-                        @if(isset($data->id))
-				  			{{ Form::open(array('action' => 'UserProfileController@postUpdateMembers', 'class' => 'form-horizontal')) }}
-				        @else
-				        	{{ Form::open(array('action' => 'UserProfileController@postAddUser', 'class' => 'form-horizontal')) }} 
-				        @endif
+				  		{{ Form::open(array('action' => 'UserProfileController@postUpdateUser', 'class' => 'form-horizontal')) }}
+				        
 				        <h2 class="content__title--main--signup">Update your account information</h2> 
 			         	<div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
 				        	{{ Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')) }}
 				            <div class="">
 				                {{ ($errors->has('fname'))? '<p>'. $errors->first('fname') .'</p>' : '' }}
-				                {{ Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($data->fname)? $data->fname : '' )), array('class' => 'input__text')) }} 
+				                {{ Form::text('fname', (Auth::user()->fname)? Auth::user()->fname : '' , array('class' => 'input__text')) }} 
 				            </div>
 				        </div>
 				        <div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
-				        	{{ Form::label('fname', 'Last Name: ', array('class' => ' content-title--sub ')) }}
+				        	{{ Form::label('lname', 'Last Name: ', array('class' => ' content-title--sub ')) }}
 				            <div class="">
-				                {{ ($errors->has('fname'))? '<p>'. $errors->first('fname') .'</p>' : '' }}
-				                {{ Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($data->fname)? $data->fname : '' )), array('class' => 'input__text')) }} 
+				                {{ ($errors->has('lname'))? '<p>'. $errors->first('lname') .'</p>' : '' }}
+				                {{ Form::text('lname', (Auth::user()->lname)? Auth::user()->lname : '' , array('class' => 'input__text')) }} 
 				            </div>
 				        </div>
 			            <div class="form-group {{ ($errors->has('email')) ? 'has-error' : '' ; }}">
 				            {{ Form::label('email', 'Email: ', array('class' => ' content-title--sub ')) }}
 				            <div class="">
 				                {{ ($errors->has('email'))? '<p>'. $errors->first('email') .'</p>' : '' }}
-				                {{ Form::text('email', (isset($input['email'])? Input::old('email') : (isset($data->email)? $data->email : '' )), array('class' => 'input__text')) }} 
+				                {{ Form::text('email', (Auth::user()->email)? Auth::user()->email : '' , array('class' => 'input__text')) }} 
 				            </div>
 				        </div>
 				        <hr>
@@ -126,7 +125,7 @@
 			            	{{ Form::label('unsubscribe', 'Unsubscribe: ', array('class' => ' content-title--sub ')) }}
 			                <div class="">
 			                    {{ ($errors->has('unsubscribe'))? '<p>'. $errors->first('unsubscribe') .'</p>' : '' }}
-			                    <input type="checkbox" name="unsubscribe" class="input__checkbox"/> 
+			                    <input type="checkbox" name="unsubscribe" class="input__checkbox" @if(Auth::User()->active == 0)checked="on"@endif /> 
 			                    {{-- Form::radio('unsubscribe', array('class'=>'input__checkbox' ) ) --}}
 			                </div>
 			            </div>
