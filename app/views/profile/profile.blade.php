@@ -129,6 +129,7 @@
 			                    {{-- Form::radio('unsubscribe', array('class'=>'input__checkbox' ) ) --}}
 			                </div>
 			            </div>
+			            
 			            <div class="form-group">
 				            <div class="form__buttons--profile_update">
 					            {{ Form::submit('Update info', array('class' => 'side__login__button side__login__button--signup')) }}

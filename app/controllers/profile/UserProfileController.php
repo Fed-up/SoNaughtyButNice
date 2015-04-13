@@ -49,13 +49,15 @@ class UserProfileController extends BaseController {
 			//->with(array('data' => $data));
 	}
 
+
+
 	public function postUpdateUser(){
 		$input = Input::all();
 		$id = Auth::User()->id;
 		
-
+		// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 		// echo '<pre>'; print_r($id); echo '</pre>'; 	exit;
-
+		// $id = 7;
 
 		if(isset($input->password) || isset($input->password_match)){
 			$rules = array(
@@ -67,7 +69,7 @@ class UserProfileController extends BaseController {
 			);
 		}else{
 			$rules = array(
-				'fname' => 'required',
+				'fname' => 'required', 
 				'email' => 'required|email|unique:users,email,'.$id,
 			);
 		}
@@ -81,19 +83,19 @@ class UserProfileController extends BaseController {
 				->withInput($input);
 		}else{
 
-			// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+			// echo '<pre>'; print_r($id); echo '</pre>'; 	exit;
 
-			$data	= User::find(20);
+			$user	= User::find($id);
 			// echo '<pre>'; print_r($data); echo '</pre>'; 	exit;
-			$data->fname 	= Input::get('fname');
-			$data->email 	= Input::get('email');
-			$data->password 	= Hash::make(Input::get('password'));
-			$data->user_type 	= 'GUEST';
-			$data->active  = (isset($input['unsubscribe'])) ? 0 : 1;
-			$data->save();
+			$user->fname 	= Input::get('fname');
+			$user->email 	= Input::get('email');
+			$user->password 	= Hash::make(Input::get('password'));
+			$user->user_type 	= 'GUEST';
+			$user->active  = (isset($input['unsubscribe'])) ? 0 : 1;
+			$user->save();
 			// echo '<pre>'; print_r($data); echo '</pre>'; 	exit;	
 		}; 
-		if($data->active == 0){
+		if($user->active == 0){
 				$message = 'Sorry to know you want to leave.. =('.'<br>'.'If this is a mistake? Quickly change your unsubscription status in your account settings, before you logout =)';
 			}else{
 				$message = 'Your account information has been updated =)';

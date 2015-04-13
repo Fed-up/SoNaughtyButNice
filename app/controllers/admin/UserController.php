@@ -25,7 +25,7 @@ class Admin_UserController extends BaseController {
 		$rules = array(
 			'fname' => 'required',
 			'lname' => 'required',
-			'username' => 'required|unique:user,email,'.Input::get('id'),
+			'username' => 'required|unique:user,username,'.Input::get('id'),
 			'email' => 'required|email|unique:users,email,'.Input::get('id'),
 			'password' => 'required|min:6',
 			'password_match' => 'required|min:6|same:password',
