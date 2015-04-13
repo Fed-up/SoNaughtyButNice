@@ -40,7 +40,7 @@
                         <div class="row collapse">
                             
                             <a href="/recipe/{{$recipe->id}}" class="columns small-4 medium-12">
-                              <img src="/uploads/{{ $recipe->Images[0]->name; }}" />
+                              <img src="/uploads/{{ $rImage[$recipe->id] }}" />
                             </a>
                             
 

@@ -35,36 +35,45 @@ class IngredientPageController  extends BaseController {
 				$query->where('ordering', '=', 0)->where('section', '=', 'RECIPE');
 			}))
 
-		->orderBy('menu_recipes.name', '=', 'ASC')->where('active', '=', 1)->get();
+		->orderBy(DB::raw('RAND()'))->where('active', '=', 1)->get();
+
+		// 
 
 
 
-
-
-
+		$rCount = 0;
 		
 		// $queries = DB::getQueryLog();
   // 		echo '<pre>'; print_r($queries); echo '</pre>';exit;
-		
+		// if
 		foreach($rData  as $recipe){
+
+
 			// echo '<pre>'; print_r($recipe->MenuRecipesIngredients); echo '</pre>';
 			$ri_count = count($recipe->MenuRecipesIngredients);
 			if($ri_count > 0){
-				// foreach($recipe->MenuRecipesIngredients as $ingredients){
-				// // if($ingredients->MenuIngredients->id)
-				// // echo '<pre>'; print_r($ingredients); echo '</pre>';
 
-				// 	if(isset($ingredients->MenuIngredients)){
-				// 			$rnData[] = $recipe;
-				// 	}
-					// $recipe_image = $recipe->images[0]->name;
-					// echo '<pre>'; print_r($recipe->images); echo '</pre>';
-					
-				// }
 				$rnData[] = $recipe;
+				$rCount = $rCount + 1;
+
+				$count = count($recipe->Images);
+				if($count < 1){
+					$recipe_image[$recipe->id] = 'recipe.png';
+				}else{
+					foreach($recipe->Images as $image){
+				        if(file_exists('uploads/'.$image->name)){
+				            $recipe_image[$recipe->id] = $image->name;
+				        }else{
+				           	$recipe_image[$recipe->id] = 'recipe.png';
+				        }
+					}
+				}
+
+
+				// echo '<pre>'; print_r($rCount); echo '</pre>';
 				// echo '<pre>'; print_r($recipe->name); echo '</pre>';
 			}
-				
+			if($rCount == 6){break;}	
 		}
 		// exit;
 		// echo '<pre>'; print_r($rnData); echo '</pre>';exit;
@@ -74,6 +83,7 @@ class IngredientPageController  extends BaseController {
 				'iData' => $iData,
 				'rData' => $rnData,
 				'iImage' => $ingredient_image,
+				'rImage' => $recipe_image,
 				// 'recipe_image' => $recipe_image,
 				)
 			);
