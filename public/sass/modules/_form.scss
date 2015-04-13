@@ -230,6 +230,18 @@ input:-webkit-autofill {
     text-align: right;
 }
 
+.form-group{
+    min-height: 40px;
+}
+
 .form__box{
     margin: 0 1rem;
 }
+
+.input__checkbox{
+    float: left;
+    margin: .7rem;
+    /* font-size: 200%; */
+    display: inline;
+}
+

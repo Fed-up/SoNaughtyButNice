@@ -182,6 +182,8 @@ ul, li {
   padding: 0.5rem;
   border-radius: 0.5rem; 
   font-weight: bold;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .content__title--main--tabs:hover{
@@ -193,9 +195,11 @@ ul, li {
   color: #fff; }
 
 .content-title--sub {
-  text-align: center;
-  font-family: headings;
-  padding: 0.5rem; }
+    text-align: center;
+    font-family: headings;
+    padding: 0.5rem; 
+    float: left;
+}
 
 .subnav {
   border-bottom: 1px solid $main_color;

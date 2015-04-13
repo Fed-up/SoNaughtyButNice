@@ -5,68 +5,144 @@
 <?php $__env->startSection('content'); ?>   
 <div class="band content">
 	<div class="container "> 
-		<h2 class="content__title content__title--main"><a class="content__title--link" href="/profile"><?php echo Auth::user()->fname; ?>'s Profile</a></h2>
-		<section class="row">
-			<?php foreach($rData as $recipe): ?>
-	        <div class="columns small-6 large-3">
-	            <a href="/recipes#myrecipes" class="profile__image__link">
-	                <img class="top-right profile__image" src="/uploads/<?php echo $rImage[$recipe->id]; ?>">
-	                <p class="profile__image__link__name">My Recipes</p>
-	            </a>
-	        </div>
-	        <?php endforeach; ?>
+		<nav class="tabs subnav" data-tab data-options="deep_linking:true; scroll_to_content: false">
+            <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#settings">Settings</a></h2> |
+            <h2 class="content-title--main content__title--main--tabs active"><a class="tab__link" href="#profile"><?php echo Auth::user()->fname; ?>'s Profile</a></h2>
+        </nav>
+		<!-- <h2 class="content__title content__title--main"><a class="content__title--link" href="/profile"></a></h2> -->
+		<section class="tabs-content"> 
+            <div id="profile" class="row content-boxes__wrapper content active">
+				<section class="row">
+					<?php foreach($rData as $recipe): ?>
+			        <div class="columns small-6 large-3">
+			            <a href="/recipes#myrecipes" class="profile__image__link">
+			                <img class="top-right profile__image" src="/uploads/<?php echo $rImage[$recipe->id]; ?>">
+			                <p class="profile__image__link__name">My Recipes</p>
+			            </a>
+			        </div>
+			        <?php endforeach; ?>
 
-	        <?php foreach($collections as $index=>$collection): ?>
-	        <div class="columns small-6 large-3">
-	            <a href="/collections#mycollections" class="profile__image__link">
-	                <img class="bottom-right profile__image" src="/uploads/<?php echo $cImage[$collection->id]; ?>">   
-	                <p class="profile__image__link__name">My Collections</p>
-	            </a>
-	        </div>
-	        <?php endforeach; ?>
+			        <?php foreach($collections as $index=>$collection): ?>
+			        <div class="columns small-6 large-3">
+			            <a href="/collections#mycollections" class="profile__image__link">
+			                <img class="bottom-right profile__image" src="/uploads/<?php echo $cImage[$collection->id]; ?>">   
+			                <p class="profile__image__link__name">My Collections</p>
+			            </a>
+			        </div>
+			        <?php endforeach; ?>
 
-	        <?php if($e_count != 'empty'): ?>
-		        <?php foreach($eData as $event): ?>
-		        <div class="columns small-6 large-3">
-		            <a href="/profile/events" class="profile__image__link">
-		                <img class="top-right profile__image" src="/uploads/<?php echo $eImage[$event->id]; ?>">
-		                <p class="profile__image__link__name">My Events</p>
-		            </a>
-		        </div>
-		        <?php endforeach; ?>		
-		    <?php else: ?>
-		    	<div class="columns small-6 large-3">
-		            <a href="/profile/events" class="profile__image__link">
-		                <img class="top-right profile__image" src="/uploads/<?php echo $eImage; ?>">
-		                <p class="profile__image__link__name">My Events</p>
-		            </a>
-		        </div>	
-		    <?php endif; ?>
+			        <?php if($e_count != 'empty'): ?>
+				        <?php foreach($eData as $event): ?>
+				        <div class="columns small-6 large-3">
+				            <a href="/profile/events" class="profile__image__link">
+				                <img class="top-right profile__image" src="/uploads/<?php echo $eImage[$event->id]; ?>">
+				                <p class="profile__image__link__name">My Events</p>
+				            </a>
+				        </div>
+				        <?php endforeach; ?>		
+				    <?php else: ?>
+				    	<div class="columns small-6 large-3">
+				            <a href="/profile/events" class="profile__image__link">
+				                <img class="top-right profile__image" src="/uploads/<?php echo $eImage; ?>">
+				                <p class="profile__image__link__name">My Events</p>
+				            </a>
+				        </div>	
+				    <?php endif; ?>
 
 
-			<?php foreach($pData as $catering): ?>
-	        <div class="columns small-6 large-3">
-	            <a href="/catering#fndtn-custom" class="profile__image__link">
-	                <img class="bottom-left profile__image" src="/uploads/<?php echo $pImage[$catering->id]; ?>">
-					<p class="profile__image__link__name">My Catering</p>
-	            </a>
-	        </div>
-	        <?php endforeach; ?>
+					<?php foreach($pData as $catering): ?>
+			        <div class="columns small-6 large-3">
+			            <a href="/catering#fndtn-custom" class="profile__image__link">
+			                <img class="bottom-left profile__image" src="/uploads/<?php echo $pImage[$catering->id]; ?>">
+							<p class="profile__image__link__name">My Catering</p>
+			            </a>
+			        </div>
+			        <?php endforeach; ?>
+
+				</section>
+				
+				<section class="row ">
+					<div class="columns small-12 large-3 large-push-6">
+						<a class="profile__account__link" href="/events">Up Coming Events</a>		
+					</div>
+					<!-- <div class="columns small-12 medium-6 large-3 large-push-3">
+						<a class="profile__account__link" href="/account">Account Settings</a>
+					</div> -->
+					<div class="columns small-12 medium-6 large-3">
+						<a class="profile__account__link" href="/logout">Logout</a>
+					</div>
+				</section>
+			</div>
+
+			<div id="settings" class="row content-boxes__wrapper content ">
+				<section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
+                    <div class="section section--form" >
+                        <?php if(isset($data->id)): ?>
+				  			<?php echo Form::open(array('action' => 'UserProfileController@postUpdateMembers', 'class' => 'form-horizontal')); ?>
+				        <?php else: ?>
+				        	<?php echo Form::open(array('action' => 'UserProfileController@postAddUser', 'class' => 'form-horizontal')); ?> 
+				        <?php endif; ?>
+				        <h2 class="content__title--main--signup">Update your account information</h2> 
+			         	<div class="form-group <?php echo ($errors->has('fname')) ? 'has-error' : '' ;; ?>">
+				        	<?php echo Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')); ?>
+				            <div class="">
+				                <?php echo ($errors->has('fname'))? '<p>'. $errors->first('fname') .'</p>' : ''; ?>
+				                <?php echo Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($data->fname)? $data->fname : '' )), array('class' => 'input__text')); ?> 
+				            </div>
+				        </div>
+				        <div class="form-group <?php echo ($errors->has('fname')) ? 'has-error' : '' ;; ?>">
+				        	<?php echo Form::label('fname', 'Last Name: ', array('class' => ' content-title--sub ')); ?>
+				            <div class="">
+				                <?php echo ($errors->has('fname'))? '<p>'. $errors->first('fname') .'</p>' : ''; ?>
+				                <?php echo Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($data->fname)? $data->fname : '' )), array('class' => 'input__text')); ?> 
+				            </div>
+				        </div>
+			            <div class="form-group <?php echo ($errors->has('email')) ? 'has-error' : '' ;; ?>">
+				            <?php echo Form::label('email', 'Email: ', array('class' => ' content-title--sub ')); ?>
+				            <div class="">
+				                <?php echo ($errors->has('email'))? '<p>'. $errors->first('email') .'</p>' : ''; ?>
+				                <?php echo Form::text('email', (isset($input['email'])? Input::old('email') : (isset($data->email)? $data->email : '' )), array('class' => 'input__text')); ?> 
+				            </div>
+				        </div>
+				        <hr>
+			            <div class="form-group <?php echo ($errors->has('password')) ? 'has-error' : '' ;; ?>">
+			            	<?php echo Form::label('password', 'Password: ', array('class' => ' content-title--sub ')); ?>
+			                <div class="">
+			                    <?php echo ($errors->has('password'))? '<p>'. $errors->first('password') .'</p>' : ''; ?>
+			                    <?php echo Form::password('password', array('class'=>'input__text' ) ); ?>
+			                </div>
+			            </div>
+			            
+			            <div class="form-group <?php echo ($errors->has('password_match')) ? 'has-error' : '' ;; ?>">
+			            	<?php echo Form::label('password_match', 'Password Match: ', array('class' => ' content-title--sub ')); ?>
+			                <div class="">
+			                    <?php echo ($errors->has('password_match'))? '<p>'. $errors->first('password_match') .'</p>' : ''; ?>
+			                    <?php echo Form::password('password_match', array('class'=>'input__text' ) ); ?>
+			                </div>
+			            </div>
+			            <hr>
+			            <div class="form-group <?php echo ($errors->has('unsubscribe')) ? 'has-error' : '' ;; ?>">
+			            	<?php echo Form::label('unsubscribe', 'Unsubscribe: ', array('class' => ' content-title--sub ')); ?>
+			                <div class="">
+			                    <?php echo ($errors->has('unsubscribe'))? '<p>'. $errors->first('unsubscribe') .'</p>' : ''; ?>
+			                    <input type="checkbox" name="unsubscribe" class="input__checkbox"/> 
+			                    <?php /* Form::radio('unsubscribe', array('class'=>'input__checkbox' ) ) */ ?>
+			                </div>
+			            </div>
+			            <div class="form-group">
+				            <div class="form__buttons--profile_update">
+					            <?php echo Form::submit('Update info', array('class' => 'side__login__button side__login__button--signup')); ?>
+				            
+				            </div>
+				        </div>
+						<?php echo Form::close(); ?>  
+
+                    </div>
+                </section>
+			</div>
+
 
 		</section>
-		
-		<section class="row ">
-			<div class="columns small-12 large-3 large-push-6">
-				<a class="profile__account__link" href="/events">Up Coming Events</a>		
-			</div>
-			<!-- <div class="columns small-12 medium-6 large-3 large-push-3">
-				<a class="profile__account__link" href="/account">Account Settings</a>
-			</div> -->
-			<div class="columns small-12 medium-6 large-3">
-				<a class="profile__account__link" href="/logout">Logout</a>
-			</div>
-		</section>
-
 	</div>
 </div>
 

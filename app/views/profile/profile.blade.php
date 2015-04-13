@@ -6,68 +6,144 @@
 @section('content')   
 <div class="band content">
 	<div class="container "> 
-		<h2 class="content__title content__title--main"><a class="content__title--link" href="/profile">{{ Auth::user()->fname }}'s Profile</a></h2>
-		<section class="row">
-			@foreach($rData as $recipe)
-	        <div class="columns small-6 large-3">
-	            <a href="/recipes#myrecipes" class="profile__image__link">
-	                <img class="top-right profile__image" src="/uploads/{{ $rImage[$recipe->id] }}">
-	                <p class="profile__image__link__name">My Recipes</p>
-	            </a>
-	        </div>
-	        @endforeach
+		<nav class="tabs subnav" data-tab data-options="deep_linking:true; scroll_to_content: false">
+            <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#settings">Settings</a></h2> |
+            <h2 class="content-title--main content__title--main--tabs active"><a class="tab__link" href="#profile">{{ Auth::user()->fname }}'s Profile</a></h2>
+        </nav>
+		<!-- <h2 class="content__title content__title--main"><a class="content__title--link" href="/profile"></a></h2> -->
+		<section class="tabs-content"> 
+            <div id="profile" class="row content-boxes__wrapper content active">
+				<section class="row">
+					@foreach($rData as $recipe)
+			        <div class="columns small-6 large-3">
+			            <a href="/recipes#myrecipes" class="profile__image__link">
+			                <img class="top-right profile__image" src="/uploads/{{ $rImage[$recipe->id] }}">
+			                <p class="profile__image__link__name">My Recipes</p>
+			            </a>
+			        </div>
+			        @endforeach
 
-	        @foreach($collections as $index=>$collection)
-	        <div class="columns small-6 large-3">
-	            <a href="/collections#mycollections" class="profile__image__link">
-	                <img class="bottom-right profile__image" src="/uploads/{{ $cImage[$collection->id] }}">   
-	                <p class="profile__image__link__name">My Collections</p>
-	            </a>
-	        </div>
-	        @endforeach
+			        @foreach($collections as $index=>$collection)
+			        <div class="columns small-6 large-3">
+			            <a href="/collections#mycollections" class="profile__image__link">
+			                <img class="bottom-right profile__image" src="/uploads/{{ $cImage[$collection->id] }}">   
+			                <p class="profile__image__link__name">My Collections</p>
+			            </a>
+			        </div>
+			        @endforeach
 
-	        @if($e_count != 'empty')
-		        @foreach($eData as $event)
-		        <div class="columns small-6 large-3">
-		            <a href="/profile/events" class="profile__image__link">
-		                <img class="top-right profile__image" src="/uploads/{{ $eImage[$event->id] }}">
-		                <p class="profile__image__link__name">My Events</p>
-		            </a>
-		        </div>
-		        @endforeach		
-		    @else
-		    	<div class="columns small-6 large-3">
-		            <a href="/profile/events" class="profile__image__link">
-		                <img class="top-right profile__image" src="/uploads/{{ $eImage }}">
-		                <p class="profile__image__link__name">My Events</p>
-		            </a>
-		        </div>	
-		    @endif
+			        @if($e_count != 'empty')
+				        @foreach($eData as $event)
+				        <div class="columns small-6 large-3">
+				            <a href="/profile/events" class="profile__image__link">
+				                <img class="top-right profile__image" src="/uploads/{{ $eImage[$event->id] }}">
+				                <p class="profile__image__link__name">My Events</p>
+				            </a>
+				        </div>
+				        @endforeach		
+				    @else
+				    	<div class="columns small-6 large-3">
+				            <a href="/profile/events" class="profile__image__link">
+				                <img class="top-right profile__image" src="/uploads/{{ $eImage }}">
+				                <p class="profile__image__link__name">My Events</p>
+				            </a>
+				        </div>	
+				    @endif
 
 
-			@foreach($pData as $catering)
-	        <div class="columns small-6 large-3">
-	            <a href="/catering#fndtn-custom" class="profile__image__link">
-	                <img class="bottom-left profile__image" src="/uploads/{{ $pImage[$catering->id] }}">
-					<p class="profile__image__link__name">My Catering</p>
-	            </a>
-	        </div>
-	        @endforeach
+					@foreach($pData as $catering)
+			        <div class="columns small-6 large-3">
+			            <a href="/catering#fndtn-custom" class="profile__image__link">
+			                <img class="bottom-left profile__image" src="/uploads/{{ $pImage[$catering->id] }}">
+							<p class="profile__image__link__name">My Catering</p>
+			            </a>
+			        </div>
+			        @endforeach
+
+				</section>
+				
+				<section class="row ">
+					<div class="columns small-12 large-3 large-push-6">
+						<a class="profile__account__link" href="/events">Up Coming Events</a>		
+					</div>
+					<!-- <div class="columns small-12 medium-6 large-3 large-push-3">
+						<a class="profile__account__link" href="/account">Account Settings</a>
+					</div> -->
+					<div class="columns small-12 medium-6 large-3">
+						<a class="profile__account__link" href="/logout">Logout</a>
+					</div>
+				</section>
+			</div>
+
+			<div id="settings" class="row content-boxes__wrapper content ">
+				<section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
+                    <div class="section section--form" >
+                        @if(isset($data->id))
+				  			{{ Form::open(array('action' => 'UserProfileController@postUpdateMembers', 'class' => 'form-horizontal')) }}
+				        @else
+				        	{{ Form::open(array('action' => 'UserProfileController@postAddUser', 'class' => 'form-horizontal')) }} 
+				        @endif
+				        <h2 class="content__title--main--signup">Update your account information</h2> 
+			         	<div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
+				        	{{ Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')) }}
+				            <div class="">
+				                {{ ($errors->has('fname'))? '<p>'. $errors->first('fname') .'</p>' : '' }}
+				                {{ Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($data->fname)? $data->fname : '' )), array('class' => 'input__text')) }} 
+				            </div>
+				        </div>
+				        <div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
+				        	{{ Form::label('fname', 'Last Name: ', array('class' => ' content-title--sub ')) }}
+				            <div class="">
+				                {{ ($errors->has('fname'))? '<p>'. $errors->first('fname') .'</p>' : '' }}
+				                {{ Form::text('fname', (isset($input['fname'])? Input::old('fname') : (isset($data->fname)? $data->fname : '' )), array('class' => 'input__text')) }} 
+				            </div>
+				        </div>
+			            <div class="form-group {{ ($errors->has('email')) ? 'has-error' : '' ; }}">
+				            {{ Form::label('email', 'Email: ', array('class' => ' content-title--sub ')) }}
+				            <div class="">
+				                {{ ($errors->has('email'))? '<p>'. $errors->first('email') .'</p>' : '' }}
+				                {{ Form::text('email', (isset($input['email'])? Input::old('email') : (isset($data->email)? $data->email : '' )), array('class' => 'input__text')) }} 
+				            </div>
+				        </div>
+				        <hr>
+			            <div class="form-group {{ ($errors->has('password')) ? 'has-error' : '' ; }}">
+			            	{{ Form::label('password', 'Password: ', array('class' => ' content-title--sub ')) }}
+			                <div class="">
+			                    {{ ($errors->has('password'))? '<p>'. $errors->first('password') .'</p>' : '' }}
+			                    {{ Form::password('password', array('class'=>'input__text' ) ) }}
+			                </div>
+			            </div>
+			            
+			            <div class="form-group {{ ($errors->has('password_match')) ? 'has-error' : '' ; }}">
+			            	{{ Form::label('password_match', 'Password Match: ', array('class' => ' content-title--sub ')) }}
+			                <div class="">
+			                    {{ ($errors->has('password_match'))? '<p>'. $errors->first('password_match') .'</p>' : '' }}
+			                    {{ Form::password('password_match', array('class'=>'input__text' ) ) }}
+			                </div>
+			            </div>
+			            <hr>
+			            <div class="form-group {{ ($errors->has('unsubscribe')) ? 'has-error' : '' ; }}">
+			            	{{ Form::label('unsubscribe', 'Unsubscribe: ', array('class' => ' content-title--sub ')) }}
+			                <div class="">
+			                    {{ ($errors->has('unsubscribe'))? '<p>'. $errors->first('unsubscribe') .'</p>' : '' }}
+			                    <input type="checkbox" name="unsubscribe" class="input__checkbox"/> 
+			                    {{-- Form::radio('unsubscribe', array('class'=>'input__checkbox' ) ) --}}
+			                </div>
+			            </div>
+			            <div class="form-group">
+				            <div class="form__buttons--profile_update">
+					            {{ Form::submit('Update info', array('class' => 'side__login__button side__login__button--signup')) }}
+				            
+				            </div>
+				        </div>
+						{{ Form::close() }}  
+
+                    </div>
+                </section>
+			</div>
+
 
 		</section>
-		
-		<section class="row ">
-			<div class="columns small-12 large-3 large-push-6">
-				<a class="profile__account__link" href="/events">Up Coming Events</a>		
-			</div>
-			<!-- <div class="columns small-12 medium-6 large-3 large-push-3">
-				<a class="profile__account__link" href="/account">Account Settings</a>
-			</div> -->
-			<div class="columns small-12 medium-6 large-3">
-				<a class="profile__account__link" href="/logout">Logout</a>
-			</div>
-		</section>
-
 	</div>
 </div>
 

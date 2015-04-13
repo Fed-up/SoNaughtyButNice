@@ -37,7 +37,6 @@
 		                    {{ Form::password('password', array('class'=>'input__text' ) ) }}
 		                </div>
 		            </div>
-		            
 		            <div class="form-group {{ ($errors->has('password_match')) ? 'has-error' : '' ; }}">
 		            	{{ Form::label('password_match', 'Password Match: ', array('class' => ' content-title--sub ')) }}
 		                <div class="">
@@ -47,15 +46,15 @@
 		            </div>
 		        
 		      	
-		        <div class="form-group">
-		            <div class="form__buttons">
-			            <a href="/">
-			                {{ Form::button('Cancel' ,array('class' => 'form__button--sub form__button--sub--signup')) }}
-			            </a>
-			            {{ Form::submit('Join', array('class' => 'side__login__button side__login__button--signup')) }}
-		            
-		            </div>
-		        </div>
+			        <div class="form-group">
+			            <div class="form__buttons">
+				            <a href="/">
+				                {{ Form::button('Cancel' ,array('class' => 'form__button--sub form__button--sub--signup')) }}
+				            </a>
+				            {{ Form::submit('Join', array('class' => 'side__login__button side__login__button--signup')) }}
+			            
+			            </div>
+			        </div>
 				{{ Form::close() }}      	
 			</div>
 		</section>

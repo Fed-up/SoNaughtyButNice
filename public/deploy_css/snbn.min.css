@@ -2760,24 +2760,27 @@ ul, li {
   display: inline-block;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  font-weight: bold; }
+  font-weight: bold;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem; }
 
-/* line 187, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 189, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .content__title--main--tabs:hover {
   color: #343434; }
 
-/* line 191, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 193, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .content__title--main--tabs.active {
   background-color: #ff5a5a;
   color: #fff; }
 
-/* line 195, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 197, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .content-title--sub {
   text-align: center;
   font-family: headings;
-  padding: 0.5rem; }
+  padding: 0.5rem;
+  float: left; }
 
-/* line 200, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 204, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .subnav {
   border-bottom: 1px solid #91dd50;
   padding-top: 0.3rem;
@@ -2785,66 +2788,66 @@ ul, li {
   text-align: center; }
 
 @media only screen and (min-width: 481px) {
-  /* line 207, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+  /* line 211, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
   .subnav {
     text-align: left; } }
 
-/* line 212, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 216, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .subnav--centre {
   text-align: center; }
 
-/* line 216, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 220, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tab__link {
   text-decoration: none;
   color: #36393b;
   white-space: nowrap;
   font-family: headings; }
 
-/* line 222, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 226, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tab__link:hover {
   color: #36393b; }
 
-/* line 226, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 230, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .active > .tab__link {
   color: #fff; }
 
-/* line 229, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 233, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .promo__text {
   padding-top: 0.3rem;
   font-size: 0.9rem;
   font-style: italic; }
 
-/* line 235, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 239, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .column, .columns {
   padding-left: 0.625rem;
   padding-right: 0.625rem; }
 
-/* line 240, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 244, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs-content > .content {
   padding: 0.625rem 0; }
 
-/* line 244, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 248, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs {
   margin-bottom: 0 !important;
   margin-left: 0; }
 
-/* line 247, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 251, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs:before, .tabs:after {
   content: " ";
   display: table; }
 
-/* line 250, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 254, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs:after {
   clear: both; }
 
-/* line 252, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 256, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs dd, .tabs .tab-title {
   position: relative;
   margin-bottom: 0 !important;
   list-style: none;
   float: left; }
 
-/* line 257, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 261, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs dd > a, .tabs .tab-title > a {
   display: block;
   background-color: #efefef;
@@ -2853,82 +2856,82 @@ ul, li {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size: 1rem; }
 
-/* line 264, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 268, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs dd > a:hover, .tabs .tab-title > a:hover {
   background-color: #e1e1e1; }
 
-/* line 266, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 270, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs dd.active a, .tabs .tab-title.active a {
   background-color: white;
   color: #222222; }
 
-/* line 269, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 273, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs.radius dd:first-child a, .tabs.radius .tab:first-child a {
   -webkit-border-bottom-left-radius: 3px;
   -webkit-border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px; }
 
-/* line 274, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 278, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs.radius dd:last-child a, .tabs.radius .tab:last-child a {
   -webkit-border-bottom-right-radius: 3px;
   -webkit-border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px; }
 
-/* line 279, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 283, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs.vertical dd, .tabs.vertical .tab-title {
   position: inherit;
   float: none;
   display: block;
   top: auto; }
 
-/* line 285, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 289, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs-content {
   margin-bottom: 1.5rem;
   width: 100%; }
 
-/* line 288, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 292, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs-content:before, .tabs-content:after {
   content: " ";
   display: table; }
 
-/* line 291, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 295, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs-content:after {
   clear: both; }
 
-/* line 293, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 297, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs-content > .content {
   display: none;
   float: left;
   padding: 0.625rem 0;
   width: 100%; }
 
-/* line 298, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 302, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs-content > .content.active {
   display: block;
   float: none; }
 
-/* line 301, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 305, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs-content > .content.contained {
   padding: 0.9375rem; }
 
-/* line 303, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 307, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs-content.vertical {
   display: block; }
 
-/* line 305, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 309, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tabs-content.vertical > .content {
   padding: 0 0.9375rem; }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 309, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+  /* line 313, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
   .tabs.vertical {
     width: 20%;
     max-width: 20%;
     float: left;
     margin: 0 0 1.25rem; }
-  /* line 315, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+  /* line 319, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
   .tabs-content.vertical {
     width: 80%;
     max-width: 80%;
@@ -2936,19 +2939,19 @@ ul, li {
     margin-left: -1px;
     padding-left: 1rem; } }
 
-/* line 321, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 325, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .no-js .tabs-content > .content {
   display: block;
   float: none; }
 
-/* line 325, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 329, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .package__total {
   text-align: right;
   margin-top: -1rem;
   margin-bottom: 1rem;
   color: #479327; }
 
-/* line 332, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
+/* line 336, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .package__total--create-package {
   text-align: right;
   margin-bottom: 1rem;
@@ -4853,8 +4856,19 @@ input:-webkit-autofill {
   text-align: right; }
 
 /* line 233, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+.form-group {
+  min-height: 40px; }
+
+/* line 237, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .form__box {
   margin: 0 1rem; }
+
+/* line 241, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+.input__checkbox {
+  float: left;
+  margin: 0.7rem;
+  /* font-size: 200%; */
+  display: inline; }
 
 /* line 4, C:/webroot/lcsnbn/sass/modules/ingredient-page */
 /* line 2, C:/GitHub/SoNaughtyButNice/public/sass/modules/ingredient_page */
