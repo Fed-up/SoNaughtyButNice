@@ -21,10 +21,7 @@ class RecipePageController  extends BaseController {
 						}
 					}
 					
-				}else{
-					$sales_data = 0;
-					$sales_count = 0;
-				}
+				}else{$sales_data = 0;}
 			}else{
 				$user_id = 0;
 				$sales_count = 0;
@@ -32,7 +29,7 @@ class RecipePageController  extends BaseController {
 			}
 
 
-			$rData = MenuRecipes::where('id', '=', $id)
+			$rData = MenuRecipes::where('id', '=', $id) 
 				->with(array('MenuCategories' => function($query) use ($id)
 				{
 					$query->orderBy(DB::raw('RAND()'))
