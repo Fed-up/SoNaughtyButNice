@@ -48,23 +48,32 @@
             	<section class="section__box">
                     <ul>
                     <?php foreach($rIngredients as $index=>$ingredient): ?>
-                        <?php if(auth::check()): ?>
-                            <?php if(Auth::user()->user_type != 'B2B'): ?>
-                                <?php if($recipe->exclusive == 1): ?>
-                                    <li>
-                                        <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
-                                            <?php echo $ingredient->MenuIngredients->name; ?>
-                                        </a>
-                                    </li>
+                        <?php if($ingredient->MenuIngredients->active == 1): ?>
+                            <?php if(auth::check()): ?>
+                                <?php if(Auth::user()->user_type != 'B2B'): ?>
+                                    <?php if($recipe->exclusive == 1): ?>
+                                        <li>
+                                            <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
+                                                <?php echo $ingredient->MenuIngredients->name; ?>
+                                            </a>
+                                        </li>
+                                    <?php else: ?>
+                                        <li>
+                                            <?php echo $ingredient->amount; ?> 
+                                            <?php echo $ingredient->Metric->name; ?>
+                                            <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
+                                                <?php echo $ingredient->MenuIngredients->name; ?>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
                                 <?php else: ?>
                                     <li>
-                                        <?php echo $ingredient->amount; ?> 
-                                        <?php echo $ingredient->Metric->name; ?>
                                         <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
                                             <?php echo $ingredient->MenuIngredients->name; ?>
                                         </a>
                                     </li>
                                 <?php endif; ?>
+                           
                             <?php else: ?>
                                 <li>
                                     <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
@@ -72,13 +81,6 @@
                                     </a>
                                 </li>
                             <?php endif; ?>
-                       
-                        <?php else: ?>
-                            <li>
-                                <a class="content-link" href="/ingredient/<?php echo $ingredient->MenuIngredients->id; ?>">
-                                    <?php echo $ingredient->MenuIngredients->name; ?>
-                                </a>
-                            </li>
                         <?php endif; ?>
                     <?php endforeach; ?>
 

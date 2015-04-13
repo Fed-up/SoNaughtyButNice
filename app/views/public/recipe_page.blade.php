@@ -49,23 +49,32 @@
             	<section class="section__box">
                     <ul>
                     @foreach($rIngredients as $index=>$ingredient)
-                        @if(auth::check())
-                            @if(Auth::user()->user_type != 'B2B')
-                                @if($recipe->exclusive == 1)
-                                    <li>
-                                        <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
-                                            {{$ingredient->MenuIngredients->name}}
-                                        </a>
-                                    </li>
+                        @if($ingredient->MenuIngredients->active == 1)
+                            @if(auth::check())
+                                @if(Auth::user()->user_type != 'B2B')
+                                    @if($recipe->exclusive == 1)
+                                        <li>
+                                            <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
+                                                {{$ingredient->MenuIngredients->name}}
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li>
+                                            {{$ingredient->amount}} 
+                                            {{$ingredient->Metric->name}}
+                                            <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
+                                                {{$ingredient->MenuIngredients->name}}
+                                            </a>
+                                        </li>
+                                    @endif
                                 @else
                                     <li>
-                                        {{$ingredient->amount}} 
-                                        {{$ingredient->Metric->name}}
                                         <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
                                             {{$ingredient->MenuIngredients->name}}
                                         </a>
                                     </li>
                                 @endif
+                           
                             @else
                                 <li>
                                     <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
@@ -73,13 +82,6 @@
                                     </a>
                                 </li>
                             @endif
-                       
-                        @else
-                            <li>
-                                <a class="content-link" href="/ingredient/{{$ingredient->MenuIngredients->id}}">
-                                    {{$ingredient->MenuIngredients->name}}
-                                </a>
-                            </li>
                         @endif
                     @endforeach
 

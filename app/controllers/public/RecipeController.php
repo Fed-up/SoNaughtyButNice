@@ -17,6 +17,18 @@ class RecipeController  extends BaseController {
 					}))
 				
 				->get();
+			}else{
+				$rData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->where('exclusive', '!=', 1)->take(18)
+					->with(array('MenuCategories' => function($query)
+					{
+						$query->where('menu_categories.active', '=', 1);
+					}))
+					
+					->with(array('Images' => function($query){
+						$query->where('images.ordering', '=', 0)->where('section', '=', 'RECIPE')->where('active', '=', 1);
+					}))
+				
+				->get();
 			}
 		}else{
 			$rData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->where('exclusive', '!=', 1)->take(18)
@@ -31,6 +43,7 @@ class RecipeController  extends BaseController {
 			
 			->get();
 		}
+
 
 		$aeData = MenuRecipes::where('exclusive', '!=', 1)->where('active', '=', 1)
 			->with(array('MenuCategories' => function($query){$query->where('menu_categories.active', '=', 1);}))

@@ -214,15 +214,9 @@ class Admin_IngredientsController extends BaseController {
 		
 		//Variable is holding the object
 		$input = Input::all();
-		
-		// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
 
-		// s
 
 		$ingredient_id = $input['id'];
-		//$grams = $input['grams'];
-		// $metric_type = $input['metric_type'];
-
 
 		$rules = array(
 			'name' 		=> 'required|unique:menu_ingredients,name,'.Input::get('id'),
@@ -239,6 +233,7 @@ class Admin_IngredientsController extends BaseController {
 			//$mCatUp = MenuCategories::findOrFail('id');
 		else{
 			$data = MenuIngredients::findOrFail($input['id']);//Find the row in Menu Categories where ID = the input and attatch the object to the variable $mCatUp 
+			$active_check = $data->active;
 			$data->name 	= $input['name'];
 			$data->summary 	= $input['summary'];
 			$data->description = $input['description'];
@@ -435,8 +430,40 @@ class Admin_IngredientsController extends BaseController {
 				// exit;
 			};
 			//This code gets the data from the input and attaches it to the object in the variable $data
-			// echo '<pre>'; print_r($input); echo '</pre>'; 	exit;
+			
 		}; 
+
+		if($active_check != $data->active){
+			// echo '<pre>'; print_r($data->active); echo '</pre>'; 	exit; 
+
+			$riData = MenuRecipesIngredients::where('menu_ingredients_id', '=', $input['id'])->get();
+			// $data->active = ($data->active == 0)? 1 : 0;
+			
+			foreach ($riData as $recipe) {
+				$recipe->active = $data->active; 
+				$recipe->save();
+				// echo '<pre>'; print_r($recipe->active); echo '</pre>'; 	
+			}
+			// exit;
+
+
+
+		// $data = MenuIngredients::findOrFail($id);
+		// $data->active = ($data->active == 0)? 1 : 0; //If it is == 0 thats true so change the value to 1, else if its false the value is 1 so change it to 0
+		$data->save();
+
+
+
+
+
+
+
+		}
+
+
+
+
+
 		if(isset($input['sc'])){
 			return Redirect::action('Admin_IngredientsController@getIngredients');
 		}else{
@@ -464,8 +491,22 @@ class Admin_IngredientsController extends BaseController {
 	}
 	
 	public function getActiveIngredients($id){
+
+		$riData = MenuRecipesIngredients::where('menu_ingredients_id', '=', $id)->get();
 		$data = MenuIngredients::findOrFail($id);
-		$data->active = ($data->active == 0)? 1 : 0; //If it is == 0 thats true so change the value to 1, else if its false the value is 1 so change it to 0
+		$data->active = ($data->active == 0)? 1 : 0;
+		
+		foreach ($riData as $recipe) {
+			$recipe->active = $data->active; 
+			$recipe->save();
+			// echo '<pre>'; print_r($recipe->active); echo '</pre>'; 	
+		}
+		// exit;
+
+
+
+		// $data = MenuIngredients::findOrFail($id);
+		// $data->active = ($data->active == 0)? 1 : 0; //If it is == 0 thats true so change the value to 1, else if its false the value is 1 so change it to 0
 		$data->save();
 		return Redirect::action('Admin_IngredientsController@getIngredients');
 	}
