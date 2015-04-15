@@ -219,12 +219,12 @@ ul, li {
 
 .tab__link {
   text-decoration: none;
-  color: $menu_dark; 
+  color: $text; 
   white-space: nowrap;
   font-family: headings;
 }
 .tab__link:hover{
-  color: $menu_dark; 
+  color: $contrast_dark; 
 }
 
 .active > .tab__link {

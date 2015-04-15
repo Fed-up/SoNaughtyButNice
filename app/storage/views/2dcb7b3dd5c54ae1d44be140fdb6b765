@@ -6,7 +6,7 @@
     <section class="page">
         <nav class="tabs subnav" data-tab data-options="deep_linking:true; scroll_to_content: false">
             <h2 class="content-title--main content__title--main--tabs active"><a class="tab__link" href="#collections">Collections</a></h2> |
-            <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#mycollections">My Collections</a></h2>
+            <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#mycollections">Exclusive Collections</a></h2>
         </nav>
         <section class="tabs-content"> 
 
@@ -41,7 +41,7 @@
             <div id="mycollections" class="row content-boxes__wrapper content">
                 <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
                 <div class="section section--form" >
-                    <h1 class="page-header">exclusive recipes coming soon..</h1>
+                    <h1 class="page-header">exclusive collections coming soon..</h1>
        
                 </div>
                 </section>

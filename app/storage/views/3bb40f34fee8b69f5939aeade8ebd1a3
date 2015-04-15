@@ -31,7 +31,7 @@
                                         <?php if(!empty($category[$recipe->id])): ?>
                                             <a href="/collection/<?php echo $category[$recipe->id]->id; ?>" class="content-box__tag"><?php echo $category[$recipe->id]->name; ?></a>
                                         <?php else: ?>
-                                            <a href="/collections" class="content-box__tag">Collection</a>
+                                            <a href="/collections" class="content-box__tag">Collections</a>
                                         <?php endif; ?>
                                     </div>
                                 </section>

@@ -49,7 +49,11 @@
         @foreach($collections as $index=>$collection)
         <div class="columns small-12 medium-6 large-4 xlarge-2 end">
             <a href="/collections" class="content-box content-box--homepage">
+                @if($collection_check == 1)
                 <div class="content-box__image"  style="background: url(/uploads/{{ $cImage[$collection->id] }}) center center; background-size:cover;"></div>   
+                @else
+                <div class="content-box__image"  style="background: url(/uploads/{{ $cImage }}) center center; background-size:cover;"></div>   
+                @endif
                 <h5 class="content-box__title content-box__title--homepage">Collections</h5>
             </a>
         </div>

@@ -211,17 +211,23 @@ input:-webkit-autofill {
 .side--nav {
     color: #fff;
     display: block;
-    background-color: #4d5559;
+    background-color: $menu_dark;
     width: 100%;
     padding-left: 1rem;
-    margin: 0.1rem 0;
+    // margin: 0.1rem 0;
     height: 3.5rem;
     line-height: 3.5rem;
     text-align: left;
-    font-size: 1.125rem; }
+    font-size: 1.125rem; 
+    border-bottom: #fff 1px solid;
+    font-weight: 700;
+}
 
 .side--nav:hover {
-  background-color: $menu_dark; }
+  background-color: $menu_light; 
+  color: $contrast_light;
+  border-bottom: #e0e0e0 1px solid;
+}
 
 .total__price{
     width: 100%;

@@ -32,7 +32,7 @@
                                         @if(!empty($category[$recipe->id]))
                                             <a href="/collection/{{$category[$recipe->id]->id}}" class="content-box__tag">{{$category[$recipe->id]->name}}</a>
                                         @else
-                                            <a href="/collections" class="content-box__tag">Collection</a>
+                                            <a href="/collections" class="content-box__tag">Collections</a>
                                         @endif
                                     </div>
                                 </section>

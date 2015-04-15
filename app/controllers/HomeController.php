@@ -60,13 +60,13 @@ class HomeController extends BaseController {
 			$count = count($category->menuRecipes);
 			if($count > 0){
 				$cnData[] = $category;
-				
+				$collection_check = 1;
 				foreach ($category->menuRecipes as $recipe) {
 
 					$count = count($recipe->Images);
 					if($count < 1){
 						
-						$category_image[$category->id] = 'recipe.png';
+						$category_image[$category->id] = 'collection.png';
 					}else{
 
 						foreach($recipe->Images as $image){
@@ -74,7 +74,7 @@ class HomeController extends BaseController {
 					        if(file_exists('uploads/'.$image->name)){
 					            $category_image[$category->id] = $image->name;
 					        }else{
-					           	$category_image[$category->id] = 'recipe.png';
+					           	$category_image[$category->id] = 'collection.png';
 					        }
 						}
 					}
@@ -83,6 +83,8 @@ class HomeController extends BaseController {
 
 			}else{
 				$cnData[] = '';
+				$collection_check = 0;
+				$category_image = 'collection.png';
 			}			
 		}
 		
@@ -253,6 +255,7 @@ class HomeController extends BaseController {
 			'pData' => $pData,
 
 			'hImage' => $header_image,
+			'collection_check' => $collection_check,
 			'cImage' => $category_image,
 			'rImage' => $recipe_image,
 			'iImage' => $ingredient_image,

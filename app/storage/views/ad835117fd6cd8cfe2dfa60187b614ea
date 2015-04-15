@@ -36,7 +36,6 @@
 		                    <?php echo Form::password('password', array('class'=>'input__text' ) ); ?>
 		                </div>
 		            </div>
-		            
 		            <div class="form-group <?php echo ($errors->has('password_match')) ? 'has-error' : '' ;; ?>">
 		            	<?php echo Form::label('password_match', 'Password Match: ', array('class' => ' content-title--sub ')); ?>
 		                <div class="">
@@ -46,15 +45,15 @@
 		            </div>
 		        
 		      	
-		        <div class="form-group">
-		            <div class="form__buttons">
-			            <a href="/">
-			                <?php echo Form::button('Cancel' ,array('class' => 'form__button--sub form__button--sub--signup')); ?>
-			            </a>
-			            <?php echo Form::submit('Join', array('class' => 'side__login__button side__login__button--signup')); ?>
-		            
-		            </div>
-		        </div>
+			        <div class="form-group">
+			            <div class="form__buttons">
+				            <a href="/">
+				                <?php echo Form::button('Cancel' ,array('class' => 'form__button--sub form__button--sub--signup')); ?>
+				            </a>
+				            <?php echo Form::submit('Join', array('class' => 'side__login__button side__login__button--signup')); ?>
+			            
+			            </div>
+			        </div>
 				<?php echo Form::close(); ?>      	
 			</div>
 		</section>

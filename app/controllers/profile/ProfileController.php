@@ -27,13 +27,13 @@ class ProfileController extends BaseController {
 			$count = count($category->menuRecipes);
 			if($count > 0){
 				$cnData[] = $category;
-				
+				$collection_check = 1;
 				foreach ($category->menuRecipes as $recipe) {
 
 					$count = count($recipe->Images);
 					if($count < 1){
 						
-						$category_image[$category->id] = 'recipe.png';
+						$category_image[$category->id] = 'collection.png';
 					}else{
 
 						foreach($recipe->Images as $image){
@@ -41,18 +41,22 @@ class ProfileController extends BaseController {
 					        if(file_exists('uploads/'.$image->name)){
 					            $category_image[$category->id] = $image->name;
 					        }else{
-					           	$category_image[$category->id] = 'recipe.png';
+					           	$category_image[$category->id] = 'collection.png';
 					        }
 						}
 					}
-					// echo '<pre>'; print_r($recipe_image); echo '</pre>';
+					
 				}
 
 			}else{
 				$cnData[] = '';
+				$collection_check = 0;
+				$category_image = 'collection.png';
 			}			
 		}
-		
+		// echo '<pre>'; print_r($collection_check); echo '</pre>';
+		// echo '<pre>'; print_r($category_image); echo '</pre>';exit;
+
 		// Recipe
 		$rData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->take(1)
 				->with(array('MenuCategories' => function($query)
@@ -196,6 +200,7 @@ class ProfileController extends BaseController {
 			'pImage' => $catering_image,
 
 			'e_count' => $e_count,
+			'collection_check' => $collection_check,
 			)
 		);
 	}

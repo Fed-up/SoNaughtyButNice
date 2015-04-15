@@ -141,7 +141,7 @@
   right: 0.8rem;
   bottom: 0.6rem;
   padding: 0.1rem 0.3rem;
-  border: 1px solid #ff8e5e;
+  border: 1px solid $contrast_light;
   border-radius: 0.25rem;
   font-size: 0.8rem;
   line-height: 1.5;
@@ -150,4 +150,5 @@
 /* line 202, C:/webroot/lcsnbn/sass/modules/tile */
 .content-box__tag:hover {
   color: #fff;
-  background-color: #ff5531; }
+  border: 1px solid $contrast_dark;
+  background-color: $contrast_dark; }

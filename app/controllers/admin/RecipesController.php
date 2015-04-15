@@ -450,6 +450,28 @@ class Admin_RecipesController extends BaseController{
 							$dp->delete();
 						};
 					};
+					// $op = 0;
+					// foreach($input['images'] as $oImage){
+					// 	// echo '<pre>'; print_r($oImage); echo '</pre>'; 	
+					// 	if($op <= $p_count){
+					// 		foreach($oImage as $io_photo=>$oPhoto){
+					// 			// echo '<pre>'; print_r($io_photo); echo '</pre>'; exit;
+					// 			// $reset_order = Images::findOrFail($o_photo);
+					// 			$reset_order = Images::where('id', '=', $io_photo)->exists();
+					// 			echo '<pre>'; print_r($reset_order); echo '</pre>'; exit;
+					// 			if($reset_order != null){
+					// 			   echo '<pre>'; print_r($reset_order); echo '</pre>'; 
+					// 			}
+									
+
+					// 			// $_image->ordering = $op;
+									
+					// 		}
+					// 	$op++;
+					// 	}
+					// }exit;
+
+
 				};
 
 				if(isset($input['fact'])){

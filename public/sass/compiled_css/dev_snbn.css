@@ -2635,7 +2635,7 @@ ul, li {
   -webkit-transition-duration: 0.5s;
   -moz-transition-duration: 0.5s;
   transition-duration: 0.5s;
-  background-color: #fafaf1;
+  background-color: #fff;
   padding-top: 2.5rem;
   position: relative;
   z-index: 1; }
@@ -2648,12 +2648,12 @@ ul, li {
 /* line 78, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .error_message {
   font-size: 80%;
-  color: #ff5a5a; }
+  color: #ff7c81; }
 
 /* line 83, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .message__alert {
   margin: 0.6rem;
-  color: #ff5a5a;
+  color: #ff7c81;
   border: 1px solid #e0e0e0;
   background: #fff;
   padding: 1rem; }
@@ -2701,7 +2701,7 @@ ul, li {
   text-align: center;
   font-family: headings;
   padding: 0.5rem;
-  border-bottom: 1px solid #91dd50;
+  border-bottom: 1px solid #8fd2c8;
   margin-top: 0.5rem;
   font-weight: bold; }
 
@@ -2770,7 +2770,7 @@ ul, li {
 
 /* line 193, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .content__title--main--tabs.active {
-  background-color: #ff5a5a;
+  background-color: #ff7c81;
   color: #fff; }
 
 /* line 197, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
@@ -2782,7 +2782,7 @@ ul, li {
 
 /* line 204, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .subnav {
-  border-bottom: 1px solid #91dd50;
+  border-bottom: 1px solid #8fd2c8;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
   text-align: center; }
@@ -2799,13 +2799,13 @@ ul, li {
 /* line 220, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tab__link {
   text-decoration: none;
-  color: #36393b;
+  color: #343434;
   white-space: nowrap;
   font-family: headings; }
 
 /* line 226, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .tab__link:hover {
-  color: #36393b; }
+  color: #ff7c81; }
 
 /* line 230, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .active > .tab__link {
@@ -2949,13 +2949,13 @@ ul, li {
   text-align: right;
   margin-top: -1rem;
   margin-bottom: 1rem;
-  color: #479327; }
+  color: #12cdb2; }
 
 /* line 336, C:/GitHub/SoNaughtyButNice/public/sass/modules/base */
 .package__total--create-package {
   text-align: right;
   margin-bottom: 1rem;
-  color: #479327; }
+  color: #12cdb2; }
 
 /* line 1, C:/GitHub/SoNaughtyButNice/public/sass/modules/swipe */
 .panel--right {
@@ -2965,7 +2965,7 @@ ul, li {
   height: 100%;
   top: 0;
   right: 0;
-  background-color: #36393b;
+  background-color: #d8eeb1;
   padding-top: 2.5rem; }
 
 /* line 11, C:/GitHub/SoNaughtyButNice/public/sass/modules/swipe */
@@ -2978,7 +2978,7 @@ body.showPanel .content-slot {
 
 /* line 20, C:/GitHub/SoNaughtyButNice/public/sass/modules/swipe */
 .navTab_active {
-  background-color: #36393b;
+  background-color: #d8eeb1;
   color: #fff;
   width: 100%;
   margin: 0.1rem 0; }
@@ -3460,11 +3460,11 @@ div.collection.container {
   position: relative;
   left: 0;
   right: 0;
-  background: #fafaf1;
+  background: #fff;
   width: 100%;
   line-height: 2rem;
   padding: 0.8rem;
-  border-bottom: 1px solid #479327;
+  border-bottom: 1px solid #12cdb2;
   text-align: center; }
 
 /* line 16, C:/GitHub/SoNaughtyButNice/public/sass/modules/footer */
@@ -3549,7 +3549,7 @@ div.collection.container {
 /* line 106, C:/webroot/lcsnbn/sass/modules/footer */
 /* line 85, C:/GitHub/SoNaughtyButNice/public/sass/modules/footer */
 .top__section__footer {
-  background-color: #bbfc9f; }
+  background-color: #a8d5ce; }
 
 @media only screen and (min-width: 481px) { }
 
@@ -3580,13 +3580,13 @@ div.collection.container {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: #91dd50;
+  background: #8fd2c8;
   height: 2.5rem;
   z-index: 2;
   width: 100%;
   line-height: 2.5rem;
   padding-left: 1rem;
-  border-bottom: 1px solid #479327; }
+  border-bottom: 1px solid #12cdb2; }
 
 @media only screen and (min-width: 768px) {
   /* line 19, C:/GitHub/SoNaughtyButNice/public/sass/modules/header */
@@ -4266,7 +4266,7 @@ div.four.columns.social_links {
 /* line 52, C:/GitHub/SoNaughtyButNice/public/sass/modules/recipes */
 .content__side__icon {
   color: #343434;
-  border: 1px solid #bbfc9f;
+  border: 1px solid #a8d5ce;
   background-color: #fff;
   text-align: center;
   font-size: 1rem;
@@ -4291,7 +4291,7 @@ div.four.columns.social_links {
 /* line 73, C:/GitHub/SoNaughtyButNice/public/sass/modules/recipes */
 .section__box--fresh-fact {
   background-color: #fff;
-  border-top: 1px solid #91dd50;
+  border-top: 1px solid #8fd2c8;
   margin-top: 1rem; }
 
 @media only screen and (min-width: 481px) {
@@ -4305,7 +4305,7 @@ div.four.columns.social_links {
 /* line 84, C:/GitHub/SoNaughtyButNice/public/sass/modules/recipes */
 .section__box--nutrition-panel {
   background-color: #fff;
-  border-top: 1px solid #91dd50;
+  border-top: 1px solid #8fd2c8;
   margin-top: 0rem; }
 
 @media only screen and (min-width: 481px) {
@@ -4346,7 +4346,7 @@ div.four.columns.social_links {
   background-color: #fff;
   border: 0px;
   width: 100%;
-  border: 1px solid #bbfc9f;
+  border: 1px solid #a8d5ce;
   margin-right: 20rem;
   margin-bottom: 1rem; }
 
@@ -4372,7 +4372,7 @@ div.four.columns.social_links {
   background-color: #fff;
   border: 0px;
   border-radius: 0.5rem;
-  color: #91dd50;
+  color: #8fd2c8;
   margin-top: 0.7rem;
   font-size: 0.8rem; }
 
@@ -4385,7 +4385,7 @@ div.four.columns.social_links {
 /* line 58, C:/GitHub/SoNaughtyButNice/public/sass/modules/signup */
 .form__button--sub:hover {
   padding: 0.5rem;
-  background-color: #91dd50;
+  background-color: #8fd2c8;
   border: 0px;
   border-radius: 0.2rem;
   color: #fff;
@@ -4489,7 +4489,7 @@ div.four.columns.social_links {
   text-align: left;
   line-height: 1.4;
   font-weight: bold;
-  color: #479327;
+  color: #12cdb2;
   border-top: 0; }
 
 @media only screen and (min-width: 481px) {
@@ -4562,7 +4562,7 @@ div.four.columns.social_links {
     line-height: 1.4;
     font-size: 1.2rem;
     background: white;
-    color: #479327;
+    color: #12cdb2;
     height: auto; } }
 
 @media only screen and (min-width: 768px) {
@@ -4599,7 +4599,7 @@ div.four.columns.social_links {
   right: 0.8rem;
   bottom: 0.6rem;
   padding: 0.1rem 0.3rem;
-  border: 1px solid #ff8e5e;
+  border: 1px solid #fd8d91;
   border-radius: 0.25rem;
   font-size: 0.8rem;
   line-height: 1.5;
@@ -4609,7 +4609,8 @@ div.four.columns.social_links {
 /* line 151, C:/GitHub/SoNaughtyButNice/public/sass/modules/tile */
 .content-box__tag:hover {
   color: #fff;
-  background-color: #ff5531; }
+  border: 1px solid #ff7c81;
+  background-color: #ff7c81; }
 
 /* line 2, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .form-horizontal {
@@ -4650,7 +4651,7 @@ div.four.columns.social_links {
   padding: 0.4rem;
   border-radius: 0.5rem;
   font-weight: bold;
-  background-color: #91dd50;
+  background-color: #8fd2c8;
   color: #fff; }
 
 /* line 47, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
@@ -4659,7 +4660,7 @@ div.four.columns.social_links {
   padding: 0.7rem;
   border-radius: 0.5rem;
   font-weight: bold;
-  background-color: #91dd50;
+  background-color: #8fd2c8;
   color: #fff;
   float: right;
   border: none; }
@@ -4673,11 +4674,11 @@ div.four.columns.social_links {
   border: none;
   margin-right: 0.4rem;
   font-size: 12px;
-  background-color: #fafaf1; }
+  background-color: #fff; }
 
 /* line 69, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .public__calc--cancel:hover {
-  background-color: #ff7474;
+  background-color: #fd8d91;
   border-radius: 0.4rem;
   color: #fff; }
 
@@ -4767,7 +4768,7 @@ input:-webkit-autofill {
 
 /* line 154, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__login__button {
-  background-color: #479327;
+  background-color: #12cdb2;
   color: #fff;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -4784,7 +4785,7 @@ input:-webkit-autofill {
 
 /* line 169, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__login__button:hover {
-  background-color: #91dd50; }
+  background-color: #8fd2c8; }
 
 /* line 172, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__login__button--signup {
@@ -4797,7 +4798,7 @@ input:-webkit-autofill {
 
 /* line 178, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__login__button--swipe {
-  background-color: #ff5a5a;
+  background-color: #ff7c81;
   color: #fff;
   padding: 0.3rem;
   border-radius: 5px;
@@ -4810,11 +4811,11 @@ input:-webkit-autofill {
 
 /* line 192, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__login__button--swipe:hover {
-  background-color: #ff7474; }
+  background-color: #fd8d91; }
 
 /* line 195, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__member__button {
-  background-color: #ff5a5a;
+  background-color: #ff7c81;
   color: #fff;
   padding: 0.3rem;
   border-radius: 5px;
@@ -4829,41 +4830,44 @@ input:-webkit-autofill {
 
 /* line 208, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side__member__button:hover {
-  background-color: #ff7474; }
+  background-color: #fd8d91; }
 
 /* line 211, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .side--nav {
   color: #fff;
   display: block;
-  background-color: #4d5559;
+  background-color: #d8eeb1;
   width: 100%;
   padding-left: 1rem;
-  margin: 0.1rem 0;
   height: 3.5rem;
   line-height: 3.5rem;
   text-align: left;
-  font-size: 1.125rem; }
-
-/* line 223, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
-.side--nav:hover {
-  background-color: #36393b; }
+  font-size: 1.125rem;
+  border-bottom: #fff 1px solid;
+  font-weight: 700; }
 
 /* line 226, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+.side--nav:hover {
+  background-color: #fff;
+  color: #fd8d91;
+  border-bottom: #e0e0e0 1px solid; }
+
+/* line 232, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .total__price {
   width: 100%;
   margin-bottom: 1rem;
   margin-right: 1rem;
   text-align: right; }
 
-/* line 233, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 239, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .form-group {
   min-height: 40px; }
 
-/* line 237, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 243, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .form__box {
   margin: 0 1rem; }
 
-/* line 241, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
+/* line 247, C:/GitHub/SoNaughtyButNice/public/sass/modules/form */
 .input__checkbox {
   float: left;
   margin: 0.7rem;
@@ -4903,7 +4907,7 @@ input:-webkit-autofill {
 /* line 17, C:/GitHub/SoNaughtyButNice/public/sass/modules/recipe_page */
 .content__side__icon {
   color: #343434;
-  border: 1px solid #bbfc9f;
+  border: 1px solid #a8d5ce;
   background-color: #fff;
   text-align: center;
   font-size: 1rem;
@@ -4928,7 +4932,7 @@ input:-webkit-autofill {
 /* line 38, C:/GitHub/SoNaughtyButNice/public/sass/modules/recipe_page */
 .section__box--fresh-fact {
   background-color: #fff;
-  border-top: 1px solid #91dd50;
+  border-top: 1px solid #8fd2c8;
   margin-top: 1rem; }
 
 @media only screen and (min-width: 481px) {
@@ -4942,7 +4946,7 @@ input:-webkit-autofill {
 /* line 49, C:/GitHub/SoNaughtyButNice/public/sass/modules/recipe_page */
 .section__box--nutrition-panel {
   background-color: #fff;
-  border-top: 1px solid #91dd50;
+  border-top: 1px solid #8fd2c8;
   margin-top: 0rem; }
 
 @media only screen and (min-width: 481px) {
@@ -5011,7 +5015,7 @@ input:-webkit-autofill {
   border-radius: 5px;
   background-color: #fff;
   border: 0px;
-  border: 1px solid #bbfc9f;
+  border: 1px solid #a8d5ce;
   text-align: right;
   width: 30%;
   margin-left: 70%; }

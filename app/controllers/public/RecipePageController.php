@@ -13,7 +13,11 @@ class RecipePageController  extends BaseController {
 					}else{
 						$sales_count = 1;
 						foreach($sales_data as $sd){
-							$sd->sales_amount = number_format($sd->sales_amount,2);
+							if($sd->sales_amount == 0){
+								$sales_count = 0;
+								// echo '<pre>'; print_r($sd->sales_amount); echo '</pre>';exit;
+							}
+							$sd->sales_amount = number_format($sd->sales_amount,0);
 							$sd->total_recipe_grams = number_format($sd->total_recipe_grams,2);
 							$sd->B2B_total_recipe_revenue = number_format($sd->B2B_total_recipe_revenue,2);
 							$sd->total_grams_per_piece = number_format($sd->total_grams_per_piece,2);

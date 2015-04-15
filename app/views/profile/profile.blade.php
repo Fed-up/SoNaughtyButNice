@@ -20,7 +20,7 @@
 			        <div class="columns small-6 large-3">
 			            <a href="/recipes#myrecipes" class="profile__image__link">
 			                <img class="top-right profile__image" src="/uploads/{{ $rImage[$recipe->id] }}">
-			                <p class="profile__image__link__name">My Recipes</p>
+			                <p class="profile__image__link__name">Nutrients</p>
 			            </a>
 			        </div>
 			        @endforeach
@@ -28,8 +28,12 @@
 			        @foreach($collections as $index=>$collection)
 			        <div class="columns small-6 large-3">
 			            <a href="/collections#mycollections" class="profile__image__link">
-			                <img class="bottom-right profile__image" src="/uploads/{{ $cImage[$collection->id] }}">   
-			                <p class="profile__image__link__name">My Collections</p>
+			            	@if($collection_check == 1)
+			                	<img class="bottom-right profile__image" src="/uploads/{{ $cImage[$collection->id] }}">  
+			                @else
+			                	<img class="bottom-right profile__image" src="/uploads/{{ $cImage }}">  
+			                @endif 
+			                <p class="profile__image__link__name">Collections</p>
 			            </a>
 			        </div>
 			        @endforeach
@@ -39,7 +43,7 @@
 				        <div class="columns small-6 large-3">
 				            <a href="/profile/events" class="profile__image__link">
 				                <img class="top-right profile__image" src="/uploads/{{ $eImage[$event->id] }}">
-				                <p class="profile__image__link__name">My Events</p>
+				                <p class="profile__image__link__name">Events</p>
 				            </a>
 				        </div>
 				        @endforeach		
@@ -47,7 +51,7 @@
 				    	<div class="columns small-6 large-3">
 				            <a href="/profile/events" class="profile__image__link">
 				                <img class="top-right profile__image" src="/uploads/{{ $eImage }}">
-				                <p class="profile__image__link__name">My Events</p>
+				                <p class="profile__image__link__name">Events</p>
 				            </a>
 				        </div>	
 				    @endif
@@ -57,7 +61,7 @@
 			        <div class="columns small-6 large-3">
 			            <a href="/catering#fndtn-custom" class="profile__image__link">
 			                <img class="bottom-left profile__image" src="/uploads/{{ $pImage[$catering->id] }}">
-							<p class="profile__image__link__name">My Catering</p>
+							<p class="profile__image__link__name">Catering</p>
 			            </a>
 			        </div>
 			        @endforeach
@@ -78,26 +82,26 @@
 			</div>
 
 			<div id="settings" class="row content-boxes__wrapper content ">
-				<section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
+				<section class="columns small-12 medium-8 medium-push-2 large-10 large-push-1 xlarge-8 xlarge-push-2">
                     <div class="section section--form" >
 				  		{{ Form::open(array('action' => 'UserProfileController@postUpdateUser', 'class' => 'form-horizontal')) }}
 				        
 				        <h2 class="content__title--main--signup">Update your account information</h2> 
-			         	<div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
+			         	<div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }} columns small-12 large-6 xlarge-6">
 				        	{{ Form::label('fname', 'First Name: ', array('class' => ' content-title--sub ')) }}
 				            <div class="">
 				                {{ ($errors->has('fname'))? '<p>'. $errors->first('fname') .'</p>' : '' }}
 				                {{ Form::text('fname', (Auth::user()->fname)? Auth::user()->fname : '' , array('class' => 'input__text')) }} 
 				            </div>
 				        </div>
-				        <div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }}">
+				        <div class="form-group {{ ($errors->has('fname')) ? 'has-error' : '' ; }} columns small-12 large-6 xlarge-6">
 				        	{{ Form::label('lname', 'Last Name: ', array('class' => ' content-title--sub ')) }}
 				            <div class="">
 				                {{ ($errors->has('lname'))? '<p>'. $errors->first('lname') .'</p>' : '' }}
 				                {{ Form::text('lname', (Auth::user()->lname)? Auth::user()->lname : '' , array('class' => 'input__text')) }} 
 				            </div>
 				        </div>
-			            <div class="form-group {{ ($errors->has('email')) ? 'has-error' : '' ; }}">
+			            <div class="form-group {{ ($errors->has('email')) ? 'has-error' : '' ; }} columns small-12">
 				            {{ Form::label('email', 'Email: ', array('class' => ' content-title--sub ')) }}
 				            <div class="">
 				                {{ ($errors->has('email'))? '<p>'. $errors->first('email') .'</p>' : '' }}
@@ -105,7 +109,7 @@
 				            </div>
 				        </div>
 				        <hr>
-			            <div class="form-group {{ ($errors->has('password')) ? 'has-error' : '' ; }}">
+			            <div class="form-group {{ ($errors->has('password')) ? 'has-error' : '' ; }} columns small-12 large-6 xlarge-6">
 			            	{{ Form::label('password', 'Password: ', array('class' => ' content-title--sub ')) }}
 			                <div class="">
 			                    {{ ($errors->has('password'))? '<p>'. $errors->first('password') .'</p>' : '' }}
@@ -113,7 +117,7 @@
 			                </div>
 			            </div>
 			            
-			            <div class="form-group {{ ($errors->has('password_match')) ? 'has-error' : '' ; }}">
+			            <div class="form-group {{ ($errors->has('password_match')) ? 'has-error' : '' ; }} columns small-12 large-6 xlarge-6">
 			            	{{ Form::label('password_match', 'Password Match: ', array('class' => ' content-title--sub ')) }}
 			                <div class="">
 			                    {{ ($errors->has('password_match'))? '<p>'. $errors->first('password_match') .'</p>' : '' }}
