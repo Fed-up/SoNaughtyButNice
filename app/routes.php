@@ -10,8 +10,11 @@ Route::get('logout', 'AuthController@logout');
 //Route
 // email::get('email', 'EmailController@getEmail');
 
+Route::get('geogram', function(){
+   return View::make("partial.geogram");
+});
 
-
+Route::get('square', 'SquareController@getSquare');
 
 //Collection
 Route::get('collections', 'CollectionController@getCollections');

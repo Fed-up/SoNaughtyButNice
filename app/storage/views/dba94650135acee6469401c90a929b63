@@ -1,0 +1,21 @@
+
+<?php $__env->startSection('__header'); ?> 
+<?php $__env->stopSection(); ?>  
+
+<?php $__env->startSection('content'); ?>   
+<div class="band content">
+    <div class="container "> 
+        <h2 class="content__title content__title--main">Square</h2> 
+        <div class="row">
+            <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
+                <div class="section section--form" >
+                    
+                </div>
+            </section>
+            <div class="footer__push"></div>  
+        </div>
+    </div>
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

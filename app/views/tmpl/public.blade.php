@@ -80,7 +80,7 @@
     
     
 
-    </body>
+    
     <!-- JS 
     ====================================  -->
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
@@ -89,8 +89,8 @@
     <script src="/bower_components/foundation/js/foundation/foundation.tab.js"></script>
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5439fba30c5e8a76" async></script>
+
     @yield('_footer')
-		
     <script>
 
 
@@ -148,7 +148,7 @@
     '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-N294FC');</script>
     <!-- End Google Tag Manager -->
-       
 
-    
+
+    </body>
 </html>
