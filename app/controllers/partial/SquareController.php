@@ -24,6 +24,8 @@ class SquareController extends BaseController {
 	  ]
 	}';
 
+	echo '<pre>'; print_r($curl_instance); echo '</pre>'; exit;
+
 	// $data_string = json_encode($data)
 
 	// create curl resource 
