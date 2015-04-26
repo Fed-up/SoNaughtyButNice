@@ -11,14 +11,14 @@ class SquareController extends BaseController {
 	$info = 0;
 
 	$data = '{
-	  "name": "Milkshake",
+	  "name": "Mel",
 	  "variations": [
 	    {
-	      "name": "Small",
+	      "name": "Awesome",
 	      "pricing_type": "FIXED_PRICING",
 	      "price_money": {
-	        "currency_code": "USD",
-	        "amount": 400
+	        "currency_code": "AUD",
+	        "amount": 1000
 	      }
 	    }
 	  ]
