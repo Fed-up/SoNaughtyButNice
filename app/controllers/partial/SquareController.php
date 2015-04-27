@@ -11,7 +11,7 @@ class SquareController extends BaseController {
 	$info = 0;
 
 	$data = '{
-	  "name": "Milkshake",
+	  "name": "ham",
 	  "variations": [
 	    {
 	      "name": "Small",
@@ -23,6 +23,8 @@ class SquareController extends BaseController {
 	    }
 	  ]
 	}';
+
+	echo '<pre>'; print_r($merchant_id); echo '</pre>';    exit;
 
 	// $data_string = json_encode($data)
 
