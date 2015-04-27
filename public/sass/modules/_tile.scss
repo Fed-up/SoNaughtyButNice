@@ -54,7 +54,7 @@
   text-align: left;
   line-height: 1.4;
   font-weight: bold;
-  color: $text;
+  color: $main_dark;
   border-top: 0; }
   @media only screen and (min-width:481px) {
     .content-box__title {
@@ -90,10 +90,11 @@
         height: 0;
         padding-top: 100%; } }
 
+/* line 137, C:/webroot/lcsnbn/sass/modules/tile */
 .content-box__title--homepage {
   font-size: 1rem;
   line-height: 1.4;
-  // color: #fff;
+  color: #fff;
   border-radius: 5px 0 0 5px;
   position: absolute;
   font-weight: bold;
@@ -108,7 +109,7 @@
       line-height: 1.4;
       font-size: 1.2rem;
       background: white;
-      // color: $main_dark;
+      color: $main_dark;
       // color: #fff;
       height: auto; } }
   @media only screen and (min-width:768px) {

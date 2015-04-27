@@ -918,7 +918,7 @@ ul, li {
   height: 100%;
   top: 0;
   right: 0;
-  background-color: #BAD38D;
+  background-color: #d8eeb1;
   padding-top: 2.5rem; }
 
 /* line 11, C:/GitHub/SoNaughtyButNice/public/sass/modules/_swipe.scss */
@@ -931,9 +931,10 @@ body.showPanel .content-slot {
 
 /* line 20, C:/GitHub/SoNaughtyButNice/public/sass/modules/_swipe.scss */
 .navTab_active {
-  background-color: #BAD38D;
+  background-color: #d8eeb1;
   color: #fff;
-  width: 100%; }
+  width: 100%;
+  margin: 0.1rem 0; }
 
 /*
  * jQuery FlexSlider v2.2.0
@@ -2423,7 +2424,7 @@ div.four.columns.social_links {
   text-align: left;
   line-height: 1.4;
   font-weight: bold;
-  color: #343434;
+  color: #12cdb2;
   border-top: 0; }
 
 @media only screen and (min-width: 481px) {
@@ -2474,10 +2475,16 @@ div.four.columns.social_links {
     height: 0;
     padding-top: 100%; } }
 
+<<<<<<< HEAD
 /* line 93, C:/GitHub/SoNaughtyButNice/public/sass/modules/_tile.scss */
+=======
+/* line 137, C:/webroot/lcsnbn/sass/modules/tile */
+/* line 94, C:/GitHub/SoNaughtyButNice/public/sass/modules/tile */
+>>>>>>> parent of 4eaebed... Recipe Images Fixed
 .content-box__title--homepage {
   font-size: 1rem;
   line-height: 1.4;
+  color: #fff;
   border-radius: 5px 0 0 5px;
   position: absolute;
   font-weight: bold;
@@ -2487,34 +2494,55 @@ div.four.columns.social_links {
   padding: 0.3rem; }
 
 @media only screen and (min-width: 481px) {
+<<<<<<< HEAD
   /* line 105, C:/GitHub/SoNaughtyButNice/public/sass/modules/_tile.scss */
+=======
+  /* line 106, C:/GitHub/SoNaughtyButNice/public/sass/modules/tile */
+>>>>>>> parent of 4eaebed... Recipe Images Fixed
   .content-box__title--homepage {
     position: static;
     padding: 0.5rem;
     line-height: 1.4;
     font-size: 1.2rem;
     background: white;
+    color: #12cdb2;
     height: auto; } }
 
 @media only screen and (min-width: 768px) {
+<<<<<<< HEAD
   /* line 115, C:/GitHub/SoNaughtyButNice/public/sass/modules/_tile.scss */
+=======
+  /* line 116, C:/GitHub/SoNaughtyButNice/public/sass/modules/tile */
+>>>>>>> parent of 4eaebed... Recipe Images Fixed
   .content-box__title--homepage {
     line-height: 1.4;
     font-size: 1rem; } }
 
 /* line 173, C:/webroot/lcsnbn/sass/modules/tile */
+<<<<<<< HEAD
 /* line 121, C:/GitHub/SoNaughtyButNice/public/sass/modules/_tile.scss */
+=======
+/* line 122, C:/GitHub/SoNaughtyButNice/public/sass/modules/tile */
+>>>>>>> parent of 4eaebed... Recipe Images Fixed
 .content-box__summary {
   color: #343434;
   font-size: 0.8rem; }
 
 @media only screen and (min-width: 481px) {
+<<<<<<< HEAD
   /* line 125, C:/GitHub/SoNaughtyButNice/public/sass/modules/_tile.scss */
+=======
+  /* line 126, C:/GitHub/SoNaughtyButNice/public/sass/modules/tile */
+>>>>>>> parent of 4eaebed... Recipe Images Fixed
   .content-box__summary {
     display: none; } }
 
 /* line 181, C:/webroot/lcsnbn/sass/modules/tile */
+<<<<<<< HEAD
 /* line 129, C:/GitHub/SoNaughtyButNice/public/sass/modules/_tile.scss */
+=======
+/* line 130, C:/GitHub/SoNaughtyButNice/public/sass/modules/tile */
+>>>>>>> parent of 4eaebed... Recipe Images Fixed
 .content-box__summary--display {
   color: #343434;
   font-size: 0.8rem;
@@ -2524,7 +2552,11 @@ div.four.columns.social_links {
   float: right; }
 
 /* line 190, C:/webroot/lcsnbn/sass/modules/tile */
+<<<<<<< HEAD
 /* line 138, C:/GitHub/SoNaughtyButNice/public/sass/modules/_tile.scss */
+=======
+/* line 139, C:/GitHub/SoNaughtyButNice/public/sass/modules/tile */
+>>>>>>> parent of 4eaebed... Recipe Images Fixed
 .content-box__tag {
   position: absolute;
   right: 0.8rem;
@@ -2537,7 +2569,11 @@ div.four.columns.social_links {
   color: #343434; }
 
 /* line 202, C:/webroot/lcsnbn/sass/modules/tile */
+<<<<<<< HEAD
 /* line 150, C:/GitHub/SoNaughtyButNice/public/sass/modules/_tile.scss */
+=======
+/* line 151, C:/GitHub/SoNaughtyButNice/public/sass/modules/tile */
+>>>>>>> parent of 4eaebed... Recipe Images Fixed
 .content-box__tag:hover {
   color: #fff;
   border: 1px solid #ff7c81;
@@ -2767,7 +2803,7 @@ input:-webkit-autofill {
 .side--nav {
   color: #fff;
   display: block;
-  background-color: #BAD38D;
+  background-color: #d8eeb1;
   width: 100%;
   padding-left: 1rem;
   height: 3.5rem;

@@ -412,38 +412,15 @@ class Admin_RecipesController extends BaseController{
 			$data->v  = (isset($input['V'])) ? 1 : 0;
 			if($data->save()){
 				if(isset($input['images'])){
-					$image_reset = $input['images'];
-					$image_des_reset = $input['img_des'];
-
-					if(isset($input['ddp'])){
-						$ddp = $input['ddp'];
-						foreach($ddp as $dp_delete){
-							foreach($image_reset as $i_image=>$image){
-								foreach($image as $i_photo=>$photo){
-									if ($dp_delete == $i_photo) {
-										unset($image_reset[$i_image]);
-										unset($image_des_reset[$i_image]);	
-									}
-								}
-							}
-							$dp = Images::find($dp_delete);
-							$dp->delete();	
-								$image_reset = array_values($image_reset);
-								$image_des_reset = array_values($image_des_reset);
-						}
-
-					}
-
-					$p_count = count($image_reset);
+					$p_count = count($input['images']);
 					$p=0;
-					
-					foreach($image_reset as $image){
+					foreach($input['images'] as $image){
 						if($p <= $p_count){
 							foreach($image as $i_photo=>$photo){
 								if($i_photo == 'x'){
 									$_image = new Images();
 									$_image->name = $photo;
-									$_image->summary = $image_des_reset[$p]['x'];
+									$_image->summary = $input['img_des'][$p]['x'];
 									$_image->link_id = $input['id'];
 									$_image->section = 'RECIPE';
 									$_image->ordering = $p;
@@ -452,7 +429,7 @@ class Admin_RecipesController extends BaseController{
 								}else{
 									$_image = Images::find($i_photo);
 									$_image->name = $photo;
-									$_image->summary = $image_des_reset[$p][$i_photo];
+									$_image->summary = $input['img_des'][$p][$i_photo];
 									$_image->link_id = $input['id'];
 									$_image->section = 'RECIPE';
 									$_image->ordering = $p;
@@ -463,6 +440,38 @@ class Admin_RecipesController extends BaseController{
 						$p++;
 						}
 					};
+					if(isset($input['ddp'])){
+						$ddp = $input['ddp'];
+						// echo '<pre>'; print_r($ddp); echo '</pre>'; 	exit;
+						
+						foreach($ddp as $dp_delete){
+						
+							$dp = Images::find($dp_delete);
+							$dp->delete();
+						};
+					};
+					// $op = 0;
+					// foreach($input['images'] as $oImage){
+					// 	// echo '<pre>'; print_r($oImage); echo '</pre>'; 	
+					// 	if($op <= $p_count){
+					// 		foreach($oImage as $io_photo=>$oPhoto){
+					// 			// echo '<pre>'; print_r($io_photo); echo '</pre>'; exit;
+					// 			// $reset_order = Images::findOrFail($o_photo);
+					// 			$reset_order = Images::where('id', '=', $io_photo)->exists();
+					// 			echo '<pre>'; print_r($reset_order); echo '</pre>'; exit;
+					// 			if($reset_order != null){
+					// 			   echo '<pre>'; print_r($reset_order); echo '</pre>'; 
+					// 			}
+									
+
+					// 			// $_image->ordering = $op;
+									
+					// 		}
+					// 	$op++;
+					// 	}
+					// }exit;
+
+
 				};
 
 				if(isset($input['fact'])){
