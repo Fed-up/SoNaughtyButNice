@@ -14,7 +14,7 @@ Route::get('geogram', function(){
    return View::make("partial.geogram");
 });
 
-
+Route::get('square', 'SquareController@getSquare');
 
 //Collection
 Route::get('collections', 'CollectionController@getCollections');
@@ -40,8 +40,8 @@ Route::get('package/{id}', 'CateringController@getPackage');
 Route::post('package', 'CateringController@packageEnquiry');
 
 
-//Square
-Route::get('square', 'SquareController@getSquare');
+
+
 
 //Sales
 Route::group(array('before' => 'force.ssl','before' => 'profile'), function() {
