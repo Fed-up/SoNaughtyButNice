@@ -46,7 +46,8 @@ module.exports = function(grunt) {
 					sourceComments: "normal"
 				},
 		        files: {
-		          'public/sass/compiled_css/dev_snbn.css': 'public/sass/snbn.scss'
+		          'public/sass/compiled_css/dev_snbn.css': 'public/sass/snbn.scss',
+		          'public/sass/compiled_css/dev_davo.css': 'public/sass/davo.scss'
 		        }     
 			},
 			// dist: {

@@ -73,7 +73,9 @@ ul, li {
 
 .page {
   color: $text;
-  height: 100%; }
+  height: 100%; 
+  background-color: red; 
+}
 
 .error_message{
   font-size: 80%;
