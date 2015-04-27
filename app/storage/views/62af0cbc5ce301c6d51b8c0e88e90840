@@ -1,0 +1,84 @@
+
+<?php $__env->startSection('__header'); ?> 
+<?php $__env->stopSection(); ?>  
+
+<?php $__env->startSection('content'); ?>   
+<div class="band content">
+    <div class="container "> 
+        <h2 class="content__title content__title--main">4 Paws</h2> 
+        <div class="row">
+            <section class="columns small-12">
+                <div class="header-23-sub">
+                    <div id="bgvideo" class="background">
+                        <video autoplay loop poster="polina.jpg" id="bgvid">
+                            <source src="polina.webm" type="video/webm">
+                            <source src="/videos/dogshow.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <button id="vidpause">Pause</button>
+                    <div id="video_controls">
+                       <button id="mutebtn">mute</button>
+                    </div> 
+                </div>
+            </section>
+            <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
+                <div class="section section--form" >
+                    
+                </div>
+            </section>
+            <div class="footer__push"></div>  
+        </div>
+    </div>
+</div>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_footer'); ?>
+    <script>
+        var vid = document.getElementById("bgvid");
+        var pauseButton = document.getElementById("vidpause");
+        function vidFade() {
+        vid.classList.add("stopfade");
+        }
+        vid.addEventListener('ended', function() {
+        // only functional if "loop" is removed
+        vid.pause();
+        // to capture IE10
+        vidFade();
+        });
+        pauseButton.addEventListener("click", function() {
+        vid.classList.toggle("stopfade");
+        if (vid.paused) {
+        vid.play();
+        pauseButton.innerHTML = "Pause";
+        } else {
+        vid.pause();
+        pauseButton.innerHTML = "Paused";
+        }
+        })
+    </script>
+
+    <script type="text/javascript">
+        // var mutebtn;
+        // intitializePlayer()  // **don't forget to call the initialize**
+
+        // function intitializePlayer(){
+        //     //set object references
+        //     vid = document.getElementById("bg");
+        //     mutebtn = document.getElementById("mutebtn");
+        //     //add event listener
+        //     mutebtn.addEventListener("click",vidmute,false);   // **quotes only around the event** 
+        // }
+
+        // function vidmute(){   // **there was an extra '.' between function and vidmute**
+        //     if(vid.muted){
+        //         vid.muted = false;
+        //         mutebtn.innerHTML = "mute";
+        //     } else {
+        //         vid.muted = true;
+        //         mutebtn.innerHTML = "Unmute";
+        //     }
+        // }
+    </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
