@@ -9,7 +9,7 @@
             @if(Auth::check())
                 @if(Auth::user()->user_type != 'B2B')
                 | <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#myrecipes">Exclusive Recipes</a></h2>
-                @endif
+                @endif 
             @else
                 | <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#myrecipes">Exclusive Recipes</a></h2>
             @endif 

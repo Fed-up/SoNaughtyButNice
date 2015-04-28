@@ -1,0 +1,127 @@
+
+<?php $__env->startSection('content'); ?>
+<main class="main page">
+    <?php if (Auth::check()): ?>
+        <h2 class="content__title content__title--homepage"><a class="content__title--link" href="/profile">Welcome home <?php echo Auth::user()->fname; ?></a></h2>
+    <?php endif; ?>
+    <section class="flexslider--tom">
+        <div class="flexslider flex-viewport">
+            <ul class="slides">
+                <?php foreach($h_data as $h_image): ?>
+                    <?php /*'<pre>'; dd($h_data->first()->id); echo '</pre>';*/ ?>
+                    <?php foreach($h_image->Images as $image): ?>
+                        <li> 
+                            <figure>
+                                <a href="<?php echo $h_image->link; ?>">
+                                    <img src="/uploads/<?php echo $hImage[$h_image->id]; ?>" />
+                                </a>
+                            </figure>
+                        </li>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>   
+            </ul>
+        </div>
+    </section>
+
+        
+
+    <section class="row content-boxes__wrapper">
+        <?php foreach($iData as $ingredient): ?>
+        
+        <div class="columns small-12 medium-6 large-4 xlarge-2 end">
+            <a href="/ingredients" class="content-box content-box--homepage">
+                <div class="content-box__image"  style="background: url(/uploads/<?php echo $iImage[$ingredient->id]; ?>) center center; background-size:cover;"></div>
+                <h5 class="content-box__title content-box__title--homepage">Ingredients</h5>
+            </a>
+        </div>
+        <?php endforeach; ?>
+
+        <?php foreach($rData as $recipe): ?>
+        <div class="columns small-12 medium-6 large-4 xlarge-2 end">
+            <a href="/recipes" class="content-box content-box--homepage">
+                <div class="content-box__image"  style="background: url(/uploads/<?php echo $rImage[$recipe->id]; ?>) center center; background-size:cover;"></div>
+                <h5 class="content-box__title content-box__title--homepage"><?php if(Auth::check()): ?><?php if(Auth::user()->user_type != 'B2B'): ?>Recipes <?php else: ?> Nutritents <?php endif; ?> <?php else: ?> Recipes <?php endif; ?></h5>
+            </a>
+        </div>
+        <?php endforeach; ?>
+
+        <?php foreach($collections as $index=>$collection): ?>
+        <div class="columns small-12 medium-6 large-4 xlarge-2 end">
+            <a href="/collections" class="content-box content-box--homepage">
+                <?php if($collection_check == 1): ?>
+                <div class="content-box__image"  style="background: url(/uploads/<?php echo $cImage[$collection->id]; ?>) center center; background-size:cover;"></div>   
+                <?php else: ?>
+                <div class="content-box__image"  style="background: url(/uploads/<?php echo $cImage; ?>) center center; background-size:cover;"></div>   
+                <?php endif; ?>
+                <h5 class="content-box__title content-box__title--homepage">Collections</h5>
+            </a>
+        </div>
+        <?php endforeach; ?>
+
+        <?php if($e_count != 'empty'): ?>
+            <?php foreach($eData as $event): ?>
+            <div class="columns small-12 medium-6 large-4 xlarge-2 end">
+                 
+                <?php if($e_count == 1): ?> 
+                    <a href="/events"  class="content-box content-box--homepage">
+                    <div class="content-box__image"  style="background: url(/uploads/<?php echo $eImage[$event->id]; ?>) center center; background-size:cover;"></div> 
+                <?php else: ?> 
+                    <a href="/events" class="content-box content-box--homepage">
+                    <div class="content-box__image"  style="background: url(/uploads/<?php echo $eImage[$event->id]; ?>) center center; background-size:cover;"></div>
+                <?php endif; ?>
+                <h5 class="content-box__title content-box__title--homepage">Events</h5>
+                </a>
+            </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="columns small-12 medium-6 large-4 xlarge-2 end">
+                <a href="/events"  class="content-box content-box--homepage">
+                    <div class="content-box__image"  style="background: url(/uploads/<?php echo $eImage; ?>) center center; background-size:cover;"></div>
+                    <h5 class="content-box__title content-box__title--homepage">Events</h5>
+                </a>
+            </div>
+            <!-- <a href="/events" class="content-box content-box--homepage">
+            <div class="content-box__image"  style="background: url(/uploads/<?php echo $eImage; ?>) center center; background-size:cover;"></div>
+            <h5 class="content-box__title content-box__title--homepage">Upcoming Events</h5> -->
+        <?php endif; ?>
+
+        <?php foreach($pData as $catering): ?>
+        <div class="columns small-12 medium-6 large-4 xlarge-2 end">
+            <a href="/catering" class="content-box content-box--homepage">
+                <div class="content-box__image"  style="background: url(/uploads/<?php echo $pImage[$catering->id]; ?>) center center; background-size:cover;"></div>
+                <h5 class="content-box__title content-box__title--homepage">Catering</h5>
+            </a>
+        </div>
+        <?php endforeach; ?>
+
+        <div class="columns small-12 medium-6 large-4 xlarge-2 end">
+            <a href="/signup" class="content-box content-box--homepage">
+                <div class="content-box__image"  style="background: url(/images/site/join.jpg) center center; background-size:cover;"></div>
+                <h5 class="content-box__title content-box__title--homepage">Login | Register</h5>
+            </a>
+        </div>
+    </section>
+</main>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_footer'); ?>
+    <script type="text/javascript" src="/js/flexslider.js"></script>
+    <script type="text/javascript" src="/js/tabs.js"></script>
+    <script type="text/javascript" src="/js/gallery.js"></script>
+    <script>
+        // $(window).load(function() {
+        //   $('.flexslider--thumbs').flexslider({
+        //     controlNav: "thumbnails",
+        //     controlsContainer: "#thumbs",
+        //     animationSpeed: 300,
+        //     slideshow: false,
+        //     directionNav: false,
+
+        //     animation: "slide",
+        //     direction: "vertical"
+        //   });
+        // });
+    </script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('tmpl.public', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

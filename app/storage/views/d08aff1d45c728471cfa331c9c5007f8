@@ -1,0 +1,57 @@
+    <?php //echo Request::segment(2); ?>
+    
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li class="tophead"><?php echo HTML::link('admin/menu/recipes', 'Menu'); ?></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+		<?php if(Auth::user()->user_type === 'Manager' || Auth::user()->user_type === 'ADMIN' ): ?>
+        	<?php if (Request::segment(2) === 'menu'): ?>
+            <li <?php echo (Request::segment(3) === 'categories')? 'class="active"' : 'class=""' ; ?>><?php echo HTML::link('admin/menu/categories', 'Categories'); ?></li>
+            <li <?php echo (Request::segment(3) === 'recipes')? 'class="active"' : 'class=""' ; ?>><?php echo HTML::link('admin/menu/recipes', 'Recipes'); ?></li>
+            <li <?php echo (Request::segment(3) === 'ingredients')? 'class="active"' : 'class=""' ; ?>><?php echo HTML::link('admin/menu/ingredients', 'Ingredients'); ?></li>
+            <li <?php echo (Request::segment(3) === 'metric')? 'class="active"' : 'class=""' ; ?>><?php echo HTML::link('admin/menu/metric', 'Metric'); ?></li>
+            <?php endif; ?>
+        <?php endif; ?>
+     	</ul>
+        
+        <ul class="nav nav-sidebar">
+        	<li class="head"><?php echo HTML::link('admin/user/members', 'Users'); ?></li>
+      	</ul>
+      	<ul class="nav nav-sidebar">
+        <?php if (Request::segment(2) === 'user'): ?>
+       	<?php if(Auth::user()->user_type === 'Manager' || Auth::user()->user_type === 'ADMIN' ): ?>
+            <li <?php echo (Request::segment(3) === 'members')? 'class="active"' : 'class=""' ; ?>><?php echo HTML::link('admin/user/members', 'Members'); ?></li>
+            <li <?php echo (Request::segment(3) === 'comments')? 'class="active"' : 'class=""' ; ?>><?php echo HTML::link('admin/user/comments', 'Comments'); ?></li>
+        <?php endif; ?> 
+        <?php endif; ?>
+        </ul>
+
+		<ul class="nav nav-sidebar">
+        	<li class="head"><?php echo HTML::link('admin/products/catering/packages', 'Products'); ?></li>
+      	</ul>
+      	<ul class="nav nav-sidebar">
+        <?php if (Request::segment(2) === 'products'): ?>
+         	<?php if(Auth::user()->user_type === 'Manager' || Auth::user()->user_type === 'ADMIN' ): ?>
+              <li <?php echo (Request::segment(3) === 'catering')? 'class="active"' : 'class=""' ; ?>><?php echo HTML::link('admin/products/catering/packages', 'Catering Packages'); ?></li>
+              <li <?php echo (Request::segment(3) === 'events')? 'class="active"' : 'class=""' ; ?>><?php echo HTML::link('admin/products/events', 'Events'); ?></li>
+          <?php endif; ?> 
+        <?php endif; ?>
+        </ul>
+        
+       	<?php if(Auth::user()->user_type === 'Manager' || Auth::user()->user_type === 'ADMIN' ): ?>
+        <ul class="nav nav-sidebar">
+        	<li class="head"><?php echo HTML::link('admin/website/header', 'Website'); ?></li>
+      	</ul>
+      	<ul class="nav nav-sidebar">
+        <?php if (Request::segment(2) === 'website'): ?>
+            <li <?php echo (Request::segment(3) === 'header')? 'class="active"' : 'class=""' ; ?>><?php echo HTML::link('admin/website/header', 'Header Images'); ?></li>
+            <li <?php echo (Request::segment(3) === 'quotes')? 'class="active"' : 'class=""' ; ?>><?php echo HTML::link('admin/website/quotes', 'Quotes'); ?></li>
+            
+        <?php endif; ?> 
+       </ul>
+        <?php endif; ?>
+       <ul class="nav nav-sidebar">
+        	<li class="head"><?php echo HTML::link('logout', 'Logout'); ?></li>
+      	</ul>
+    </div>
