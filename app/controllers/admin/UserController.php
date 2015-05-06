@@ -75,8 +75,6 @@ class Admin_UserController extends BaseController {
 			'lname' => 'required',
 			'username' => 'required',
 			'email' => 'required|email|unique:users,email,'.Input::get('id'),
-			//'password' => 'required|min:6',
-			//'password_match' => 'required|min:6|same:password',
 		);
 		
 		if (Input::get('password')) {
