@@ -10,7 +10,9 @@
         <div class="row">
             <section class="columns small-12 medium-8 medium-push-2 large-6 large-push-3 xlarge-4 xlarge-push-4">
                 <div class="section section--form" >
-                    
+                    <p>{{$output}}</p>
+                    <p>{{$error}}</p> 
+                    <p>{{$end}}</p> 
                 </div>
             </section>
             <div class="footer__push"></div>  

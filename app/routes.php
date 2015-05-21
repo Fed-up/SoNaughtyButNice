@@ -15,6 +15,7 @@ Route::get('geogram', function(){
 });
 
 Route::get('square', 'SquareController@getSquare');
+Route::get('pay', 'SquareController@getPay');
 
 //Collection
 Route::get('collections', 'CollectionController@getCollections');
