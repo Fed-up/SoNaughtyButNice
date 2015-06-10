@@ -8,7 +8,7 @@
             <?php if(Auth::check()): ?>
                 <?php if(Auth::user()->user_type != 'B2B'): ?>
                 | <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#myrecipes">Exclusive Recipes</a></h2>
-                <?php endif; ?>
+                <?php endif; ?> 
             <?php else: ?>
                 | <h2 class="content-title--main content__title--main--tabs"><a class="tab__link" href="#myrecipes">Exclusive Recipes</a></h2>
             <?php endif; ?> 
