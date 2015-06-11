@@ -42,7 +42,7 @@ class RecipePageController  extends BaseController {
 					$query->orderBy(DB::raw('RAND()'))
 						->with(array('menuRecipes' => function($query) use ($id)
 						{
-							$query->where('menu_recipes.active', '=', 1)->where('menu_recipes.id', '!=', $id)
+							$query->where('menu_recipes.naughty_active', '=', 1)->where('menu_recipes.id', '!=', $id)
 								->with(array('Images' => function($query)
 								{
 									$query->where('ordering', '=', 0)->where('section', '=', 'RECIPE');
@@ -70,7 +70,7 @@ class RecipePageController  extends BaseController {
 					// echo '<pre>'; print_r($user_id); echo '</pre>';exit;
 					$query->where('paid.user_id', '=', $user_id)->where('paid.type', '=', 'RECIPE');
 				}))
-			->orderBy(DB::raw('RAND()'))->where('active', '=', 1)->take(3)->get();
+			->orderBy(DB::raw('RAND()'))->where('naughty_active', '=', 1)->take(3)->get();
 
 			$exrData = MenuRecipes::where('id', '=', $id)
 				->with(array('MenuCategories' => function($query) use ($id)
@@ -78,7 +78,7 @@ class RecipePageController  extends BaseController {
 					$query->orderBy(DB::raw('RAND()'))
 						->with(array('menuRecipes' => function($query) use ($id)
 						{
-							$query->where('menu_recipes.active', '=', 1)->where('menu_recipes.id', '!=', $id)
+							$query->where('menu_recipes.naughty_active', '=', 1)->where('menu_recipes.id', '!=', $id)
 								->with(array('Images' => function($query)
 								{
 									$query->where('ordering', '=', 0)->where('section', '=', 'RECIPE');
@@ -106,7 +106,7 @@ class RecipePageController  extends BaseController {
 					// echo '<pre>'; print_r($user_id); echo '</pre>';exit;
 					$query->where('paid.user_id', '=', $user_id)->where('paid.type', '=', 'RECIPE');
 				}))
-			->orderBy(DB::raw('RAND()'))->where('active', '=', 1)->take(3)->get();
+			->orderBy(DB::raw('RAND()'))->where('naughty_active', '=', 1)->take(3)->get();
 
 			foreach ($rData as $recipe) {	
 				$count = count($cRecipes = $recipe->MenuCategories->menuRecipes);

@@ -44,7 +44,7 @@
 
             <div id="ae" class="row content-boxes__wrapper content">
                 @foreach($aeData as $ae)
-                @if($ae->active == 1)
+                @if($ae->naughty_active == 1)
                     <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
                         <article class="content-box">
                             <div class="row collapse">                                   
@@ -70,7 +70,7 @@
 
             <div id="fj" class="row content-boxes__wrapper content">
                 @foreach($fjData as $fj)
-                @if($fj->active == 1)
+                @if($fj->naughty_active == 1)
                     <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
                         <article class="content-box">
                             <div class="row collapse">                                   
@@ -96,7 +96,7 @@
 
             <div id="ko" class="row content-boxes__wrapper content">
                 @foreach($koData as $ko)
-                @if($ko->active == 1)
+                @if($ko->naughty_active == 1)
                     <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
                         <article class="content-box">
                             <div class="row collapse">                                   
@@ -123,7 +123,7 @@
             <div id="pt" class="row content-boxes__wrapper content">
 
                 @foreach($ptData as $pt)
-                @if($pt->active == 1)
+                @if($pt->naughty_active == 1)
                     <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
                         <article class="content-box">
                             <div class="row collapse">                                   
@@ -150,7 +150,7 @@
             <div id="uz" class="row content-boxes__wrapper content">
                 
                 @foreach($uzData as $uz)
-                @if($uz->active == 1)
+                @if($uz->naughty_active == 1)
                     <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
                         <article class="content-box">
                             <div class="row collapse">                                   

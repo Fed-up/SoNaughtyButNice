@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'xenusfit_snbn',
+			'database'  => 'xenusfit_fedup',
 			'username'  => '',
 			'password'  => '',
 			'charset'   => 'utf8',

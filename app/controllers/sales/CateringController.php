@@ -37,7 +37,7 @@ class CateringController  extends BaseController {
 
 
 		
-		$recipes = MenuRecipes::orderBy('name','ASC')->where('active', '=', '1')->get();
+		$recipes = MenuRecipes::orderBy('name','ASC')->where('naughty_active', '=', '1')->get();
 
 		$mRep = array();
 		$mRep[0]	= '- Select Recipe -';	

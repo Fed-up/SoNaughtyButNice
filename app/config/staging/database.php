@@ -7,7 +7,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'xenusfit_drupal',
+			'database'  => 'xenusfit_fedup',
 			'username'  => 'xenusfit_admin1',
 			'password'  => '}4Tc7K7gH6}}',
 			'charset'   => 'utf8',

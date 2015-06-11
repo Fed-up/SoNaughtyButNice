@@ -43,7 +43,7 @@
 
             <div id="ae" class="row content-boxes__wrapper content">
                 <?php foreach($aeData as $ae): ?>
-                <?php if($ae->active == 1): ?>
+                <?php if($ae->naughty_active == 1): ?>
                     <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
                         <article class="content-box">
                             <div class="row collapse">                                   
@@ -69,7 +69,7 @@
 
             <div id="fj" class="row content-boxes__wrapper content">
                 <?php foreach($fjData as $fj): ?>
-                <?php if($fj->active == 1): ?>
+                <?php if($fj->naughty_active == 1): ?>
                     <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
                         <article class="content-box">
                             <div class="row collapse">                                   
@@ -95,7 +95,7 @@
 
             <div id="ko" class="row content-boxes__wrapper content">
                 <?php foreach($koData as $ko): ?>
-                <?php if($ko->active == 1): ?>
+                <?php if($ko->naughty_active == 1): ?>
                     <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
                         <article class="content-box">
                             <div class="row collapse">                                   
@@ -122,7 +122,7 @@
             <div id="pt" class="row content-boxes__wrapper content">
 
                 <?php foreach($ptData as $pt): ?>
-                <?php if($pt->active == 1): ?>
+                <?php if($pt->naughty_active == 1): ?>
                     <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
                         <article class="content-box">
                             <div class="row collapse">                                   
@@ -149,7 +149,7 @@
             <div id="uz" class="row content-boxes__wrapper content">
                 
                 <?php foreach($uzData as $uz): ?>
-                <?php if($uz->active == 1): ?>
+                <?php if($uz->naughty_active == 1): ?>
                     <div class="columns small-12 medium-6 large-4 xlarge-3 xxlarge-2 end">
                         <article class="content-box">
                             <div class="row collapse">                                   

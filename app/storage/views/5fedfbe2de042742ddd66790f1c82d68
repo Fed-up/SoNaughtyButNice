@@ -1,0 +1,535 @@
+
+<?php $__env->startSection('title'); ?><?php echo $title; ?> <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_head'); ?>
+    <script type="text/javascript" src="/packages/jquery-1.11.1.min/vendor/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/packages/jquery-1.11.1.min/vendor/jquery-ui-1.10.4.custom/css/no-theme/jquery-ui-1.10.4.custom.min.css"/> 
+
+    <script>
+        $(function() {
+
+        $( "._mySortable" ).sortable({ 
+        axis: "y", 
+        opacity: 0.5,
+        placeholder: "sortable-placeholder",
+        // callback function
+        update: function( event, ui ) {
+            ui.item.css({'background':'#DBEEC9'})
+            },
+            });
+            $( "._mySortable" ).disableSelection();
+        });
+    </script>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+    <div class="row">
+        <h1 class="page-header"><?php echo $__env->yieldContent('title'); ?></h1>
+
+        <?php if(isset($data->id)): ?>
+            <?php echo Form::open(array('action' => 'Admin_CategoriesController@postUpdateCategories', 'class' => 'form-horizontal')); ?> 
+        <?php else: ?>
+            <?php echo Form::open(array('action' => 'Admin_CategoriesController@postAddCategories', 'class' => 'form-horizontal')); ?> 
+        <?php endif; ?>
+
+        <ul id="myTab" class="nav nav-tabs">
+
+            <li class="<?php echo ($tab_data == 'sav')? 'active' : '' ;; ?>"><a href="#savoury" data-toggle="tab">Savoury</a></li>
+            <li class="<?php echo ($tab_data == 'sna')? 'active' : '' ;; ?>"><a href="#snack" data-toggle="tab">Snacks</a></li>
+            <li class="<?php echo ($tab_data == 'des')? 'active' : '' ;; ?>"><a href="#dessert" data-toggle="tab">Dessert</a></li>
+            <li class="<?php echo ($tab_data == 'ref')? 'active' : '' ;; ?>"><a href="#refreshment" data-toggle="tab">Refreshments</a></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in <?php echo ($tab_data == 'sav')? 'active' : '' ;; ?>" id="savoury">
+                <table class="table table-striped">
+                    <thead> 
+                        <tr>
+                            <th>#</td>
+                            <th>Recipe Name</th>
+                            <th></th>
+                            <th>Savoury</th>
+                            <th>Snack</th>
+                            <th>Dessert</th>
+                            <th>Refreshment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($savoury as $recipe): ?> 
+                            <tr>
+                                <td><?php echo $recipe->id; ?></td>
+                                <td><?php echo $recipe->name; ?></td>
+                                <td></td>
+                                <td>
+                                    <?php if($recipe->savoury == 1): ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->snack == 1): ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->dessert == 1): ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->refreshment == 1): ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>   
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="20">
+                                Total: <?php echo $recipes->count(); ?> 
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table> 
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</td>
+                            <th>Recipe Name</th>
+                            <th></th>
+                            <th>Savoury</th>
+                            <th>Snack</th>
+                            <th>Dessert</th>
+                            <th>Refreshment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($recipes as $recipe): ?>  
+                            <?php if($recipe->savoury != 1): ?> 
+                            <tr>
+                                <td><?php echo $recipe->id; ?></td>
+                                <td><?php echo $recipe->name; ?></td>
+                                <td></td>
+                                <td>
+                                    <?php if($recipe->savoury == 1): ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->snack == 1): ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->dessert == 1): ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->refreshment == 1): ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                            <?php endif; ?>
+                        <?php endforeach; ?>   
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="20">
+                                Total: <?php echo $recipes->count(); ?> 
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table> 
+            </div>
+            <div class="tab-pane fade in <?php echo ($tab_data == 'sna')? 'active' : '' ;; ?>" id="snack">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</td>
+                            <th>Recipe Name</th>
+                            <th></th>
+                            <th>Savoury</th>
+                            <th>Snack</th>
+                            <th>Dessert</th>
+                            <th>Refreshment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($snack as $recipe): ?> 
+                            <tr>
+                                <td><?php echo $recipe->id; ?></td>
+                                <td><?php echo $recipe->name; ?></td>
+                                <td></td>
+                                <td>
+                                    <?php if($recipe->savoury == 1): ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->snack == 1): ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->dessert == 1): ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->refreshment == 1): ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>   
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="20">
+                                Total: <?php echo $recipes->count(); ?> 
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table> 
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</td>
+                            <th>Recipe Name</th>
+                            <th></th>
+                            <th>Savoury</th>
+                            <th>Snack</th>
+                            <th>Dessert</th>
+                            <th>Refreshment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($recipes as $recipe): ?>  
+                            <?php if($recipe->snack != 1): ?> 
+                            <tr>
+                                <td><?php echo $recipe->id; ?></td>
+                                <td><?php echo $recipe->name; ?></td>
+                                <td></td>
+                                <td>
+                                    <?php if($recipe->savoury == 1): ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->snack == 1): ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->dessert == 1): ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->refreshment == 1): ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                            <?php endif; ?>
+                        <?php endforeach; ?>   
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="20">
+                                Total: <?php echo $recipes->count(); ?> 
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="tab-pane fade in <?php echo ($tab_data == 'des')? 'active' : '' ;; ?>" id="dessert">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</td>
+                            <th>Recipe Name</th>
+                            <th></th>
+                            <th>Savoury</th>
+                            <th>Snack</th>
+                            <th>Dessert</th>
+                            <th>Refreshment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($dessert as $recipe): ?> 
+                            <tr>
+                                <td><?php echo $recipe->id; ?></td>
+                                <td><?php echo $recipe->name; ?></td>
+                                <td></td>
+                                <td>
+                                    <?php if($recipe->savoury == 1): ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->snack == 1): ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->dessert == 1): ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->refreshment == 1): ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>   
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="20">
+                                Total: <?php echo $recipes->count(); ?> 
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table> 
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</td>
+                            <th>Recipe Name</th>
+                            <th></th>
+                            <th>Savoury</th>
+                            <th>Snack</th>
+                            <th>Dessert</th>
+                            <th>Refreshment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($recipes as $recipe): ?>  
+                            <?php if($recipe->dessert != 1): ?> 
+                            <tr>
+                                <td><?php echo $recipe->id; ?></td>
+                                <td><?php echo $recipe->name; ?></td>
+                                <td></td>
+                                <td>
+                                    <?php if($recipe->savoury == 1): ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->snack == 1): ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->dessert == 1): ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->refreshment == 1): ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                            <?php endif; ?>
+                        <?php endforeach; ?>   
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="20">
+                                Total: <?php echo $recipes->count(); ?> 
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="tab-pane fade in <?php echo ($tab_data == 'ref')? 'active' : '' ;; ?>" id="refreshment">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</td>
+                            <th>Recipe Name</th>
+                            <th></th>
+                            <th>Savoury</th>
+                            <th>Snack</th>
+                            <th>Dessert</th>
+                            <th>Refreshment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($refreshment as $recipe): ?> 
+                            <tr>
+                                <td><?php echo $recipe->id; ?></td>
+                                <td><?php echo $recipe->name; ?></td>
+                                <td></td>
+                                <td>
+                                    <?php if($recipe->savoury == 1): ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->snack == 1): ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->dessert == 1): ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->refreshment == 1): ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>   
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="20">
+                                Total: <?php echo $recipes->count(); ?> 
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table> 
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</td>
+                            <th>Recipe Name</th>
+                            <th></th>
+                            <th>Savoury</th>
+                            <th>Snack</th>
+                            <th>Dessert</th>
+                            <th>Refreshment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($recipes as $recipe): ?>  
+                            <?php if($recipe->refreshment != 1): ?> 
+                            <tr>
+                                <td><?php echo $recipe->id; ?></td>
+                                <td><?php echo $recipe->name; ?></td>
+                                <td></td>
+                                <td>
+                                    <?php if($recipe->savoury == 1): ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/savoury/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->snack == 1): ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/snack/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->dessert == 1): ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/dessert/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($recipe->refreshment == 1): ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
+                                    <?php else: ?>
+                                        <?php echo link_to('/admin/menu/refreshment/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                            <?php endif; ?>
+                        <?php endforeach; ?>   
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="20">
+                                Total: <?php echo $recipes->count(); ?> 
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            
+        </div>
+        <hr>   	
+        <?php echo Form::hidden('id', (isset($input['id'])? Input::old('id') : (isset($data->id)? $data->id : '' ))); ?>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+            <?php echo Form::submit('Save', array('class' => 'btn btn-success')); ?>
+            <a href="/admin/menu/categories/">
+            <?php echo Form::button('Cancel' ,array('class' => 'btn btn-danger')); ?>
+            </a>
+            </div>
+        </div>       	
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('_tail'); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('tmpl.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

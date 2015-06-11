@@ -26,7 +26,7 @@ class IngredientPageController  extends BaseController {
 		
 		// echo '<pre>'; print_r($iData); echo '</pre>';  exit; 
 
-		$rData = MenuRecipes::where('menu_recipes.active', '=', 1)
+		$rData = MenuRecipes::where('menu_recipes.naughty_active', '=', 1)
 			->with(array('MenuRecipesIngredients' => function($query) use ($id){
 				$query->where('menu_ingredients_id', '=', $id);
 			}))
@@ -35,7 +35,7 @@ class IngredientPageController  extends BaseController {
 				$query->where('ordering', '=', 0)->where('section', '=', 'RECIPE');
 			}))
 
-		->orderBy(DB::raw('RAND()'))->where('active', '=', 1)->get();
+		->orderBy(DB::raw('RAND()'))->where('naughty_active', '=', 1)->get();
 
 		// 
 

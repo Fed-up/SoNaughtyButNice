@@ -27,7 +27,7 @@
                 <td><?php echo $recipe->MenuCategories['name']; ?></td>
                 <td><?php echo $recipe->summary; ?></td>
                 <td>
-                	<?php if($recipe->active == 1): ?>
+                	<?php if($recipe->naughty_active == 1): ?>
                     	<?php echo link_to('/admin/menu/recipes/active/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')); ?>
                     <?php else: ?>
                 		<?php echo link_to('/admin/menu/recipes/active/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')); ?>

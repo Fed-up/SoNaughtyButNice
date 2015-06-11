@@ -28,7 +28,7 @@
                 <td>{{ $recipe->MenuCategories['name'] }}</td>
                 <td>{{ $recipe->summary }}</td>
                 <td>
-                	@if($recipe->active == 1)
+                	@if($recipe->naughty_active == 1)
                     	{{ link_to('/admin/menu/recipes/active/'.$recipe->id, '', array('class' => 'btn btn-success glyphicon glyphicon-ok')) }}
                     @else
                 		{{ link_to('/admin/menu/recipes/active/'.$recipe->id, '', array('class' => 'btn btn-danger glyphicon glyphicon-remove')) }}

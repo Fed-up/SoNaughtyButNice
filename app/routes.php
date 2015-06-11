@@ -77,7 +77,15 @@ Route::group(array('before' => 'profile'), function() {
 //Admin
 Route::group(array('before' => 'auth'), function() {		
 	Route::get('admin', 'Admin_AdminController@getIndex');
-	//Our Menu
+
+	//Cafe Menu
+	Route::get('admin/menu/menu', 'Admin_MenuController@getMenu');
+	Route::get('admin/menu/savoury/{id}', 'Admin_MenuController@getSavoury');
+	Route::get('admin/menu/snack/{id}', 'Admin_MenuController@getSnack');
+	Route::get('admin/menu/dessert/{id}', 'Admin_MenuController@getDessert');
+	Route::get('admin/menu/refreshment/{id}', 'Admin_MenuController@getRefreshment');
+	
+	//Our Categories
 	Route::get('admin/menu/categories', 'Admin_CategoriesController@getCategories');
 	Route::get('admin/menu/categories/add', 'Admin_CategoriesController@getAddCategories');
 	Route::post('admin/menu/categories/add', 'Admin_CategoriesController@postAddCategories');
@@ -175,13 +183,19 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('admin/website/quotes/delete/{id}', 'Admin_QuotesController@getDeleteQuotes');
 	
 	//Header
-	Route::get('admin/website/header', 'Admin_HeaderController@getHeader');
+	Route::get('admin/website/header', 'Admin_HeaderController@getHeader'); 
 	Route::get('admin/website/header/add', 'Admin_HeaderController@getAddHeader');
 	Route::post('admin/website/header/add', 'Admin_HeaderController@postAddHeader');
 	Route::post('admin/website/header/edit', 'Admin_HeaderController@postUpdateHeader');
 	Route::get('admin/website/header/edit/{id}', 'Admin_HeaderController@getEditHeader');
 	Route::get('admin/website/header/active/{id}', 'Admin_HeaderController@getActiveHeader');
 	Route::get('admin/website/header/delete/{id}', 'Admin_HeaderController@getDeleteHeader');
+
+	//Website All Recipes
+	Route::get('admin/website/allrecipes', 'Admin_RecipesController@getAllRecipes');	
+	Route::get('admin/website/allrecipes/active/{id}', 'Admin_RecipesController@getAllActiveRecipes');
+	Route::get('admin/website/allrecipes/makeactive', 'Admin_RecipesController@getMakeRecipesActive');
+	Route::get('admin/menu/recipes/confirmdelete/{id}', 'Admin_RecipesController@getConfirmDeleteRecipes');
 	
 	
 	Route::post('admin/upload', 'Admin_AdminController@postUpload');

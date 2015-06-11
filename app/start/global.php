@@ -58,7 +58,7 @@ App::error(function(Exception $exception, $code)
 
 	// echo '<pre>'; print_r($code); echo '</pre>'; 
 	// echo '<pre>'; print_r($exception); echo '</pre>'; 	exit;
-	// return Response::view('public.error');
+	return Response::view('public.error');
 });
 
 /*

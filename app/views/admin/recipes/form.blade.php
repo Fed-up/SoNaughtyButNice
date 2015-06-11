@@ -426,7 +426,7 @@
 				silverlight_xap_url : '/packages/jquery-1.11.1.min/vendor/jquery-ui-1.10.4.custom/js/Moxie.xap',
 				
 				filters : {
-					max_file_size : '200mb',
+					max_file_size : '1mb',
 					mime_types: [
 						{title : "Image files", extensions : "jpg,jpeg"},
 					]
@@ -632,21 +632,35 @@
                 {{ Form::text('serve', (isset($input['serve'])? Input::old('serve') : (isset($data->serve)? $data->serve : '' )), array('class' => 'form-control')) }}
             </div>
 		</div>
-        
-        
-        
-        
-        
-        <div class="form-group">
-            {{ Form::label('active', 'Active: ', array('class' => 'col-sm-2 control-label')) }}
+        <div class="form-group }}">
+        	{{ Form::label('menu_type', 'Menu Type: ', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-3">
+                {{ Form::select('menu_type', 
+                    array(
+                    	'Default' => 'Default',
+                        'Savoury Meal' => 'Savoury Meal',                   	
+                        'Quick Snack' => 'Quick Snack',
+                        'Dessert' => 'Dessert',
+                        'Refreshment' => 'Refreshment', 
+                    ), (isset($input['menu_type'])? Input::old('menu_type') : (isset($data->menu_type)? $data->menu_type : null )), array('class'=>'form-control')) }} 
+            </div>
+        </div>
+		<div class="form-group">
+            {{ Form::label('fedup_active', 'Active: ', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-10">
-              {{ Form::checkbox('active', 1, (isset($input['active'])? Input::old('active') : (isset($data->active)? $data->active : '' )), array('class' => '')) }}
+              {{ Form::checkbox('fedup_active', 1, (isset($input['fedup_active'])? Input::old('fedup_active') : (isset($data->fedup_active)? $data->fedup_active : '' )), array('class' => '')) }}
             </div>
         </div>  
         <div class="form-group">
             {{ Form::label('exclusive', 'Exclusive: ', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-10">
               {{ Form::checkbox('exclusive', 1, (isset($input['exclusive'])? Input::old('exclusive') : (isset($data->exclusive)? $data->exclusive : '' )), array('class' => '')) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ Form::label('catering', 'Catering: ', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+              {{ Form::checkbox('catering', 1, (isset($input['catering'])? Input::old('catering') : (isset($data->catering)? $data->catering : '' )), array('class' => '')) }}
             </div>
         </div>        
         <div class="form-group {{ ($errors->has('categories')) ? 'has-error' : '' ; }}">
@@ -926,7 +940,7 @@
 
 				            {{ Form::label('desired_total_markup', 'Desired Total Markup - %: ', array('class' => 'col-sm-2 control-label')) }}
 				            <div class="col-sm-2">
-				               {{ Form::text('desired_total_markup', (isset($input['desired_total_markup'])? Input::old('desired_total_markup') : (isset($sdata->desired_total_markup)? $sdata->desired_total_markup : '' )), array('class' => 'form-control', 'placeholder' => '400')) }}
+				               {{ Form::text('desired_total_markup', (isset($input['desired_total_markup'])? Input::old('desired_total_markup') : (isset($sdata->desired_total_markup)? $sdata->desired_total_markup : '' )), array('class' => 'form-control', 'placeholder' => '350')) }}
 				            </div>
 				            <!-- <div class="col-sm-1"></div> -->
 				             
@@ -968,7 +982,7 @@
 				               <p class="sales-data__info">$ {{$sdata->total_ingredient_cost_per_piece}}</p>
 				            </div>
 
-				            <h5 class="col-sm-2 control-label sales-data__title">Total recipe revenue:</h5>
+				            <h5 class="col-sm-2 control-label sales-data__title">B2C Total recipe revenue:</h5>
 				            <div class="col-sm-3">
 				               <p class="sales-data__info">$ {{$sdata->total_recipe_revenue}}</p>
 				            </div>
@@ -982,7 +996,7 @@
 				            </div>
 
 
-				            <h5 class="col-sm-2 control-label sales-data__title">Total profit:</h5>
+				            <h5 class="col-sm-2 control-label sales-data__title">Total gross profit:</h5>
 				            <div class="col-sm-3">
 				               <p class="sales-data__info">$ {{$sdata->total_profit}}</p>
 				            </div>
@@ -1010,7 +1024,7 @@
 				            </div>
 				        </div>
 				        <div class="form-group {{ ($errors->has('title')) ? ' has-error' : '' ; }}">
-				        	<h5 class="col-sm-2 control-label sales-data__title">Total margin percentage:</h5>
+				        	<h5 class="col-sm-2 control-label sales-data__title">Total gross margin percentage:</h5>
 				            <div class="col-sm-3">
 				               <p class="sales-data__info">{{$sdata->total_margin_percentage}} %</p>
 				            </div>

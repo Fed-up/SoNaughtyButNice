@@ -6,7 +6,7 @@ class RecipeController  extends BaseController {
 		if(Auth::user()){
 			$user = Auth::user();
 			if($user->user_type == 'B2B'){
-				$rData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->take(18)
+				$rData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('naughty_active', '=', 1)->take(18)
 					->with(array('MenuCategories' => function($query)
 					{
 						$query->where('menu_categories.active', '=', 1);
@@ -18,7 +18,7 @@ class RecipeController  extends BaseController {
 				
 				->get();
 			}else{
-				$rData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->where('exclusive', '!=', 1)->take(18)
+				$rData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('naughty_active', '=', 1)->where('exclusive', '!=', 1)->take(18)
 					->with(array('MenuCategories' => function($query)
 					{
 						$query->where('menu_categories.active', '=', 1);
@@ -31,7 +31,7 @@ class RecipeController  extends BaseController {
 				->get();
 			}
 		}else{
-			$rData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->where('exclusive', '!=', 1)->take(18)
+			$rData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('naughty_active', '=', 1)->where('exclusive', '!=', 1)->take(18)
 				->with(array('MenuCategories' => function($query)
 				{
 					$query->where('menu_categories.active', '=', 1);
@@ -45,27 +45,27 @@ class RecipeController  extends BaseController {
 		}
 
 
-		$aeData = MenuRecipes::where('active', '=', 1)
+		$aeData = MenuRecipes::where('naughty_active', '=', 1)
 			->with(array('MenuCategories' => function($query){$query->where('menu_categories.active', '=', 1);}))
 			->with(array('Images' => function($query){$query->where('images.ordering', '=', 0)->where('section', '=', 'RECIPE')->where('active', '=', 1);}))
 		->orderBy('name','ASC')->where('name', 'LIKE', 'a%')->orWhere('name', 'LIKE', 'b%')->orWhere('name', 'LIKE', 'c%')->orWhere('name', 'LIKE', 'd%')->orWhere('name', 'LIKE', 'e%')->get();
 
-		$fjData = MenuRecipes::where('active', '=', 1)
+		$fjData = MenuRecipes::where('naughty_active', '=', 1)
 			->with(array('MenuCategories' => function($query){$query->where('menu_categories.active', '=', 1);}))
 			->with(array('Images' => function($query){$query->where('images.ordering', '=', 0)->where('section', '=', 'RECIPE')->where('active', '=', 1);}))
 		->orderBy('name','ASC')->where('name', 'LIKE', 'f%')->orWhere('name', 'LIKE', 'g%')->orWhere('name', 'LIKE', 'h%')->orWhere('name', 'LIKE', 'i%')->orWhere('name', 'LIKE', 'j%')->get();
 
-		$koData = MenuRecipes::where('active', '=', 1)
+		$koData = MenuRecipes::where('naughty_active', '=', 1)
 			->with(array('MenuCategories' => function($query){$query->where('menu_categories.active', '=', 1);}))
 			->with(array('Images' => function($query){$query->where('images.ordering', '=', 0)->where('section', '=', 'RECIPE')->where('active', '=', 1);}))
 		->orderBy('name','ASC')->where('name', 'LIKE', 'k%')->orWhere('name', 'LIKE', 'l%')->orWhere('name', 'LIKE', 'm%')->orWhere('name', 'LIKE', 'n%')->orWhere('name', 'LIKE', 'o%')->get();
 
-		$ptData = MenuRecipes::where('active', '=', 1)
+		$ptData = MenuRecipes::where('naughty_active', '=', 1)
 			->with(array('MenuCategories' => function($query){$query->where('menu_categories.active', '=', 1);}))
 			->with(array('Images' => function($query){$query->where('images.ordering', '=', 0)->where('section', '=', 'RECIPE')->where('active', '=', 1);}))
 		->orderBy('name','ASC')->where('name', 'LIKE', 'p%')->orWhere('name', 'LIKE', 'q%')->orWhere('name', 'LIKE', 'r%')->orWhere('name', 'LIKE', 's%')->orWhere('name', 'LIKE', 't%')->get();
 
-		$uzData = MenuRecipes::where('active', '=', 1)
+		$uzData = MenuRecipes::where('naughty_active', '=', 1)
 			->with(array('MenuCategories' => function($query){$query->where('menu_categories.active', '=', 1);}))
 			->with(array('Images' => function($query){$query->where('images.ordering', '=', 0)->where('section', '=', 'RECIPE')->where('active', '=', 1);}))
 		->orderBy('name','ASC')->where('name', 'LIKE', 'u%')->orWhere('name', 'LIKE', 'v%')->orWhere('name', 'LIKE', 'w%')->orWhere('name', 'LIKE', 'x%')->orWhere('name', 'LIKE', 'y%')->orwhere('name', 'LIKE', 'z%')->get();
@@ -207,7 +207,7 @@ class RecipeController  extends BaseController {
 
 
 		// if($user->user_type != 'B2B'){
-			$exrData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->where('exclusive', '=', 1)
+			$exrData = MenuRecipes::orderBy(DB::raw('RAND()'))->where('naughty_active', '=', 1)->where('exclusive', '=', 1)
 				->with(array('MenuCategories' => function($query)
 				{
 					$query->where('menu_categories.active', '=', 1);

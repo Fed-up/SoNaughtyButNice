@@ -7,7 +7,7 @@ class CollectionController  extends BaseController {
 		$cData = MenuCategories::orderBy(DB::raw('RAND()'))->where('active', '=', 1)->take(12)
 			->with(array('menuRecipes' => function($query)
 			{
-				$query->where('menu_recipes.active', '=', 1)
+				$query->where('menu_recipes.naughty_active', '=', 1)
 					->with(array('Images' => function($query)
 					{
 						$query->where('ordering', '=', 0)->where('section', '=', 'RECIPE');

@@ -7,7 +7,7 @@ class CollectionPageController  extends BaseController {
 			$cData = MenuCategories::where('id', '=', $id)->with(array('menuRecipes' => function($query)
 			{
 				//while(mysqli_num_rows(MenuCategories) > 0){
-				$query->where('menu_recipes.active', '=', 1)
+				$query->where('menu_recipes.naughty_active', '=', 1)
 					->with(array('Images' => function($query)
 					{
 						$query->where('ordering', '=', 0)->where('section', '=', 'RECIPE');
