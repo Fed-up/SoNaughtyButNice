@@ -88,14 +88,16 @@ ul, li {
   padding: 1rem;
 }
 
-.section__box {
+.section__box { 
   background-color: #fff;
-  border: 1px solid #e0e0e0;
+  /*border: 1px solid #e0e0e0;*/
   padding: 0.5rem;
   margin-bottom: 0.5rem; }
 
 .section__box--content {
-  padding: 0rem; }
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
 
 .content-link {
   color: #000;
