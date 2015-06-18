@@ -20,50 +20,51 @@
 
 
   <body>
-    
-    <!-- <header class="header"> -->
-      @include('public.header')
-    <!-- </header> -->
-
     <div class="content-slot">
-      @yield('content')
-      <div class="footer__push"></div>
-      @include('public.footer') 
+    
+    <div id="container">
+        <div id="header">
+            @include('public.header')
+        </div>
+        <div id="body">
+            @yield('content')  
+        </div>
+        <div id="footer">
+            @include('public.footer') 
+        </div>
     </div>
 
-
-      
-    
+    </div>
 
     <aside 
-      id="panel--right" 
-      class="panel--right"> <!-- //panel -->
+        id="panel--right" 
+        class="panel--right"> <!-- //panel -->
         <div id="navigation" class="">
-          
-          @if (Auth::check())
-              
-          @else
-             {{ Form::open(array('url' => 'login', 'class' => 'form-signin form-signin--swipe')) }}
-              <a href="/signup" class="side__member__button">Become a Member</a> 
-              <h3 class="side__login__header">Join Us Today</h3> 
 
-              <div class="form__input--side--login form__input--side--login--swipe">
-                  {{ Form::label('email', 'Email: ', array('class' => 'input__name--white')) }}
-                  {{ Form::email('email', '', array('placeholder'=>'Email', 'class'=>'form-control' ) ) }}
-              </div>
-              <div class="form__input--side--login form__input--side--login--swipe">
-                  {{ Form::label('password', 'Password: ', array('class' => 'input__name--white')) }}
-                  {{ Form::password('password', array('placeholder'=>'Password', 'class'=>'form-control' ) ) }}
-              </div>
-              
-              {{ Form::submit('Login', array('class' => 'side__login__button--swipe')) }}
-              
-            {{ Form::close() }}
-          @endif 
+            @if (Auth::check())
+
+            @else
+                {{ Form::open(array('url' => 'login', 'class' => 'form-signin form-signin--swipe')) }}
+                <a href="/signup" class="side__member__button">Become a Member</a> 
+                <h3 class="side__login__header">Join Us Today</h3> 
+
+                <div class="form__input--side--login form__input--side--login--swipe">
+                    {{ Form::label('email', 'Email: ', array('class' => 'input__name--white')) }}
+                    {{ Form::email('email', '', array('placeholder'=>'Email', 'class'=>'form-control' ) ) }}
+                </div>
+                <div class="form__input--side--login form__input--side--login--swipe">
+                    {{ Form::label('password', 'Password: ', array('class' => 'input__name--white')) }}
+                    {{ Form::password('password', array('placeholder'=>'Password', 'class'=>'form-control' ) ) }}
+                </div>
+
+                {{ Form::submit('Login', array('class' => 'side__login__button--swipe')) }}
+
+                {{ Form::close() }}
+            @endif 
 
 
 
-            
+
             <nav class="">
                 <a href="/" class="{{((Request::segment(0) === '')? 'side--nav navTab_active ' : 'side--nav')}}">Home</a>
                 <!-- <a class="side--nav" href="/">{{ ((Auth::guest())? '' : ((Auth::user()->admin == 1)? HTML::link('admin', 'Profile') : HTML::link('profile', 'Profile'))) }}</a> -->
@@ -75,8 +76,13 @@
                 <a class="{{((Request::segment(1) === 'catering')? 'side--nav navTab_active' : 'side--nav')}}" href="/catering">Catering</a>
             </nav>
         </div>
-
     </aside><!-- /panel -->
+
+
+      
+    
+
+    
     
     
 

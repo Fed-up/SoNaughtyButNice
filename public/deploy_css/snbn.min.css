@@ -2712,61 +2712,54 @@ html {
   -moz-box-sizing: border-box;
   -webbkit-box-sizing: border-box;
   font-size: 1rem;
-  height: auto; }
+  height: 100%; }
+  @media only screen and (min-width:481px) {
+    html {
+      font-size: 0.92rem; } }
+  @media only screen and (min-width:769px) {
+    html {
+      font-size: 0.9rem; } }
 
-@media only screen and (min-width: 481px) {
-  /* line 20, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
-  html {
-    font-size: 0.94rem; } }
-
-@media only screen and (min-width: 768px) {
-  /* line 23, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
-  html {
-    font-size: 0.92rem; } }
-
-@media only screen and (min-width: 961px) {
-  /* line 26, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
-  html {
-    font-size: 0.9rem; } }
-
-/* line 29, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 28, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 body {
-  background-color: #F3F6F5;
+  background-color: #fff;
   -webkit-font-smoothing: antialiased;
   /* Fix for webkit rendering */
   -webkit-text-size-adjust: 100%;
-  height: auto; }
+  margin: 0;
+  padding: 0;
+  height: 100%; }
 
-/* line 36, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 38, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 a {
   text-decoration: none; }
 
-/* line 40, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 42, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 a:hover, a:focus {
   color: #fff;
   text-decoration: none; }
 
-/* line 45, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 47, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .columns img {
   width: 100%; }
 
-/* line 48, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 51, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 ul, li {
   list-style: none; }
 
-/* line 51, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 54, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .row {
   max-width: 84.375rem; }
 
-/* line 55, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 58, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .no-display {
   display: none; }
 
-/* line 58, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 61, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .ui-content {
   padding: 0; }
 
-/* line 61, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 64, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content-slot {
   -webkit-transition-property: -webkit-transform;
   -moz-transition-property: -moz-transform;
@@ -2775,21 +2768,47 @@ ul, li {
   -moz-transition-duration: 0.5s;
   transition-duration: 0.5s;
   background-color: #fff;
+  height: 100%;
   padding-top: 2.5rem;
   position: relative;
   z-index: 1; }
 
-/* line 74, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
-.page {
-  color: #343434;
-  height: 100%; }
+/* line 77, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+#container {
+  min-height: 100%;
+  /*// position:relative;*/ }
 
-/* line 78, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 81, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+#header {
+  background: #ff0;
+  padding: 40px; }
+
+/* line 85, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+#body {
+  /*   // padding:10px;
+   // padding-bottom:60px;   /* Height of the footer */
+  margin-bottom: 24rem; }
+
+/* line 90, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+#footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  /*// height:60px;    Height of the footer */
+  background: #6cf; }
+
+/* line 98, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+.page {
+  color: #000;
+  height: 100%;
+  background-color: #fff; }
+
+/* line 104, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .error_message {
   font-size: 80%;
   color: #ff7c81; }
 
-/* line 83, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 109, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .message__alert {
   margin: .6rem;
   color: #ff7c81;
@@ -2797,46 +2816,46 @@ ul, li {
   background: #fff;
   padding: 1rem; }
 
-/* line 91, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 117, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .section__box {
   background-color: #fff;
   /*border: 1px solid #e0e0e0;*/
   padding: 0.5rem;
   margin-bottom: 0.5rem; }
 
-/* line 97, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 123, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .section__box--content {
   padding: 0.5rem;
   margin-top: 0.5rem; }
 
-/* line 102, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 128, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content-link {
   color: #000;
   text-decoration: none;
   font-weight: bold; }
 
-/* line 107, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 133, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content-link:hover {
   color: #343434;
   border-bottom: 1px solid #ff5531; }
 
-/* line 111, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 137, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .footer__push {
   height: 33rem; }
 
 @media only screen {
-  /* line 116, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+  /* line 142, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
   .image-box {
     margin-bottom: 0.2rem;
     margin-top: 1rem; } }
 
 @media only screen and (min-width: 481px) {
-  /* line 123, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+  /* line 149, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
   .image-box {
     margin-bottom: 0.2rem;
     margin-top: 1rem; } }
 
-/* line 129, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 155, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content__title {
   text-align: center;
   font-family: headings;
@@ -2845,57 +2864,57 @@ ul, li {
   margin-top: 0.5rem;
   font-weight: bold; }
 
-/* line 138, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 164, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .page-header {
   font-size: 1.1rem;
   padding-bottom: 1rem; }
 
-/* line 143, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 169, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content__title--main {
   text-align: center;
   margin: 0.5rem 0;
   font-family: headings; }
 
-/* line 148, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 174, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content__title--login {
   display: inline-block;
   text-align: center;
   margin: 0.5rem 0;
   font-family: headings; }
 
-/* line 154, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 180, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content__title--recipe {
   text-align: center;
   font-family: headings !important; }
 
-/* line 158, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 184, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content__title--main--signup {
   text-align: center;
   margin: 0.5rem 0 2.5rem 0;
   font-family: headings;
   line-height: 1.6rem; }
 
-/* line 165, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 191, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content__title--link {
   text-decoration: none;
   color: #343434;
   font-weight: bold; }
 
-/* line 171, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 197, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content__title--link:hover {
   color: #343434; }
 
-/* line 175, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 201, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content__title--homepage {
   text-align: center;
   margin-top: 0.5rem; }
 
 @media only screen and (min-width: 768px) {
-  /* line 179, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+  /* line 205, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
   .content__title--homepage {
     display: none; } }
 
-/* line 182, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 208, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content__title--main--tabs {
   display: inline-block;
   padding: 0.5rem;
@@ -2904,23 +2923,23 @@ ul, li {
   margin-left: 0.5rem;
   margin-right: 0.5rem; }
 
-/* line 191, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 217, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content__title--main--tabs:hover {
   color: #343434; }
 
-/* line 195, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 221, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content__title--main--tabs.active {
   background-color: #ff7c81;
   color: #fff; }
 
-/* line 199, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 225, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .content-title--sub {
   text-align: center;
   font-family: headings;
   padding: 0.5rem;
   float: left; }
 
-/* line 206, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 232, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .subnav {
   border-bottom: 1px solid #8fd2c8;
   padding-top: 0.3rem;
@@ -2928,66 +2947,66 @@ ul, li {
   text-align: center; }
 
 @media only screen and (min-width: 481px) {
-  /* line 213, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+  /* line 239, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
   .subnav {
     text-align: left; } }
 
-/* line 218, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 244, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .subnav--centre {
   text-align: center; }
 
-/* line 222, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 248, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tab__link {
   text-decoration: none;
   color: #343434;
   white-space: nowrap;
   font-family: headings; }
 
-/* line 228, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 254, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tab__link:hover {
   color: #ff7c81; }
 
-/* line 232, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 258, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .active > .tab__link {
   color: #fff; }
 
-/* line 235, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 261, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .promo__text {
   padding-top: .3rem;
   font-size: 0.9rem;
   font-style: italic; }
 
-/* line 241, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 267, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .column, .columns {
   padding-left: 0.625rem;
   padding-right: 0.625rem; }
 
-/* line 246, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 272, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs-content > .content {
   padding: 0.625rem 0; }
 
-/* line 250, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 276, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs {
   margin-bottom: 0 !important;
   margin-left: 0; }
 
-/* line 253, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 279, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs:before, .tabs:after {
   content: " ";
   display: table; }
 
-/* line 256, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 282, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs:after {
   clear: both; }
 
-/* line 258, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 284, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs dd, .tabs .tab-title {
   position: relative;
   margin-bottom: 0 !important;
   list-style: none;
   float: left; }
 
-/* line 263, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 289, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs dd > a, .tabs .tab-title > a {
   display: block;
   background-color: #efefef;
@@ -2996,82 +3015,82 @@ ul, li {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size: 1rem; }
 
-/* line 270, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 296, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs dd > a:hover, .tabs .tab-title > a:hover {
   background-color: #e1e1e1; }
 
-/* line 272, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 298, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs dd.active a, .tabs .tab-title.active a {
   background-color: white;
   color: #222222; }
 
-/* line 275, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 301, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs.radius dd:first-child a, .tabs.radius .tab:first-child a {
   -webkit-border-bottom-left-radius: 3px;
   -webkit-border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px; }
 
-/* line 280, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 306, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs.radius dd:last-child a, .tabs.radius .tab:last-child a {
   -webkit-border-bottom-right-radius: 3px;
   -webkit-border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px; }
 
-/* line 285, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 311, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs.vertical dd, .tabs.vertical .tab-title {
   position: inherit;
   float: none;
   display: block;
   top: auto; }
 
-/* line 291, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 317, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs-content {
   margin-bottom: 1.5rem;
   width: 100%; }
 
-/* line 294, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 320, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs-content:before, .tabs-content:after {
   content: " ";
   display: table; }
 
-/* line 297, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 323, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs-content:after {
   clear: both; }
 
-/* line 299, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 325, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs-content > .content {
   display: none;
   float: left;
   padding: 0.625rem 0;
   width: 100%; }
 
-/* line 304, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 330, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs-content > .content.active {
   display: block;
   float: none; }
 
-/* line 307, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 333, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs-content > .content.contained {
   padding: 0.9375rem; }
 
-/* line 309, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 335, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs-content.vertical {
   display: block; }
 
-/* line 311, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 337, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .tabs-content.vertical > .content {
   padding: 0 0.9375rem; }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 315, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+  /* line 341, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
   .tabs.vertical {
     width: 20%;
     max-width: 20%;
     float: left;
     margin: 0 0 1.25rem; }
-  /* line 321, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+  /* line 347, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
   .tabs-content.vertical {
     width: 80%;
     max-width: 80%;
@@ -3079,19 +3098,19 @@ ul, li {
     margin-left: -1px;
     padding-left: 1rem; } }
 
-/* line 327, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 353, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .no-js .tabs-content > .content {
   display: block;
   float: none; }
 
-/* line 331, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 357, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .package__total {
   text-align: right;
   margin-top: -1rem;
   margin-bottom: 1rem;
   color: #12cdb2; }
 
-/* line 338, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
+/* line 364, C:/GitHub/SoNaughtyButNice/public/sass/modules/_base.scss */
 .package__total--create-package {
   text-align: right;
   margin-bottom: 1rem;
@@ -3132,30 +3151,34 @@ body.showPanel .content-slot {
  *
  * Contributing author: Tyler Smith (@mbmufffin)
  */
-@media only screen and (max-width: 480px) {
-  /* line 12, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
-  .flexslider--tom {
-    display: none; } }
+/* line 12, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+.flexslider--tom {
+  display: normal; }
 
-@media only screen and (min-width: 481px) and (max-width: 767px) {
-  /* line 18, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
-  .flexslider--tom {
-    display: none; } }
+/* line 16, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+.flexslider {
+  width: 200px;
+  height: 200px; }
 
-@media only screen and (min-width: 768px) {
-  /* line 24, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
-  .flexslider--tom {
-    display: normal; } }
+/* line 21, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+.flexslider .slides img {
+  width: 200px;
+  height: 200px; }
 
+/*.flexslider .slides img {
+     max-width: 100%; 
+     height: 748px; 
+     display: block;
+}*/
 /* Browser Resets
 *********************************/
 /* line 29, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 33, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 36, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flex-container a:active, .flexslider a:active, .flex-container a:focus, .flexslider a:focus {
   outline: none; }
 
 /* line 32, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 39, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 42, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .slides, .flex-control-nav, .flex-direction-nav {
   margin: 0;
   padding: 0;
@@ -3174,16 +3197,16 @@ body.showPanel .content-slot {
 /* FlexSlider Necessary Styles
 *********************************/
 /* line 50, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 61, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 64, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flexslider {
   margin: 0;
   padding: 0; }
-  /* line 65, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 68, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flexslider .slides > li {
     display: none;
     -webkit-backface-visibility: hidden;
     overflow: hidden; }
-  /* line 70, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 73, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flexslider .slides img {
     width: 100%;
     display: block; }
@@ -3192,13 +3215,13 @@ body.showPanel .content-slot {
 /* Hide the slides before the JS is loaded. Avoids image jumping */
 /* line 52, C:/webroot/lcsnbn/sass/modules/flexslider */
 /* line 53, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 84, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 87, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flex-pauseplay span {
   text-transform: capitalize; }
 
 /* Clearfix for the .slides element */
 /* line 56, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 91, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 94, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .slides:after {
   content: ".";
   display: block;
@@ -3208,12 +3231,12 @@ body.showPanel .content-slot {
   height: 0; }
 
 /* line 57, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 102, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 105, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 html[xmlns] .slides {
   display: block; }
 
 /* line 58, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 108, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 111, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 * html .slides {
   height: 1%; }
 
@@ -3221,22 +3244,22 @@ html[xmlns] .slides {
 /* If you are not using another script, such as Modernizr, make sure you
  * include js that eliminates this class on page load */
 /* line 63, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 117, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 120, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .no-js .slides > li:first-child {
   display: block; }
 
 /* FlexSlider Default Theme
 *********************************/
 /* line 67, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 125, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 128, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flexslider {
-  margin: 0 0.625rem 2rem;
+  /*margin: 0 0.625rem 2rem;*/
   background: #fff;
   position: relative;
   zoom: 1; }
 
 /* line 68, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 134, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 137, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flex-viewport {
   max-height: 2000px;
   -webkit-transition: all 1s ease;
@@ -3245,27 +3268,27 @@ html[xmlns] .slides {
   transition: all 1s ease; }
 
 /* line 69, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 144, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 147, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .loading .flex-viewport {
   max-height: 300px; }
 
 /* line 70, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 150, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 153, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flexslider .slides {
   zoom: 1;
   height: 100%; }
 
 /* line 71, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 157, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 160, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .carousel li {
   margin-right: 5px; }
 
 /* Direction Nav */
 /* line 74, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 164, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 167, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flex-direction-nav {
   *height: 0; }
-  /* line 166, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 169, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flex-direction-nav a {
     text-decoration: none;
     display: block;
@@ -3282,10 +3305,10 @@ html[xmlns] .slides {
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     transition: all 0.3s ease; }
-  /* line 183, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 186, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flex-direction-nav .flex-prev {
     left: 0; }
-  /* line 186, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 189, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flex-direction-nav .flex-next {
     right: 0;
     text-align: right; }
@@ -3294,37 +3317,37 @@ html[xmlns] .slides {
 /* line 76, C:/webroot/lcsnbn/sass/modules/flexslider */
 /* line 77, C:/webroot/lcsnbn/sass/modules/flexslider */
 /* line 78, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 201, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 204, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flexslider:hover .flex-prev {
   opacity: 0.7;
   left: 10px; }
-/* line 205, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 208, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flexslider:hover .flex-next {
   opacity: 0.7;
   right: 10px; }
-  /* line 208, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 211, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flexslider:hover .flex-next:hover {
     opacity: 1; }
-/* line 212, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 215, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flexslider:hover .flex-prev:hover {
   opacity: 1; }
 
 /* line 79, C:/webroot/lcsnbn/sass/modules/flexslider */
 /* line 80, C:/webroot/lcsnbn/sass/modules/flexslider */
 /* line 81, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 224, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 227, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flex-direction-nav .flex-disabled {
   opacity: 0 !important;
   filter: alpha(opacity=0);
   cursor: default; }
-/* line 230, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 233, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flex-direction-nav a:before {
   font-family: "flexslider-icon";
   font-size: 40px;
   line-height: 1;
   display: inline-block;
   content: '\f001'; }
-/* line 237, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 240, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flex-direction-nav a.flex-next:before {
   content: '\f002'; }
 
@@ -3332,7 +3355,7 @@ html[xmlns] .slides {
 /* line 83, C:/webroot/lcsnbn/sass/modules/flexslider */
 /* Pause/Play */
 /* line 86, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 250, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 253, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flex-pauseplay a {
   display: block;
   width: 20px;
@@ -3345,16 +3368,16 @@ html[xmlns] .slides {
   overflow: hidden;
   cursor: pointer;
   color: #000; }
-  /* line 262, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 265, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flex-pauseplay a:before {
     font-family: "flexslider-icon";
     font-size: 20px;
     display: inline-block;
     content: '\f004'; }
-  /* line 268, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 271, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flex-pauseplay a:hover {
     opacity: 1; }
-  /* line 271, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 274, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flex-pauseplay a.flex-play:before {
     content: '\f003'; }
 
@@ -3363,13 +3386,13 @@ html[xmlns] .slides {
 /* line 89, C:/webroot/lcsnbn/sass/modules/flexslider */
 /* Control Nav */
 /* line 92, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 285, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 288, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flex-control-nav {
   width: 100%;
   position: absolute;
   bottom: -40px;
   text-align: center; }
-  /* line 290, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 293, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flex-control-nav li {
     margin: 0 6px;
     display: inline-block;
@@ -3378,7 +3401,7 @@ html[xmlns] .slides {
 
 /* line 93, C:/webroot/lcsnbn/sass/modules/flexslider */
 /* line 94, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 302, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 305, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flex-control-paging li a {
   width: 11px;
   height: 11px;
@@ -3395,11 +3418,11 @@ html[xmlns] .slides {
   -moz-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
   -o-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3); }
-  /* line 318, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 321, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flex-control-paging li a:hover {
     background: #333;
     background: rgba(0, 0, 0, 0.7); }
-  /* line 322, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 325, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flex-control-paging li a.flex-active {
     background: #000;
     background: rgba(0, 0, 0, 0.9);
@@ -3408,26 +3431,26 @@ html[xmlns] .slides {
 /* line 95, C:/webroot/lcsnbn/sass/modules/flexslider */
 /* line 96, C:/webroot/lcsnbn/sass/modules/flexslider */
 /* line 98, C:/webroot/lcsnbn/sass/modules/flexslider */
-/* line 335, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+/* line 338, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
 .flex-control-thumbs {
   margin: 5px 0 0;
   position: static;
   overflow: hidden; }
-  /* line 339, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 342, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flex-control-thumbs li {
     width: 25%;
     float: left;
     margin: 0; }
-  /* line 344, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 347, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flex-control-thumbs img {
     width: 100%;
     display: block;
     opacity: 0.7;
     cursor: pointer; }
-    /* line 349, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+    /* line 352, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
     .flex-control-thumbs img:hover {
       opacity: 1; }
-  /* line 353, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
+  /* line 356, C:/GitHub/SoNaughtyButNice/public/sass/modules/_flexslider.scss */
   .flex-control-thumbs .flex-active {
     opacity: 1;
     cursor: default; }
@@ -3590,9 +3613,14 @@ div.collection.container {
 /*==== Footer ======= */
 /* line 2, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
 .footer__wrapper {
-  margin-top: 4rem; }
+  /*margin-top: 4rem; */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /*height:10rem;    Height of the footer */
+  background: #6cf; }
 
-/* line 5, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+/* line 11, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
 .footer {
   position: relative;
   left: 0;
@@ -3604,14 +3632,14 @@ div.collection.container {
   border-bottom: 1px solid #12cdb2;
   text-align: center; }
 
-/* line 16, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+/* line 22, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
 .addthis_horizontal_follow_toolbox {
   margin-top: 0.5rem;
   right: 0.5rem;
   position: absolute;
   margin-right: 10%; }
 
-/* line 22, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+/* line 28, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
 .logo__image--footer {
   position: absolute;
   bottom: -0.75rem;
@@ -3623,11 +3651,11 @@ div.collection.container {
   background-size: contain; }
 
 @media only screen and (min-width: 768px) {
-  /* line 32, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+  /* line 38, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
   .logo__image--footer {
     bottom: -0.77rem; } }
 
-/* line 35, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+/* line 41, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
 .logo__text--footer {
   font-size: 0.83rem;
   display: block;
@@ -3638,18 +3666,18 @@ div.collection.container {
   text-align: right; }
 
 @media only screen and (min-width: 481px) {
-  /* line 44, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+  /* line 50, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
   .logo__text--footer {
     margin: 0px;
     text-align: center;
     font-size: 1rem; } }
 
-/* line 50, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+/* line 56, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
 .logo__text--footer:hover, .logo__text--footer:active {
   color: #343434; }
 
 /* line 68, C:/webroot/lcsnbn/sass/modules/footer */
-/* line 56, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+/* line 62, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
 .footer__links {
   display: block;
   width: 80%;
@@ -3661,7 +3689,7 @@ div.collection.container {
   margin-top: 4rem; }
 
 @media only screen and (min-width: 481px) {
-  /* line 66, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+  /* line 72, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
   .footer__links {
     width: 80%;
     margin: auto;
@@ -3669,25 +3697,25 @@ div.collection.container {
     margin-top: 3.5rem; } }
 
 /* line 90, C:/webroot/lcsnbn/sass/modules/footer */
-/* line 73, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+/* line 79, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
 .footer__links--heading {
   padding-bottom: 0.2rem;
   border-bottom: solid 1px;
   text-align: center; }
 
 /* line 100, C:/webroot/lcsnbn/sass/modules/footer */
-/* line 80, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+/* line 86, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
 .footer__links--text {
   padding: 0.5rem;
   font-style: italic; }
 
 /* line 106, C:/webroot/lcsnbn/sass/modules/footer */
-/* line 85, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+/* line 91, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
 .top__section__footer {
   background-color: #a8d5ce; }
 
 /* line 115, C:/webroot/lcsnbn/sass/modules/footer */
-/* line 90, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+/* line 96, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
 .bottom__section__footer {
   position: relative;
   background-color: #343434;
@@ -3698,7 +3726,7 @@ div.collection.container {
   padding: 0.3rem; }
 
 /* line 125, C:/webroot/lcsnbn/sass/modules/footer */
-/* line 100, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
+/* line 106, C:/GitHub/SoNaughtyButNice/public/sass/modules/_footer.scss */
 .footer__blurb {
   margin: 2rem;
   font-style: italic; }
@@ -5180,6 +5208,56 @@ input:-webkit-autofill {
 .section__box p {
   padding: 0.5rem; }
 
-/* line 1, C:/GitHub/SoNaughtyButNice/public/sass/modules/_paws_base.scss */
-.page {
-  /*background-color: red;*/ }
+/*.page{
+	background-color: red;
+}*/
+/* line 4, C:/GitHub/SoNaughtyButNice/public/sass/modules/_snbn_base.scss */
+.swipe__wrapper {
+  /*padding-top: 40rem;*/ }
+
+/* line 7, C:/GitHub/SoNaughtyButNice/public/sass/modules/_snbn_base.scss */
+.swiper-container {
+  width: 100%;
+  height: 20rem;
+  /*background-color: #000;*/
+  color: #000;
+  display: block; }
+  @media only screen and (min-width:481px) {
+    .swiper-container {
+      height: 20rem; } }
+
+/* line 19, C:/GitHub/SoNaughtyButNice/public/sass/modules/_snbn_base.scss */
+.swiper-slide {
+  /*width: 321px; 
+	height: 276px; */
+  opacity: 1;
+  /*transform: translate3d(-642px, 0px, 0px); 
+	-webkit-transform: translate3d(-642px, 0px, 0px); 
+	transition-duration: 900ms; 
+	-webkit-transition-duration: 900ms; */
+  top: -1px;
+  background-image: url(http://bondiharvest.com/wp-content/uploads/2015/06/slide_3.jpg);
+  background-color: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center; }
+
+/* line 35, C:/GitHub/SoNaughtyButNice/public/sass/modules/_snbn_base.scss */
+.brand__name {
+  height: 10rem; }
+
+/* line 39, C:/GitHub/SoNaughtyButNice/public/sass/modules/_snbn_base.scss */
+.no__row__padding .columns {
+  padding-left: 0rem;
+  padding-right: 0rem; }
+
+/* line 44, C:/GitHub/SoNaughtyButNice/public/sass/modules/_snbn_base.scss */
+.swiper__content {
+  text-align: center;
+  height: 18rem;
+  margin: 1rem;
+  border: 2px soild #000;
+  background-color: #fff;
+  position: relative;
+  opacity: 0.6;
+  font-size: 1.5rem; }

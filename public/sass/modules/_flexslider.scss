@@ -8,23 +8,26 @@
  *
  * Contributing author: Tyler Smith (@mbmufffin)
  */
-@media only screen and (max-width: 480px) {
-  .flexslider--tom {
-    display: none;
-  }
-}
 
-@media only screen and (min-width: 481px) and (max-width: 767px) {
-  .flexslider--tom {
-    display: none;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .flexslider--tom {
+.flexslider--tom{
     display: normal;
-  }
 }
+
+.flexslider {
+    width: 200px;
+    height: 200px;
+}
+
+.flexslider .slides img {
+    width: 200px;
+    height: 200px;
+}
+
+/*.flexslider .slides img {
+     max-width: 100%; 
+     height: 748px; 
+     display: block;
+}*/
 
 /* Browser Resets
 *********************************/
@@ -123,7 +126,7 @@ html[xmlns] .slides {
 /* line 67, C:/webroot/lcsnbn/sass/modules/flexslider */
 
 .flexslider {
-  margin: 0 0.625rem 2rem;
+  /*margin: 0 0.625rem 2rem;*/
   background: #fff;
   position: relative;
   zoom: 1;

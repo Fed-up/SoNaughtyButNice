@@ -20,50 +20,51 @@
 
 
   <body>
-    
-    <!-- <header class="header"> -->
-      <?php echo $__env->make('public.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-    <!-- </header> -->
-
     <div class="content-slot">
-      <?php echo $__env->yieldContent('content'); ?>
-      <div class="footer__push"></div>
-      <?php echo $__env->make('public.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 
+    
+    <div id="container">
+        <div id="header">
+            <?php echo $__env->make('public.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        </div>
+        <div id="body">
+            <?php echo $__env->yieldContent('content'); ?>  
+        </div>
+        <div id="footer">
+            <?php echo $__env->make('public.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 
+        </div>
     </div>
 
-
-      
-    
+    </div>
 
     <aside 
-      id="panel--right" 
-      class="panel--right"> <!-- //panel -->
+        id="panel--right" 
+        class="panel--right"> <!-- //panel -->
         <div id="navigation" class="">
-          
-          <?php if (Auth::check()): ?>
-              
-          <?php else: ?>
-             <?php echo Form::open(array('url' => 'login', 'class' => 'form-signin form-signin--swipe')); ?>
-              <a href="/signup" class="side__member__button">Become a Member</a> 
-              <h3 class="side__login__header">Join Us Today</h3> 
 
-              <div class="form__input--side--login form__input--side--login--swipe">
-                  <?php echo Form::label('email', 'Email: ', array('class' => 'input__name--white')); ?>
-                  <?php echo Form::email('email', '', array('placeholder'=>'Email', 'class'=>'form-control' ) ); ?>
-              </div>
-              <div class="form__input--side--login form__input--side--login--swipe">
-                  <?php echo Form::label('password', 'Password: ', array('class' => 'input__name--white')); ?>
-                  <?php echo Form::password('password', array('placeholder'=>'Password', 'class'=>'form-control' ) ); ?>
-              </div>
-              
-              <?php echo Form::submit('Login', array('class' => 'side__login__button--swipe')); ?>
-              
-            <?php echo Form::close(); ?>
-          <?php endif; ?> 
+            <?php if (Auth::check()): ?>
+
+            <?php else: ?>
+                <?php echo Form::open(array('url' => 'login', 'class' => 'form-signin form-signin--swipe')); ?>
+                <a href="/signup" class="side__member__button">Become a Member</a> 
+                <h3 class="side__login__header">Join Us Today</h3> 
+
+                <div class="form__input--side--login form__input--side--login--swipe">
+                    <?php echo Form::label('email', 'Email: ', array('class' => 'input__name--white')); ?>
+                    <?php echo Form::email('email', '', array('placeholder'=>'Email', 'class'=>'form-control' ) ); ?>
+                </div>
+                <div class="form__input--side--login form__input--side--login--swipe">
+                    <?php echo Form::label('password', 'Password: ', array('class' => 'input__name--white')); ?>
+                    <?php echo Form::password('password', array('placeholder'=>'Password', 'class'=>'form-control' ) ); ?>
+                </div>
+
+                <?php echo Form::submit('Login', array('class' => 'side__login__button--swipe')); ?>
+
+                <?php echo Form::close(); ?>
+            <?php endif; ?> 
 
 
 
-            
+
             <nav class="">
                 <a href="/" class="<?php echo ((Request::segment(0) === '')? 'side--nav navTab_active ' : 'side--nav'); ?>">Home</a>
                 <!-- <a class="side--nav" href="/"><?php echo ((Auth::guest())? '' : ((Auth::user()->admin == 1)? HTML::link('admin', 'Profile') : HTML::link('profile', 'Profile'))); ?></a> -->
@@ -75,8 +76,13 @@
                 <a class="<?php echo ((Request::segment(1) === 'catering')? 'side--nav navTab_active' : 'side--nav'); ?>" href="/catering">Catering</a>
             </nav>
         </div>
-
     </aside><!-- /panel -->
+
+
+      
+    
+
+    
     
     
 
